@@ -1,0 +1,67 @@
+import Cocoa
+
+class AppDelegate: NSObject, NSApplicationDelegate {
+    private var config: Config? {
+        return Config.shared
+    }
+    
+    var statusBarMenu: NSStatusItem?
+    var item2Action = [String: NSMenuItem]()
+    var action2Item = [NSMenuItem: String]()
+    var item2ConfigAction = [String: Action]()
+    
+    func applicationDidFinishLaunching(_ aNotification: Notification) {
+        func buildStatusBarMenu(config: Config) -> NSStatusItem! {
+            let statusBarMenu = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
+            func applyStartupIconToMenu() {
+                let iconName: String! = config.indicator.initialStatus
+                let iconImage: NSImage! = config.icons[iconName]!.statusBar
+                statusBarMenu.image = iconImage
+            }
+            func buildMenuItem(menuItem: Action) -> NSMenuItem {
+                if menuItem.separator == true {
+                    return NSMenuItem.separator()
+                } else {
+                    let guiMenuItem = NSMenuItem(title: menuItem.label ?? "", action: nil , keyEquivalent: "")
+                    guiMenuItem.isEnabled = menuItem.sensitive == true
+                    if guiMenuItem.isEnabled {
+                        guiMenuItem.action = #selector(execute(sender:))
+                        self.action2Item[guiMenuItem] = menuItem.item
+                    }
+                    return guiMenuItem
+                }
+            }
+            self.statusBarMenu = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
+            applyStartupIconToMenu()
+            let menu = NSMenu()
+            config.indicator.menu.forEach { configItem in
+                let newItem = buildMenuItem(menuItem: configItem)
+                menu.addItem(newItem)
+                guard let item = configItem.item else { return }
+                self.item2Action[item] = newItem
+                self.item2ConfigAction[item] = configItem
+            }
+            statusBarMenu.menu = menu
+            return statusBarMenu
+        }
+        
+        self.statusBarMenu = buildStatusBarMenu(config: self.config!)
+        NSApplication.shared.windows.forEach { window in window.title = self.config?.app_name ?? "Your App Name" }            
+    }
+
+    func applicationWillTerminate(_ aNotification: Notification) {
+        // Insert code here to tear down your application
+    }
+    
+    func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
+        return self.config?.main_window?.close_quits ?? false
+    }
+    
+    // TODO refactor this. Crete a subclass of NSMenuItem's ViewController Controller and execute commands from there.
+    @objc func execute(sender : NSMenuItem) {
+        let item = action2Item[sender]!
+        let configItem = item2ConfigAction[item]!
+        OperationExecutor.execute(operation: configItem.op!, args: configItem.args)
+    }
+    
+}
