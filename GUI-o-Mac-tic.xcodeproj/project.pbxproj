@@ -47,7 +47,7 @@
 			containerPortal = D819887620595165004B5974 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = D819887D20595165004B5974;
-			remoteInfo = GUI-o-Mac-tic;
+			remoteInfo = "GUI-o-Mac-tic";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -58,9 +58,9 @@
 		D819888520595165004B5974 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D819888820595165004B5974 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D819888A20595165004B5974 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D819888B20595165004B5974 /* GUI-o-Mac-tic.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GUI-o-Mac-tic.entitlements; sourceTree = "<group>"; };
+		D819888B20595165004B5974 /* GUI-o-Mac-tic.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "GUI-o-Mac-tic.entitlements"; sourceTree = "<group>"; };
 		D819889020595165004B5974 /* GUI-o-Mac-ticTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "GUI-o-Mac-ticTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		D819889420595165004B5974 /* GUI-o-Mac-ticTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GUI-o-Mac-tic.swift; sourceTree = "<group>"; };
+		D819889420595165004B5974 /* GUI-o-Mac-ticTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GUI-o-Mac-ticTests.swift"; sourceTree = "<group>"; };
 		D819889620595165004B5974 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D819889F205951D5004B5974 /* Control.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Control.swift; sourceTree = "<group>"; };
 		D81988A1205957EE004B5974 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
@@ -242,7 +242,7 @@
 			dependencies = (
 			);
 			name = "GUI-o-Mac-tic";
-			productName = GUI-o-Mac-tic;
+			productName = "GUI-o-Mac-tic";
 			productReference = D819887E20595165004B5974 /* GUI-o-Mac-tic.app */;
 			productType = "com.apple.product-type.application";
 		};
@@ -260,7 +260,7 @@
 				D819889220595165004B5974 /* PBXTargetDependency */,
 			);
 			name = "GUI-o-Mac-ticTests";
-			productName = GUI-o-Mac-ticTests;
+			productName = "GUI-o-Mac-ticTests";
 			productReference = D819889020595165004B5974 /* GUI-o-Mac-ticTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
