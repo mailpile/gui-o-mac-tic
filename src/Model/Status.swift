@@ -1,12 +1,12 @@
 import AppKit
 
 class Status : NSObject {
-    let item: String!
-    let label: String!
-    let hint: String!
+    let item: String
+    let label: String
+    let hint: String
     let icon: NSImage?
     
-    init(item: String!, label: String!, hint: String!, icon: NSImage?) {
+    init(item: String, label: String, hint: String, icon: NSImage?) {
         self.item = item
         self.label = label
         self.hint = hint

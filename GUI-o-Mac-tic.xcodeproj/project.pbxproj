@@ -11,16 +11,16 @@
 		D819888420595165004B5974 /* MainWindowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D819888320595165004B5974 /* MainWindowViewController.swift */; };
 		D819888620595165004B5974 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D819888520595165004B5974 /* Assets.xcassets */; };
 		D819888920595165004B5974 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D819888720595165004B5974 /* Main.storyboard */; };
-		D819889520595165004B5974 /* GUI-o-Mac-ticTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D819889420595165004B5974 /* GUI-o-Mac-ticTests.swift */; };
 		D81988A0205951D5004B5974 /* Control.swift in Sources */ = {isa = PBXBuildFile; fileRef = D819889F205951D5004B5974 /* Control.swift */; };
 		D81988A2205957EE004B5974 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81988A1205957EE004B5974 /* Config.swift */; };
 		D81988A420595F08004B5974 /* GUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81988A320595F08004B5974 /* GUI.swift */; };
+		D81A51FE2067F38600E431E9 /* PostURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81A51FD2067F38600E431E9 /* PostURL.swift */; };
+		D81A52002067F81A00E431E9 /* URLCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81A51FF2067F81A00E431E9 /* URLCommand.swift */; };
 		D81D3CE5206659E0008325B9 /* gui.conf.json in Resources */ = {isa = PBXBuildFile; fileRef = D8ECDD6D205EAB060004790B /* gui.conf.json */; };
 		D81D3CE620665A7E008325B9 /* SubstatusTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85B1E3220614FC5003744E0 /* SubstatusTableCellView.swift */; };
 		D8333EE9205D3FA90029172B /* FontStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8333EE8205D3FA90029172B /* FontStyle.swift */; };
 		D842DA8C2062A73B0043B73A /* URL+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D842DA8B2062A73B0043B73A /* URL+Extensions.swift */; };
 		D842DA8E2062AAD60043B73A /* Icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = D842DA8D2062AAD60043B73A /* Icon.swift */; };
-		D84FD03020603C8F00C97073 /* Terminal.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84FD02F20603C8F00C97073 /* Terminal.swift */; };
 		D8515E99205C3CB000565AAE /* Operation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8515E98205C3CB000565AAE /* Operation.swift */; };
 		D8515E9B205C3D0D00565AAE /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8515E9A205C3D0D00565AAE /* Action.swift */; };
 		D8515E9D205C3F0300565AAE /* Position.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8515E9C205C3F0300565AAE /* Position.swift */; };
@@ -31,18 +31,26 @@
 		D8515EAD205C443400565AAE /* ConfigInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8515EAC205C443400565AAE /* ConfigInitializer.swift */; };
 		D8515EB1205D206300565AAE /* Args.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8515EB0205D206300565AAE /* Args.swift */; };
 		D85B1E2820612A81003744E0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85B1E2720612A81003744E0 /* Constants.swift */; };
-		D85B1E2B2061350F003744E0 /* Browser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85B1E2A2061350F003744E0 /* Browser.swift */; };
 		D85B1E2D20613614003744E0 /* Shell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85B1E2C20613614003744E0 /* Shell.swift */; };
 		D860514620601B2000E8983A /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D860514520601B2000E8983A /* MainWindowController.swift */; };
 		D88213252066441400150FAE /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = D88213242066441400150FAE /* LICENSE.txt */; };
-		D8CC4EC22063EB6900A0F7F0 /* OperationExecutor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CC4EC12063EB6900A0F7F0 /* OperationExecutor.swift */; };
+		D8B289492067AD6A000DCD03 /* ShowURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B289482067AD6A000DCD03 /* ShowURL.swift */; };
+		D8B289632067B1C3000DCD03 /* GUI_o_Mac_ticTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B289622067B1C3000DCD03 /* GUI_o_Mac_ticTests.swift */; };
+		D8B2896D2067C3C5000DCD03 /* CommandFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B2896C2067C3C5000DCD03 /* CommandFactory.swift */; };
+		D8B2896F2067C5A1000DCD03 /* Quit.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B2896E2067C5A1000DCD03 /* Quit.swift */; };
+		D8B289712067CBBD000DCD03 /* ShowMainWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B289702067CBBD000DCD03 /* ShowMainWindow.swift */; };
+		D8B289742067CC3C000DCD03 /* Terminal.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B289732067CC3C000DCD03 /* Terminal.swift */; };
+		D8BE028A2067DE8D006219D5 /* GetURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8BE02892067DE8D006219D5 /* GetURL.swift */; };
+		D8BE028D2067E496006219D5 /* UserNotificationFacade.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8BE028C2067E496006219D5 /* UserNotificationFacade.swift */; };
+		D8CA67A42066BF1C003501FD /* LogicalXOR.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CA67A32066BF1C003501FD /* LogicalXOR.swift */; };
+		D8CA67A72066CE31003501FD /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CA67A62066CE31003501FD /* Command.swift */; };
 		D8ECDD6C205EA6370004790B /* ConfigParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8ECDD6B205EA6370004790B /* ConfigParser.swift */; };
 		D8F1FEFD20654785007E497B /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F1FEFC20654785007E497B /* main.swift */; };
 		D8F1FEFF2065818D007E497B /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F1FEFE2065818D007E497B /* SplashViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		D819889120595165004B5974 /* PBXContainerItemProxy */ = {
+		D8B289652067B1C3000DCD03 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D819887620595165004B5974 /* Project object */;
 			proxyType = 1;
@@ -59,17 +67,15 @@
 		D819888820595165004B5974 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D819888A20595165004B5974 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D819888B20595165004B5974 /* GUI-o-Mac-tic.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "GUI-o-Mac-tic.entitlements"; sourceTree = "<group>"; };
-		D819889020595165004B5974 /* GUI-o-Mac-ticTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "GUI-o-Mac-ticTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		D819889420595165004B5974 /* GUI-o-Mac-ticTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GUI-o-Mac-ticTests.swift"; sourceTree = "<group>"; };
-		D819889620595165004B5974 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D819889F205951D5004B5974 /* Control.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Control.swift; sourceTree = "<group>"; };
 		D81988A1205957EE004B5974 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		D81988A320595F08004B5974 /* GUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GUI.swift; sourceTree = "<group>"; };
+		D81A51FD2067F38600E431E9 /* PostURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostURL.swift; sourceTree = "<group>"; };
+		D81A51FF2067F81A00E431E9 /* URLCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLCommand.swift; sourceTree = "<group>"; };
 		D8333EE8205D3FA90029172B /* FontStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontStyle.swift; sourceTree = "<group>"; };
 		D842DA84206276B00043B73A /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		D842DA8B2062A73B0043B73A /* URL+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Extensions.swift"; sourceTree = "<group>"; };
 		D842DA8D2062AAD60043B73A /* Icon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icon.swift; sourceTree = "<group>"; };
-		D84FD02F20603C8F00C97073 /* Terminal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Terminal.swift; sourceTree = "<group>"; };
 		D8515E98205C3CB000565AAE /* Operation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operation.swift; sourceTree = "<group>"; };
 		D8515E9A205C3D0D00565AAE /* Action.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Action.swift; sourceTree = "<group>"; };
 		D8515E9C205C3F0300565AAE /* Position.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Position.swift; sourceTree = "<group>"; };
@@ -80,12 +86,22 @@
 		D8515EAC205C443400565AAE /* ConfigInitializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigInitializer.swift; sourceTree = "<group>"; };
 		D8515EB0205D206300565AAE /* Args.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Args.swift; sourceTree = "<group>"; };
 		D85B1E2720612A81003744E0 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		D85B1E2A2061350F003744E0 /* Browser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Browser.swift; sourceTree = "<group>"; };
 		D85B1E2C20613614003744E0 /* Shell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shell.swift; sourceTree = "<group>"; };
 		D85B1E3220614FC5003744E0 /* SubstatusTableCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SubstatusTableCellView.swift; path = src/Views/SubstatusTableCellView.swift; sourceTree = SOURCE_ROOT; };
 		D860514520601B2000E8983A /* MainWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
 		D88213242066441400150FAE /* LICENSE.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
-		D8CC4EC12063EB6900A0F7F0 /* OperationExecutor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationExecutor.swift; sourceTree = "<group>"; };
+		D8B289482067AD6A000DCD03 /* ShowURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowURL.swift; sourceTree = "<group>"; };
+		D8B289602067B1C3000DCD03 /* GUI-o-Mac-ticTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "GUI-o-Mac-ticTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D8B289622067B1C3000DCD03 /* GUI_o_Mac_ticTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GUI_o_Mac_ticTests.swift; sourceTree = "<group>"; };
+		D8B289642067B1C3000DCD03 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D8B2896C2067C3C5000DCD03 /* CommandFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandFactory.swift; sourceTree = "<group>"; };
+		D8B2896E2067C5A1000DCD03 /* Quit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quit.swift; sourceTree = "<group>"; };
+		D8B289702067CBBD000DCD03 /* ShowMainWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowMainWindow.swift; sourceTree = "<group>"; };
+		D8B289732067CC3C000DCD03 /* Terminal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Terminal.swift; sourceTree = "<group>"; };
+		D8BE02892067DE8D006219D5 /* GetURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetURL.swift; sourceTree = "<group>"; };
+		D8BE028C2067E496006219D5 /* UserNotificationFacade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationFacade.swift; sourceTree = "<group>"; };
+		D8CA67A32066BF1C003501FD /* LogicalXOR.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogicalXOR.swift; sourceTree = "<group>"; };
+		D8CA67A62066CE31003501FD /* Command.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Command.swift; sourceTree = "<group>"; };
 		D8ECDD6B205EA6370004790B /* ConfigParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigParser.swift; sourceTree = "<group>"; };
 		D8ECDD6D205EAB060004790B /* gui.conf.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = gui.conf.json; path = src/gui.conf.json; sourceTree = SOURCE_ROOT; };
 		D8F1FEFC20654785007E497B /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -100,7 +116,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D819888D20595165004B5974 /* Frameworks */ = {
+		D8B2895D2067B1C3000DCD03 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -116,7 +132,7 @@
 				D88213242066441400150FAE /* LICENSE.txt */,
 				D842DA84206276B00043B73A /* README.md */,
 				D819888020595165004B5974 /* src */,
-				D819889320595165004B5974 /* tests */,
+				D8B289612067B1C3000DCD03 /* GUI-o-Mac-ticTests */,
 				D819887F20595165004B5974 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -125,7 +141,7 @@
 			isa = PBXGroup;
 			children = (
 				D819887E20595165004B5974 /* GUI-o-Mac-tic.app */,
-				D819889020595165004B5974 /* GUI-o-Mac-ticTests.xctest */,
+				D8B289602067B1C3000DCD03 /* GUI-o-Mac-ticTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -133,12 +149,12 @@
 		D819888020595165004B5974 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				D8CA67A52066CE23003501FD /* Commands */,
 				D842DA8A2062A7290043B73A /* Extensions */,
 				D85B1E3120614F42003744E0 /* Views */,
-				D85B1E29206134CE003744E0 /* Operation */,
 				D8ECDD6D205EAB060004790B /* gui.conf.json */,
 				D8333EF8205E40D90029172B /* Controllers */,
-				D8515EAB205C440900565AAE /* ConfigParser */,
+				D8515EAB205C440900565AAE /* Parser */,
 				D8515E95205C3C2100565AAE /* Model */,
 				D819888120595165004B5974 /* AppDelegate.swift */,
 				D819888520595165004B5974 /* Assets.xcassets */,
@@ -149,17 +165,9 @@
 				D81988A320595F08004B5974 /* GUI.swift */,
 				D85B1E2720612A81003744E0 /* Constants.swift */,
 				D8F1FEFC20654785007E497B /* main.swift */,
+				D8CA67A32066BF1C003501FD /* LogicalXOR.swift */,
 			);
 			path = src;
-			sourceTree = "<group>";
-		};
-		D819889320595165004B5974 /* tests */ = {
-			isa = PBXGroup;
-			children = (
-				D819889420595165004B5974 /* GUI-o-Mac-ticTests.swift */,
-				D819889620595165004B5974 /* Info.plist */,
-			);
-			path = tests;
 			sourceTree = "<group>";
 		};
 		D8333EF8205E40D90029172B /* Controllers */ = {
@@ -198,24 +206,13 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		D8515EAB205C440900565AAE /* ConfigParser */ = {
+		D8515EAB205C440900565AAE /* Parser */ = {
 			isa = PBXGroup;
 			children = (
 				D8515EAC205C443400565AAE /* ConfigInitializer.swift */,
 				D8ECDD6B205EA6370004790B /* ConfigParser.swift */,
 			);
-			path = ConfigParser;
-			sourceTree = "<group>";
-		};
-		D85B1E29206134CE003744E0 /* Operation */ = {
-			isa = PBXGroup;
-			children = (
-				D8CC4EC12063EB6900A0F7F0 /* OperationExecutor.swift */,
-				D84FD02F20603C8F00C97073 /* Terminal.swift */,
-				D85B1E2A2061350F003744E0 /* Browser.swift */,
-				D85B1E2C20613614003744E0 /* Shell.swift */,
-			);
-			path = Operation;
+			path = Parser;
 			sourceTree = "<group>";
 		};
 		D85B1E3120614F42003744E0 /* Views */ = {
@@ -224,6 +221,41 @@
 				D85B1E3220614FC5003744E0 /* SubstatusTableCellView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		D8B289612067B1C3000DCD03 /* GUI-o-Mac-ticTests */ = {
+			isa = PBXGroup;
+			children = (
+				D8B289622067B1C3000DCD03 /* GUI_o_Mac_ticTests.swift */,
+				D8B289642067B1C3000DCD03 /* Info.plist */,
+			);
+			path = "GUI-o-Mac-ticTests";
+			sourceTree = "<group>";
+		};
+		D8BE028B2067E485006219D5 /* Facades */ = {
+			isa = PBXGroup;
+			children = (
+				D8BE028C2067E496006219D5 /* UserNotificationFacade.swift */,
+			);
+			path = Facades;
+			sourceTree = "<group>";
+		};
+		D8CA67A52066CE23003501FD /* Commands */ = {
+			isa = PBXGroup;
+			children = (
+				D8BE028B2067E485006219D5 /* Facades */,
+				D8B2896C2067C3C5000DCD03 /* CommandFactory.swift */,
+				D8CA67A62066CE31003501FD /* Command.swift */,
+				D8B289482067AD6A000DCD03 /* ShowURL.swift */,
+				D8B2896E2067C5A1000DCD03 /* Quit.swift */,
+				D85B1E2C20613614003744E0 /* Shell.swift */,
+				D8B289702067CBBD000DCD03 /* ShowMainWindow.swift */,
+				D8B289732067CC3C000DCD03 /* Terminal.swift */,
+				D8BE02892067DE8D006219D5 /* GetURL.swift */,
+				D81A51FD2067F38600E431E9 /* PostURL.swift */,
+				D81A51FF2067F81A00E431E9 /* URLCommand.swift */,
+			);
+			path = Commands;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -246,22 +278,22 @@
 			productReference = D819887E20595165004B5974 /* GUI-o-Mac-tic.app */;
 			productType = "com.apple.product-type.application";
 		};
-		D819888F20595165004B5974 /* GUI-o-Mac-ticTests */ = {
+		D8B2895F2067B1C3000DCD03 /* GUI-o-Mac-ticTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D819889C20595165004B5974 /* Build configuration list for PBXNativeTarget "GUI-o-Mac-ticTests" */;
+			buildConfigurationList = D8B289672067B1C3000DCD03 /* Build configuration list for PBXNativeTarget "GUI-o-Mac-ticTests" */;
 			buildPhases = (
-				D819888C20595165004B5974 /* Sources */,
-				D819888D20595165004B5974 /* Frameworks */,
-				D819888E20595165004B5974 /* Resources */,
+				D8B2895C2067B1C3000DCD03 /* Sources */,
+				D8B2895D2067B1C3000DCD03 /* Frameworks */,
+				D8B2895E2067B1C3000DCD03 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				D819889220595165004B5974 /* PBXTargetDependency */,
+				D8B289662067B1C3000DCD03 /* PBXTargetDependency */,
 			);
 			name = "GUI-o-Mac-ticTests";
 			productName = "GUI-o-Mac-ticTests";
-			productReference = D819889020595165004B5974 /* GUI-o-Mac-ticTests.xctest */;
+			productReference = D8B289602067B1C3000DCD03 /* GUI-o-Mac-ticTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -284,7 +316,7 @@
 							};
 						};
 					};
-					D819888F20595165004B5974 = {
+					D8B2895F2067B1C3000DCD03 = {
 						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Automatic;
 						TestTargetID = D819887D20595165004B5974;
@@ -305,7 +337,7 @@
 			projectRoot = "";
 			targets = (
 				D819887D20595165004B5974 /* GUI-o-Mac-tic */,
-				D819888F20595165004B5974 /* GUI-o-Mac-ticTests */,
+				D8B2895F2067B1C3000DCD03 /* GUI-o-Mac-ticTests */,
 			);
 		};
 /* End PBXProject section */
@@ -322,7 +354,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D819888E20595165004B5974 /* Resources */ = {
+		D8B2895E2067B1C3000DCD03 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -337,28 +369,36 @@
 			buildActionMask = 2147483647;
 			files = (
 				D81D3CE620665A7E008325B9 /* SubstatusTableCellView.swift in Sources */,
-				D8CC4EC22063EB6900A0F7F0 /* OperationExecutor.swift in Sources */,
-				D84FD03020603C8F00C97073 /* Terminal.swift in Sources */,
+				D81A52002067F81A00E431E9 /* URLCommand.swift in Sources */,
 				D819888420595165004B5974 /* MainWindowViewController.swift in Sources */,
 				D8F1FEFF2065818D007E497B /* SplashViewController.swift in Sources */,
 				D8515E99205C3CB000565AAE /* Operation.swift in Sources */,
 				D842DA8E2062AAD60043B73A /* Icon.swift in Sources */,
 				D81988A2205957EE004B5974 /* Config.swift in Sources */,
+				D8B289712067CBBD000DCD03 /* ShowMainWindow.swift in Sources */,
+				D8B2896F2067C5A1000DCD03 /* Quit.swift in Sources */,
 				D8515EA3205C416700565AAE /* Indicator.swift in Sources */,
 				D8515EAD205C443400565AAE /* ConfigInitializer.swift in Sources */,
+				D8BE028D2067E496006219D5 /* UserNotificationFacade.swift in Sources */,
 				D860514620601B2000E8983A /* MainWindowController.swift in Sources */,
-				D85B1E2B2061350F003744E0 /* Browser.swift in Sources */,
 				D8333EE9205D3FA90029172B /* FontStyle.swift in Sources */,
 				D85B1E2D20613614003744E0 /* Shell.swift in Sources */,
+				D8B2896D2067C3C5000DCD03 /* CommandFactory.swift in Sources */,
 				D8515EB1205D206300565AAE /* Args.swift in Sources */,
 				D8F1FEFD20654785007E497B /* main.swift in Sources */,
 				D819888220595165004B5974 /* AppDelegate.swift in Sources */,
+				D8B289492067AD6A000DCD03 /* ShowURL.swift in Sources */,
 				D842DA8C2062A73B0043B73A /* URL+Extensions.swift in Sources */,
 				D85B1E2820612A81003744E0 /* Constants.swift in Sources */,
+				D8CA67A72066CE31003501FD /* Command.swift in Sources */,
+				D8CA67A42066BF1C003501FD /* LogicalXOR.swift in Sources */,
+				D8B289742067CC3C000DCD03 /* Terminal.swift in Sources */,
 				D8515E9B205C3D0D00565AAE /* Action.swift in Sources */,
 				D81988A0205951D5004B5974 /* Control.swift in Sources */,
 				D8515E9D205C3F0300565AAE /* Position.swift in Sources */,
+				D8BE028A2067DE8D006219D5 /* GetURL.swift in Sources */,
 				D8515EA1205C402600565AAE /* ActionType.swift in Sources */,
+				D81A51FE2067F38600E431E9 /* PostURL.swift in Sources */,
 				D8515EA6205C41BD00565AAE /* MainWindow.swift in Sources */,
 				D8ECDD6C205EA6370004790B /* ConfigParser.swift in Sources */,
 				D81988A420595F08004B5974 /* GUI.swift in Sources */,
@@ -366,21 +406,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D819888C20595165004B5974 /* Sources */ = {
+		D8B2895C2067B1C3000DCD03 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D819889520595165004B5974 /* GUI-o-Mac-ticTests.swift in Sources */,
+				D8B289632067B1C3000DCD03 /* GUI_o_Mac_ticTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		D819889220595165004B5974 /* PBXTargetDependency */ = {
+		D8B289662067B1C3000DCD03 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = D819887D20595165004B5974 /* GUI-o-Mac-tic */;
-			targetProxy = D819889120595165004B5974 /* PBXContainerItemProxy */;
+			targetProxy = D8B289652067B1C3000DCD03 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -534,34 +574,32 @@
 			};
 			name = Release;
 		};
-		D819889D20595165004B5974 /* Debug */ = {
+		D8B289682067B1C3000DCD03 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 32325SM62E;
-				INFOPLIST_FILE = tests/Info.plist;
+				INFOPLIST_FILE = "GUI-o-Mac-ticTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "is.mailpile.gui-o-mac-ticTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "is.mailpile.GUI-o-Mac-ticTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GUI-o-Mac-tic.app/Contents/MacOS/GUI-o-Mac-tic";
 			};
 			name = Debug;
 		};
-		D819889E20595165004B5974 /* Release */ = {
+		D8B289692067B1C3000DCD03 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 32325SM62E;
-				INFOPLIST_FILE = tests/Info.plist;
+				INFOPLIST_FILE = "GUI-o-Mac-ticTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "is.mailpile.gui-o-mac-ticTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "is.mailpile.GUI-o-Mac-ticTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GUI-o-Mac-tic.app/Contents/MacOS/GUI-o-Mac-tic";
@@ -589,11 +627,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D819889C20595165004B5974 /* Build configuration list for PBXNativeTarget "GUI-o-Mac-ticTests" */ = {
+		D8B289672067B1C3000DCD03 /* Build configuration list for PBXNativeTarget "GUI-o-Mac-ticTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D819889D20595165004B5974 /* Debug */,
-				D819889E20595165004B5974 /* Release */,
+				D8B289682067B1C3000DCD03 /* Debug */,
+				D8B289692067B1C3000DCD03 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

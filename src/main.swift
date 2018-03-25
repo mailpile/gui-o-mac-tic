@@ -13,4 +13,8 @@ catch {
     print(error) // TODO Error handling.
 }
 
+#if DEBUG
+    setenv("CFNETWORK_DIAGNOSTICS", "3", 1);
+#endif
+
 _ = NSApplicationMain(CommandLine.argc, CommandLine.unsafeArgv)

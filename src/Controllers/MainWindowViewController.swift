@@ -2,6 +2,7 @@ import Cocoa
 
 class MainWindowViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource {
     var button2Action = [NSButton: Action]()
+    var commands = [Command]()
     
     @IBOutlet weak var background: NSImageView!
     @IBOutlet weak var substatusView: NSTableView!
@@ -33,7 +34,9 @@ class MainWindowViewController: NSViewController, NSTableViewDelegate, NSTableVi
                 case .button:
                     buttonInit = NSButton.init(title:target:action:)
                 }
-                let control = buttonInit(action.label!, nil, #selector(self.actionExecutionHandler(sender:)))
+                let command = CommandFactory.build(forOperation: action.op!, withArgs: action.args)
+                self.commands.append(command)
+                let control = buttonInit(action.label!, command, #selector(command.execute(sender:)))
                 let gravity = mapPosition2Gravity(position: action.position!)
                 self.actionStack.addView(control, in: gravity)
                 self.button2Action[control] = action
@@ -43,12 +46,7 @@ class MainWindowViewController: NSViewController, NSTableViewDelegate, NSTableVi
         configureActionStack()
         self.background.image = self.config.main_window?.image
     }
-    
-    @objc func actionExecutionHandler(sender: NSButton!) {
-        let action: Action! = button2Action[sender]
-        OperationExecutor.execute(operation:action.op!, args:action.args)
-    }
-    
+        
     func numberOfRows(in tableView: NSTableView) -> Int {
         return self.config.main_window?.substatus?.count ?? 0
     }

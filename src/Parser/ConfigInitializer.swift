@@ -11,7 +11,7 @@ extension Config {
         let fontStylesJSON = json["font-styles"] as? [String: Any]
         let indicator:Indicator! = Indicator(json: indicatorJSON!)
         let fontStyles:FontStyles? = FontStyles(json: fontStylesJSON!)
-        
+        // TODO Cookies are to be parsed as well.
         func getImageForIconAt(path: String!, ofType: String!) -> NSImage? {
             let iconUrl = URL(fileURLWithPath: path)
             let actualIconUrl = iconUrl.appendingToLastPathComponent(string: ofType)
@@ -31,7 +31,7 @@ extension Config {
         }
         let main_window:MainWindow? = MainWindow(json: main_windowJSON!, substatusIconFinder: imageForSubstatusIconNamed)
         
-        self.init(app_name: app_name, app_icon: app_icon, require_gui: require_gui, main_window: main_window, indicators: indicator, icons: icons, fontStyles: fontStyles)
+        self.init(app_name: app_name!, app_icon: app_icon!, require_gui: require_gui, main_window: main_window, indicators: indicator, icons: icons, fontStyles: fontStyles)
     }
 }
 
@@ -51,13 +51,18 @@ extension Indicator {
 extension Action {
     init?(json: [String: Any]) {
         self.label = json["label"] as? String
-        self.item = json["item"] as? String
+        self.item = json["item"] as? String ?? nil
         self.sensitive = json["sensitive"] as? Bool
         self.separator = json["separator"] as? Bool
         
         
-        let args = json["args"]
-        self.args = Args(string: args as? String, list: args as? [String], dictionary: args as? [String: String])
+        if let args = json["args"] {
+            self.args = Args(string: args as? String,
+                             list: args as? [String],
+                             dictionary: args as? [String: String])
+        } else {
+            args = nil
+        }
 
         if let type = json["type"] as? String {
             self.type = ActionType(rawValue: type)
@@ -77,8 +82,12 @@ extension Action {
                 self.op = .quit
             case "show_main_window":
                 self.op = .show_main_window
+            case "get_url":
+                self.op = .get_url
+            case "post_url":
+                self.op = .post_url
             default:
-                self.op = nil
+                preconditionFailure("Invalid configuration: \(opString) is not a known op.")
             }
         } else {
             self.op = nil

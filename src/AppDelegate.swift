@@ -1,10 +1,10 @@
 import Cocoa
 
-class AppDelegate: NSObject, NSApplicationDelegate {
+class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDelegate {
     private var config: Config? {
         return Config.shared
     }
-    
+    var commands = [Command]()
     var statusBarMenu: NSStatusItem?
     var item2Action = [String: NSMenuItem]()
     var action2Item = [NSMenuItem: String]()
@@ -22,15 +22,19 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 if menuItem.separator == true {
                     return NSMenuItem.separator()
                 } else {
-                    let guiMenuItem = NSMenuItem(title: menuItem.label ?? "", action: nil , keyEquivalent: "")
+                    let guiMenuItem = NSMenuItem(title: menuItem.label ?? "", action: nil, keyEquivalent: "")
                     guiMenuItem.isEnabled = menuItem.sensitive == true
                     if guiMenuItem.isEnabled {
-                        guiMenuItem.action = #selector(execute(sender:))
+                        let command = CommandFactory.build(forOperation: menuItem.op!, withArgs: menuItem.args)
+                        self.commands.append(command)
+                        guiMenuItem.target = command
+                        guiMenuItem.action = #selector(command.execute(sender:))
                         self.action2Item[guiMenuItem] = menuItem.item
                     }
                     return guiMenuItem
                 }
             }
+            NSUserNotificationCenter.default.delegate = self
             self.statusBarMenu = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
             applyStartupIconToMenu()
             let menu = NSMenu()
@@ -57,11 +61,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         return self.config?.main_window?.close_quits ?? false
     }
     
-    // TODO refactor this. Crete a subclass of NSMenuItem's ViewController Controller and execute commands from there.
-    @objc func execute(sender : NSMenuItem) {
-        let item = action2Item[sender]!
-        let configItem = item2ConfigAction[item]!
-        OperationExecutor.execute(operation: configItem.op!, args: configItem.args)
+    func userNotificationCenter(_ center: NSUserNotificationCenter, shouldPresent notification: NSUserNotification) -> Bool {
+        return true
     }
-    
 }

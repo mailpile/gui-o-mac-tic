@@ -1,6 +1,7 @@
 {
   "indicator": {
     "menu": [
+
       {
         "item": "status", 
         "sensitive": false, 
@@ -109,6 +110,24 @@
         "type" : "checkbox",
                 "position": "first"
         },
+                { "position": "first","type":"button",
+                "item": "visitme",
+                "op": "get_url",
+                "sensitive": true,
+                "args": {
+                "_url": "https://petur.ingi.dk/guiomactic.json",
+                },
+                "label": "get json"
+                },
+                { "position": "first","type":"button",
+                "item": "visitme2",
+                "op": "post_url",
+                "sensitive": true,
+                "args": {
+                "_url": "http://localhost:8089/gui-o-mac-tic/post",
+                },
+                "label": "post json"
+                },
       {
         "item": "quit_button", 
         "label": "Quit GUI", 
