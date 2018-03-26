@@ -161,6 +161,14 @@
                 "position": "last"
                 },
                 {
+                "item": "status=new-setup",
+                "label": "status=new-setup",
+                "type": "button",
+                "op": "set_status",
+                "args": { "status" : "new-setup"},
+                "position": "last"
+                },
+                {
                 "item": "hide Main",
                 "label": "Hide Main",
                 "type": "button",

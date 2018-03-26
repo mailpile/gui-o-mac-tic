@@ -10,6 +10,18 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
     var action2Item = [NSMenuItem: String]()
     var item2ConfigAction = [String: Action]()
     
+    var _status = "normal"
+    var status: String {
+        get {
+            return self._status
+        }
+        set {
+            self.statusBarMenu?.image = config!.icons[newValue]!.statusBar!
+            self._status = newValue
+        }
+    }
+    
+    
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         func buildStatusBarMenu(config: Config) -> NSStatusItem! {
             let statusBarMenu = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
