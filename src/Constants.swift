@@ -6,7 +6,7 @@ final class Constants {
     
     static let SHOW_MAIN_WINDOW: NSNotification.Name! = NSNotification.Name(rawValue: "SHOW_MAIN_WINDOW")
     static let SHOW_SPLASH_SCREEN: NSNotification.Name = NSNotification.Name(rawValue: "SHOW_SPLASH_SCREEN")
-    static let DATA_SOURCE_UPDATED: NSNotification.Name! = NSNotification.Name(rawValue: "DATA_SOURCE_UPDATED")
+    static let UPDATE_SPLASH_SCREEN: NSNotification.Name! = NSNotification.Name(rawValue: "UPDATE_SPLASH_SCREEN")
     
     static let SPLASH_SEGUE: NSStoryboardSegue.Identifier! = NSStoryboardSegue.Identifier.init("splashSegue")
     

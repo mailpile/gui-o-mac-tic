@@ -60,6 +60,17 @@ class CommandFactory {
             
             precondition(background != nil, "A splash screen can not be created without a background.")
             return ShowSplashScreen(background: background, message: message, showProgressBar: showProgressBar)
+            
+        case .update_splash_screen:
+            precondition(args == nil || args!.dictionary != nil, "Expected args to be a dictionary.")
+            var progress = args!.dictionary!["progress"] as? Double
+            if (progress != nil) {
+                /* The Bar Progress Indicator requries a value on the range [0;100] but
+                such values are on the range [0.0;1.0] in the config file. */
+                progress! *= 100
+            }
+            let message = args!.dictionary!["message"] as? String ?? ""
+            return UpdateSplashScreen(progress ?? 0, message)
         }
         
         

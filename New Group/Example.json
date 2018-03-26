@@ -141,6 +141,18 @@
                 "type" : "button",
                 "position": "first"
                 },
+                {
+                "item": "update splash screen",
+                "op": "update_splash_screen",
+                "sensitive": true,
+                "args": {
+                "message": "enjoy :)",
+                "progress" : 0.5
+                },
+                "label": "Splash (paper)",
+                "type" : "button",
+                "position": "first"
+                },
       {
         "item": "quit_button", 
         "label": "Quit GUI", 

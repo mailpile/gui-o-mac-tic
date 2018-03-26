@@ -47,6 +47,7 @@
 		D8DF32242068D5520034165A /* ShowSplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DF32232068D5520034165A /* ShowSplashScreen.swift */; };
 		D8DF322E2068ED870034165A /* SplashViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DF322D2068ED870034165A /* SplashViewDataSource.swift */; };
 		D8DF32312068EE710034165A /* SplashScreenConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DF32302068EE710034165A /* SplashScreenConfig.swift */; };
+		D8DF32332068FC2E0034165A /* UpdateSplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DF32322068FC2E0034165A /* UpdateSplashScreen.swift */; };
 		D8ECDD6C205EA6370004790B /* ConfigParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8ECDD6B205EA6370004790B /* ConfigParser.swift */; };
 		D8F1FEFD20654785007E497B /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F1FEFC20654785007E497B /* main.swift */; };
 		D8F1FEFF2065818D007E497B /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F1FEFE2065818D007E497B /* SplashViewController.swift */; };
@@ -110,6 +111,7 @@
 		D8DF322A2068E69F0034165A /* Images */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Images; path = share/Images; sourceTree = SOURCE_ROOT; };
 		D8DF322D2068ED870034165A /* SplashViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewDataSource.swift; sourceTree = "<group>"; };
 		D8DF32302068EE710034165A /* SplashScreenConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenConfig.swift; sourceTree = "<group>"; };
+		D8DF32322068FC2E0034165A /* UpdateSplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateSplashScreen.swift; sourceTree = "<group>"; };
 		D8ECDD6B205EA6370004790B /* ConfigParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigParser.swift; sourceTree = "<group>"; };
 		D8ECDD6D205EAB060004790B /* Example.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = Example.json; path = "New Group/Example.json"; sourceTree = SOURCE_ROOT; };
 		D8F1FEFC20654785007E497B /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -265,6 +267,7 @@
 				D81A51FD2067F38600E431E9 /* PostURL.swift */,
 				D81A51FF2067F81A00E431E9 /* URLCommand.swift */,
 				D8DF32232068D5520034165A /* ShowSplashScreen.swift */,
+				D8DF32322068FC2E0034165A /* UpdateSplashScreen.swift */,
 			);
 			path = Commands;
 			sourceTree = "<group>";
@@ -418,6 +421,7 @@
 				D8B2896F2067C5A1000DCD03 /* Quit.swift in Sources */,
 				D8515EA3205C416700565AAE /* Indicator.swift in Sources */,
 				D8515EAD205C443400565AAE /* ConfigInitializer.swift in Sources */,
+				D8DF32332068FC2E0034165A /* UpdateSplashScreen.swift in Sources */,
 				D8BE028D2067E496006219D5 /* UserNotificationFacade.swift in Sources */,
 				D860514620601B2000E8983A /* MainWindowController.swift in Sources */,
 				D8DF322E2068ED870034165A /* SplashViewDataSource.swift in Sources */,

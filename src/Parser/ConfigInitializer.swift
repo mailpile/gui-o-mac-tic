@@ -88,6 +88,8 @@ extension Action {
                 self.op = .post_url
             case "show_splash_screen":
                 self.op = .show_splash_screen
+            case "update_splash_screen":
+                self.op = .update_splash_screen
                 
             default:
                 preconditionFailure("Invalid configuration: \(opString) is not a known op.")
