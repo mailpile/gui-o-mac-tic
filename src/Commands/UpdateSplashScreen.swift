@@ -17,6 +17,4 @@ class UpdateSplashScreen: Command {
                                         object: nil,
                                         userInfo: userInfo)
     }
-    
-    
 }

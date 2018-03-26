@@ -165,7 +165,7 @@
         <!--Splash Window Controller-->
         <scene sceneID="LgI-cn-b1w">
             <objects>
-                <windowController showSeguePresentationStyle="single" id="ddy-uX-gB5" userLabel="Splash Window Controller" sceneMemberID="viewController">
+                <windowController showSeguePresentationStyle="single" id="ddy-uX-gB5" userLabel="Splash Window Controller" customClass="SplashWindowController" customModule="GUI_o_Mac_tic" customModuleProvider="target" sceneMemberID="viewController">
                     <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="LmP-dP-BBJ" userLabel="Splash Window">
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="245" y="301" width="480" height="57"/>

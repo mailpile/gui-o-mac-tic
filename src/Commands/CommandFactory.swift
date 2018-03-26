@@ -71,6 +71,9 @@ class CommandFactory {
             }
             let message = args!.dictionary!["message"] as? String ?? ""
             return UpdateSplashScreen(progress ?? 0, message)
+            
+        case .hide_splash_screen:
+            return HideSplashScreen()
         }
         
         

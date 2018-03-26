@@ -153,6 +153,13 @@
                 "type" : "button",
                 "position": "first"
                 },
+                {
+                "item": "hide",
+                "label": "Hide Splash",
+                "type": "button",
+                "op": "hide_splash_screen",
+                "position": "last"
+                },
       {
         "item": "quit_button", 
         "label": "Quit GUI", 
