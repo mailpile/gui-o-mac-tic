@@ -1,6 +1,8 @@
 import Cocoa
 
-class MainWindowViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource {
+class MainWindowViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource, SplashScreenDataSource {
+    
+    var splashScreenConfig: SplashScreenConfig?
     var button2Action = [NSButton: Action]()
     var commands = [Command]()
     
@@ -8,6 +10,7 @@ class MainWindowViewController: NSViewController, NSTableViewDelegate, NSTableVi
     @IBOutlet weak var substatusView: NSTableView!
     @IBOutlet weak var actionStack: NSStackView!
     
+
     private var config: Config! {
         get {
             return Config.shared!
@@ -16,7 +19,6 @@ class MainWindowViewController: NSViewController, NSTableViewDelegate, NSTableVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        showSplashScreen()
         func configureActionStack() {
             func mapPosition2Gravity(position: Position) -> NSStackView.Gravity {
                 switch position {
@@ -42,6 +44,18 @@ class MainWindowViewController: NSViewController, NSTableViewDelegate, NSTableVi
                 self.button2Action[control] = action
             }
         }
+        NotificationCenter.default.addObserver(forName: Constants.SHOW_SPLASH_SCREEN, object: nil, queue: nil) { notification in
+            guard
+                let userInfo = notification.userInfo,
+                let background = userInfo["background"] as? NSImage,
+                let message = userInfo["message"] as? String,
+                let showProgressBar = userInfo["progress_bar"] as? Bool?
+                else {
+                    preconditionFailure("Observed a \(Constants.SHOW_SPLASH_SCREEN) notification without a valid userInfo.")
+            }
+            self.splashScreenConfig = SplashScreenConfig(message, background, showProgressBar ?? false)
+            self.showSplashScreen()
+        }
         
         configureActionStack()
         self.background.image = self.config.main_window?.image
@@ -62,6 +76,17 @@ class MainWindowViewController: NSViewController, NSTableViewDelegate, NSTableVi
     
     func tableView(_ tableView: NSTableView, shouldSelectRow row: Int) -> Bool {
         return false
+    }
+    
+    override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
+        if let targetWindowController = segue.destinationController as? NSWindowController,
+            let targetViewController = targetWindowController.contentViewController as? SplashViewController {
+            targetViewController.reportingLabel.stringValue = splashScreenConfig!.message
+            targetViewController.imageCell.image = splashScreenConfig!.background
+            targetViewController.progressIndicator.isHidden = splashScreenConfig!.showProgressIndicator == false
+        } else {
+            assertionFailure("Expected a single segue from this controller, leading to a NSWindowController.")
+        }
     }
     
     func showSplashScreen() {

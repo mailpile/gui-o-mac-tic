@@ -12,9 +12,9 @@ let URL_KEY = "_url"
     private let type: ArgsType
     let string: String?
     let list: [String]?
-    let dictionary: [String: String]?
+    let dictionary: [String: Any]?
     
-    init(string: String?, list: [String]?, dictionary: [String: String]?) {
+    init(string: String?, list: [String]?, dictionary: [String: Any]?) {
         /* TODO error checking: xor shall be true between:
          string, list and dictionary.*/
         precondition( (string != nil) ^^ (list != nil) ^^ (dictionary != nil) )
@@ -56,7 +56,7 @@ let URL_KEY = "_url"
         case .dictionary:
             assert(self.dictionary!.count == 1)
             if let urlString = self.dictionary![URL_KEY] {
-                return URL.init(string: urlString)
+                return URL.init(string: urlString as! String)
             }
         }
         return nil

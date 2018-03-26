@@ -16,7 +16,7 @@
 		D81988A420595F08004B5974 /* GUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81988A320595F08004B5974 /* GUI.swift */; };
 		D81A51FE2067F38600E431E9 /* PostURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81A51FD2067F38600E431E9 /* PostURL.swift */; };
 		D81A52002067F81A00E431E9 /* URLCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81A51FF2067F81A00E431E9 /* URLCommand.swift */; };
-		D81D3CE5206659E0008325B9 /* gui.conf.json in Resources */ = {isa = PBXBuildFile; fileRef = D8ECDD6D205EAB060004790B /* gui.conf.json */; };
+		D81D3CE5206659E0008325B9 /* Example.json in Resources */ = {isa = PBXBuildFile; fileRef = D8ECDD6D205EAB060004790B /* Example.json */; };
 		D81D3CE620665A7E008325B9 /* SubstatusTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85B1E3220614FC5003744E0 /* SubstatusTableCellView.swift */; };
 		D8333EE9205D3FA90029172B /* FontStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8333EE8205D3FA90029172B /* FontStyle.swift */; };
 		D842DA8C2062A73B0043B73A /* URL+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D842DA8B2062A73B0043B73A /* URL+Extensions.swift */; };
@@ -44,6 +44,9 @@
 		D8BE028D2067E496006219D5 /* UserNotificationFacade.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8BE028C2067E496006219D5 /* UserNotificationFacade.swift */; };
 		D8CA67A42066BF1C003501FD /* LogicalXOR.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CA67A32066BF1C003501FD /* LogicalXOR.swift */; };
 		D8CA67A72066CE31003501FD /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CA67A62066CE31003501FD /* Command.swift */; };
+		D8DF32242068D5520034165A /* ShowSplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DF32232068D5520034165A /* ShowSplashScreen.swift */; };
+		D8DF322E2068ED870034165A /* SplashViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DF322D2068ED870034165A /* SplashViewDataSource.swift */; };
+		D8DF32312068EE710034165A /* SplashScreenConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DF32302068EE710034165A /* SplashScreenConfig.swift */; };
 		D8ECDD6C205EA6370004790B /* ConfigParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8ECDD6B205EA6370004790B /* ConfigParser.swift */; };
 		D8F1FEFD20654785007E497B /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F1FEFC20654785007E497B /* main.swift */; };
 		D8F1FEFF2065818D007E497B /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F1FEFE2065818D007E497B /* SplashViewController.swift */; };
@@ -102,8 +105,13 @@
 		D8BE028C2067E496006219D5 /* UserNotificationFacade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationFacade.swift; sourceTree = "<group>"; };
 		D8CA67A32066BF1C003501FD /* LogicalXOR.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogicalXOR.swift; sourceTree = "<group>"; };
 		D8CA67A62066CE31003501FD /* Command.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Command.swift; sourceTree = "<group>"; };
+		D8DF32232068D5520034165A /* ShowSplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowSplashScreen.swift; sourceTree = "<group>"; };
+		D8DF32262068E6800034165A /* Icons */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Icons; path = share/Icons; sourceTree = SOURCE_ROOT; };
+		D8DF322A2068E69F0034165A /* Images */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Images; path = share/Images; sourceTree = SOURCE_ROOT; };
+		D8DF322D2068ED870034165A /* SplashViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewDataSource.swift; sourceTree = "<group>"; };
+		D8DF32302068EE710034165A /* SplashScreenConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenConfig.swift; sourceTree = "<group>"; };
 		D8ECDD6B205EA6370004790B /* ConfigParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigParser.swift; sourceTree = "<group>"; };
-		D8ECDD6D205EAB060004790B /* gui.conf.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = gui.conf.json; path = src/gui.conf.json; sourceTree = SOURCE_ROOT; };
+		D8ECDD6D205EAB060004790B /* Example.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = Example.json; path = "New Group/Example.json"; sourceTree = SOURCE_ROOT; };
 		D8F1FEFC20654785007E497B /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		D8F1FEFE2065818D007E497B /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -129,6 +137,7 @@
 		D819887520595165004B5974 = {
 			isa = PBXGroup;
 			children = (
+				D8DF32252068E66A0034165A /* share */,
 				D88213242066441400150FAE /* LICENSE.txt */,
 				D842DA84206276B00043B73A /* README.md */,
 				D819888020595165004B5974 /* src */,
@@ -152,7 +161,6 @@
 				D8CA67A52066CE23003501FD /* Commands */,
 				D842DA8A2062A7290043B73A /* Extensions */,
 				D85B1E3120614F42003744E0 /* Views */,
-				D8ECDD6D205EAB060004790B /* gui.conf.json */,
 				D8333EF8205E40D90029172B /* Controllers */,
 				D8515EAB205C440900565AAE /* Parser */,
 				D8515E95205C3C2100565AAE /* Model */,
@@ -173,6 +181,8 @@
 		D8333EF8205E40D90029172B /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				D8DF322F2068EE590034165A /* ViewModels */,
+				D8DF322C2068ED670034165A /* Protocols */,
 				D819888320595165004B5974 /* MainWindowViewController.swift */,
 				D860514520601B2000E8983A /* MainWindowController.swift */,
 				D8F1FEFE2065818D007E497B /* SplashViewController.swift */,
@@ -254,8 +264,36 @@
 				D8BE02892067DE8D006219D5 /* GetURL.swift */,
 				D81A51FD2067F38600E431E9 /* PostURL.swift */,
 				D81A51FF2067F81A00E431E9 /* URLCommand.swift */,
+				D8DF32232068D5520034165A /* ShowSplashScreen.swift */,
 			);
 			path = Commands;
+			sourceTree = "<group>";
+		};
+		D8DF32252068E66A0034165A /* share */ = {
+			isa = PBXGroup;
+			children = (
+				D8ECDD6D205EAB060004790B /* Example.json */,
+				D8DF322A2068E69F0034165A /* Images */,
+				D8DF32262068E6800034165A /* Icons */,
+			);
+			name = share;
+			path = "New Group";
+			sourceTree = "<group>";
+		};
+		D8DF322C2068ED670034165A /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				D8DF322D2068ED870034165A /* SplashViewDataSource.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		D8DF322F2068EE590034165A /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				D8DF32302068EE710034165A /* SplashScreenConfig.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -347,7 +385,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D81D3CE5206659E0008325B9 /* gui.conf.json in Resources */,
+				D81D3CE5206659E0008325B9 /* Example.json in Resources */,
 				D88213252066441400150FAE /* LICENSE.txt in Resources */,
 				D819888620595165004B5974 /* Assets.xcassets in Resources */,
 				D819888920595165004B5974 /* Main.storyboard in Resources */,
@@ -373,6 +411,7 @@
 				D819888420595165004B5974 /* MainWindowViewController.swift in Sources */,
 				D8F1FEFF2065818D007E497B /* SplashViewController.swift in Sources */,
 				D8515E99205C3CB000565AAE /* Operation.swift in Sources */,
+				D8DF32242068D5520034165A /* ShowSplashScreen.swift in Sources */,
 				D842DA8E2062AAD60043B73A /* Icon.swift in Sources */,
 				D81988A2205957EE004B5974 /* Config.swift in Sources */,
 				D8B289712067CBBD000DCD03 /* ShowMainWindow.swift in Sources */,
@@ -381,7 +420,9 @@
 				D8515EAD205C443400565AAE /* ConfigInitializer.swift in Sources */,
 				D8BE028D2067E496006219D5 /* UserNotificationFacade.swift in Sources */,
 				D860514620601B2000E8983A /* MainWindowController.swift in Sources */,
+				D8DF322E2068ED870034165A /* SplashViewDataSource.swift in Sources */,
 				D8333EE9205D3FA90029172B /* FontStyle.swift in Sources */,
+				D8DF32312068EE710034165A /* SplashScreenConfig.swift in Sources */,
 				D85B1E2D20613614003744E0 /* Shell.swift in Sources */,
 				D8B2896D2067C3C5000DCD03 /* CommandFactory.swift in Sources */,
 				D8515EB1205D206300565AAE /* Args.swift in Sources */,

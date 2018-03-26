@@ -1,8 +1,9 @@
 import Cocoa
 
 class SplashViewController: NSViewController {
-
     @IBOutlet weak var reportingLabel: NSTextField!
+    @IBOutlet weak var imageCell: NSImageCell!
+    @IBOutlet weak var progressIndicator: NSProgressIndicator!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,6 +20,9 @@ class SplashViewController: NSViewController {
             }
             self.reportingLabel.font = font
         }
+    }
+    
+    override func viewWillAppear() {
         self.reportingLabel.sizeToFit()
     }
     

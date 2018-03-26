@@ -165,7 +165,7 @@
         <!--Splash Window Controller-->
         <scene sceneID="LgI-cn-b1w">
             <objects>
-                <windowController id="ddy-uX-gB5" userLabel="Splash Window Controller" sceneMemberID="viewController">
+                <windowController showSeguePresentationStyle="single" id="ddy-uX-gB5" userLabel="Splash Window Controller" sceneMemberID="viewController">
                     <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="LmP-dP-BBJ" userLabel="Splash Window">
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="245" y="301" width="480" height="57"/>
@@ -195,7 +195,7 @@
                             </progressIndicator>
                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="sxi-34-1Wi" userLabel="Splash Image View">
                                 <rect key="frame" x="0.0" y="0.0" width="480" height="720"/>
-                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="SplashBackground" id="qdE-7X-iao"/>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" image="SplashBackground" id="qdE-7X-iao"/>
                             </imageView>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="52b-Wz-GcU" userLabel="Splash Label">
                                 <rect key="frame" x="222" y="158" width="37" height="17"/>
@@ -218,6 +218,8 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="imageCell" destination="qdE-7X-iao" id="rLM-7e-eRT"/>
+                        <outlet property="progressIndicator" destination="28v-MU-njv" id="Mmg-i0-V85"/>
                         <outlet property="reportingLabel" destination="52b-Wz-GcU" id="D5K-Sa-NIT"/>
                     </connections>
                 </viewController>

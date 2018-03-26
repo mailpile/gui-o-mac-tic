@@ -35,7 +35,7 @@
           "title": "mailpile"
         }, 
         "label": "Open in Terminal"
-      }, 
+      },
       {
         "separator": true
       }, 
@@ -51,17 +51,17 @@
   },
   "app_name": "Mailpile", 
   "icons": {
-    "normal": "/Users/petur/Development/Mailpile/macos/Mailpile/share/Icons/normal.png",
-    "attention": "/Users/petur/Development/Mailpile/macos/Mailpile/share/Icons/attention.png",
-    "startup": "/Users/petur/Development/Mailpile/macos/Mailpile/share/Icons/startup.png",
-    "ra-on": "/Users/petur/Development/Mailpile/macos/Mailpile/share/Icons/ra-on.png",
-    "shutdown": "/Users/petur/Development/Mailpile/macos/Mailpile/share/Icons/shutdown.png",
-    "logged-in": "/Users/petur/Development/Mailpile/macos/Mailpile/share/Icons/logged-in.png",
-    "logo": "/Users/petur/Development/Mailpile/macos/Mailpile/share/Icons/logo.png",
-    "logged-out": "/Users/petur/Development/Mailpile/macos/Mailpile/share/Icons/logged-out.png",
-    "working": "/Users/petur/Development/Mailpile/macos/Mailpile/share/Icons/working.png",
-    "new-setup": "/Users/petur/Development/Mailpile/macos/Mailpile/share/Icons/new-setup.png",
-    "ra-off": "/Users/petur/Development/Mailpile/macos/Mailpile/share/Icons/ra-off.png"
+    "normal": "/Users/petur/Development/gui-o-mac-tic/share/Icons/normal.png",
+    "attention": "/Users/petur/Development/gui-o-mac-tic/share/Icons/attention.png",
+    "startup": "/Users/petur/Development/gui-o-mac-tic/share/Icons/startup.png",
+    "ra-on": "/Users/petur/Development/gui-o-mac-tic/share/Icons/ra-on.png",
+    "shutdown": "/Users/petur/Development/gui-o-mac-tic/share/Icons/shutdown.png",
+    "logged-in": "/Users/petur/Development/gui-o-mac-tic/share/Icons/logged-in.png",
+    "logo": "/Users/petur/Development/gui-o-mac-tic/share/Icons/logo.png",
+    "logged-out": "/Users/petur/Development/gui-o-mac-tic/share/Icons/logged-out.png",
+    "working": "/Users/petur/Development/gui-o-mac-tic/share/Icons/working.png",
+    "new-setup": "/Users/petur/Development/gui-o-mac-tic/share/Icons/new-setup.png",
+    "ra-off": "/Users/petur/Development/gui-o-mac-tic/share/Icons/ra-off.png"
   }, 
   "app_icon": "icon:logo", 
   "main_window": {
@@ -127,6 +127,19 @@
                 "_url": "http://localhost:8089/gui-o-mac-tic/post",
                 },
                 "label": "post json"
+      },
+                {
+                "item": "show_splash",
+                "op": "show_splash_screen",
+                "sensitive": true,
+                "args": {
+                         "background": "/Users/petur/Development/gui-o-mac-tic/share/Images/paper.jpg",
+                         "message": "You can write on this...",
+                         "progress_bar": true
+                         },
+                "label": "Splash (paper)",
+                "type" : "button",
+                "position": "first"
                 },
       {
         "item": "quit_button", 

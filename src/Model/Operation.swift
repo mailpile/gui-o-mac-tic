@@ -6,7 +6,7 @@ import AppKit
     case get_url
     case post_url
     case shell
-    //case show_splash_screen
+    case show_splash_screen
     //case update_splash_screen
     //case hide_splash_screen
     case show_main_window

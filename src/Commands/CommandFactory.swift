@@ -1,4 +1,4 @@
-import Foundation
+import AppKit
 
 class CommandFactory {
     
@@ -23,9 +23,9 @@ class CommandFactory {
             precondition(args?.dictionary != nil, "Expected a dictionary.")
             precondition(args!.dictionary!.count > 0, "Expected a non-empty dictionary.")
             precondition(args!.dictionary!["command"] != nil, "No command was provided for execution.")
-            let command = args!.dictionary!["command"]!
-            let title = args!.dictionary!["title"]
-            let icon = args!.dictionary!["icon"]
+            let command = args!.dictionary!["command"] as! String
+            let title = args!.dictionary!["title"] as? String
+            let icon = args!.dictionary!["icon"] as? String
             return Terminal(command, title, icon)
             
         case .get_url:
@@ -51,6 +51,15 @@ class CommandFactory {
                 print(error.localizedDescription)
                 fatalError()
             }
+        
+        case .show_splash_screen:
+            precondition(args != nil, "Did not receive arguments")
+            let background = NSImage(contentsOfFile: args!.dictionary!["background"] as! String)
+            let message = args!.dictionary!["message"] as? String ?? ""
+            let showProgressBar = args!.dictionary!["progress_bar"] as? Bool == true
+            
+            precondition(background != nil, "A splash screen can not be created without a background.")
+            return ShowSplashScreen(background: background, message: message, showProgressBar: showProgressBar)
         }
         
         

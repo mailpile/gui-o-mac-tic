@@ -59,7 +59,7 @@ extension Action {
         if let args = json["args"] {
             self.args = Args(string: args as? String,
                              list: args as? [String],
-                             dictionary: args as? [String: String])
+                             dictionary: args as? [String: Any])
         } else {
             args = nil
         }
@@ -86,6 +86,9 @@ extension Action {
                 self.op = .get_url
             case "post_url":
                 self.op = .post_url
+            case "show_splash_screen":
+                self.op = .show_splash_screen
+                
             default:
                 preconditionFailure("Invalid configuration: \(opString) is not a known op.")
             }
