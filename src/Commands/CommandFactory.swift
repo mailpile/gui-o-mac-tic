@@ -74,6 +74,9 @@ class CommandFactory {
             
         case .hide_splash_screen:
             return HideSplashScreen()
+            
+        case .hide_main_window:
+            return HideMainWindow()
         }
         
         

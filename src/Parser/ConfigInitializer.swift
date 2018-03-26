@@ -92,6 +92,8 @@ extension Action {
                 self.op = .update_splash_screen
             case "hide_splash_screen":
                 self.op = .hide_splash_screen
+            case "hide_main_window":
+                self.op = .hide_main_window
                 
             default:
                 preconditionFailure("Invalid configuration: \(opString) is not a known op.")

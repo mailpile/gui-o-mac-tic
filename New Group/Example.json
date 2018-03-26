@@ -160,6 +160,13 @@
                 "op": "hide_splash_screen",
                 "position": "last"
                 },
+                {
+                "item": "hide Main",
+                "label": "Hide Main",
+                "type": "button",
+                "op": "hide_main_window",
+                "position": "last"
+                },
       {
         "item": "quit_button", 
         "label": "Quit GUI", 

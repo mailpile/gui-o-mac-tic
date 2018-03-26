@@ -22,6 +22,10 @@ class MainWindowController: NSWindowController {
             self.showWindow(nil)
             NSApplication.shared.activate(ignoringOtherApps: true)
         }
+        
+        NotificationCenter.default.addObserver(forName: Constants.HIDE_MAIN_WINDOW, object: nil, queue: nil) { _ in
+            self.window?.orderOut(self)
+        }
     }
 
     override func showWindow(_ sender: Any?) {

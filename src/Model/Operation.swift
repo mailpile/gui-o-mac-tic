@@ -10,7 +10,7 @@ import AppKit
     case update_splash_screen
     case hide_splash_screen
     case show_main_window
-    //case hide_main_window
+    case hide_main_window
     //case set_status
     //case set_substatus
     //case set_item_label
