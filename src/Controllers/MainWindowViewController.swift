@@ -49,7 +49,7 @@ class MainWindowViewController: NSViewController, NSTableViewDelegate, NSTableVi
                 let userInfo = notification.userInfo,
                 let background = userInfo["background"] as? NSImage,
                 let message = userInfo["message"] as? String,
-                let showProgressBar = userInfo["progress_bar"] as? Bool?
+                let showProgressBar = userInfo["showProgressBar"] as? Bool?
                 else {
                     preconditionFailure("Observed a \(Constants.SHOW_SPLASH_SCREEN) notification without a valid userInfo.")
             }

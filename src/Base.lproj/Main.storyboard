@@ -190,17 +190,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="480" height="720"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <progressIndicator wantsLayer="YES" maxValue="100" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="28v-MU-njv">
+                            <progressIndicator wantsLayer="YES" maxValue="100" doubleValue="50" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="28v-MU-njv">
                                 <rect key="frame" x="0.0" y="-7" width="480" height="20"/>
                             </progressIndicator>
                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="sxi-34-1Wi" userLabel="Splash Image View">
                                 <rect key="frame" x="0.0" y="0.0" width="480" height="720"/>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" image="SplashBackground" id="qdE-7X-iao"/>
                             </imageView>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="52b-Wz-GcU" userLabel="Splash Label">
-                                <rect key="frame" x="222" y="158" width="37" height="17"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="hbp-fs-c5x">
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="52b-Wz-GcU" userLabel="Splash Label">
+                                <rect key="frame" x="-2" y="158" width="484" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Label" id="hbp-fs-c5x">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -212,9 +211,12 @@
                             <constraint firstItem="sxi-34-1Wi" firstAttribute="height" secondItem="SSV-er-UMe" secondAttribute="height" id="6hQ-TM-i3o"/>
                             <constraint firstAttribute="bottom" secondItem="28v-MU-njv" secondAttribute="bottom" constant="-6" id="7uT-0h-TaA"/>
                             <constraint firstItem="28v-MU-njv" firstAttribute="leading" secondItem="SSV-er-UMe" secondAttribute="leading" id="DpB-4v-eOf"/>
+                            <constraint firstItem="52b-Wz-GcU" firstAttribute="width" secondItem="SSV-er-UMe" secondAttribute="width" id="Ooy-fP-3oT"/>
                             <constraint firstItem="sxi-34-1Wi" firstAttribute="width" secondItem="SSV-er-UMe" secondAttribute="width" id="YHp-1d-374"/>
                             <constraint firstItem="sxi-34-1Wi" firstAttribute="leading" secondItem="SSV-er-UMe" secondAttribute="leading" id="aTf-eQ-hML"/>
+                            <constraint firstItem="52b-Wz-GcU" firstAttribute="centerX" secondItem="SSV-er-UMe" secondAttribute="centerX" id="iEU-NT-XSj"/>
                             <constraint firstItem="28v-MU-njv" firstAttribute="width" secondItem="SSV-er-UMe" secondAttribute="width" id="jih-YB-pTU"/>
+                            <constraint firstAttribute="bottom" secondItem="52b-Wz-GcU" secondAttribute="bottom" constant="158" id="x2v-SR-doy"/>
                         </constraints>
                     </view>
                     <connections>
