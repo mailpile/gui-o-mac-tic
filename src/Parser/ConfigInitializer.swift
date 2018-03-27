@@ -99,6 +99,8 @@ extension Action {
                 self.op = .set_status_display
             case "set_item":
                 self.op = .set_item
+            case "set_next_error_message":
+                self.op = .set_next_error_message
                 
             default:
                 preconditionFailure("Invalid configuration: \(opString) is not a known op.")

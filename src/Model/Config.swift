@@ -6,6 +6,7 @@ class Config {
         return Config._shared!
     }
     
+    public var nextErrorMessage: String?
     private(set) public var app_name: String
     private(set) public var app_icon: String
     private(set) public var require_gui: String?

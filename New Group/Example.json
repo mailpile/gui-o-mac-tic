@@ -195,6 +195,16 @@
                 "position": "last"
                 },
                 {
+                "item": "act1",
+                "label": "set error msg",
+                "type": "button",
+                "op": "set_next_error_message",
+                "args": {
+                "message": "The answer is not 42!"
+                },
+                "position": "last"
+                },
+                {
                 "item": "hide Main",
                 "label": "Hide Main",
                 "type": "button",

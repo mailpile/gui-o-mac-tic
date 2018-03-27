@@ -112,6 +112,10 @@ class CommandFactory {
             let label = args!.dictionary!["label"] as? String
             let sensitive = args!.dictionary!["sensitive"] as? Bool ?? true
             return SetItem(id, label, sensitive)
+            
+        case .set_next_error_message:
+            let message = args?.dictionary?["message"] as? String
+            return SetNextErrorMessage(message)
         }
     }
 }
