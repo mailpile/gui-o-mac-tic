@@ -12,7 +12,7 @@ import AppKit
     case show_main_window
     case hide_main_window
     case set_status
-    //case set_substatus
+    case set_status_display
     //case set_item_label
     //case set_item_sensitive
     //case set_next_error_message

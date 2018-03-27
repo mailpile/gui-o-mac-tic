@@ -96,6 +96,8 @@ extension Action {
                 self.op = .hide_main_window
             case "set_status":
                 self.op = .set_status
+            case "set_status_display":
+                self.op = .set_status_display
                 
             default:
                 preconditionFailure("Invalid configuration: \(opString) is not a known op.")
@@ -119,11 +121,11 @@ extension Action {
 extension MainWindow {
     init?(json: [String: Any], substatusIconFinder: @escaping (String!) -> NSImage?) {
         
-        func statusParser(statusJSON: [[String: String]]?) -> [Status]? {
-            var statuses: [Status] = []
+        func statusParser(statusJSON: [[String: String]]?) -> [StatusDisplay]? {
+            var statuses: [StatusDisplay] = []
             if (statusJSON != nil) {
                 for oneStatusJSON in statusJSON! {
-                    guard let status: Status = Status(json: oneStatusJSON, substatusIconFinder: substatusIconFinder) else {
+                    guard let status: StatusDisplay = StatusDisplay(json: oneStatusJSON, substatusIconFinder: substatusIconFinder) else {
                         continue
                     }
                     statuses.append(status)
@@ -152,11 +154,8 @@ extension MainWindow {
         
         let actionsJSON = json["actions"] as! [[String: Any]]
 
-        let statusJSON = json["status"] as? [[String: String]]
+        let statusJSON = json["status_displays"] as? [[String: String]]
         self.status = statusParser(statusJSON: statusJSON)
-        
-        let substatusJSON = json["substatus"] as? [[String: String]]
-        self.substatus = statusParser(statusJSON: substatusJSON)
         
         self.actions = []
         for action:[String: Any] in actionsJSON {
@@ -166,7 +165,7 @@ extension MainWindow {
     }
 }
 
-extension Status {
+extension StatusDisplay {
     convenience init?(json: [String: String], substatusIconFinder: (String!) -> NSImage?) {
         
         let icon: String? = json["icon"]
@@ -175,7 +174,7 @@ extension Status {
         let iconName = String(icon!.dropFirst(prefix.count))
         let iconImage: NSImage? = substatusIconFinder(iconName)
         
-        self.init(item: json["item"]!, label: json["label"]!, hint: json["hint"]!, icon: iconImage)
+        self.init(item: json["id"]!, label: json["title"]!, hint: json["details"]!, icon: iconImage)
     }
 }
 

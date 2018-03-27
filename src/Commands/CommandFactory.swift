@@ -83,7 +83,31 @@ class CommandFactory {
                 preconditionFailure("Status was not provided as an argument.")
             }
             return SetStatus(status)
+            
+        case .set_status_display:
+            guard let id: String = args?.dictionary?["id"] as? String else {
+                preconditionFailure("'set_status_display' must provide an 'id'.")
+            }
+            let title = args!.dictionary!["title"] as? String
+            let details = args!.dictionary!["details"] as? String
+            
+            
+            let icon: NSImage?
+            if let iconUrl = args!.dictionary!["icon"] as? String {
+                icon = NSImage(contentsOfFile: iconUrl) // TODO icon can also be image:{somename} FIXME
+            } else {
+                icon = nil
+            }
+            
+            var colour: NSColor?
+            if let hexColour = args!.dictionary!["color"] as? String {
+                colour = NSColor(hexColour: hexColour)
+            }
+            
+            return SetStatusDisplay(id, title, details, icon, colour)
         }
+        
+        
         
         
     }

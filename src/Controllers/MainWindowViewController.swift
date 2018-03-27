@@ -57,20 +57,30 @@ class MainWindowViewController: NSViewController, NSTableViewDelegate, NSTableVi
             self.showSplashScreen()
         }
         
+        NotificationCenter.default.addObserver(forName: Constants.SET_STATUS_DISPLAY, object: nil, queue: nil) { _ in
+            self.substatusView.reloadData()
+        }
+        
         configureActionStack()
         self.background.image = self.config.main_window?.image
     }
         
     func numberOfRows(in tableView: NSTableView) -> Int {
-        return self.config.main_window?.substatus?.count ?? 0
+        return self.config.main_window?.status?.count ?? 0
     }
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         let cell = tableView.makeView(withIdentifier: Constants.SUBSTATE_CELL_ID, owner: self) as! SubstatusTableCellView
-        let substatus = self.config.main_window!.substatus![row]
-        cell.titleView.stringValue = substatus.label
-        cell.descriptionView.stringValue = substatus.hint
-        cell.iconView.image = substatus.icon
+        let status = self.config.main_window!.status![row]
+        cell.titleView.stringValue = status.title
+        cell.descriptionView.stringValue = status.details
+        cell.iconView.image = status.icon
+        
+        if let colour = status.textColour {
+            cell.titleView.textColor = colour
+            cell.descriptionView.textColor = colour
+        }
+        
         return cell
     }
     

@@ -18,6 +18,6 @@ class ShowSplashScreen: Command {
         userInfo["showProgressBar"] = showProgressBar
         NotificationCenter.default.post(name: Constants.SHOW_SPLASH_SCREEN,
                                         object: nil,
-                                        userInfo: userInfo )
+                                        userInfo: userInfo)
     }
 }

@@ -67,23 +67,23 @@
   "main_window": {
     "status": "", 
     "width": 550, 
-    "substatus": [
+    "status_displays": [
       {
-        "item": "mailpile", 
-        "label": "Mailpile is starting up", 
-        "hint": "Patience is a virtue...", 
+        "id": "mailpile",
+        "title": "Mailpile is starting up",
+        "details": "Patience is a virtue...",
         "icon": "icon:logo"
       }, 
       {
-        "item": "logged-in", 
-        "label": "You are not logged in", 
-        "hint": "", 
+        "id": "logged-in",
+        "title": "You are not logged in",
+        "details": "",
         "icon": "icon:logged-out"
       }, 
       {
-        "item": "remote_access", 
-        "label": "Remote access is disabled", 
-        "hint": "Enable remote access if you would like to access\nMailpile from your phone or another computer.", 
+        "id": "remote_access",
+        "title": "Remote access is disabled",
+        "details": "Enable remote access if you would like to access\nMailpile from your phone or another computer.",
         "icon": "icon:ra-off"
       }
     ], 
@@ -166,6 +166,20 @@
                 "type": "button",
                 "op": "set_status",
                 "args": { "status" : "new-setup"},
+                "position": "last"
+                },
+                {
+                "item": "set_status_display",
+                "label": "set_status_display",
+                "type": "button",
+                "op": "set_status_display",
+                "args": {
+                "id": "mailpile",
+                "title": "new title",
+                "details": "new details",
+                "icon": "icon:logged-out",
+                "color": "#AAA"
+                },
                 "position": "last"
                 },
                 {

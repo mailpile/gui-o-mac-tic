@@ -27,7 +27,7 @@
 		D8515EA1205C402600565AAE /* ActionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8515EA0205C402600565AAE /* ActionType.swift */; };
 		D8515EA3205C416700565AAE /* Indicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8515EA2205C416700565AAE /* Indicator.swift */; };
 		D8515EA6205C41BD00565AAE /* MainWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8515EA5205C41BD00565AAE /* MainWindow.swift */; };
-		D8515EA8205C421900565AAE /* Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8515EA7205C421900565AAE /* Status.swift */; };
+		D8515EA8205C421900565AAE /* StatusDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8515EA7205C421900565AAE /* StatusDisplay.swift */; };
 		D8515EAD205C443400565AAE /* ConfigInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8515EAC205C443400565AAE /* ConfigInitializer.swift */; };
 		D8515EB1205D206300565AAE /* Args.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8515EB0205D206300565AAE /* Args.swift */; };
 		D85B1E2820612A81003744E0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85B1E2720612A81003744E0 /* Constants.swift */; };
@@ -52,6 +52,9 @@
 		D8DF3238206907460034165A /* SplashWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DF3237206907460034165A /* SplashWindowController.swift */; };
 		D8DF323A206908F70034165A /* HideMainWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DF3239206908F70034165A /* HideMainWindow.swift */; };
 		D8DF323C206917510034165A /* SetStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DF323B206917510034165A /* SetStatus.swift */; };
+		D8DF323F206922150034165A /* SetStatusDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DF323E206922150034165A /* SetStatusDisplay.swift */; };
+		D8DF3241206927200034165A /* NSColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DF3240206927200034165A /* NSColor+Extensions.swift */; };
+		D8DF324320692B7B0034165A /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DF324220692B7B0034165A /* String+Extensions.swift */; };
 		D8ECDD6C205EA6370004790B /* ConfigParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8ECDD6B205EA6370004790B /* ConfigParser.swift */; };
 		D8F1FEFD20654785007E497B /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F1FEFC20654785007E497B /* main.swift */; };
 		D8F1FEFF2065818D007E497B /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F1FEFE2065818D007E497B /* SplashViewController.swift */; };
@@ -90,7 +93,7 @@
 		D8515EA0205C402600565AAE /* ActionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionType.swift; sourceTree = "<group>"; };
 		D8515EA2205C416700565AAE /* Indicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Indicator.swift; sourceTree = "<group>"; };
 		D8515EA5205C41BD00565AAE /* MainWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWindow.swift; sourceTree = "<group>"; };
-		D8515EA7205C421900565AAE /* Status.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Status.swift; sourceTree = "<group>"; };
+		D8515EA7205C421900565AAE /* StatusDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusDisplay.swift; sourceTree = "<group>"; };
 		D8515EAC205C443400565AAE /* ConfigInitializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigInitializer.swift; sourceTree = "<group>"; };
 		D8515EB0205D206300565AAE /* Args.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Args.swift; sourceTree = "<group>"; };
 		D85B1E2720612A81003744E0 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -120,6 +123,9 @@
 		D8DF3237206907460034165A /* SplashWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashWindowController.swift; sourceTree = "<group>"; };
 		D8DF3239206908F70034165A /* HideMainWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideMainWindow.swift; sourceTree = "<group>"; };
 		D8DF323B206917510034165A /* SetStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetStatus.swift; sourceTree = "<group>"; };
+		D8DF323E206922150034165A /* SetStatusDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetStatusDisplay.swift; sourceTree = "<group>"; };
+		D8DF3240206927200034165A /* NSColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSColor+Extensions.swift"; sourceTree = "<group>"; };
+		D8DF324220692B7B0034165A /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		D8ECDD6B205EA6370004790B /* ConfigParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigParser.swift; sourceTree = "<group>"; };
 		D8ECDD6D205EAB060004790B /* Example.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = Example.json; path = "New Group/Example.json"; sourceTree = SOURCE_ROOT; };
 		D8F1FEFC20654785007E497B /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -205,6 +211,8 @@
 			isa = PBXGroup;
 			children = (
 				D842DA8B2062A73B0043B73A /* URL+Extensions.swift */,
+				D8DF3240206927200034165A /* NSColor+Extensions.swift */,
+				D8DF324220692B7B0034165A /* String+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -220,7 +228,7 @@
 				D8515EA0205C402600565AAE /* ActionType.swift */,
 				D8515EA2205C416700565AAE /* Indicator.swift */,
 				D8515EA5205C41BD00565AAE /* MainWindow.swift */,
-				D8515EA7205C421900565AAE /* Status.swift */,
+				D8515EA7205C421900565AAE /* StatusDisplay.swift */,
 				D8515EB0205D206300565AAE /* Args.swift */,
 				D842DA8D2062AAD60043B73A /* Icon.swift */,
 			);
@@ -280,6 +288,7 @@
 				D8DF3235206904EF0034165A /* HideSplashScreen.swift */,
 				D8DF3239206908F70034165A /* HideMainWindow.swift */,
 				D8DF323B206917510034165A /* SetStatus.swift */,
+				D8DF323E206922150034165A /* SetStatusDisplay.swift */,
 			);
 			path = Commands;
 			sourceTree = "<group>";
@@ -423,6 +432,7 @@
 			files = (
 				D81D3CE620665A7E008325B9 /* SubstatusTableCellView.swift in Sources */,
 				D81A52002067F81A00E431E9 /* URLCommand.swift in Sources */,
+				D8DF3241206927200034165A /* NSColor+Extensions.swift in Sources */,
 				D819888420595165004B5974 /* MainWindowViewController.swift in Sources */,
 				D8F1FEFF2065818D007E497B /* SplashViewController.swift in Sources */,
 				D8515E99205C3CB000565AAE /* Operation.swift in Sources */,
@@ -448,6 +458,7 @@
 				D819888220595165004B5974 /* AppDelegate.swift in Sources */,
 				D8DF323C206917510034165A /* SetStatus.swift in Sources */,
 				D8B289492067AD6A000DCD03 /* ShowURL.swift in Sources */,
+				D8DF323F206922150034165A /* SetStatusDisplay.swift in Sources */,
 				D842DA8C2062A73B0043B73A /* URL+Extensions.swift in Sources */,
 				D85B1E2820612A81003744E0 /* Constants.swift in Sources */,
 				D8CA67A72066CE31003501FD /* Command.swift in Sources */,
@@ -461,9 +472,10 @@
 				D8515EA1205C402600565AAE /* ActionType.swift in Sources */,
 				D81A51FE2067F38600E431E9 /* PostURL.swift in Sources */,
 				D8515EA6205C41BD00565AAE /* MainWindow.swift in Sources */,
+				D8DF324320692B7B0034165A /* String+Extensions.swift in Sources */,
 				D8ECDD6C205EA6370004790B /* ConfigParser.swift in Sources */,
 				D81988A420595F08004B5974 /* GUI.swift in Sources */,
-				D8515EA8205C421900565AAE /* Status.swift in Sources */,
+				D8515EA8205C421900565AAE /* StatusDisplay.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,6 +8,5 @@ struct MainWindow {
     let height: Int
     let image: NSImage?
     var actions: [Action]
-    let status: [Status]?
-    let substatus: [Status]?
+    let status: [StatusDisplay]?
 }
