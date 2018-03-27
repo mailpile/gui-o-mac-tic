@@ -4,13 +4,13 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
     private var config: Config? {
         return Config.shared
     }
-    var commands = [Command]()
-    var statusBarMenu: NSStatusItem?
+    private var commands = [Command]()
+    private var statusBarMenu: NSStatusItem?
     var item2Action = [String: NSMenuItem]()
-    var action2Item = [NSMenuItem: String]()
-    var item2ConfigAction = [String: Action]()
+    private var action2Item = [NSMenuItem: String]()
+    private var item2ConfigAction = [String: Action]()
     
-    var _status = "normal"
+    private var _status = "normal"
     var status: String {
         get {
             return self._status
@@ -21,10 +21,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
         }
     }
     
-    
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+        let statusBarMenu = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
+        
         func buildStatusBarMenu(config: Config) -> NSStatusItem! {
-            let statusBarMenu = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
             func applyStartupIconToMenu() {
                 let iconName: String! = config.indicator.initialStatus
                 let iconImage: NSImage! = config.icons[iconName]!.statusBar
@@ -36,33 +36,33 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
                 } else {
                     let guiMenuItem = NSMenuItem(title: menuItem.label ?? "", action: nil, keyEquivalent: "")
                     guiMenuItem.isEnabled = menuItem.sensitive == true
-                    if guiMenuItem.isEnabled {
-                        let command = CommandFactory.build(forOperation: menuItem.op!, withArgs: menuItem.args)
+                    if let operation = menuItem.op {
+                        let command = CommandFactory.build(forOperation: operation, withArgs: menuItem.args)
                         self.commands.append(command)
                         guiMenuItem.target = command
                         guiMenuItem.action = #selector(command.execute(sender:))
-                        self.action2Item[guiMenuItem] = menuItem.item
+                        self.action2Item[guiMenuItem] = menuItem.id
                     }
                     return guiMenuItem
                 }
             }
             NSUserNotificationCenter.default.delegate = self
-            self.statusBarMenu = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
             applyStartupIconToMenu()
             let menu = NSMenu()
+            menu.autoenablesItems = false
             config.indicator.menu.forEach { configItem in
                 let newItem = buildMenuItem(menuItem: configItem)
                 menu.addItem(newItem)
-                guard let item = configItem.item else { return }
+                guard let item = configItem.id else { return }
                 self.item2Action[item] = newItem
                 self.item2ConfigAction[item] = configItem
             }
             statusBarMenu.menu = menu
             return statusBarMenu
         }
-        
+
         self.statusBarMenu = buildStatusBarMenu(config: self.config!)
-        NSApplication.shared.windows.forEach { window in window.title = self.config?.app_name ?? "Your App Name" }            
+        NSApplication.shared.windows.forEach { window in window.title = self.config?.app_name ?? "Your App Name" }
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {

@@ -1,11 +1,11 @@
 import Foundation
 
 struct Action {
-    let label: String?
-    let item: String?
+    var label: String?
+    let id: String? // Id is optional because seperators do not have IDs.
     let type: ActionType?
     let args: Args?
-    let sensitive: Bool?
+    var sensitive: Bool?
     let op: Operation?
     let position: Position?
     let separator: Bool?

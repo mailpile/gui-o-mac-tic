@@ -105,11 +105,13 @@ class CommandFactory {
             }
             
             return SetStatusDisplay(id, title, details, icon, colour)
+            
+        case .set_item:
+            precondition(args?.dictionary?["id"] as? String != nil, "'set_item' must provide an id.")
+            let id = args!.dictionary!["id"] as! String
+            let label = args!.dictionary!["label"] as? String
+            let sensitive = args!.dictionary!["sensitive"] as? Bool ?? true
+            return SetItem(id, label, sensitive)
         }
-        
-        
-        
-        
     }
-    
 }

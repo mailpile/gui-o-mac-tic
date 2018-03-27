@@ -9,11 +9,11 @@
         <scene sceneID="JPo-4y-FX3">
             <objects>
                 <application id="hnw-xV-0zn" sceneMemberID="viewController">
-                    <menu key="mainMenu" title="Main Menu" systemMenu="main" id="AYu-sK-qS6">
+                    <menu key="mainMenu" title="Main Menu" systemMenu="main" autoenablesItems="NO" id="AYu-sK-qS6">
                         <items>
                             <menuItem title="GUI-o-Mac-tic" id="1Xt-HY-uBw">
                                 <modifierMask key="keyEquivalentModifierMask"/>
-                                <menu key="submenu" title="GUI-o-Mac-tic" systemMenu="apple" id="uQy-DD-JDr">
+                                <menu key="submenu" title="GUI-o-Mac-tic" systemMenu="apple" autoenablesItems="NO" id="uQy-DD-JDr">
                                     <items>
                                         <menuItem title="Quit GUI-o-Mac-tic" keyEquivalent="q" id="4sb-4s-VLi">
                                             <connections>

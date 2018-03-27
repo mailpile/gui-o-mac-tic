@@ -50,11 +50,10 @@ extension Indicator {
 
 extension Action {
     init?(json: [String: Any]) {
+        self.id = json["id"] as? String
         self.label = json["label"] as? String
-        self.item = json["item"] as? String ?? nil
         self.sensitive = json["sensitive"] as? Bool
         self.separator = json["separator"] as? Bool
-        
         
         if let args = json["args"] {
             self.args = Args(string: args as? String,
@@ -98,6 +97,8 @@ extension Action {
                 self.op = .set_status
             case "set_status_display":
                 self.op = .set_status_display
+            case "set_item":
+                self.op = .set_item
                 
             default:
                 preconditionFailure("Invalid configuration: \(opString) is not a known op.")

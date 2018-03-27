@@ -3,7 +3,7 @@
     "menu": [
 
       {
-        "item": "status", 
+        "id": "status",
         "sensitive": false, 
         "label": "Starting up"
       }, 
@@ -11,14 +11,14 @@
         "separator": true
       }, 
       {
-        "item": "main", 
+        "id": "main",
         "op": "show_main_window", 
         "sensitive": true, 
         "args": [], 
         "label": "Show Status Window"
       }, 
       {
-        "item": "browse", 
+        "id": "browse",
         "op": "show_url", 
         "sensitive": true,
         "args": [
@@ -27,7 +27,7 @@
         "label": "Open in Web Browser"
       }, 
       {
-        "item": "screen", 
+        "id": "screen",
         "op": "terminal", 
         "sensitive": true, 
         "args": {
@@ -40,8 +40,8 @@
         "separator": true
       }, 
       {
-        "sensitive": true, 
-        "item": "quit", 
+        "sensitive": false,
+        "id": "quit",
         "args": [], 
         "label": "Quit GUI", 
         "op": "quit"
@@ -179,6 +179,18 @@
                 "details": "new details",
                 "icon": "icon:logged-out",
                 "color": "#AAA"
+                },
+                "position": "last"
+                },
+                {
+                "item": "act1",
+                "label": "Activate1",
+                "type": "button",
+                "op": "set_item",
+                "args": {
+                "id": "quit",
+                "label": "The answer is 42",
+                "sensitive": true
                 },
                 "position": "last"
                 },

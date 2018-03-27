@@ -30,6 +30,7 @@
 		D8515EA8205C421900565AAE /* StatusDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8515EA7205C421900565AAE /* StatusDisplay.swift */; };
 		D8515EAD205C443400565AAE /* ConfigInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8515EAC205C443400565AAE /* ConfigInitializer.swift */; };
 		D8515EB1205D206300565AAE /* Args.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8515EB0205D206300565AAE /* Args.swift */; };
+		D8594A0B206A737000D089DE /* SetItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8594A0A206A737000D089DE /* SetItem.swift */; };
 		D85B1E2820612A81003744E0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85B1E2720612A81003744E0 /* Constants.swift */; };
 		D85B1E2D20613614003744E0 /* Shell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85B1E2C20613614003744E0 /* Shell.swift */; };
 		D860514620601B2000E8983A /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D860514520601B2000E8983A /* MainWindowController.swift */; };
@@ -96,6 +97,7 @@
 		D8515EA7205C421900565AAE /* StatusDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusDisplay.swift; sourceTree = "<group>"; };
 		D8515EAC205C443400565AAE /* ConfigInitializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigInitializer.swift; sourceTree = "<group>"; };
 		D8515EB0205D206300565AAE /* Args.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Args.swift; sourceTree = "<group>"; };
+		D8594A0A206A737000D089DE /* SetItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetItem.swift; sourceTree = "<group>"; };
 		D85B1E2720612A81003744E0 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		D85B1E2C20613614003744E0 /* Shell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shell.swift; sourceTree = "<group>"; };
 		D85B1E3220614FC5003744E0 /* SubstatusTableCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SubstatusTableCellView.swift; path = src/Views/SubstatusTableCellView.swift; sourceTree = SOURCE_ROOT; };
@@ -289,6 +291,7 @@
 				D8DF3239206908F70034165A /* HideMainWindow.swift */,
 				D8DF323B206917510034165A /* SetStatus.swift */,
 				D8DF323E206922150034165A /* SetStatusDisplay.swift */,
+				D8594A0A206A737000D089DE /* SetItem.swift */,
 			);
 			path = Commands;
 			sourceTree = "<group>";
@@ -437,6 +440,7 @@
 				D8F1FEFF2065818D007E497B /* SplashViewController.swift in Sources */,
 				D8515E99205C3CB000565AAE /* Operation.swift in Sources */,
 				D8DF32242068D5520034165A /* ShowSplashScreen.swift in Sources */,
+				D8594A0B206A737000D089DE /* SetItem.swift in Sources */,
 				D842DA8E2062AAD60043B73A /* Icon.swift in Sources */,
 				D81988A2205957EE004B5974 /* Config.swift in Sources */,
 				D8DF323A206908F70034165A /* HideMainWindow.swift in Sources */,
