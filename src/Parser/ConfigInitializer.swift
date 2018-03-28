@@ -6,17 +6,19 @@ extension Config {
         let app_icon = json["app_icon"] as? String
         let require_gui = json["require_gui"] as? String
         let main_windowJSON = json["main_window"] as? [String: Any]
+        
         let indicatorJSON = json["indicator"] as? [String: Any]
-        let iconsJSON = json["icons"] as? [String: String]
+        let indicator: Indicator! = Indicator(json: indicatorJSON!)
+        
         let fontStylesJSON = json["font-styles"] as? [String: Any]
-        let indicator:Indicator! = Indicator(json: indicatorJSON!)
-        let fontStyles:FontStyles? = FontStyles(json: fontStylesJSON!)
-        // TODO Cookies are to be parsed as well.
+        let fontStyles: FontStyles? = FontStyles(json: fontStylesJSON!)
+        
         func getImageForIconAt(path: String!, ofType: String!) -> NSImage? {
             let iconUrl = URL(fileURLWithPath: path)
             let actualIconUrl = iconUrl.appendingToLastPathComponent(string: ofType)
             return NSImage(contentsOf: actualIconUrl)
         }
+        let iconsJSON = json["icons"] as? [String: String]
         var icons = [String: Icon]()
         iconsJSON!.forEach({ title, path in
             let statusBarIcon: NSImage? = getImageForIconAt(path: path, ofType: Constants.STATUSBAR)
@@ -31,7 +33,22 @@ extension Config {
         }
         let main_window:MainWindow? = MainWindow(json: main_windowJSON!, substatusIconFinder: imageForSubstatusIconNamed)
         
-        self.init(app_name: app_name!, app_icon: app_icon!, require_gui: require_gui, main_window: main_window, indicators: indicator, icons: icons, fontStyles: fontStyles)
+        let http_cookiesJSON = json["http_cookies"] as? [String: Any]
+        var http_cookies = [MPHTTPCookie]()
+        for cookieJSON in http_cookiesJSON! {
+            let value = cookieJSON.value as! [String: Any]
+            let cookie = MPHTTPCookie(hostname: cookieJSON.key, json: value)
+            http_cookies.append(cookie)
+        }
+        
+        self.init(app_name: app_name!,
+                  app_icon: app_icon!,
+                  require_gui: require_gui,
+                  main_window: main_window,
+                  indicators: indicator,
+                  icons: icons,
+                  fontStyles: fontStyles,
+                  http_cookies: http_cookies)
     }
 }
 
@@ -103,6 +120,8 @@ extension Action {
                 self.op = .set_next_error_message
             case "notify_user":
                 self.op = .notify_user
+            case "set_http_cookie":
+                self.op = .set_http_cookie
                 
             default:
                 preconditionFailure("Invalid configuration: \(opString) is not a known op.")

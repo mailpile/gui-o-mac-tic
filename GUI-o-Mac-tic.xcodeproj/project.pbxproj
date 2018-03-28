@@ -43,6 +43,8 @@
 		D8B109B5206BA7AD00084D82 /* NotifyBySplashScreenMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B109B4206BA7AD00084D82 /* NotifyBySplashScreenMessage.swift */; };
 		D8B109B7206BAA6900084D82 /* NotificationStrategyFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B109B6206BAA6900084D82 /* NotificationStrategyFactory.swift */; };
 		D8B109BA206BB81D00084D82 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B109B9206BB81D00084D82 /* Queue.swift */; };
+		D8B109BC206BD64C00084D82 /* SetHTTPCookie.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B109BB206BD64C00084D82 /* SetHTTPCookie.swift */; };
+		D8B109C0206BD82F00084D82 /* HTTPCookie.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B109BF206BD82F00084D82 /* HTTPCookie.swift */; };
 		D8B289492067AD6A000DCD03 /* ShowURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B289482067AD6A000DCD03 /* ShowURL.swift */; };
 		D8B289632067B1C3000DCD03 /* GUI_o_Mac_ticTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B289622067B1C3000DCD03 /* GUI_o_Mac_ticTests.swift */; };
 		D8B2896D2067C3C5000DCD03 /* CommandFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B2896C2067C3C5000DCD03 /* CommandFactory.swift */; };
@@ -119,6 +121,8 @@
 		D8B109B4206BA7AD00084D82 /* NotifyBySplashScreenMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotifyBySplashScreenMessage.swift; sourceTree = "<group>"; };
 		D8B109B6206BAA6900084D82 /* NotificationStrategyFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationStrategyFactory.swift; sourceTree = "<group>"; };
 		D8B109B9206BB81D00084D82 /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
+		D8B109BB206BD64C00084D82 /* SetHTTPCookie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetHTTPCookie.swift; sourceTree = "<group>"; };
+		D8B109BF206BD82F00084D82 /* HTTPCookie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPCookie.swift; sourceTree = "<group>"; };
 		D8B289482067AD6A000DCD03 /* ShowURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowURL.swift; sourceTree = "<group>"; };
 		D8B289602067B1C3000DCD03 /* GUI-o-Mac-ticTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "GUI-o-Mac-ticTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8B289622067B1C3000DCD03 /* GUI_o_Mac_ticTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GUI_o_Mac_ticTests.swift; sourceTree = "<group>"; };
@@ -250,6 +254,7 @@
 				D8515EA7205C421900565AAE /* StatusDisplay.swift */,
 				D8515EB0205D206300565AAE /* Args.swift */,
 				D842DA8D2062AAD60043B73A /* Icon.swift */,
+				D8B109BF206BD82F00084D82 /* HTTPCookie.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -340,6 +345,7 @@
 				D8DF323E206922150034165A /* SetStatusDisplay.swift */,
 				D8594A0A206A737000D089DE /* SetItem.swift */,
 				D8594A0D206A8A8D00D089DE /* SetNextErrorMessage.swift */,
+				D8B109BB206BD64C00084D82 /* SetHTTPCookie.swift */,
 			);
 			path = Commands;
 			sourceTree = "<group>";
@@ -485,6 +491,7 @@
 				D81A52002067F81A00E431E9 /* URLCommand.swift in Sources */,
 				D8DF3241206927200034165A /* NSColor+Extensions.swift in Sources */,
 				D819888420595165004B5974 /* MainWindowViewController.swift in Sources */,
+				D8B109BC206BD64C00084D82 /* SetHTTPCookie.swift in Sources */,
 				D8F1FEFF2065818D007E497B /* SplashViewController.swift in Sources */,
 				D8515E99205C3CB000565AAE /* Operation.swift in Sources */,
 				D8DF32242068D5520034165A /* ShowSplashScreen.swift in Sources */,
@@ -528,6 +535,7 @@
 				D8515E9D205C3F0300565AAE /* Position.swift in Sources */,
 				D8BE028A2067DE8D006219D5 /* GetURL.swift in Sources */,
 				D8515EA1205C402600565AAE /* ActionType.swift in Sources */,
+				D8B109C0206BD82F00084D82 /* HTTPCookie.swift in Sources */,
 				D8B109B7206BAA6900084D82 /* NotificationStrategyFactory.swift in Sources */,
 				D81A51FE2067F38600E431E9 /* PostURL.swift in Sources */,
 				D8515EA6205C41BD00565AAE /* MainWindow.swift in Sources */,

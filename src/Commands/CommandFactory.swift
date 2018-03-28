@@ -123,6 +123,20 @@ class CommandFactory {
             // TODO, be robust and try parsing "true" and "false" as Strings in case they fail to parse as Bools.
             let popup = args?.dictionary?["popup"] as? Bool ?? false
             return NotifyUser(messageToSend: message!, preferUserNotificationCenter: popup)
+            
+        case .set_http_cookie:
+            guard let domain = args!.dictionary!["domain"] as? String else {
+                preconditionFailure("'set_http_cookie' must provide a 'domain'.")
+            }
+            
+            guard let key = args!.dictionary!["key"] as? String else {
+                preconditionFailure("'set_http_cookie' must provide a 'key'.")
+            }
+            
+            let value = args!.dictionary!["value"] as? String
+            let remove = args!.dictionary!["remove"] as? Bool
+            return SetHTTPCookie(domain, key, value, remove)
+            
         }
     }
 }

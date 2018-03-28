@@ -26,6 +26,19 @@
              "popup": false
              },
              },
+             {
+             "id": "remove_cookie",
+             "sensitive": true,
+             "label": "remove_cookie(existing)",
+             "op": "set_http_cookie",
+             "args": 
+                 {
+                     "domain" : "localhost:33411",
+                     "key" : "session",
+                     "remove" : true
+                 }
+             
+             },
       {
         "separator": true
       }, 
@@ -81,7 +94,12 @@
     "working": "/Users/petur/Development/gui-o-mac-tic/share/Icons/working.png",
     "new-setup": "/Users/petur/Development/gui-o-mac-tic/share/Icons/new-setup.png",
     "ra-off": "/Users/petur/Development/gui-o-mac-tic/share/Icons/ra-off.png"
-  }, 
+  },
+    "http_cookies": {
+        "localhost:33411": {
+            "session": "abacabadonk"
+        }
+    },
   "app_icon": "icon:logo", 
   "main_window": {
     "status": "", 

@@ -18,5 +18,6 @@ import AppKit
     case notify_user
     case show_url
     case terminal
+    case set_http_cookie
     case quit 
 }

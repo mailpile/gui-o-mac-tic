@@ -18,6 +18,7 @@ class Config {
     private(set) public var indicator: Indicator!
     private(set) public var icons: [String: Icon]
     private(set) public var fontStyles: FontStyles?
+    private(set) public var http_cookies: [MPHTTPCookie]?
     
     init(app_name: String,
          app_icon: String,
@@ -25,14 +26,15 @@ class Config {
          main_window: MainWindow?,
          indicators: Indicator!,
          icons: [String: Icon],
-         fontStyles: FontStyles?) {
+         fontStyles: FontStyles?,
+         http_cookies: [MPHTTPCookie]?) {
         self.app_name = app_name
         self.app_icon = app_icon
         self.main_window = main_window
         self.indicator = indicators
         self.icons = icons
         self.fontStyles = fontStyles
-        
+        self.http_cookies = http_cookies
         Config._shared = self
     }
 }
