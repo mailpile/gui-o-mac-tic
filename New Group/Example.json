@@ -1,12 +1,31 @@
 {
   "indicator": {
     "menu": [
-
       {
         "id": "status",
         "sensitive": false, 
         "label": "Starting up"
-      }, 
+      },
+             {
+             "id": "notify_user_popup",
+             "sensitive": true,
+             "label": "notify_user(popup=true)",
+             "op": "notify_user",
+             "args": {
+             "message": "test from notify_user",
+             "popup": true
+             },
+             },
+             {
+             "id": "notify_user_popup_false",
+             "sensitive": true,
+             "label": "notify_user(popup=false)",
+             "op": "notify_user",
+             "args": {
+             "message": "test from notify_user",
+             "popup": false
+             },
+             },
       {
         "separator": true
       }, 

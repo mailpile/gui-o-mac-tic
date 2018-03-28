@@ -116,6 +116,13 @@ class CommandFactory {
         case .set_next_error_message:
             let message = args?.dictionary?["message"] as? String
             return SetNextErrorMessage(message)
+            
+        case .notify_user:
+            let message = args?.dictionary?["message"] as? String
+            precondition(message != nil, "'notify_user' must provide a message.")
+            // TODO, be robust and try parsing "true" and "false" as Strings in case they fail to parse as Bools.
+            let popup = args?.dictionary?["popup"] as? Bool ?? false
+            return NotifyUser(messageToSend: message!, preferUserNotificationCenter: popup)
         }
     }
 }

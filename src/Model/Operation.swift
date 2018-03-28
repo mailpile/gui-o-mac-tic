@@ -15,7 +15,7 @@ import AppKit
     case set_status_display
     case set_item
     case set_next_error_message
-    //case notify_user
+    case notify_user
     case show_url
     case terminal
     case quit 

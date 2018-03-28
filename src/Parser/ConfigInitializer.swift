@@ -101,6 +101,8 @@ extension Action {
                 self.op = .set_item
             case "set_next_error_message":
                 self.op = .set_next_error_message
+            case "notify_user":
+                self.op = .notify_user
                 
             default:
                 preconditionFailure("Invalid configuration: \(opString) is not a known op.")
