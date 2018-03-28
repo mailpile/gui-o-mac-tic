@@ -36,6 +36,13 @@
 		D85B1E2D20613614003744E0 /* Shell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85B1E2C20613614003744E0 /* Shell.swift */; };
 		D860514620601B2000E8983A /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D860514520601B2000E8983A /* MainWindowController.swift */; };
 		D88213252066441400150FAE /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = D88213242066441400150FAE /* LICENSE.txt */; };
+		D8B109AB206BA28F00084D82 /* NotifyUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B109AA206BA28F00084D82 /* NotifyUser.swift */; };
+		D8B109AF206BA67400084D82 /* NotificationStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B109AE206BA67400084D82 /* NotificationStrategy.swift */; };
+		D8B109B1206BA6BD00084D82 /* NotifyByNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B109B0206BA6BD00084D82 /* NotifyByNotification.swift */; };
+		D8B109B3206BA72700084D82 /* NotifyByModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B109B2206BA72700084D82 /* NotifyByModal.swift */; };
+		D8B109B5206BA7AD00084D82 /* NotifyBySplashScreenMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B109B4206BA7AD00084D82 /* NotifyBySplashScreenMessage.swift */; };
+		D8B109B7206BAA6900084D82 /* NotificationStrategyFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B109B6206BAA6900084D82 /* NotificationStrategyFactory.swift */; };
+		D8B109BA206BB81D00084D82 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B109B9206BB81D00084D82 /* Queue.swift */; };
 		D8B289492067AD6A000DCD03 /* ShowURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B289482067AD6A000DCD03 /* ShowURL.swift */; };
 		D8B289632067B1C3000DCD03 /* GUI_o_Mac_ticTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B289622067B1C3000DCD03 /* GUI_o_Mac_ticTests.swift */; };
 		D8B2896D2067C3C5000DCD03 /* CommandFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B2896C2067C3C5000DCD03 /* CommandFactory.swift */; };
@@ -105,6 +112,13 @@
 		D85B1E3220614FC5003744E0 /* SubstatusTableCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SubstatusTableCellView.swift; path = src/Views/SubstatusTableCellView.swift; sourceTree = SOURCE_ROOT; };
 		D860514520601B2000E8983A /* MainWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
 		D88213242066441400150FAE /* LICENSE.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
+		D8B109AA206BA28F00084D82 /* NotifyUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotifyUser.swift; sourceTree = "<group>"; };
+		D8B109AE206BA67400084D82 /* NotificationStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationStrategy.swift; sourceTree = "<group>"; };
+		D8B109B0206BA6BD00084D82 /* NotifyByNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotifyByNotification.swift; sourceTree = "<group>"; };
+		D8B109B2206BA72700084D82 /* NotifyByModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotifyByModal.swift; sourceTree = "<group>"; };
+		D8B109B4206BA7AD00084D82 /* NotifyBySplashScreenMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotifyBySplashScreenMessage.swift; sourceTree = "<group>"; };
+		D8B109B6206BAA6900084D82 /* NotificationStrategyFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationStrategyFactory.swift; sourceTree = "<group>"; };
+		D8B109B9206BB81D00084D82 /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		D8B289482067AD6A000DCD03 /* ShowURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowURL.swift; sourceTree = "<group>"; };
 		D8B289602067B1C3000DCD03 /* GUI-o-Mac-ticTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "GUI-o-Mac-ticTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8B289622067B1C3000DCD03 /* GUI_o_Mac_ticTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GUI_o_Mac_ticTests.swift; sourceTree = "<group>"; };
@@ -178,6 +192,7 @@
 		D819888020595165004B5974 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				D8B109B8206BB80F00084D82 /* DataTypes */,
 				D8CA67A52066CE23003501FD /* Commands */,
 				D842DA8A2062A7290043B73A /* Extensions */,
 				D85B1E3120614F42003744E0 /* Views */,
@@ -256,6 +271,36 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		D8B109AC206BA5D100084D82 /* NotifyUser */ = {
+			isa = PBXGroup;
+			children = (
+				D8B109AD206BA5F600084D82 /* Strategies */,
+				D8BE028B2067E485006219D5 /* Facades */,
+				D8B109AA206BA28F00084D82 /* NotifyUser.swift */,
+			);
+			path = NotifyUser;
+			sourceTree = "<group>";
+		};
+		D8B109AD206BA5F600084D82 /* Strategies */ = {
+			isa = PBXGroup;
+			children = (
+				D8B109B6206BAA6900084D82 /* NotificationStrategyFactory.swift */,
+				D8B109AE206BA67400084D82 /* NotificationStrategy.swift */,
+				D8B109B0206BA6BD00084D82 /* NotifyByNotification.swift */,
+				D8B109B2206BA72700084D82 /* NotifyByModal.swift */,
+				D8B109B4206BA7AD00084D82 /* NotifyBySplashScreenMessage.swift */,
+			);
+			path = Strategies;
+			sourceTree = "<group>";
+		};
+		D8B109B8206BB80F00084D82 /* DataTypes */ = {
+			isa = PBXGroup;
+			children = (
+				D8B109B9206BB81D00084D82 /* Queue.swift */,
+			);
+			path = DataTypes;
+			sourceTree = "<group>";
+		};
 		D8B289612067B1C3000DCD03 /* GUI-o-Mac-ticTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -276,7 +321,7 @@
 		D8CA67A52066CE23003501FD /* Commands */ = {
 			isa = PBXGroup;
 			children = (
-				D8BE028B2067E485006219D5 /* Facades */,
+				D8B109AC206BA5D100084D82 /* NotifyUser */,
 				D8B2896C2067C3C5000DCD03 /* CommandFactory.swift */,
 				D8CA67A62066CE31003501FD /* Command.swift */,
 				D8B289482067AD6A000DCD03 /* ShowURL.swift */,
@@ -451,6 +496,7 @@
 				D8B2896F2067C5A1000DCD03 /* Quit.swift in Sources */,
 				D8515EA3205C416700565AAE /* Indicator.swift in Sources */,
 				D8515EAD205C443400565AAE /* ConfigInitializer.swift in Sources */,
+				D8B109B5206BA7AD00084D82 /* NotifyBySplashScreenMessage.swift in Sources */,
 				D8DF32332068FC2E0034165A /* UpdateSplashScreen.swift in Sources */,
 				D8BE028D2067E496006219D5 /* UserNotificationFacade.swift in Sources */,
 				D8DF3236206904EF0034165A /* HideSplashScreen.swift in Sources */,
@@ -460,13 +506,16 @@
 				D8DF32312068EE710034165A /* SplashScreenConfig.swift in Sources */,
 				D85B1E2D20613614003744E0 /* Shell.swift in Sources */,
 				D8B2896D2067C3C5000DCD03 /* CommandFactory.swift in Sources */,
+				D8B109BA206BB81D00084D82 /* Queue.swift in Sources */,
 				D8515EB1205D206300565AAE /* Args.swift in Sources */,
 				D8F1FEFD20654785007E497B /* main.swift in Sources */,
 				D819888220595165004B5974 /* AppDelegate.swift in Sources */,
 				D8DF323C206917510034165A /* SetStatus.swift in Sources */,
 				D8B289492067AD6A000DCD03 /* ShowURL.swift in Sources */,
+				D8B109AB206BA28F00084D82 /* NotifyUser.swift in Sources */,
 				D8DF323F206922150034165A /* SetStatusDisplay.swift in Sources */,
 				D8594A0E206A8A8D00D089DE /* SetNextErrorMessage.swift in Sources */,
+				D8B109AF206BA67400084D82 /* NotificationStrategy.swift in Sources */,
 				D842DA8C2062A73B0043B73A /* URL+Extensions.swift in Sources */,
 				D85B1E2820612A81003744E0 /* Constants.swift in Sources */,
 				D8CA67A72066CE31003501FD /* Command.swift in Sources */,
@@ -475,15 +524,18 @@
 				D8B289742067CC3C000DCD03 /* Terminal.swift in Sources */,
 				D8515E9B205C3D0D00565AAE /* Action.swift in Sources */,
 				D81988A0205951D5004B5974 /* Control.swift in Sources */,
+				D8B109B1206BA6BD00084D82 /* NotifyByNotification.swift in Sources */,
 				D8515E9D205C3F0300565AAE /* Position.swift in Sources */,
 				D8BE028A2067DE8D006219D5 /* GetURL.swift in Sources */,
 				D8515EA1205C402600565AAE /* ActionType.swift in Sources */,
+				D8B109B7206BAA6900084D82 /* NotificationStrategyFactory.swift in Sources */,
 				D81A51FE2067F38600E431E9 /* PostURL.swift in Sources */,
 				D8515EA6205C41BD00565AAE /* MainWindow.swift in Sources */,
 				D8DF324320692B7B0034165A /* String+Extensions.swift in Sources */,
 				D8ECDD6C205EA6370004790B /* ConfigParser.swift in Sources */,
 				D81988A420595F08004B5974 /* GUI.swift in Sources */,
 				D8515EA8205C421900565AAE /* StatusDisplay.swift in Sources */,
+				D8B109B3206BA72700084D82 /* NotifyByModal.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

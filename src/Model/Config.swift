@@ -6,7 +6,11 @@ class Config {
         return Config._shared!
     }
     
+    /* TODO Refactor to a Blackboard. Add this class and the two following group of variables as top level entities. */
+    public var splashMessages = Queue<String>()
+    public var mainWindowMessages = Queue<String>()
     public var nextErrorMessage: String?
+    
     private(set) public var app_name: String
     private(set) public var app_icon: String
     private(set) public var require_gui: String?
