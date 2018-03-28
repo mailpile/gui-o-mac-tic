@@ -4,6 +4,7 @@ final class Constants {
     private init() {
     }
     
+    // TODO Replace the following notifications with KVO on the blackboard.
     static let SHOW_MAIN_WINDOW = NSNotification.Name(rawValue: "SHOW_MAIN_WINDOW")
     static let HIDE_MAIN_WINDOW = NSNotification.Name(rawValue: "HIDE_MAIN_WINDOW")
     static let SHOW_SPLASH_SCREEN = NSNotification.Name(rawValue: "SHOW_SPLASH_SCREEN")
@@ -11,6 +12,7 @@ final class Constants {
     static let UPDATE_SPLASH_SCREEN = NSNotification.Name(rawValue: "UPDATE_SPLASH_SCREEN")
     static let SET_STATUS = NSNotification.Name(rawValue: "SET_STATUS")
     static let SET_STATUS_DISPLAY = NSNotification.Name(rawValue: "SET_STATUS_DISPLAY")
+    static let MAIN_WINDOW_NOTIFY_USER = NSNotification.Name(rawValue: "MAIN_WINDOW_NOTIFY_USER")
     
     static let SPLASH_SEGUE = NSStoryboardSegue.Identifier.init("splashSegue")
     

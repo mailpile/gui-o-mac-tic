@@ -148,12 +148,29 @@
                             <stackView orientation="horizontal" alignment="bottom" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" fixedFrame="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Abb-xO-YYl">
                                 <rect key="frame" x="8" y="8" width="384" height="32"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+                                <middleViews>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WQR-TC-v3D">
+                                        <rect key="frame" x="174" y="0.0" width="37" height="17"/>
+                                        <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" id="Ya3-cX-SZ1">
+                                            <font key="font" metaFont="system"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                </middleViews>
+                                <visibilityPriorities>
+                                    <integer value="1000"/>
+                                </visibilityPriorities>
+                                <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
+                                </customSpacing>
                             </stackView>
                         </subviews>
                     </view>
                     <connections>
                         <outlet property="actionStack" destination="Abb-xO-YYl" id="eEn-ko-gvN"/>
                         <outlet property="background" destination="Nlk-hX-FkE" id="ho9-Hh-vk8"/>
+                        <outlet property="message" destination="WQR-TC-v3D" id="qKv-Oj-gKs"/>
                         <outlet property="substatusView" destination="p3U-rk-9b6" id="uEr-4u-8fT"/>
                         <segue destination="ddy-uX-gB5" kind="show" identifier="splashSegue" id="plZ-p0-PkT"/>
                     </connections>

@@ -9,6 +9,7 @@ class MainWindowViewController: NSViewController, NSTableViewDelegate, NSTableVi
     @IBOutlet weak var background: NSImageView!
     @IBOutlet weak var substatusView: NSTableView!
     @IBOutlet weak var actionStack: NSStackView!
+    @IBOutlet weak var message: NSTextField!
     
 
     private var config: Config! {
@@ -59,6 +60,14 @@ class MainWindowViewController: NSViewController, NSTableViewDelegate, NSTableVi
         
         NotificationCenter.default.addObserver(forName: Constants.SET_STATUS_DISPLAY, object: nil, queue: nil) { _ in
             self.substatusView.reloadData()
+        }
+        
+        NotificationCenter.default.addObserver(forName: Constants.MAIN_WINDOW_NOTIFY_USER, object: nil, queue: nil) { _ in
+            guard let message: String = Config.shared.mainWindowMessages.tryPop() else {
+                preconditionFailure("Expected a message.")
+            }
+            self.message.stringValue = message
+            self.message.sizeToFit()
         }
         
         configureActionStack()

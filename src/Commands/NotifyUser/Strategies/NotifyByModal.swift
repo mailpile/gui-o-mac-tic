@@ -1,7 +1,8 @@
-import Foundation
+import AppKit
 
 class NotifyByModal: NotificationStrategy {
     static func Notify(message: String) {
-        preconditionFailure("Not yet implemented.") // TODO
+        Config.shared.mainWindowMessages.push(message)
+        NotificationCenter.default.post(name: Constants.MAIN_WINDOW_NOTIFY_USER, object: nil)
     }
 }

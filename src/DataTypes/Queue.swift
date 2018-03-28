@@ -17,5 +17,9 @@ struct Queue<Element> {
         return items.removeFirst()
     }
     
+    mutating func tryPop() -> Element? {
+        return isEmpty ? nil : pop()
+    }
+    
     
 }
