@@ -32,6 +32,14 @@ class SplashViewController: NSViewController {
                 self.reportingLabel.stringValue = message
             }
         }
+        
+        NotificationCenter.default.addObserver(forName: Constants.SPLASH_SCREEN_NOTIFY_USER, object: nil, queue: nil) { _ in
+            guard let message: String = Config.shared.splashMessages.tryPop() else {
+                preconditionFailure("Expected a message.")
+            }
+            self.reportingLabel.stringValue = message
+            self.reportingLabel.sizeToFit()
+        }
     }
     
     override func viewWillAppear() {

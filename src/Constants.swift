@@ -13,6 +13,7 @@ final class Constants {
     static let SET_STATUS = NSNotification.Name(rawValue: "SET_STATUS")
     static let SET_STATUS_DISPLAY = NSNotification.Name(rawValue: "SET_STATUS_DISPLAY")
     static let MAIN_WINDOW_NOTIFY_USER = NSNotification.Name(rawValue: "MAIN_WINDOW_NOTIFY_USER")
+    static let SPLASH_SCREEN_NOTIFY_USER = NSNotification.Name(rawValue: "SPLASH_SCREEN_NOTIFY_USER")
     
     static let SPLASH_SEGUE = NSStoryboardSegue.Identifier.init("splashSegue")
     
