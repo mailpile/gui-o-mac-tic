@@ -120,9 +120,10 @@ class CommandFactory {
         case .notify_user:
             let message = args?.dictionary?["message"] as? String
             precondition(message != nil, "'notify_user' must provide a message.")
-            // TODO, be robust and try parsing "true" and "false" as Strings in case they fail to parse as Bools.
+            
             let popup = args?.dictionary?["popup"] as? Bool ?? false
-            return NotifyUser(messageToSend: message!, preferUserNotificationCenter: popup)
+            let alert = args?.dictionary?["alert"] as? Bool ?? false
+            return NotifyUser(messageToSend: message!, preferUserNotificationCenter: popup, alert: alert)
             
         case .set_http_cookie:
             guard let domain = args!.dictionary!["domain"] as? String else {

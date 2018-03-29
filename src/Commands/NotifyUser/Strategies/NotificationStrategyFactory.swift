@@ -1,7 +1,11 @@
 import AppKit
 
 class NotificationStrategyFactory {
-    static func build(preferUserNotificationCenter: Bool) -> NotificationStrategy.Type {
+    static func build(preferUserNotificationCenter: Bool, alert: Bool) -> NotificationStrategy.Type {
+        if alert {
+            return NotifyByAlert.self
+        }
+        
         if !preferUserNotificationCenter {
             let windows: [NSWindow] = NSApplication.shared.windows
             

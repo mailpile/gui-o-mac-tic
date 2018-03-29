@@ -35,9 +35,10 @@
 		D85B1E2D20613614003744E0 /* Shell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85B1E2C20613614003744E0 /* Shell.swift */; };
 		D860514620601B2000E8983A /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D860514520601B2000E8983A /* MainWindowController.swift */; };
 		D88213252066441400150FAE /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = D88213242066441400150FAE /* LICENSE.txt */; };
-		D88F29F0206CEC0B006901CB /* mailpile.json in Resources */ = {isa = PBXBuildFile; fileRef = D88F29EF206CEC0B006901CB /* mailpile.json */; };
+		D88F29F0206CEC0B006901CB /* mailpile.conf in Resources */ = {isa = PBXBuildFile; fileRef = D88F29EF206CEC0B006901CB /* mailpile.conf */; };
 		D88F29F2206CEC74006901CB /* mailpile.onlyjson.json in Resources */ = {isa = PBXBuildFile; fileRef = D88F29F1206CEC74006901CB /* mailpile.onlyjson.json */; };
 		D88F29F5206CF4B0006901CB /* images in Resources */ = {isa = PBXBuildFile; fileRef = D8DF322A2068E69F0034165A /* images */; settings = {ASSET_TAGS = (New, ); }; };
+		D8A38275206D741E006E79D6 /* NotifyByAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A38274206D741E006E79D6 /* NotifyByAlert.swift */; };
 		D8B109AB206BA28F00084D82 /* NotifyUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B109AA206BA28F00084D82 /* NotifyUser.swift */; };
 		D8B109AF206BA67400084D82 /* NotificationStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B109AE206BA67400084D82 /* NotificationStrategy.swift */; };
 		D8B109B1206BA6BD00084D82 /* NotifyByNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B109B0206BA6BD00084D82 /* NotifyByNotification.swift */; };
@@ -116,8 +117,9 @@
 		D85B1E3220614FC5003744E0 /* SubstatusTableCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SubstatusTableCellView.swift; path = src/Views/SubstatusTableCellView.swift; sourceTree = SOURCE_ROOT; };
 		D860514520601B2000E8983A /* MainWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
 		D88213242066441400150FAE /* LICENSE.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
-		D88F29EF206CEC0B006901CB /* mailpile.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = mailpile.json; sourceTree = "<group>"; };
+		D88F29EF206CEC0B006901CB /* mailpile.conf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = mailpile.conf; sourceTree = "<group>"; };
 		D88F29F1206CEC74006901CB /* mailpile.onlyjson.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = mailpile.onlyjson.json; sourceTree = "<group>"; };
+		D8A38274206D741E006E79D6 /* NotifyByAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotifyByAlert.swift; sourceTree = "<group>"; };
 		D8B109AA206BA28F00084D82 /* NotifyUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotifyUser.swift; sourceTree = "<group>"; };
 		D8B109AE206BA67400084D82 /* NotificationStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationStrategy.swift; sourceTree = "<group>"; };
 		D8B109B0206BA6BD00084D82 /* NotifyByNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotifyByNotification.swift; sourceTree = "<group>"; };
@@ -177,12 +179,12 @@
 		D819887520595165004B5974 = {
 			isa = PBXGroup;
 			children = (
-				D8DF32252068E66A0034165A /* share */,
 				D88213242066441400150FAE /* LICENSE.txt */,
 				D842DA84206276B00043B73A /* README.md */,
+				D8DF32252068E66A0034165A /* share */,
 				D819888020595165004B5974 /* src */,
-				D8B289612067B1C3000DCD03 /* GUI-o-Mac-ticTests */,
 				D819887F20595165004B5974 /* Products */,
+				D8B289612067B1C3000DCD03 /* GUI-o-Mac-ticTests */,
 			);
 			sourceTree = "<group>";
 		};
@@ -198,23 +200,23 @@
 		D819888020595165004B5974 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				D8B109B8206BB80F00084D82 /* DataTypes */,
-				D8CA67A52066CE23003501FD /* Commands */,
-				D842DA8A2062A7290043B73A /* Extensions */,
-				D85B1E3120614F42003744E0 /* Views */,
-				D8333EF8205E40D90029172B /* Controllers */,
-				D8515EAB205C440900565AAE /* Parser */,
-				D8515E95205C3C2100565AAE /* Model */,
 				D819888120595165004B5974 /* AppDelegate.swift */,
 				D819888520595165004B5974 /* Assets.xcassets */,
-				D819888720595165004B5974 /* Main.storyboard */,
-				D819888A20595165004B5974 /* Info.plist */,
-				D819888B20595165004B5974 /* GUI-o-Mac-tic.entitlements */,
-				D819889F205951D5004B5974 /* Control.swift */,
-				D81988A320595F08004B5974 /* GUI.swift */,
+				D8CA67A52066CE23003501FD /* Commands */,
 				D85B1E2720612A81003744E0 /* Constants.swift */,
-				D8F1FEFC20654785007E497B /* main.swift */,
+				D819889F205951D5004B5974 /* Control.swift */,
+				D8333EF8205E40D90029172B /* Controllers */,
+				D8B109B8206BB80F00084D82 /* DataTypes */,
+				D842DA8A2062A7290043B73A /* Extensions */,
+				D819888B20595165004B5974 /* GUI-o-Mac-tic.entitlements */,
+				D81988A320595F08004B5974 /* GUI.swift */,
+				D819888A20595165004B5974 /* Info.plist */,
 				D8CA67A32066BF1C003501FD /* LogicalXOR.swift */,
+				D819888720595165004B5974 /* Main.storyboard */,
+				D8F1FEFC20654785007E497B /* main.swift */,
+				D8515E95205C3C2100565AAE /* Model */,
+				D8515EAB205C440900565AAE /* Parser */,
+				D85B1E3120614F42003744E0 /* Views */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -222,12 +224,12 @@
 		D8333EF8205E40D90029172B /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				D8DF322F2068EE590034165A /* ViewModels */,
-				D8DF322C2068ED670034165A /* Protocols */,
-				D819888320595165004B5974 /* MainWindowViewController.swift */,
 				D860514520601B2000E8983A /* MainWindowController.swift */,
+				D819888320595165004B5974 /* MainWindowViewController.swift */,
+				D8DF322C2068ED670034165A /* Protocols */,
 				D8F1FEFE2065818D007E497B /* SplashViewController.swift */,
 				D8DF3237206907460034165A /* SplashWindowController.swift */,
+				D8DF322F2068EE590034165A /* ViewModels */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -235,9 +237,9 @@
 		D842DA8A2062A7290043B73A /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				D842DA8B2062A73B0043B73A /* URL+Extensions.swift */,
 				D8DF3240206927200034165A /* NSColor+Extensions.swift */,
 				D8DF324220692B7B0034165A /* String+Extensions.swift */,
+				D842DA8B2062A73B0043B73A /* URL+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -245,18 +247,18 @@
 		D8515E95205C3C2100565AAE /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				D8333EE8205D3FA90029172B /* FontStyle.swift */,
-				D81988A1205957EE004B5974 /* Config.swift */,
-				D8515E98205C3CB000565AAE /* Operation.swift */,
 				D8515E9A205C3D0D00565AAE /* ActionItem.swift */,
-				D8515E9C205C3F0300565AAE /* Position.swift */,
 				D8515EA0205C402600565AAE /* ActionItemType.swift */,
+				D8515EB0205D206300565AAE /* Args.swift */,
+				D81988A1205957EE004B5974 /* Config.swift */,
+				D8333EE8205D3FA90029172B /* FontStyle.swift */,
+				D8B109BF206BD82F00084D82 /* HTTPCookie.swift */,
+				D842DA8D2062AAD60043B73A /* Images.swift */,
 				D8515EA2205C416700565AAE /* Indicator.swift */,
 				D8515EA5205C41BD00565AAE /* MainWindow.swift */,
+				D8515E98205C3CB000565AAE /* Operation.swift */,
+				D8515E9C205C3F0300565AAE /* Position.swift */,
 				D8515EA7205C421900565AAE /* StatusDisplay.swift */,
-				D8515EB0205D206300565AAE /* Args.swift */,
-				D842DA8D2062AAD60043B73A /* Images.swift */,
-				D8B109BF206BD82F00084D82 /* HTTPCookie.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -281,9 +283,9 @@
 		D8B109AC206BA5D100084D82 /* NotifyUser */ = {
 			isa = PBXGroup;
 			children = (
-				D8B109AD206BA5F600084D82 /* Strategies */,
 				D8BE028B2067E485006219D5 /* Facades */,
 				D8B109AA206BA28F00084D82 /* NotifyUser.swift */,
+				D8B109AD206BA5F600084D82 /* Strategies */,
 			);
 			path = NotifyUser;
 			sourceTree = "<group>";
@@ -291,11 +293,12 @@
 		D8B109AD206BA5F600084D82 /* Strategies */ = {
 			isa = PBXGroup;
 			children = (
-				D8B109B6206BAA6900084D82 /* NotificationStrategyFactory.swift */,
 				D8B109AE206BA67400084D82 /* NotificationStrategy.swift */,
-				D8B109B0206BA6BD00084D82 /* NotifyByNotification.swift */,
+				D8B109B6206BAA6900084D82 /* NotificationStrategyFactory.swift */,
 				D8B109B2206BA72700084D82 /* NotifyByModal.swift */,
+				D8B109B0206BA6BD00084D82 /* NotifyByNotification.swift */,
 				D8B109B4206BA7AD00084D82 /* NotifyBySplashScreenMessage.swift */,
+				D8A38274206D741E006E79D6 /* NotifyByAlert.swift */,
 			);
 			path = Strategies;
 			sourceTree = "<group>";
@@ -328,26 +331,26 @@
 		D8CA67A52066CE23003501FD /* Commands */ = {
 			isa = PBXGroup;
 			children = (
-				D8B109AC206BA5D100084D82 /* NotifyUser */,
-				D8B2896C2067C3C5000DCD03 /* CommandFactory.swift */,
 				D8CA67A62066CE31003501FD /* Command.swift */,
-				D8B289482067AD6A000DCD03 /* ShowURL.swift */,
-				D8B2896E2067C5A1000DCD03 /* Quit.swift */,
-				D85B1E2C20613614003744E0 /* Shell.swift */,
-				D8B289702067CBBD000DCD03 /* ShowMainWindow.swift */,
-				D8B289732067CC3C000DCD03 /* Terminal.swift */,
+				D8B2896C2067C3C5000DCD03 /* CommandFactory.swift */,
 				D8BE02892067DE8D006219D5 /* GetURL.swift */,
-				D81A51FD2067F38600E431E9 /* PostURL.swift */,
-				D81A51FF2067F81A00E431E9 /* URLCommand.swift */,
-				D8DF32232068D5520034165A /* ShowSplashScreen.swift */,
-				D8DF32322068FC2E0034165A /* UpdateSplashScreen.swift */,
-				D8DF3235206904EF0034165A /* HideSplashScreen.swift */,
 				D8DF3239206908F70034165A /* HideMainWindow.swift */,
-				D8DF323B206917510034165A /* SetStatus.swift */,
-				D8DF323E206922150034165A /* SetStatusDisplay.swift */,
+				D8DF3235206904EF0034165A /* HideSplashScreen.swift */,
+				D8B109AC206BA5D100084D82 /* NotifyUser */,
+				D81A51FD2067F38600E431E9 /* PostURL.swift */,
+				D8B2896E2067C5A1000DCD03 /* Quit.swift */,
+				D8B109BB206BD64C00084D82 /* SetHTTPCookie.swift */,
 				D8594A0A206A737000D089DE /* SetItem.swift */,
 				D8594A0D206A8A8D00D089DE /* SetNextErrorMessage.swift */,
-				D8B109BB206BD64C00084D82 /* SetHTTPCookie.swift */,
+				D8DF323B206917510034165A /* SetStatus.swift */,
+				D8DF323E206922150034165A /* SetStatusDisplay.swift */,
+				D85B1E2C20613614003744E0 /* Shell.swift */,
+				D8B289702067CBBD000DCD03 /* ShowMainWindow.swift */,
+				D8DF32232068D5520034165A /* ShowSplashScreen.swift */,
+				D8B289482067AD6A000DCD03 /* ShowURL.swift */,
+				D8B289732067CC3C000DCD03 /* Terminal.swift */,
+				D8DF32322068FC2E0034165A /* UpdateSplashScreen.swift */,
+				D81A51FF2067F81A00E431E9 /* URLCommand.swift */,
 			);
 			path = Commands;
 			sourceTree = "<group>";
@@ -355,9 +358,9 @@
 		D8DF32252068E66A0034165A /* share */ = {
 			isa = PBXGroup;
 			children = (
-				D88F29F1206CEC74006901CB /* mailpile.onlyjson.json */,
-				D88F29EF206CEC0B006901CB /* mailpile.json */,
 				D8DF322A2068E69F0034165A /* images */,
+				D88F29EF206CEC0B006901CB /* mailpile.conf */,
+				D88F29F1206CEC74006901CB /* mailpile.onlyjson.json */,
 			);
 			name = share;
 			path = "New Group";
@@ -471,7 +474,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D88F29F0206CEC0B006901CB /* mailpile.json in Resources */,
+				D88F29F0206CEC0B006901CB /* mailpile.conf in Resources */,
 				D88F29F2206CEC74006901CB /* mailpile.onlyjson.json in Resources */,
 				D88F29F5206CF4B0006901CB /* images in Resources */,
 				D88213252066441400150FAE /* LICENSE.txt in Resources */,
@@ -540,6 +543,7 @@
 				D81988A0205951D5004B5974 /* Control.swift in Sources */,
 				D8B109B1206BA6BD00084D82 /* NotifyByNotification.swift in Sources */,
 				D8515E9D205C3F0300565AAE /* Position.swift in Sources */,
+				D8A38275206D741E006E79D6 /* NotifyByAlert.swift in Sources */,
 				D8BE028A2067DE8D006219D5 /* GetURL.swift in Sources */,
 				D8515EA1205C402600565AAE /* ActionItemType.swift in Sources */,
 				D8B109C0206BD82F00084D82 /* HTTPCookie.swift in Sources */,

@@ -33,6 +33,16 @@
     "indicator": {
         "initial_status": "startup",
         "menu_items": [
+                       {
+                       "args": {
+                                "message": "The answer is not 42.",
+                                "alert": true
+                       },
+                       "id": "alert",
+                       "label": "Alert",
+                       "op": "notify_user",
+                       "sensitive": true
+                       },
             {
                 "id": "notification",
                 "label": "Starting up",

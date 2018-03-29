@@ -26,7 +26,7 @@ extension URLCommand {
             if let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] {
                 let message = json["message"] as? String
                 precondition(message != nil, "JSON replies shall contain a \"message\".")
-                UserNotificationFacade.DeliverNotification(withTitle: message!)
+                UserNotificationFacade.DeliverNotification(withText: message!)
             }
         } catch let error {
             // TODO Handle the error.
