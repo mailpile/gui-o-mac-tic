@@ -3,7 +3,7 @@ import Cocoa
 class MainWindowViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource, SplashScreenDataSource {
     
     var splashScreenConfig: SplashScreenConfig?
-    var button2Action = [NSButton: Action]()
+    var button2Action = [NSButton: ActionItem]()
     var commands = [Command]()
     
     @IBOutlet weak var background: NSImageView!
@@ -31,12 +31,14 @@ class MainWindowViewController: NSViewController, NSTableViewDelegate, NSTableVi
             }
             self.config.main_window?.actions.forEach { action in
                 let buttonInit: ((String, Any?, Selector?) -> NSButton)
-                switch action.type! {
-                case .checkbox:
-                    buttonInit = NSButton.init(checkboxWithTitle:target:action:)
-                case .button:
-                    buttonInit = NSButton.init(title:target:action:)
-                }
+                    switch action.type {
+                    case .checkbox?:
+                        buttonInit = NSButton.init(checkboxWithTitle:target:action:)
+                    case .button?:
+                        buttonInit = NSButton.init(title:target:action:)
+                    case nil:
+                        buttonInit = NSButton.init(title:target:action:)
+                    }
                 let command = CommandFactory.build(forOperation: action.op!, withArgs: action.args)
                 self.commands.append(command)
                 let control = buttonInit(action.label!, command, #selector(command.execute(sender:)))
@@ -82,7 +84,7 @@ class MainWindowViewController: NSViewController, NSTableViewDelegate, NSTableVi
         let cell = tableView.makeView(withIdentifier: Constants.SUBSTATE_CELL_ID, owner: self) as! SubstatusTableCellView
         let status = self.config.main_window!.status![row]
         cell.titleView.stringValue = status.title
-        cell.descriptionView.stringValue = status.details
+        cell.descriptionView.stringValue = status.details ?? ""
         cell.iconView.image = status.icon
         
         if let colour = status.textColour {

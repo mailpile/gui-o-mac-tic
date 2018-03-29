@@ -11,34 +11,33 @@ extension Config {
         let indicator: Indicator! = Indicator(json: indicatorJSON!)
         
         let fontStylesJSON = json["font-styles"] as? [String: Any]
-        let fontStyles: FontStyles? = FontStyles(json: fontStylesJSON!)
+        let fontStyles: FontStyles? = fontStylesJSON != nil ? FontStyles(json: fontStylesJSON!) : nil
         
         func getImageForIconAt(path: String!, ofType: String!) -> NSImage? {
-            let iconUrl = URL(fileURLWithPath: path)
-            let actualIconUrl = iconUrl.appendingToLastPathComponent(string: ofType)
-            return NSImage(contentsOf: actualIconUrl)
+            let image = NSImage(named: NSImage.Name(path))
+            return image
         }
-        let iconsJSON = json["icons"] as? [String: String]
-        var icons = [String: Icon]()
-        iconsJSON!.forEach({ title, path in
-            let statusBarIcon: NSImage? = getImageForIconAt(path: path, ofType: Constants.STATUSBAR)
-            let substatusIcon: NSImage? = getImageForIconAt(path: path, ofType: Constants.SUBSTATUS)
-            let icon = Icon(statusBar: statusBarIcon,
-                            substatus: substatusIcon)
-            icons[title] = icon
+        let imagesJSON = json["images"] as? [String: String]
+        var images = [String: Images]()
+        imagesJSON!.forEach({ title, path in
+            let statusBarIcon: NSImage? = getImageForIconAt(path: title, ofType: Constants.STATUSBAR)
+            let substatusIcon: NSImage? = getImageForIconAt(path: title, ofType: Constants.SUBSTATUS)
+            let icon = Images(statusBar: statusBarIcon, substatus: substatusIcon)
+            images[title] = icon
         })
         
         func imageForSubstatusIconNamed(name: String!) -> NSImage? {
-            return icons[name]?.substatus
+            return images[name]?.substatus
         }
         let main_window:MainWindow? = MainWindow(json: main_windowJSON!, substatusIconFinder: imageForSubstatusIconNamed)
         
-        let http_cookiesJSON = json["http_cookies"] as? [String: Any]
         var http_cookies = [MPHTTPCookie]()
-        for cookieJSON in http_cookiesJSON! {
-            let value = cookieJSON.value as! [String: Any]
-            let cookie = MPHTTPCookie(hostname: cookieJSON.key, json: value)
-            http_cookies.append(cookie)
+        if let http_cookiesJSON = json["http_cookies"] as? [String: Any] {
+            for cookieJSON in http_cookiesJSON {
+                let value = cookieJSON.value as! [String: Any]
+                let cookie = MPHTTPCookie(hostname: cookieJSON.key, json: value)
+                http_cookies.append(cookie)
+            }
         }
         
         self.init(app_name: app_name!,
@@ -46,7 +45,7 @@ extension Config {
                   require_gui: require_gui,
                   main_window: main_window,
                   indicators: indicator,
-                  icons: icons,
+                  icons: images,
                   fontStyles: fontStyles,
                   http_cookies: http_cookies)
     }
@@ -55,17 +54,17 @@ extension Config {
 extension Indicator {
     init?(json: [String: Any]) {
         self.initialStatus = json["initial_status"] as? String
-        let menuJSON = json["menu"] as? [[String: Any]]
+        let menuJSON = json["menu_items"] as? [[String: Any]]
         
         self.menu = []
         for action:[String: Any] in menuJSON! {
-            let menu = Action(json: action)
+            let menu = ActionItem(json: action)
             self.menu.append(menu!)
         }
     }
 }
 
-extension Action {
+extension ActionItem {
     init?(json: [String: Any]) {
         self.id = json["id"] as? String
         self.label = json["label"] as? String
@@ -81,7 +80,7 @@ extension Action {
         }
 
         if let type = json["type"] as? String {
-            self.type = ActionType(rawValue: type)
+            self.type = ActionItemType(rawValue: type)
         } else {
             self.type = nil
         }
@@ -164,7 +163,7 @@ extension MainWindow {
         self.width = json["width"] as! Int
         self.height = json["height"] as! Int
         
-        if let imageFileName = json["image"] as? String {
+        if let imageFileName = json["background"] as? String {
             let imageFileNameWithExtension = imageFileName.components(separatedBy: .init(charactersIn: "/")).last
             let imageFileNameWithoutExtension = imageFileNameWithExtension!.components(separatedBy: .init(charactersIn: ".")).first!
             guard let image = NSImage(named: NSImage.Name(rawValue: imageFileNameWithoutExtension)) else {
@@ -176,14 +175,14 @@ extension MainWindow {
             self.image = nil
         }
         
-        let actionsJSON = json["actions"] as! [[String: Any]]
+        let actionItemsJSON = json["action_items"] as! [[String: Any]]
 
         let statusJSON = json["status_displays"] as? [[String: String]]
         self.status = statusParser(statusJSON: statusJSON)
         
         self.actions = []
-        for action:[String: Any] in actionsJSON {
-            let menu = Action(json: action)
+        for action:[String: Any] in actionItemsJSON {
+            let menu = ActionItem(json: action)
             self.actions.append(menu!)
         }
     }
@@ -193,26 +192,41 @@ extension StatusDisplay {
     convenience init?(json: [String: String], substatusIconFinder: (String!) -> NSImage?) {
         
         let icon: String? = json["icon"]
-        let prefix = "icon:"
+        let prefix = "image:"
         assert(icon?.hasPrefix(prefix) ?? true)
         let iconName = String(icon!.dropFirst(prefix.count))
         let iconImage: NSImage? = substatusIconFinder(iconName)
         
-        self.init(item: json["id"]!, label: json["title"]!, hint: json["details"]!, icon: iconImage)
+        self.init(item: json["id"]!, title: json["title"]!, details: json["details"], icon: iconImage)
     }
 }
 
 extension FontStyles {
     init?(json: [String: Any]) {
-        let labelJSON = json["label"] as! [String: Any]
-        let hintJSON = json["hint"] as! [String: Any]
-        let splashJSON = json["splash"] as! [String: Any]
-        let statusJSON = json["status"] as! [String: Any]
         
-        self.label = FontStyle(json: labelJSON)
-        self.hint = FontStyle(json: hintJSON)
-        self.splash = FontStyle(json: splashJSON)
-        self.status = FontStyle(json: statusJSON)
+        if let detailsJSON = json["details"] as? [String: Any] {
+            self.details = FontStyle(json: detailsJSON)
+        } else {
+            self.details = nil
+        }
+        
+        if let notificationJSON = json["notification"] as? [String: Any] {
+            self.notification = FontStyle(json: notificationJSON)
+        } else {
+            self.notification = nil
+        }
+        
+        if let splashJSON = json["splash"] as? [String: Any] {
+            self.splash = FontStyle(json: splashJSON)
+        } else {
+            self.splash = nil
+        }
+        
+        if let statusJSON = json["status"] as? [String: Any] {
+            self.status = FontStyle(json: statusJSON)
+        } else {
+            self.status = nil
+        }
     }
 }
 

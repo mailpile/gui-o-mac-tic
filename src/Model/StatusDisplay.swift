@@ -3,14 +3,14 @@ import AppKit
 class StatusDisplay : NSObject {
     var id: String
     var title: String
-    var details: String
+    var details: String?
     var icon: NSImage?
     var textColour: NSColor?
     
-    init(item: String, label: String, hint: String, icon: NSImage?) {
+    init(item: String, title: String, details: String?, icon: NSImage?) {
         self.id = item
-        self.title = label
-        self.details = hint
+        self.title = title
+        self.details = details
         self.icon = icon
     }
     

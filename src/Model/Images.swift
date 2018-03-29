@@ -1,6 +1,6 @@
 import AppKit
 
-struct Icon {
+struct Images {
     let statusBar: NSImage?
     let substatus: NSImage?
 }

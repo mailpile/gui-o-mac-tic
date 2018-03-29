@@ -150,7 +150,7 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                 <middleViews>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WQR-TC-v3D">
-                                        <rect key="frame" x="174" y="0.0" width="37" height="17"/>
+                                        <rect key="frame" x="190" y="0.0" width="4" height="17"/>
                                         <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" id="Ya3-cX-SZ1">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>

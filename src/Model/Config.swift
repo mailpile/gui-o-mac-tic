@@ -16,7 +16,7 @@ class Config {
     private(set) public var require_gui: String?
     private(set) public var main_window: MainWindow?
     private(set) public var indicator: Indicator!
-    private(set) public var icons: [String: Icon]
+    private(set) public var icons: [String: Images]
     private(set) public var fontStyles: FontStyles?
     private(set) public var http_cookies: [MPHTTPCookie]?
     
@@ -25,7 +25,7 @@ class Config {
          require_gui: String?,
          main_window: MainWindow?,
          indicators: Indicator!,
-         icons: [String: Icon],
+         icons: [String: Images],
          fontStyles: FontStyles?,
          http_cookies: [MPHTTPCookie]?) {
         self.app_name = app_name

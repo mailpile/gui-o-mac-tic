@@ -9,29 +9,32 @@ class MainWindowController: NSWindowController {
             return NSMakeSize(width, height)
         }
     }
-    var isShowable: Bool! {
-        return Config.shared.main_window?.show
-    }
+    
+    var shouldShowWindow = Config.shared.main_window!.show
     
     override func windowDidLoad() {
         super.windowDidLoad()
         self.window!.setContentSize(self.windowSize)
         self.window!.isReleasedWhenClosed = false
         
-        NotificationCenter.default.addObserver(forName: Constants.SHOW_MAIN_WINDOW, object: nil, queue: nil) { (_) in
-            self.showWindow(nil)
+        NotificationCenter.default.addObserver(forName: Constants.SHOW_MAIN_WINDOW, object: nil, queue: nil) { _ in
+            self.shouldShowWindow = true
+            self.showWindow(self)
             NSApplication.shared.activate(ignoringOtherApps: true)
         }
         
         NotificationCenter.default.addObserver(forName: Constants.HIDE_MAIN_WINDOW, object: nil, queue: nil) { _ in
+            self.shouldShowWindow=false
             self.window?.orderOut(self)
         }
+        
     }
 
     override func showWindow(_ sender: Any?) {
-        super.showWindow(sender)
-        if !isShowable {
-            self.window?.orderOut(nil)
+        if self.shouldShowWindow {
+            super.showWindow(sender)
+        } else {
+            self.window?.orderOut(self)
         }
     }
 }

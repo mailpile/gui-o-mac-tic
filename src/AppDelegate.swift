@@ -8,7 +8,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
     private var statusBarMenu: NSStatusItem?
     var item2Action = [String: NSMenuItem]()
     private var action2Item = [NSMenuItem: String]()
-    private var item2ConfigAction = [String: Action]()
+    private var item2ConfigAction = [String: ActionItem]()
     
     private var _status = "normal"
     var status: String {
@@ -30,7 +30,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
                 let iconImage: NSImage! = config.icons[iconName]!.statusBar
                 statusBarMenu.image = iconImage
             }
-            func buildMenuItem(menuItem: Action) -> NSMenuItem {
+            func buildMenuItem(menuItem: ActionItem) -> NSMenuItem {
                 if menuItem.separator == true {
                     return NSMenuItem.separator()
                 } else {

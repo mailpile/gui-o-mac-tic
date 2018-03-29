@@ -2,5 +2,5 @@ import Foundation
 
 struct Indicator {
     let initialStatus: String?
-    var menu = [Action]()
+    var menu = [ActionItem]()
 }

@@ -4,7 +4,7 @@ let appDelegate = AppDelegate()
 app.delegate = appDelegate
 
 // TODO get the conf by calling "mailpile-gui.py --script"
-let file = Bundle.main.url(forResource: "Example", withExtension: "json")
+let file = Bundle.main.url(forResource: "mailpile.onlyjson", withExtension: "json")
 let config: Config?
 do {
     try config = ConfigParser.parse(file: file!)
