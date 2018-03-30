@@ -37,7 +37,6 @@
 		D88213252066441400150FAE /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = D88213242066441400150FAE /* LICENSE.txt */; };
 		D88F29F0206CEC0B006901CB /* mailpile.conf in Resources */ = {isa = PBXBuildFile; fileRef = D88F29EF206CEC0B006901CB /* mailpile.conf */; };
 		D88F29F2206CEC74006901CB /* mailpile.onlyjson.json in Resources */ = {isa = PBXBuildFile; fileRef = D88F29F1206CEC74006901CB /* mailpile.onlyjson.json */; };
-		D88F29F5206CF4B0006901CB /* images in Resources */ = {isa = PBXBuildFile; fileRef = D8DF322A2068E69F0034165A /* images */; settings = {ASSET_TAGS = (New, ); }; };
 		D8A38275206D741E006E79D6 /* NotifyByAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A38274206D741E006E79D6 /* NotifyByAlert.swift */; };
 		D8B109AB206BA28F00084D82 /* NotifyUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B109AA206BA28F00084D82 /* NotifyUser.swift */; };
 		D8B109AF206BA67400084D82 /* NotificationStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B109AE206BA67400084D82 /* NotificationStrategy.swift */; };
@@ -142,7 +141,6 @@
 		D8CA67A32066BF1C003501FD /* LogicalXOR.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogicalXOR.swift; sourceTree = "<group>"; };
 		D8CA67A62066CE31003501FD /* Command.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Command.swift; sourceTree = "<group>"; };
 		D8DF32232068D5520034165A /* ShowSplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowSplashScreen.swift; sourceTree = "<group>"; };
-		D8DF322A2068E69F0034165A /* images */ = {isa = PBXFileReference; lastKnownFileType = folder; name = images; path = share/images; sourceTree = SOURCE_ROOT; };
 		D8DF322D2068ED870034165A /* SplashViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewDataSource.swift; sourceTree = "<group>"; };
 		D8DF32302068EE710034165A /* SplashScreenConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenConfig.swift; sourceTree = "<group>"; };
 		D8DF32322068FC2E0034165A /* UpdateSplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateSplashScreen.swift; sourceTree = "<group>"; };
@@ -358,7 +356,6 @@
 		D8DF32252068E66A0034165A /* share */ = {
 			isa = PBXGroup;
 			children = (
-				D8DF322A2068E69F0034165A /* images */,
 				D88F29EF206CEC0B006901CB /* mailpile.conf */,
 				D88F29F1206CEC74006901CB /* mailpile.onlyjson.json */,
 			);
@@ -476,7 +473,6 @@
 			files = (
 				D88F29F0206CEC0B006901CB /* mailpile.conf in Resources */,
 				D88F29F2206CEC74006901CB /* mailpile.onlyjson.json in Resources */,
-				D88F29F5206CF4B0006901CB /* images in Resources */,
 				D88213252066441400150FAE /* LICENSE.txt in Resources */,
 				D819888620595165004B5974 /* Assets.xcassets in Resources */,
 				D819888920595165004B5974 /* Main.storyboard in Resources */,
