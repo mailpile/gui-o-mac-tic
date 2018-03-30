@@ -163,7 +163,8 @@ extension MainWindow {
             self.image = nil
         }
         
-        let actionItemsJSON = json["actions"] as! [[String: Any]]
+        // TODO FIXME change to json["actions"] when mailpile-gui has been updated.
+        let actionItemsJSON = json["action_items"] as! [[String: Any]]
 
         let statusJSON = json["status_displays"] as? [[String: String]]
         self.status = statusParser(statusJSON: statusJSON)

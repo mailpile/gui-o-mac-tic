@@ -3,11 +3,12 @@ let app = NSApplication.shared
 let appDelegate = AppDelegate()
 app.delegate = appDelegate
 
-// TODO get the conf by calling "mailpile-gui.py --script"
-let file = Bundle.main.url(forResource: "mailpile.onlyjson", withExtension: "json")
+let configurator = Configurator()
+
+
 let config: Config?
 do {
-    try config = Parser.parse(jsonConfig: file!)
+    try config = Parser.parse(json: configurator.part1)
 }
 catch {
     print(error) // TODO Error handling.

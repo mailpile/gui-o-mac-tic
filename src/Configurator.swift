@@ -1,0 +1,63 @@
+import Foundation
+
+class Configurator {
+    let part1: String
+    let part2: [String]
+    
+    init() {
+        let process = Process()
+        process.launchPath = "/bin/sh"
+        
+        let url = Bundle.main.url(forResource: "configurator", withExtension: "sh")
+        process.arguments = url?.relativePath.components(separatedBy: .whitespaces)
+        
+        let stdout = Pipe()
+        let stdoutHandle = stdout.fileHandleForReading
+        process.standardOutput = stdout
+        
+        let stderr = Pipe()
+        let stderrHandle = stderr.fileHandleForReading
+        process.standardError = stderr
+        
+        process.launch()
+        process.waitUntilExit()
+        
+        guard process.terminationStatus == EX_OK else {
+            let stderrData = stderrHandle.readDataToEndOfFile()
+            let stderrOutput = NSString(data: stderrData, encoding: String.Encoding.utf8.rawValue) ?? "unknown error"
+            NSLog("Failed to obtain configuration. Error: \(stderrOutput)")
+            exit(EX_USAGE)
+        }
+        stderrHandle.closeFile()
+        
+        let stdoutData = stdoutHandle.readDataToEndOfFile()
+        stdoutHandle.closeFile()
+        let stdoutOutput = NSString(data: stdoutData, encoding: String.Encoding.utf8.rawValue)
+        let lines = stdoutOutput?.components(separatedBy: .newlines)
+        
+        guard lines?.isEmpty == false else {
+            NSLog("Error: the config input is empty.")
+            exit(EX_USAGE)
+        }
+        
+        var part1 = String()
+        var part2 = [String]()
+        
+        var inPart2 = false
+        for line in lines! {
+            if !inPart2 {
+                inPart2 = line.hasPrefix("OK ") && (line.hasPrefix("OK GO") || line.hasPrefix("OK LISTEN"))
+                if inPart2 && line.hasPrefix("OK GO") {
+                    break
+                }
+            }
+            if inPart2 {
+                part2.append(line)
+            } else {
+                part1.append(line)
+            }
+        }
+        self.part1 = part1
+        self.part2 = part2
+    }
+}

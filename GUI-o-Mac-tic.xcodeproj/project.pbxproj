@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		659F3D252E28CC11C274AEB2 /* NSImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659F39C6BDCA4E86A2CC3C01 /* NSImage+Extensions.swift */; };
+		D8167F0D206E753C0073552A /* configurator.sh in Resources */ = {isa = PBXBuildFile; fileRef = D8167F0C206E753C0073552A /* configurator.sh */; };
+		D8167F0F206E76A10073552A /* Configurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8167F0E206E76A10073552A /* Configurator.swift */; };
 		D819888220595165004B5974 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D819888120595165004B5974 /* AppDelegate.swift */; };
 		D819888420595165004B5974 /* MainWindowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D819888320595165004B5974 /* MainWindowViewController.swift */; };
 		D819888620595165004B5974 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D819888520595165004B5974 /* Assets.xcassets */; };
@@ -36,7 +38,6 @@
 		D860514620601B2000E8983A /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D860514520601B2000E8983A /* MainWindowController.swift */; };
 		D88213252066441400150FAE /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = D88213242066441400150FAE /* LICENSE.txt */; };
 		D88F29F0206CEC0B006901CB /* mailpile.conf in Resources */ = {isa = PBXBuildFile; fileRef = D88F29EF206CEC0B006901CB /* mailpile.conf */; };
-		D88F29F2206CEC74006901CB /* mailpile.onlyjson.json in Resources */ = {isa = PBXBuildFile; fileRef = D88F29F1206CEC74006901CB /* mailpile.onlyjson.json */; };
 		D8A38275206D741E006E79D6 /* NotifyByAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A38274206D741E006E79D6 /* NotifyByAlert.swift */; };
 		D8B109AB206BA28F00084D82 /* NotifyUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B109AA206BA28F00084D82 /* NotifyUser.swift */; };
 		D8B109AF206BA67400084D82 /* NotificationStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B109AE206BA67400084D82 /* NotificationStrategy.swift */; };
@@ -85,6 +86,8 @@
 
 /* Begin PBXFileReference section */
 		659F39C6BDCA4E86A2CC3C01 /* NSImage+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSImage+Extensions.swift"; sourceTree = "<group>"; };
+		D8167F0C206E753C0073552A /* configurator.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = configurator.sh; sourceTree = "<group>"; };
+		D8167F0E206E76A10073552A /* Configurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configurator.swift; sourceTree = "<group>"; };
 		D819887E20595165004B5974 /* GUI-o-Mac-tic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GUI-o-Mac-tic.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D819888120595165004B5974 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D819888320595165004B5974 /* MainWindowViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWindowViewController.swift; sourceTree = "<group>"; };
@@ -117,7 +120,6 @@
 		D860514520601B2000E8983A /* MainWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
 		D88213242066441400150FAE /* LICENSE.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
 		D88F29EF206CEC0B006901CB /* mailpile.conf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = mailpile.conf; sourceTree = "<group>"; };
-		D88F29F1206CEC74006901CB /* mailpile.onlyjson.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = mailpile.onlyjson.json; sourceTree = "<group>"; };
 		D8A38274206D741E006E79D6 /* NotifyByAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotifyByAlert.swift; sourceTree = "<group>"; };
 		D8B109AA206BA28F00084D82 /* NotifyUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotifyUser.swift; sourceTree = "<group>"; };
 		D8B109AE206BA67400084D82 /* NotificationStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationStrategy.swift; sourceTree = "<group>"; };
@@ -201,6 +203,7 @@
 				D819888120595165004B5974 /* AppDelegate.swift */,
 				D819888520595165004B5974 /* Assets.xcassets */,
 				D8CA67A52066CE23003501FD /* Commands */,
+				D8167F0E206E76A10073552A /* Configurator.swift */,
 				D85B1E2720612A81003744E0 /* Constants.swift */,
 				D819889F205951D5004B5974 /* Control.swift */,
 				D8333EF8205E40D90029172B /* Controllers */,
@@ -356,8 +359,8 @@
 		D8DF32252068E66A0034165A /* share */ = {
 			isa = PBXGroup;
 			children = (
+				D8167F0C206E753C0073552A /* configurator.sh */,
 				D88F29EF206CEC0B006901CB /* mailpile.conf */,
-				D88F29F1206CEC74006901CB /* mailpile.onlyjson.json */,
 			);
 			name = share;
 			path = "New Group";
@@ -472,7 +475,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D88F29F0206CEC0B006901CB /* mailpile.conf in Resources */,
-				D88F29F2206CEC74006901CB /* mailpile.onlyjson.json in Resources */,
+				D8167F0D206E753C0073552A /* configurator.sh in Resources */,
 				D88213252066441400150FAE /* LICENSE.txt in Resources */,
 				D819888620595165004B5974 /* Assets.xcassets in Resources */,
 				D819888920595165004B5974 /* Main.storyboard in Resources */,
@@ -507,6 +510,7 @@
 				D8B289712067CBBD000DCD03 /* ShowMainWindow.swift in Sources */,
 				D8B2896F2067C5A1000DCD03 /* Quit.swift in Sources */,
 				D8515EA3205C416700565AAE /* Indicator.swift in Sources */,
+				D8167F0F206E76A10073552A /* Configurator.swift in Sources */,
 				D8515EAD205C443400565AAE /* ConfigInitializer.swift in Sources */,
 				D8B109B5206BA7AD00084D82 /* NotifyBySplashScreenMessage.swift in Sources */,
 				D8DF32332068FC2E0034165A /* UpdateSplashScreen.swift in Sources */,
