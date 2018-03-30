@@ -31,10 +31,20 @@ class Parser {
     static func parse(actions: [[String: Any]]) -> [ActionItem] {
         var result = [ActionItem]()
         for action in actions {
-            let action = ActionItem(json: action)!
+            let action: ActionItem = parse(action: action)
             result.append(action)
         }
         return result
+    }
+    
+    static func parse(action: [String: Any]) -> ActionItem {
+        return ActionItem(json: action)!
+    }
+    
+    static func parse(action: [String: Any]) -> Command {
+        let action: ActionItem = parse(action: action)
+        let command = CommandFactory.build(forOperation: action.op!, withArgs: action.args)
+        return command
     }
 
 }

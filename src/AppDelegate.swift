@@ -60,6 +60,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 
         self.statusBarMenu = buildStatusBarMenu(config: Blackboard.shared.config!)
         NSApplication.shared.windows.forEach { window in window.title = Blackboard.shared.config!.app_name }
+        
+        while let command = Blackboard.shared.unexecuted.tryPop() {
+            command.execute(sender: self)
+        }
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {

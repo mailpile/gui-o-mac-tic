@@ -22,16 +22,18 @@ class Configurator {
         process.launch()
         process.waitUntilExit()
         
-        guard process.terminationStatus == EX_OK else {
-            let stderrData = stderrHandle.readDataToEndOfFile()
-            let stderrOutput = NSString(data: stderrData, encoding: String.Encoding.utf8.rawValue) ?? "unknown error"
-            NSLog("Failed to obtain configuration. Error: \(stderrOutput)")
-            exit(EX_USAGE)
-        }
+        let stderrData = stderrHandle.readDataToEndOfFile()
         stderrHandle.closeFile()
         
         let stdoutData = stdoutHandle.readDataToEndOfFile()
         stdoutHandle.closeFile()
+        
+        guard process.terminationStatus == EX_OK, stderrData.isEmpty else {
+            let stderrOutput = NSString(data: stderrData, encoding: String.Encoding.utf8.rawValue) ?? "unknown error"
+            NSLog("Failed to obtain configuration. Error: \(stderrOutput)")
+            exit(EX_USAGE)
+        }
+        
         let stdoutOutput = NSString(data: stdoutData, encoding: String.Encoding.utf8.rawValue)
         let lines = stdoutOutput?.components(separatedBy: .newlines)
         

@@ -80,45 +80,7 @@ extension ActionItem {
         }
         
         if let opString = json["op"] as? String {
-            switch opString {
-            case "show_url":
-                self.op = .show_url
-            case "terminal":
-                self.op = .terminal
-            case "shell":
-                self.op = .shell
-            case "quit":
-                self.op = .quit
-            case "show_main_window":
-                self.op = .show_main_window
-            case "get_url":
-                self.op = .get_url
-            case "post_url":
-                self.op = .post_url
-            case "show_splash_screen":
-                self.op = .show_splash_screen
-            case "update_splash_screen":
-                self.op = .update_splash_screen
-            case "hide_splash_screen":
-                self.op = .hide_splash_screen
-            case "hide_main_window":
-                self.op = .hide_main_window
-            case "set_status":
-                self.op = .set_status
-            case "set_status_display":
-                self.op = .set_status_display
-            case "set_item":
-                self.op = .set_item
-            case "set_next_error_message":
-                self.op = .set_next_error_message
-            case "notify_user":
-                self.op = .notify_user
-            case "set_http_cookie":
-                self.op = .set_http_cookie
-                
-            default:
-                preconditionFailure("Invalid configuration: \(opString) is not a known op.")
-            }
+           self.op = StringToOperationMapper.Map(operation: opString)
         } else {
             self.op = nil
         }
