@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		659F3D252E28CC11C274AEB2 /* NSImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659F39C6BDCA4E86A2CC3C01 /* NSImage+Extensions.swift */; };
 		D819888220595165004B5974 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D819888120595165004B5974 /* AppDelegate.swift */; };
 		D819888420595165004B5974 /* MainWindowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D819888320595165004B5974 /* MainWindowViewController.swift */; };
 		D819888620595165004B5974 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D819888520595165004B5974 /* Assets.xcassets */; };
@@ -19,7 +20,6 @@
 		D81D3CE620665A7E008325B9 /* SubstatusTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85B1E3220614FC5003744E0 /* SubstatusTableCellView.swift */; };
 		D8333EE9205D3FA90029172B /* FontStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8333EE8205D3FA90029172B /* FontStyle.swift */; };
 		D842DA8C2062A73B0043B73A /* URL+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D842DA8B2062A73B0043B73A /* URL+Extensions.swift */; };
-		D842DA8E2062AAD60043B73A /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = D842DA8D2062AAD60043B73A /* Images.swift */; };
 		D8515E99205C3CB000565AAE /* Operation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8515E98205C3CB000565AAE /* Operation.swift */; };
 		D8515E9B205C3D0D00565AAE /* ActionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8515E9A205C3D0D00565AAE /* ActionItem.swift */; };
 		D8515E9D205C3F0300565AAE /* Position.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8515E9C205C3F0300565AAE /* Position.swift */; };
@@ -85,6 +85,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		659F39C6BDCA4E86A2CC3C01 /* NSImage+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSImage+Extensions.swift"; sourceTree = "<group>"; };
 		D819887E20595165004B5974 /* GUI-o-Mac-tic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GUI-o-Mac-tic.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D819888120595165004B5974 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D819888320595165004B5974 /* MainWindowViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWindowViewController.swift; sourceTree = "<group>"; };
@@ -100,7 +101,6 @@
 		D8333EE8205D3FA90029172B /* FontStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontStyle.swift; sourceTree = "<group>"; };
 		D842DA84206276B00043B73A /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		D842DA8B2062A73B0043B73A /* URL+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Extensions.swift"; sourceTree = "<group>"; };
-		D842DA8D2062AAD60043B73A /* Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
 		D8515E98205C3CB000565AAE /* Operation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operation.swift; sourceTree = "<group>"; };
 		D8515E9A205C3D0D00565AAE /* ActionItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionItem.swift; sourceTree = "<group>"; };
 		D8515E9C205C3F0300565AAE /* Position.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Position.swift; sourceTree = "<group>"; };
@@ -240,6 +240,7 @@
 				D8DF3240206927200034165A /* NSColor+Extensions.swift */,
 				D8DF324220692B7B0034165A /* String+Extensions.swift */,
 				D842DA8B2062A73B0043B73A /* URL+Extensions.swift */,
+				659F39C6BDCA4E86A2CC3C01 /* NSImage+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -253,7 +254,6 @@
 				D81988A1205957EE004B5974 /* Config.swift */,
 				D8333EE8205D3FA90029172B /* FontStyle.swift */,
 				D8B109BF206BD82F00084D82 /* HTTPCookie.swift */,
-				D842DA8D2062AAD60043B73A /* Images.swift */,
 				D8515EA2205C416700565AAE /* Indicator.swift */,
 				D8515EA5205C41BD00565AAE /* MainWindow.swift */,
 				D8515E98205C3CB000565AAE /* Operation.swift */,
@@ -506,7 +506,6 @@
 				D8515E99205C3CB000565AAE /* Operation.swift in Sources */,
 				D8DF32242068D5520034165A /* ShowSplashScreen.swift in Sources */,
 				D8594A0B206A737000D089DE /* SetItem.swift in Sources */,
-				D842DA8E2062AAD60043B73A /* Images.swift in Sources */,
 				D81988A2205957EE004B5974 /* Config.swift in Sources */,
 				D8DF323A206908F70034165A /* HideMainWindow.swift in Sources */,
 				D8B289712067CBBD000DCD03 /* ShowMainWindow.swift in Sources */,
@@ -555,6 +554,7 @@
 				D81988A420595F08004B5974 /* GUI.swift in Sources */,
 				D8515EA8205C421900565AAE /* StatusDisplay.swift in Sources */,
 				D8B109B3206BA72700084D82 /* NotifyByModal.swift in Sources */,
+				659F3D252E28CC11C274AEB2 /* NSImage+Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

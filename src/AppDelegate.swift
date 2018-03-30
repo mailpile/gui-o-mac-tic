@@ -16,7 +16,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
             return self._status
         }
         set {
-            self.statusBarMenu?.image = config!.icons[newValue]!.statusBar!
+            self.statusBarMenu?.image = config!.icons[newValue]
             self._status = newValue
         }
     }
@@ -27,7 +27,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
         func buildStatusBarMenu(config: Config) -> NSStatusItem! {
             func applyStartupIconToMenu() {
                 let iconName: String! = config.indicator.initialStatus
-                let iconImage: NSImage! = config.icons[iconName]!.statusBar
+                let iconImage: NSImage! = config.icons[iconName]
                 statusBarMenu.image = iconImage
             }
             func buildMenuItem(menuItem: ActionItem) -> NSMenuItem {

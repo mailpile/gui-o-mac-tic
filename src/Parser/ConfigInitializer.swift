@@ -13,23 +13,17 @@ extension Config {
         let fontStylesJSON = json["font-styles"] as? [String: Any]
         let fontStyles: FontStyles? = fontStylesJSON != nil ? FontStyles(json: fontStylesJSON!) : nil
         
-        func getImageForIconAt(path: String!, ofType: String!) -> NSImage? {
-            let image = NSImage(named: NSImage.Name(path))
-            return image
-        }
         let imagesJSON = json["images"] as? [String: String]
-        var images = [String: Images]()
+        var images = [String: NSImage]()
         imagesJSON!.forEach({ title, path in
-            let statusBarIcon: NSImage? = getImageForIconAt(path: title, ofType: Constants.STATUSBAR)
-            let substatusIcon: NSImage? = getImageForIconAt(path: title, ofType: Constants.SUBSTATUS)
-            let icon = Images(statusBar: statusBarIcon, substatus: substatusIcon)
-            images[title] = icon
+            let image = NSImage(withTemplatedIconPath: path)
+            images[title] = image
         })
         
-        func imageForSubstatusIconNamed(name: String!) -> NSImage? {
-            return images[name]?.substatus
+        func imageForIcon(name: String!) -> NSImage? {
+            return images[name]
         }
-        let main_window:MainWindow? = MainWindow(json: main_windowJSON!, substatusIconFinder: imageForSubstatusIconNamed)
+        let main_window:MainWindow? = MainWindow(json: main_windowJSON!, substatusIconFinder: imageForIcon)
         
         var http_cookies = [MPHTTPCookie]()
         if let http_cookiesJSON = json["http_cookies"] as? [String: Any] {
@@ -164,13 +158,7 @@ extension MainWindow {
         self.height = json["height"] as! Int
         
         if let imageFileName = json["background"] as? String {
-            let imageFileNameWithExtension = imageFileName.components(separatedBy: .init(charactersIn: "/")).last
-            let imageFileNameWithoutExtension = imageFileNameWithExtension!.components(separatedBy: .init(charactersIn: ".")).first!
-            guard let image = NSImage(named: NSImage.Name(rawValue: imageFileNameWithoutExtension)) else {
-                // TODO Alert the user.
-                fatalError("Bad configuration. Image by the name \(imageFileNameWithoutExtension) does not exist")
-            }
-            self.image = image
+            self.image = NSImage(withTemplatedIconPath: imageFileName)
         } else {
             self.image = nil
         }
@@ -181,7 +169,7 @@ extension MainWindow {
         self.status = statusParser(statusJSON: statusJSON)
         
         self.actions = []
-        for action:[String: Any] in actionItemsJSON {
+        for action: [String: Any] in actionItemsJSON {
             let menu = ActionItem(json: action)
             self.actions.append(menu!)
         }

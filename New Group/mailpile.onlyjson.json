@@ -18,17 +18,17 @@
         }
     },
     "images": {
-        "attention": "icons-%(theme)s/attention.png",
-        "logged-in": "media/lock-open.svg",
-        "logged-out": "media/lock-closed.svg",
-        "logo": "media/logo-color.png",
-        "new-setup": "media/new-setup.svg",
-        "normal": "icons-%(theme)s/normal.png",
-        "ra-off": "media/remote-access-off.svg",
-        "ra-on": "media/remote-access-on.svg",
-        "shutdown": "icons-%(theme)s/shutdown.png",
-        "startup": "icons-%(theme)s/startup.png",
-        "working": "icons-%(theme)s/working.png"
+        "attention": "/Users/petur/mailpile/shared-data/mailpile-gui/icons-%(theme)s/attention.png",
+        "logged-in": "/Users/petur/mailpile/shared-data/mailpile-gui/media/lock-open.svg",
+        "logged-out": "/Users/petur/mailpile/shared-data/mailpile-gui/media/lock-closed.svg",
+        "logo": "/Users/petur/mailpile/shared-data/mailpile-gui/media/logo-color.png",
+        "new-setup": "/Users/petur/mailpile/shared-data/mailpile-gui/media/new-setup.svg",
+        "normal": "/Users/petur/mailpile/shared-data/mailpile-gui/icons-%(theme)s/normal.png",
+        "ra-off": "/Users/petur/mailpile/shared-data/mailpile-gui/media/remote-access-off.svg",
+        "ra-on": "/Users/petur/mailpile/shared-data/mailpile-gui/media/remote-access-on.svg",
+        "shutdown": "/Users/petur/mailpile/shared-data/mailpile-gui/icons-%(theme)s/shutdown.png",
+        "startup": "/Users/petur/mailpile/shared-data/mailpile-gui/icons-%(theme)s/startup.png",
+        "working": "/Users/petur/mailpile/shared-data/mailpile-gui/icons-%(theme)s/working.png"
     },
     "indicator": {
         "initial_status": "startup",
@@ -134,7 +134,7 @@
                 "position": "last"
             }
         ],
-        "background": "media/background.jpg",
+        "background": "/Users/petur/mailpile/shared-data/mailpile-gui/media/background.jpg",
         "close_quits": false,
         "height": 330,
         "initial_notification": "",
