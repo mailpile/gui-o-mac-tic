@@ -2,7 +2,7 @@ import Foundation
 
 struct ActionItem {
     var label: String?
-    let id: String? // Id is optional because seperators do not have IDs.
+    let id: String? // Id is optional because seperators and notify-actions do not have IDs.
     let type: ActionItemType?
     let args: Args?
     var sensitive: Bool?

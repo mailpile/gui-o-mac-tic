@@ -175,7 +175,7 @@ extension MainWindow {
             self.image = nil
         }
         
-        let actionItemsJSON = json["action_items"] as! [[String: Any]]
+        let actionItemsJSON = json["actions"] as! [[String: Any]]
 
         let statusJSON = json["status_displays"] as? [[String: String]]
         self.status = statusParser(statusJSON: statusJSON)

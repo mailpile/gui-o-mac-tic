@@ -7,7 +7,7 @@ app.delegate = appDelegate
 let file = Bundle.main.url(forResource: "mailpile.onlyjson", withExtension: "json")
 let config: Config?
 do {
-    try config = ConfigParser.parse(file: file!)
+    try config = Parser.parse(jsonConfig: file!)
 }
 catch {
     print(error) // TODO Error handling.

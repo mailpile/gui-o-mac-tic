@@ -36,8 +36,18 @@
                        {
                        "args": {
                                 "message": "The answer is not 42.",
-                                "alert": true
-                       },
+                                "alert": true,
+                       "actions": [
+                                   {
+                                   "op": "show_url",
+                                   "args": ["https://example.com"]
+                                   },
+                                   {
+                                   "op": "show_url",
+                                   "args": ["https://example.org"]
+                                   }
+                                   ]
+                                },
                        "id": "alert",
                        "label": "Alert",
                        "op": "notify_user",
@@ -45,7 +55,7 @@
                        },
                        {
                        "args": {
-                       "status" : "normal",
+                       "status" : "new-setup",
                        "badge" : "1k"
                        },
                        "id": "badge 1k",
@@ -107,7 +117,7 @@
         ]
     },
     "main_window": {
-        "action_items": [
+        "actions": [
             {
                 "args": [
                     "http://localhost:33411/"

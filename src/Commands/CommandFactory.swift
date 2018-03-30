@@ -90,7 +90,6 @@ class CommandFactory {
             let title = args!.dictionary!["title"] as? String
             let details = args!.dictionary!["details"] as? String
             
-            
             let icon: NSImage?
             if let iconUrl = args!.dictionary!["icon"] as? String {
                 icon = NSImage(contentsOfFile: iconUrl) // TODO icon can also be image:{somename} FIXME
@@ -122,7 +121,17 @@ class CommandFactory {
             
             let popup = args?.dictionary?["popup"] as? Bool ?? false
             let alert = args?.dictionary?["alert"] as? Bool ?? false
-            return NotifyUser(messageToSend: message!, preferUserNotificationCenter: popup, alert: alert)
+            
+            let actions: [ActionItem]?
+            if let jsonActions = args?.dictionary?["actions"] as? [[String: Any]] {
+                actions = Parser.parse(actions: jsonActions)
+            } else {
+                actions = nil
+            }
+            return NotifyUser(messageToSend: message!,
+                              preferUserNotificationCenter: popup,
+                              alert: alert,
+                              actions: actions)
             
         case .set_http_cookie:
             guard let domain = args!.dictionary!["domain"] as? String else {
@@ -136,7 +145,6 @@ class CommandFactory {
             let value = args!.dictionary!["value"] as? String
             let remove = args!.dictionary!["remove"] as? Bool
             return SetHTTPCookie(domain, key, value, remove)
-            
         }
     }
 }
