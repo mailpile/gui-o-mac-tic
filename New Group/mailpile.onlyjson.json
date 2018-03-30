@@ -43,6 +43,16 @@
                        "op": "notify_user",
                        "sensitive": true
                        },
+                       {
+                       "args": {
+                       "status" : "normal",
+                       "badge" : "1k"
+                       },
+                       "id": "badge 1k",
+                       "label": "badge 1k",
+                       "op": "set_status",
+                       "sensitive": true
+                       },
             {
                 "id": "notification",
                 "label": "Starting up",

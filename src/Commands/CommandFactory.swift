@@ -79,10 +79,9 @@ class CommandFactory {
             return HideMainWindow()
             
         case .set_status:
-            guard let status: String = args?.dictionary?["status"] as? String else {
-                preconditionFailure("Status was not provided as an argument.")
-            }
-            return SetStatus(status)
+            let status = args?.dictionary?["status"] as? String
+            let badge = args?.dictionary?["badge"] as? String
+            return SetStatus(status, badge)
             
         case .set_status_display:
             guard let id: String = args?.dictionary?["id"] as? String else {
