@@ -1,9 +1,6 @@
 import Cocoa
 
 class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDelegate {
-    private var config: Config? {
-        return Config.shared
-    }
     private var commands = [Command]()
     private var statusBarMenu: NSStatusItem?
     var item2Action = [String: NSMenuItem]()
@@ -16,7 +13,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
             return self._status
         }
         set {
-            self.statusBarMenu?.image = config!.icons[newValue]
+            self.statusBarMenu?.image = Blackboard.shared.config!.icons[newValue]
             self._status = newValue
         }
     }
@@ -61,8 +58,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
             return statusBarMenu
         }
 
-        self.statusBarMenu = buildStatusBarMenu(config: self.config!)
-        NSApplication.shared.windows.forEach { window in window.title = self.config?.app_name ?? "Your App Name" }
+        self.statusBarMenu = buildStatusBarMenu(config: Blackboard.shared.config!)
+        NSApplication.shared.windows.forEach { window in window.title = Blackboard.shared.config!.app_name }
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
@@ -70,7 +67,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
     }
     
     func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
-        return self.config?.main_window?.close_quits ?? false
+        return Blackboard.shared.config!.main_window?.close_quits ?? false
     }
     
     func userNotificationCenter(_ center: NSUserNotificationCenter, shouldPresent notification: NSUserNotification) -> Bool {

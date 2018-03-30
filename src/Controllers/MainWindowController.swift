@@ -1,16 +1,16 @@
-import Cocoa
+ import Cocoa
 
 class MainWindowController: NSWindowController {
     
     var windowSize: CGSize {
         get {
-            let width = CGFloat(Config.shared.main_window?.width ?? Constants.DEFAULT_WIDTH)
-            let height = CGFloat(Config.shared.main_window?.height ?? Constants.DEFAULT_HEIGHT)
+            let width = CGFloat(Blackboard.shared.config!.main_window?.width ?? Constants.DEFAULT_WIDTH)
+            let height = CGFloat(Blackboard.shared.config!.main_window?.height ?? Constants.DEFAULT_HEIGHT)
             return NSMakeSize(width, height)
         }
     }
     
-    var shouldShowWindow = Config.shared.main_window!.show
+    var shouldShowWindow = Blackboard.shared.config!.main_window!.show
     
     override func windowDidLoad() {
         super.windowDidLoad()

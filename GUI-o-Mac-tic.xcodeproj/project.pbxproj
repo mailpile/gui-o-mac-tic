@@ -10,6 +10,7 @@
 		659F3D252E28CC11C274AEB2 /* NSImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659F39C6BDCA4E86A2CC3C01 /* NSImage+Extensions.swift */; };
 		D8167F0D206E753C0073552A /* configurator.sh in Resources */ = {isa = PBXBuildFile; fileRef = D8167F0C206E753C0073552A /* configurator.sh */; };
 		D8167F0F206E76A10073552A /* Configurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8167F0E206E76A10073552A /* Configurator.swift */; };
+		D8167F11206EAD4E0073552A /* Blackboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8167F10206EAD4E0073552A /* Blackboard.swift */; };
 		D819888220595165004B5974 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D819888120595165004B5974 /* AppDelegate.swift */; };
 		D819888420595165004B5974 /* MainWindowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D819888320595165004B5974 /* MainWindowViewController.swift */; };
 		D819888620595165004B5974 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D819888520595165004B5974 /* Assets.xcassets */; };
@@ -88,6 +89,7 @@
 		659F39C6BDCA4E86A2CC3C01 /* NSImage+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSImage+Extensions.swift"; sourceTree = "<group>"; };
 		D8167F0C206E753C0073552A /* configurator.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = configurator.sh; sourceTree = "<group>"; };
 		D8167F0E206E76A10073552A /* Configurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configurator.swift; sourceTree = "<group>"; };
+		D8167F10206EAD4E0073552A /* Blackboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Blackboard.swift; sourceTree = "<group>"; };
 		D819887E20595165004B5974 /* GUI-o-Mac-tic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GUI-o-Mac-tic.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D819888120595165004B5974 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D819888320595165004B5974 /* MainWindowViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWindowViewController.swift; sourceTree = "<group>"; };
@@ -202,6 +204,7 @@
 			children = (
 				D819888120595165004B5974 /* AppDelegate.swift */,
 				D819888520595165004B5974 /* Assets.xcassets */,
+				D8167F10206EAD4E0073552A /* Blackboard.swift */,
 				D8CA67A52066CE23003501FD /* Commands */,
 				D8167F0E206E76A10073552A /* Configurator.swift */,
 				D85B1E2720612A81003744E0 /* Constants.swift */,
@@ -520,6 +523,7 @@
 				D8DF322E2068ED870034165A /* SplashViewDataSource.swift in Sources */,
 				D8333EE9205D3FA90029172B /* FontStyle.swift in Sources */,
 				D8DF32312068EE710034165A /* SplashScreenConfig.swift in Sources */,
+				D8167F11206EAD4E0073552A /* Blackboard.swift in Sources */,
 				D85B1E2D20613614003744E0 /* Shell.swift in Sources */,
 				D8B2896D2067C3C5000DCD03 /* CommandFactory.swift in Sources */,
 				D8B109BA206BB81D00084D82 /* Queue.swift in Sources */,

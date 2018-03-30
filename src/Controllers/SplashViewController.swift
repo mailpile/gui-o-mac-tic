@@ -7,7 +7,7 @@ class SplashViewController: NSViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let fontStyle = Config.shared.fontStyles?.splash {
+        if let fontStyle = Blackboard.shared.config!.fontStyles?.splash {
             var font = NSFont.userFont(ofSize: CGFloat(fontStyle.points!))!
             if (fontStyle.family != nil) {
                 font = NSFontManager.shared.convert(font, toFamily: fontStyle.family!)
@@ -34,7 +34,7 @@ class SplashViewController: NSViewController {
         }
         
         NotificationCenter.default.addObserver(forName: Constants.SPLASH_SCREEN_NOTIFY_USER, object: nil, queue: nil) { _ in
-            guard let message: String = Config.shared.splashMessages.tryPop() else {
+            guard let message: String = Blackboard.shared.splashMessages.tryPop() else {
                 preconditionFailure("Expected a message.")
             }
             self.reportingLabel.stringValue = message

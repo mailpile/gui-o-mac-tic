@@ -16,7 +16,7 @@ class SetStatusDisplay: Command {
     }
     
     func execute(sender: NSObject) {
-        guard let main_window = Config.shared.main_window else {
+        guard let main_window = Blackboard.shared.config!.main_window else {
             preconditionFailure("Unable to set a status because main_window has not been specified")
         }
         

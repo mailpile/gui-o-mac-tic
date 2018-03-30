@@ -14,7 +14,7 @@ class SetItem: Command {
     func execute(sender: NSObject) {
         /* Updates the domain model and returns id of the updated item. */
         func updateDomainModel() -> String {
-            var item = Config.shared.indicator.menu.first(where: {$0.id == self.id})
+            var item = Blackboard.shared.config!.indicator.menu.first(where: {$0.id == self.id})
             precondition(item != nil, "Unable to 'set_item' for id='\(self.id)' because no item has that id.")
             if self.label != nil {
                 item!.label = self.label

@@ -14,7 +14,7 @@ class SetHTTPCookie: Command {
     }
     
     func execute(sender: NSObject) {
-        guard var cookies = Config.shared.http_cookies else {
+        guard var cookies = Blackboard.shared.config!.http_cookies else {
             preconditionFailure("Attempted to modify a cookie, but no cookies exist.")
         }
         

@@ -8,6 +8,6 @@ class SetNextErrorMessage: Command {
     }
     
     func execute(sender: NSObject) {
-        Config.shared.nextErrorMessage = message
+        Blackboard.shared.nextErrorMessage = message
     }
 }

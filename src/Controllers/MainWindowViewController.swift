@@ -11,13 +11,6 @@ class MainWindowViewController: NSViewController, NSTableViewDelegate, NSTableVi
     @IBOutlet weak var actionStack: NSStackView!
     @IBOutlet weak var message: NSTextField!
     
-
-    private var config: Config! {
-        get {
-            return Config.shared!
-        }
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         func configureActionStack() {
@@ -29,7 +22,7 @@ class MainWindowViewController: NSViewController, NSTableViewDelegate, NSTableVi
                     return .trailing
                 }
             }
-            self.config.main_window?.actions.forEach { action in
+            Blackboard.shared.config!.main_window?.actions.forEach { action in
                 let buttonInit: ((String, Any?, Selector?) -> NSButton)
                     switch action.type {
                     case .checkbox?:
@@ -65,7 +58,7 @@ class MainWindowViewController: NSViewController, NSTableViewDelegate, NSTableVi
         }
         
         NotificationCenter.default.addObserver(forName: Constants.MAIN_WINDOW_NOTIFY_USER, object: nil, queue: nil) { _ in
-            guard let message: String = Config.shared.mainWindowMessages.tryPop() else {
+            guard let message: String = Blackboard.shared.mainWindowMessages.tryPop() else {
                 preconditionFailure("Expected a message.")
             }
             self.message.stringValue = message
@@ -73,16 +66,16 @@ class MainWindowViewController: NSViewController, NSTableViewDelegate, NSTableVi
         }
         
         configureActionStack()
-        self.background.image = self.config.main_window?.image
+        self.background.image = Blackboard.shared.config!.main_window?.image
     }
         
     func numberOfRows(in tableView: NSTableView) -> Int {
-        return self.config.main_window?.status?.count ?? 0
+        return Blackboard.shared.config!.main_window?.status?.count ?? 0
     }
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         let cell = tableView.makeView(withIdentifier: Constants.SUBSTATE_CELL_ID, owner: self) as! SubstatusTableCellView
-        let status = self.config.main_window!.status![row]
+        let status = Blackboard.shared.config!.main_window!.status![row]
         cell.titleView.stringValue = status.title
         cell.descriptionView.stringValue = status.details ?? ""
         cell.iconView.image = status.icon
