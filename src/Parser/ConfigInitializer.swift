@@ -23,7 +23,7 @@ extension Config {
         func imageForIcon(name: String!) -> NSImage? {
             return images[name]
         }
-        let main_window:MainWindow? = MainWindow(json: main_windowJSON!, substatusIconFinder: imageForIcon)
+        let main_window:MainWindow? = MainWindow(json: main_windowJSON!, statusDisplayIconFinder: imageForIcon)
         
         var http_cookies = [MPHTTPCookie]()
         if let http_cookiesJSON = json["http_cookies"] as? [String: Any] {
@@ -98,12 +98,12 @@ extension ActionItem {
 }
 
 extension MainWindow {
-    init?(json: [String: Any], substatusIconFinder: @escaping (String?) -> NSImage?) {
+    init?(json: [String: Any], statusDisplayIconFinder: @escaping (String?) -> NSImage?) {
         func statusParser(statusJSON: [[String: String]]?) -> [StatusDisplay]? {
             var statuses: [StatusDisplay] = []
             if (statusJSON != nil) {
                 for oneStatusJSON in statusJSON! {
-                    guard let status: StatusDisplay = StatusDisplay(json: oneStatusJSON, substatusIconFinder: substatusIconFinder) else {
+                    guard let status: StatusDisplay = StatusDisplay(json: oneStatusJSON, statusDisplayIconFinder: statusDisplayIconFinder) else {
                         continue
                     }
                     statuses.append(status)
@@ -124,7 +124,6 @@ extension MainWindow {
             self.image = nil
         }
         
-        // TODO FIXME change to json["actions"] when mailpile-gui has been updated.
         let actionItemsJSON = json["action_items"] as! [[String: Any]]
 
         let statusJSON = json["status_displays"] as? [[String: String]]
@@ -139,12 +138,12 @@ extension MainWindow {
 }
 
 extension StatusDisplay {
-    convenience init?(json: [String: String], substatusIconFinder: (String?) -> NSImage?) {
+    convenience init?(json: [String: String], statusDisplayIconFinder: (String?) -> NSImage?) {
         let icon: String? = json["icon"]
         let prefix = "image:"
         assert(icon?.hasPrefix(prefix) ?? true)
         let iconName = String(icon!.dropFirst(prefix.count))
-        let iconImage: NSImage? = substatusIconFinder(iconName)
+        let iconImage: NSImage? = statusDisplayIconFinder(iconName)
         
         self.init(item: json["id"]!, title: json["title"]!, details: json["details"], icon: iconImage)
     }
