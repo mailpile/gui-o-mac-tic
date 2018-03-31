@@ -1,10 +1,10 @@
 import Foundation
 
-class Configurator {
-    let part1: String
-    let part2: [String]
+class Boot {
+    private (set) public var part1: String? = nil
+    private (set) public var part2 = [String]()
     
-    init() {
+    func boot() {
         let process = Process()
         process.launchPath = "/bin/sh"
         

@@ -5,7 +5,7 @@ class Terminal: Command {
     let title: String?
     let icon: String? // TODO What should be done with this icon?
     
-    init(_ command: String, _ title: String?, _ icon: String?) {
+    init(_ command: String, _ title: String? = nil, _ icon: String? = nil) {
         precondition(command.count > 0, "Expected a command for execution.")
         self.command = command
         self.title = title
@@ -34,13 +34,13 @@ class Terminal: Command {
         /* The empty line and the indentation is part of the AppleScript syntax. */
         let titlePart: String =
         """
-        set custom title of tab 1 of front window to "\(terminalWindowTitle!)"
+            set custom title of tab 1 of front window to "\(terminalWindowTitle ?? "My App")"
         
         """
         /* The indentation is part of the AppleScript syntax. */
         let executionPart: String =
         """
-        do script "\(command!)" in front window
+            do script "\(command!.replacingOccurrences(of: "\"", with: "\\\""))" in front window
         end tell
         """
         

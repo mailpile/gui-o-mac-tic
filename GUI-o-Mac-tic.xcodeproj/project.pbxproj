@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		659F3D252E28CC11C274AEB2 /* NSImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659F39C6BDCA4E86A2CC3C01 /* NSImage+Extensions.swift */; };
 		D8167F0D206E753C0073552A /* configurator.sh in Resources */ = {isa = PBXBuildFile; fileRef = D8167F0C206E753C0073552A /* configurator.sh */; };
-		D8167F0F206E76A10073552A /* Configurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8167F0E206E76A10073552A /* Configurator.swift */; };
+		D8167F0F206E76A10073552A /* Boot.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8167F0E206E76A10073552A /* Boot.swift */; };
 		D8167F11206EAD4E0073552A /* Blackboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8167F10206EAD4E0073552A /* Blackboard.swift */; };
 		D8167F14206EC17E0073552A /* StringToOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8167F13206EC17E0073552A /* StringToOperation.swift */; };
 		D819888220595165004B5974 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D819888120595165004B5974 /* AppDelegate.swift */; };
@@ -58,6 +58,7 @@
 		D8B289742067CC3C000DCD03 /* Terminal.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B289732067CC3C000DCD03 /* Terminal.swift */; };
 		D8BE028A2067DE8D006219D5 /* GetURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8BE02892067DE8D006219D5 /* GetURL.swift */; };
 		D8BE028D2067E496006219D5 /* UserNotificationFacade.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8BE028C2067E496006219D5 /* UserNotificationFacade.swift */; };
+		D8BE2C7E206EE0A70039C7B5 /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8BE2C7D206EE0A70039C7B5 /* Server.swift */; };
 		D8CA67A42066BF1C003501FD /* LogicalXOR.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CA67A32066BF1C003501FD /* LogicalXOR.swift */; };
 		D8CA67A72066CE31003501FD /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CA67A62066CE31003501FD /* Command.swift */; };
 		D8DF32242068D5520034165A /* ShowSplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DF32232068D5520034165A /* ShowSplashScreen.swift */; };
@@ -89,7 +90,7 @@
 /* Begin PBXFileReference section */
 		659F39C6BDCA4E86A2CC3C01 /* NSImage+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSImage+Extensions.swift"; sourceTree = "<group>"; };
 		D8167F0C206E753C0073552A /* configurator.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = configurator.sh; sourceTree = "<group>"; };
-		D8167F0E206E76A10073552A /* Configurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configurator.swift; sourceTree = "<group>"; };
+		D8167F0E206E76A10073552A /* Boot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Boot.swift; sourceTree = "<group>"; };
 		D8167F10206EAD4E0073552A /* Blackboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Blackboard.swift; sourceTree = "<group>"; };
 		D8167F13206EC17E0073552A /* StringToOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringToOperation.swift; sourceTree = "<group>"; };
 		D819887E20595165004B5974 /* GUI-o-Mac-tic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GUI-o-Mac-tic.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -144,6 +145,7 @@
 		D8B289732067CC3C000DCD03 /* Terminal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Terminal.swift; sourceTree = "<group>"; };
 		D8BE02892067DE8D006219D5 /* GetURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetURL.swift; sourceTree = "<group>"; };
 		D8BE028C2067E496006219D5 /* UserNotificationFacade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationFacade.swift; sourceTree = "<group>"; };
+		D8BE2C7D206EE0A70039C7B5 /* Server.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
 		D8CA67A32066BF1C003501FD /* LogicalXOR.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogicalXOR.swift; sourceTree = "<group>"; };
 		D8CA67A62066CE31003501FD /* Command.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Command.swift; sourceTree = "<group>"; };
 		D8DF32232068D5520034165A /* ShowSplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowSplashScreen.swift; sourceTree = "<group>"; };
@@ -184,6 +186,7 @@
 			isa = PBXGroup;
 			children = (
 				D8167F13206EC17E0073552A /* StringToOperation.swift */,
+				D8BE2C7D206EE0A70039C7B5 /* Server.swift */,
 			);
 			path = Mappers;
 			sourceTree = "<group>";
@@ -216,8 +219,8 @@
 				D819888120595165004B5974 /* AppDelegate.swift */,
 				D819888520595165004B5974 /* Assets.xcassets */,
 				D8167F10206EAD4E0073552A /* Blackboard.swift */,
+				D8167F0E206E76A10073552A /* Boot.swift */,
 				D8CA67A52066CE23003501FD /* Commands */,
-				D8167F0E206E76A10073552A /* Configurator.swift */,
 				D85B1E2720612A81003744E0 /* Constants.swift */,
 				D819889F205951D5004B5974 /* Control.swift */,
 				D8333EF8205E40D90029172B /* Controllers */,
@@ -445,7 +448,7 @@
 					New,
 				);
 				LastSwiftUpdateCheck = 0920;
-				LastUpgradeCheck = 0920;
+				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = "Mailpile ehf.";
 				TargetAttributes = {
 					D819887D20595165004B5974 = {
@@ -512,6 +515,7 @@
 			files = (
 				D81D3CE620665A7E008325B9 /* SubstatusTableCellView.swift in Sources */,
 				D81A52002067F81A00E431E9 /* URLCommand.swift in Sources */,
+				D8BE2C7E206EE0A70039C7B5 /* Server.swift in Sources */,
 				D8DF3241206927200034165A /* NSColor+Extensions.swift in Sources */,
 				D819888420595165004B5974 /* MainWindowViewController.swift in Sources */,
 				D8B109BC206BD64C00084D82 /* SetHTTPCookie.swift in Sources */,
@@ -524,7 +528,7 @@
 				D8B289712067CBBD000DCD03 /* ShowMainWindow.swift in Sources */,
 				D8B2896F2067C5A1000DCD03 /* Quit.swift in Sources */,
 				D8515EA3205C416700565AAE /* Indicator.swift in Sources */,
-				D8167F0F206E76A10073552A /* Configurator.swift in Sources */,
+				D8167F0F206E76A10073552A /* Boot.swift in Sources */,
 				D8515EAD205C443400565AAE /* ConfigInitializer.swift in Sources */,
 				D8B109B5206BA7AD00084D82 /* NotifyBySplashScreenMessage.swift in Sources */,
 				D8DF32332068FC2E0034165A /* UpdateSplashScreen.swift in Sources */,
@@ -618,6 +622,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -625,6 +630,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -676,6 +682,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -683,6 +690,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;

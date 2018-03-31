@@ -98,8 +98,7 @@ extension ActionItem {
 }
 
 extension MainWindow {
-    init?(json: [String: Any], substatusIconFinder: @escaping (String!) -> NSImage?) {
-        
+    init?(json: [String: Any], substatusIconFinder: @escaping (String?) -> NSImage?) {
         func statusParser(statusJSON: [[String: String]]?) -> [StatusDisplay]? {
             var statuses: [StatusDisplay] = []
             if (statusJSON != nil) {
@@ -113,7 +112,7 @@ extension MainWindow {
             return statuses.isEmpty ? nil : statuses
         }
         
-        self.show = json["show"] as! Bool!
+        self.show = json["show"] as! Bool
         self.message = json["message"] as? String
         self.close_quits = json["close_quits"] as! Bool
         self.width = json["width"] as! Int
@@ -140,8 +139,7 @@ extension MainWindow {
 }
 
 extension StatusDisplay {
-    convenience init?(json: [String: String], substatusIconFinder: (String!) -> NSImage?) {
-        
+    convenience init?(json: [String: String], substatusIconFinder: (String?) -> NSImage?) {
         let icon: String? = json["icon"]
         let prefix = "image:"
         assert(icon?.hasPrefix(prefix) ?? true)

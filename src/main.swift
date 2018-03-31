@@ -2,7 +2,7 @@ import Cocoa
 let app = NSApplication.shared
 let appDelegate = AppDelegate()
 app.delegate = appDelegate
-
+var server = Server()
 func rawCommandToOperationAndArgs(rawCommand: String) -> (op: Operation, args: Args) {
     let keyValuePair = rawCommand.split(separator: " ", maxSplits: 1)
     let key = String(keyValuePair[0])
@@ -22,9 +22,10 @@ func rawCommandToOperationAndArgs(rawCommand: String) -> (op: Operation, args: A
 }
 
 do {
-    let configurator = Configurator()
-    try Blackboard.shared.config = Parser.parse(json: configurator.part1)
-    for rawStage2Command: String in configurator.part2 {
+    let boot = Boot()
+    boot.boot()
+    try Blackboard.shared.config = Parser.parse(json: boot.part1!)
+    for rawStage2Command: String in boot.part2 {
         guard rawStage2Command.isEmpty == false else {
             continue
         }
@@ -33,17 +34,24 @@ do {
         case "OK GO":
             break
         
-        case "OK LISTEN":
-            continue
-        
         case let command where command.hasPrefix("OK LISTEN TO:"):
             preconditionFailure("Not yet implemented.")
         
         case let command where command.hasPrefix("OK LISTEN TCP:"):
-            preconditionFailure("Not yet implemented.")
+            var shellCommand = String(command.dropFirst("OK LISTEN TCP:".count))
+            shellCommand = shellCommand.trimmingCharacters(in: .whitespaces)
+            shellCommand = shellCommand.replacingOccurrences(of: "%PORT%", with: String(Blackboard.shared.tcp_port))
+            DispatchQueue.global(qos: .background).async {
+                server.go()
+            }
+            let shell = Terminal(shellCommand)
+            shell.execute(sender: NSString(string: "not used"))
             
         case let command where command.hasPrefix("OK LISTEN HTTP:"):
             preconditionFailure("Not yet implemented.")
+            
+        case "OK LISTEN":
+            continue
         
         default:
             let cmd = rawCommandToOperationAndArgs(rawCommand: rawStage2Command)
