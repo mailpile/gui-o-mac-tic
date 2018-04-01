@@ -3,6 +3,7 @@ let app = NSApplication.shared
 let appDelegate = AppDelegate()
 app.delegate = appDelegate
 var server = Server()
+
 func rawCommandToOperationAndArgs(rawCommand: String) -> (op: Operation, args: Args) {
     let keyValuePair = rawCommand.split(separator: " ", maxSplits: 1)
     let key = String(keyValuePair[0])
@@ -21,42 +22,83 @@ func rawCommandToOperationAndArgs(rawCommand: String) -> (op: Operation, args: A
     }
 }
 
+let OK_LISTEN_TO = "OK LISTEN TO:"
+let OK_LISTEN_HTTP = "OK LISTEN HTTP:"
+let OK_LISTEN_TCP = "OK LISTEN TCP:"
+let OK_GO = "OK GO"
+let OK_LISTEN = "OK LISTEN"
+let PORT = "%PORT%"
+
 do {
     let boot = Boot()
     boot.boot()
     try Blackboard.shared.config = Parser.parse(json: boot.part1!)
     for rawStage2Command: String in boot.part2 {
-        guard rawStage2Command.isEmpty == false else {
-            continue
-        }
-        
-        switch rawStage2Command {
-        case "OK GO":
-            break
-        
-        case let command where command.hasPrefix("OK LISTEN TO:"):
-            preconditionFailure("Not yet implemented.")
-        
-        case let command where command.hasPrefix("OK LISTEN TCP:"):
-            var shellCommand = String(command.dropFirst("OK LISTEN TCP:".count))
-            shellCommand = shellCommand.trimmingCharacters(in: .whitespaces)
-            shellCommand = shellCommand.replacingOccurrences(of: "%PORT%", with: String(Blackboard.shared.tcp_port))
-            DispatchQueue.global(qos: .background).async {
-                server.go()
+        func stage2(command: String) -> Bool /* true if for loop should is allowed to run again */ {
+            guard rawStage2Command.isEmpty == false else {
+                return true
             }
-            let shell = Terminal(shellCommand)
-            shell.execute(sender: NSString(string: "not used"))
             
-        case let command where command.hasPrefix("OK LISTEN HTTP:"):
-            preconditionFailure("Not yet implemented.")
+            switch rawStage2Command {
+            case OK_GO:
+                return false
             
-        case "OK LISTEN":
-            continue
-        
-        default:
-            let cmd = rawCommandToOperationAndArgs(rawCommand: rawStage2Command)
-            let command = CommandFactory.build(forOperation: cmd.op, withArgs: cmd.args)
-            Blackboard.shared.unexecuted.push(command)
+            case let command where command.hasPrefix(OK_LISTEN_TO):
+                preconditionFailure("Not yet implemented.")
+            
+            case let command where command.hasPrefix(OK_LISTEN_TCP):
+                var shellCommand = String(command.dropFirst(OK_LISTEN_TCP.count))
+                shellCommand = shellCommand.trimmingCharacters(in: .whitespaces)
+                shellCommand = shellCommand.replacingOccurrences(of: PORT, with: String(Blackboard.shared.tcp_port))
+                let shell = Terminal(shellCommand)
+                /*
+                 * NOTE Starts a server for listening to commands over TCP,
+                 * then executes a shell command which triggres commands to
+                 * be send over TCP.
+                 */
+                DispatchQueue.global(qos: .background).async {
+                    server.go() {
+                        shell.execute(sender: NSString(string: "Called by main.swift."))
+                    }
+                }
+                
+            case let command where command.hasPrefix(OK_LISTEN_HTTP):
+                var uri = String(command.dropFirst(OK_LISTEN_HTTP.count))
+                uri = uri.trimmingCharacters(in: .whitespaces)
+                uri = uri.replacingOccurrences(of: PORT, with: String(Blackboard.shared.tcp_port))
+                if let url = URL(string: uri) {
+                /*
+                 * NOTE Starts a server for listening to commands over TCP,
+                 * then requests commands to be send over TCP.
+                 */
+                    DispatchQueue.global(qos: .background).async {
+                        server.go() {
+                            do {
+                                try _ = String(contentsOf: url, encoding: String.Encoding.utf8)
+                            } catch {
+                                // TODO error handling, server could not be contacted.
+                                print("Failed to connect to url")
+                                preconditionFailure("not yet implemented.")
+                            }
+                        }
+                    }
+                } else {
+                     // TODO error handing
+                    preconditionFailure("Error: \(uri) is not a url.")
+                }
+                
+            case OK_LISTEN:
+                return true
+            
+            default:
+                let cmd = rawCommandToOperationAndArgs(rawCommand: rawStage2Command)
+                let command = CommandFactory.build(forOperation: cmd.op, withArgs: cmd.args)
+                Blackboard.shared.unexecuted.push(command)
+            }
+            return true
+        }
+        if stage2(command: rawStage2Command) == false { // NOTE Possible recursion.
+            break
         }
     }
 }

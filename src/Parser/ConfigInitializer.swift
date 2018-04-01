@@ -124,15 +124,16 @@ extension MainWindow {
             self.image = nil
         }
         
-        let actionItemsJSON = json["action_items"] as! [[String: Any]]
-
+        
         let statusJSON = json["status_displays"] as? [[String: String]]
         self.status = statusParser(statusJSON: statusJSON)
         
         self.actions = []
-        for action: [String: Any] in actionItemsJSON {
-            let menu = ActionItem(json: action)
-            self.actions.append(menu!)
+        if let actionItemsJSON = json["actions"] as? [[String: Any]] {
+            for action: [String: Any] in actionItemsJSON {
+                let menu = ActionItem(json: action)
+                self.actions.append(menu!)
+            }
         }
     }
 }

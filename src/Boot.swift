@@ -47,6 +47,10 @@ class Boot {
         
         var inPart2 = false
         for line in lines! {
+            guard line.count != 0 else {
+                continue
+            }
+            
             if !inPart2 {
                 inPart2 = line.hasPrefix("OK ") && (line.hasPrefix("OK GO") || line.hasPrefix("OK LISTEN"))
                 if inPart2 && line.hasPrefix("OK GO") {

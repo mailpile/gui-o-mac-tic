@@ -2,11 +2,11 @@ import Foundation
 import CoreFoundation
 
 class Server: Thread {
-    func go() {
+    func go(dispatchForExecutionWhenChannelIsOpened: () -> Void) {
         let ERROR = -1
         let sock = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP)
         if sock == ERROR {
-            perror("Error creating a socket.")
+            perror("Error creating a socket.") // TODO Error handling.
             Thread.exit()
         }
         
@@ -24,27 +24,37 @@ class Server: Thread {
             Darwin.bind(sock, UnsafeRawPointer($0).assumingMemoryBound(to: sockaddr.self), socketAddressSize)
         }
         guard bindServer != ERROR else {
-            perror("Binding error.")
+            perror("Binding error.") // TODO ERROR HANDLING
             Thread.exit()
             return
         }
         guard listen(sock, 5) != ERROR else {
-            perror("Listening error.")
+            print("Listening error.") // TODO ERROR HANDLING
             Thread.exit()
             return
         }
         
         var clientAddress = sockaddr_storage()
         var client_addr_len = socklen_t(MemoryLayout.size(ofValue: clientAddress))
+        
+        /* XXX
+         * A possible, yet extremely unlikely, race condition.
+         * A callback-request can in principle beat the listener.
+         * If that happens, then the call back is requested and the remote machine tries to call this server
+         * before the server starts accepting connections.
+         */
+        dispatchForExecutionWhenChannelIsOpened()
         let client_fd = withUnsafeMutablePointer(to: &clientAddress) {
             accept(sock, UnsafeMutableRawPointer($0).assumingMemoryBound(to: sockaddr.self), &client_addr_len)
         }
+        
         guard client_fd != ERROR else {
-            perror("Failure: accepting connection")
+            print("Failure: accepting connection") // TODO Error handling.
             Thread.exit();
             return
         }
-        
+    
+        // NOTE Processes received data.
         while (true) {
             var line: String = ""
             var buff_rcvd = CChar()
