@@ -1,22 +1,25 @@
 import Foundation
 import CoreFoundation
 
+/* NOTE: The archaic functions used in this file are documented in the online-manual pages (man command). */
+
 class Server: Thread {
     let QUEUE_SIZE: Int32 = 5
     let port = "4444"
+    let UNKNOWN_ERROR = "Unknown error."
     
     var _addrinfo: addrinfo?
     var _sockaddr: UnsafeMutablePointer<addrinfo>?
     var socket_fd: Int32 = -1
     var request_fd: Int32 = -1
-    
+
     func serve(dispatchForExecutionWhenChannelIsOpened: () -> Void) {
-        func setupDataStructures() {
+        func setupDataStructures() throws {
             self._addrinfo = addrinfo(
-                ai_flags: AI_PASSIVE,       // Localhost
-                ai_family: AF_INET,         // Use either IPv4 or IPv6
-                ai_socktype: SOCK_STREAM,   // Force TCP
-                ai_protocol: 0,             // Any
+                ai_flags: AI_PASSIVE,
+                ai_family: AF_INET,         // Use either IPv4 or IPv6.
+                ai_socktype: SOCK_STREAM,   // Force TCP.
+                ai_protocol: 0,             // Do not prefer IPv4 or IPv6 over the other.
                 ai_addrlen: 0,
                 ai_canonname: nil,
                 ai_addr: nil,
@@ -29,21 +32,25 @@ class Server: Thread {
                 &(self._sockaddr))
             
             guard status == 0 else {
-                // todo error handling
-                return
+                let prefix = "The following error occured while preparing for a network connection: "
+                let errorMessage = status == EAI_SYSTEM
+                    ? String(validatingUTF8: strerror(errno))
+                    : String(validatingUTF8: gai_strerror(status))
+                throw NetworkError.getaddrinfo(reason: prefix + (errorMessage ?? UNKNOWN_ERROR))
             }
         }
         
-        func getSocketFileDescriptor() {
+        func getSocketFileDescriptor() throws {
             self.socket_fd = socket(
                 self._sockaddr!.pointee.ai_family,
                 self._sockaddr!.pointee.ai_socktype,
                 self._sockaddr!.pointee.ai_protocol)
             
             guard self.socket_fd != -1 else {
-                // todo error handling.
-                freeaddrinfo(_sockaddr)
-                return
+                var errorMessage = "The following error occured while attempting to create a socket file descriptor: "
+                errorMessage.append(String(utf8String: strerror(errno)) ?? UNKNOWN_ERROR)
+                freeaddrinfo(self._sockaddr)
+                throw NetworkError.socket(reason: errorMessage)
             }
         }
         
@@ -107,13 +114,17 @@ class Server: Thread {
             }
         }
         
-        setupDataStructures()
-        getSocketFileDescriptor()
-        bindSocketFileDescriptorToPort()
-        listenForACall()
-        dispatchForExecutionWhenChannelIsOpened()
-        acceptCall()
-        receiveAndProcessData()
-        // TODO free up resources.
+        do {
+            try setupDataStructures()
+            try getSocketFileDescriptor()
+            bindSocketFileDescriptorToPort()
+            listenForACall()
+            dispatchForExecutionWhenChannelIsOpened()
+            acceptCall()
+            receiveAndProcessData()
+            // TODO free up resources.
+        } catch  {
+            print("todo error handling.")
+        }
     }
 }
