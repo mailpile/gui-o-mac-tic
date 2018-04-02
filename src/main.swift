@@ -57,7 +57,7 @@ do {
                  * be send over TCP.
                  */
                 DispatchQueue.global(qos: .background).async {
-                    server.go() {
+                    server.serve() {
                         shell.execute(sender: NSString(string: "Called by main.swift."))
                     }
                 }
@@ -72,7 +72,7 @@ do {
                  * then requests commands to be send over TCP.
                  */
                     DispatchQueue.global(qos: .background).async {
-                        server.go() {
+                        server.serve() {
                             do {
                                 try _ = String(contentsOf: url, encoding: String.Encoding.utf8)
                             } catch {

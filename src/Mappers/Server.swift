@@ -2,72 +2,118 @@ import Foundation
 import CoreFoundation
 
 class Server: Thread {
-    func go(dispatchForExecutionWhenChannelIsOpened: () -> Void) {
-        let ERROR = -1
-        let sock = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP)
-        if sock == ERROR {
-            perror("Error creating a socket.") // TODO Error handling.
-            Thread.exit()
-        }
-        
-        var sock_opt_on = Int32(1)
-        setsockopt(sock, SOL_SOCKET, SO_REUSEADDR, &sock_opt_on, socklen_t(MemoryLayout.size(ofValue: sock_opt_on)))
-        
-        var socketAddress = sockaddr_in()
-        let socketAddressSize = socklen_t(MemoryLayout.size(ofValue: socketAddress))
-        socketAddress.sin_len = UInt8(socketAddressSize)
-        socketAddress.sin_family = sa_family_t(AF_INET)
-        
-        socketAddress.sin_port = Blackboard.shared.tcp_port.bigEndian
-        
-        let bindServer = withUnsafePointer(to: &socketAddress) {
-            Darwin.bind(sock, UnsafeRawPointer($0).assumingMemoryBound(to: sockaddr.self), socketAddressSize)
-        }
-        guard bindServer != ERROR else {
-            perror("Binding error.") // TODO ERROR HANDLING
-            Thread.exit()
-            return
-        }
-        guard listen(sock, 5) != ERROR else {
-            print("Listening error.") // TODO ERROR HANDLING
-            Thread.exit()
-            return
-        }
-        
-        var clientAddress = sockaddr_storage()
-        var client_addr_len = socklen_t(MemoryLayout.size(ofValue: clientAddress))
-        
-        /* XXX
-         * A possible, yet extremely unlikely, race condition.
-         * A callback-request can in principle beat the listener.
-         * If that happens, then the call back is requested and the remote machine tries to call this server
-         * before the server starts accepting connections.
-         */
-        dispatchForExecutionWhenChannelIsOpened()
-        let client_fd = withUnsafeMutablePointer(to: &clientAddress) {
-            accept(sock, UnsafeMutableRawPointer($0).assumingMemoryBound(to: sockaddr.self), &client_addr_len)
-        }
-        
-        guard client_fd != ERROR else {
-            print("Failure: accepting connection") // TODO Error handling.
-            Thread.exit();
-            return
-        }
+    let QUEUE_SIZE: Int32 = 5
+    let port = "4444"
     
-        // NOTE Processes received data.
-        while (true) {
-            var line: String = ""
-            var buff_rcvd = CChar()
-            while line.last != "\n" {
-                read(client_fd, &buff_rcvd, 1)
-                line.append(NSString(format:"%c",buff_rcvd) as String)
-            }
-            let cmd = rawCommandToOperationAndArgs(rawCommand: line)
-            let command = CommandFactory.build(forOperation: cmd.op, withArgs: cmd.args)
+    var _addrinfo: addrinfo?
+    var _sockaddr: UnsafeMutablePointer<addrinfo>?
+    var socket_fd: Int32 = -1
+    var request_fd: Int32 = -1
+    
+    func serve(dispatchForExecutionWhenChannelIsOpened: () -> Void) {
+        func setupDataStructures() {
+            self._addrinfo = addrinfo(
+                ai_flags: AI_PASSIVE,       // Localhost
+                ai_family: AF_INET,         // Use either IPv4 or IPv6
+                ai_socktype: SOCK_STREAM,   // Force TCP
+                ai_protocol: 0,             // Any
+                ai_addrlen: 0,
+                ai_canonname: nil,
+                ai_addr: nil,
+                ai_next: nil)
             
-            DispatchQueue.main.async {
-                command.execute(sender: self)
+            let status = getaddrinfo(
+                nil,
+                port,
+                &(self._addrinfo!),
+                &(self._sockaddr))
+            
+            guard status == 0 else {
+                // todo error handling
+                return
             }
         }
+        
+        func getSocketFileDescriptor() {
+            self.socket_fd = socket(
+                self._sockaddr!.pointee.ai_family,
+                self._sockaddr!.pointee.ai_socktype,
+                self._sockaddr!.pointee.ai_protocol)
+            
+            guard self.socket_fd != -1 else {
+                // todo error handling.
+                freeaddrinfo(_sockaddr)
+                return
+            }
+        }
+        
+        func bindSocketFileDescriptorToPort() {
+            let status = Darwin.bind(
+                self.socket_fd,
+                self._sockaddr!.pointee.ai_addr,
+                self._sockaddr!.pointee.ai_addrlen)
+            
+            guard status == 0 else {
+                // Handle errors
+                freeaddrinfo(self._sockaddr)
+                close(self.socket_fd)
+                return
+            }
+        }
+        
+        func listenForACall() {
+            let status = listen(
+                self.socket_fd,
+                QUEUE_SIZE)
+            
+            guard status == 0 else {
+                // TODO error handling.
+                close(self.socket_fd)
+                return
+            }
+        }
+        
+        func acceptCall() {
+            var connectedAddrInfo = sockaddr(sa_len: 0, sa_family: 0, sa_data: (0,0,0,0,0,0,0,0,0,0,0,0,0,0))
+            var connectedAddrInfoLength = socklen_t(MemoryLayout.size(ofValue: sockaddr.self))
+            self.request_fd = accept(self.socket_fd,
+                                     &connectedAddrInfo,
+                                     &connectedAddrInfoLength) // TODO free?
+            
+            guard request_fd != -1 else {
+                let error = String(utf8String: strerror(errno)) ?? "Unknown error" // TODO Handle errors.
+                print(error)
+                Thread.exit()
+                return
+            }
+        }
+        
+        func receiveAndProcessData() {
+            while (true) {
+                var line: String = ""
+                var buff_rcvd = CChar()
+                while line.last != "\n" {
+                    read(self.request_fd,
+                         &buff_rcvd,
+                         1)
+                    line.append(NSString(format:"%c",buff_rcvd) as String)
+                }
+                let cmd = rawCommandToOperationAndArgs(rawCommand: line)
+                let command = CommandFactory.build(forOperation: cmd.op, withArgs: cmd.args)
+                
+                DispatchQueue.main.async {
+                    command.execute(sender: self)
+                }
+            }
+        }
+        
+        setupDataStructures()
+        getSocketFileDescriptor()
+        bindSocketFileDescriptorToPort()
+        listenForACall()
+        dispatchForExecutionWhenChannelIsOpened()
+        acceptCall()
+        receiveAndProcessData()
+        // TODO free up resources.
     }
 }
