@@ -1,7 +1,7 @@
 import AppKit
 
 class NotifyByAlert: NotificationStrategy {
-    static func Notify(message: String) {
+    static func Notify(message: String, actions: [ActionItem]?) {
         let appName = Bundle.main.infoDictionary![kCFBundleNameKey as String] as! String
         UserNotificationFacade.DeliverNotification(withTitle: "Alert from \(appName)", withText: message)
         

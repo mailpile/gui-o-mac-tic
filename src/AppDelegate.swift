@@ -74,7 +74,29 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
         return Blackboard.shared.config!.main_window?.close_quits ?? false
     }
     
-    func userNotificationCenter(_ center: NSUserNotificationCenter, shouldPresent notification: NSUserNotification) -> Bool {
+    func userNotificationCenter(_ center: NSUserNotificationCenter,
+                                shouldPresent notification: NSUserNotification) -> Bool {
         return true
+    }
+    
+    func userNotificationCenter(_ center: NSUserNotificationCenter, didActivate notification: NSUserNotification) {
+        switch notification.activationType {
+        case .actionButtonClicked: // Lower button.
+            preconditionFailure()
+            break
+        case .additionalActionClicked: // Button from menu that expands.
+            preconditionFailure()
+            break
+        case .contentsClicked: // Actual notification clicked.
+            preconditionFailure()
+            break
+        case .none:
+            preconditionFailure()
+            break
+        case .replied:
+            preconditionFailure()
+            break
+        }
+        
     }
 }

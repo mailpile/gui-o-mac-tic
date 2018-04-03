@@ -18,9 +18,6 @@ class NotifyUser: Command {
     
     func execute(sender: NSObject) {
         let strategy = NotificationStrategyFactory.build(preferUserNotificationCenter: self.popup, alert: self.alert)
-        strategy.Notify(message: self.message)
-        if self.actions?.isEmpty == false {
-            assertionFailure("Not yet implemented as it is unclear whether actions should be auto executed or user selectable.")
-        }
+        strategy.Notify(message: self.message, actions: self.actions)
     }
 }

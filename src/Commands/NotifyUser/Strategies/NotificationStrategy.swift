@@ -1,5 +1,5 @@
 import Foundation
 
 protocol NotificationStrategy {
-    static func Notify(message: String)
+    static func Notify(message: String, actions: [ActionItem]?)
 }
