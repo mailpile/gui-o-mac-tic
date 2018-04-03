@@ -1,5 +1,6 @@
 import Foundation
 import CoreFoundation
+import AppKit.NSAlert
 
 /*
  * NOTE:
@@ -14,11 +15,11 @@ import CoreFoundation
  */
 class Server: Thread {
     let QUEUE_SIZE: Int32 = 5
-    let port = "4444"
     let UNKNOWN_ERROR = "Unknown error."
     
     /* NOTE: The archaic types, functions and their error-codes
-     * are documented in the BSD System Calls Manual. */
+     * are documented in the BSD System Calls Manual and in the
+     * BSD Library Functions Manual. */
     
     var _addrinfo: addrinfo?
     var _sockaddr: UnsafeMutablePointer<addrinfo>?
@@ -27,7 +28,7 @@ class Server: Thread {
     var request_fd: Int32 = INVALID_FILE_DESCRIPTOR
 
     func serve(dispatchForExecutionWhenChannelIsOpened: () -> Void) {
-        func setupDataStructures() throws {
+        func setupDataStructures(portToListenOn port: UInt16) throws {
             self._addrinfo = addrinfo(
                 ai_flags: AI_PASSIVE,
                 ai_family: AF_INET,         // Use either IPv4 or IPv6.
@@ -40,16 +41,41 @@ class Server: Thread {
             
             let status = getaddrinfo(
                 nil,
-                port,
+                String(port),
                 &(self._addrinfo!),
                 &(self._sockaddr))
             
             guard status == 0 else {
                 let prefix = "Failed to prepare for a network connection: "
-                let errorMessage = status == EAI_SYSTEM
-                    ? String(validatingUTF8: strerror(errno))
-                    : String(validatingUTF8: gai_strerror(status))
-                throw NetworkError.getaddrinfo(errorMessage: prefix + (errorMessage ?? UNKNOWN_ERROR))
+                var errorMessage: String
+                var errorCode: Int32
+                switch status {
+                                    /** Non-recoverable errors: **/
+                case EAI_AGAIN,     /* temporary failure in name resolution */
+                     EAI_BADFLAGS,  /* invalid value for ai_flags */
+                     EAI_BADHINTS,  /* invalid value for hints */
+                     EAI_FAIL,      /* on-recoverable failure in name resolution */
+                     EAI_FAMILY,    /* ai_family not supported */
+                     EAI_MEMORY,    /* memory allocation failure */
+                     EAI_NONAME,    /* hostname or servname not provided, or not known */
+                     EAI_OVERFLOW,  /* argument buffer overflow */
+                     EAI_PROTOCOL,  /* resolved protocol is unknown */
+                     EAI_SERVICE,   /* servname not supported for ai_socktype */
+                     EAI_SOCKTYPE:  /* ai_socktype not supported */
+                    errorMessage = String(validatingUTF8: gai_strerror(status)) ?? UNKNOWN_ERROR
+                    errorCode = status
+                case EAI_SYSTEM:    /* system error returned in errno */
+                    errorMessage = String(validatingUTF8: strerror(errno)) ?? UNKNOWN_ERROR
+                    errorCode = errno
+                    break
+                default:            /* Non-documented errors are non-recoverable. */
+                    errorMessage = UNKNOWN_ERROR
+                    errorCode = status
+                    break
+                }
+                throw NetworkError.getaddrinfo(recoverable: false,
+                                               errorMessage: prefix + errorMessage,
+                                               errorCode: errorCode)
             }
         }
         
@@ -60,10 +86,25 @@ class Server: Thread {
                 self._sockaddr!.pointee.ai_protocol)
             
             guard self.socket_fd != Server.INVALID_FILE_DESCRIPTOR else {
+                switch errno {
+                                /** Non-recoverable errors: **/
+                case EACCES,    /* Permission to create a socket of the specified type and/or protocol is denied.*/
+                EAFNOSUPPORT,   /* The specified address family is not supported. */
+                EMFILE,         /* The per-process descriptor table is full. */
+                ENOBUFS,        /* Insufficient buffer space is available.
+                                 * The socket cannot be created until sufficient resources are freed. */
+                ENOMEM,         /* Insufficient memory was available to fulfill the request. */
+                EPROTONOSUPPORT,/* The protocol type or the specified protocol is not supported
+                                 * within this domain. */
+                EPROTOTYPE:     /* The socket type is not supported by the protocol. */
+                    break
+                default:        /* Non-documented errors are non-recoverable. */
+                    break
+                }
                 var errorMessage = "Failed to create a socket file descriptor. Error: "
                 errorMessage.append(String(utf8String: strerror(errno)) ?? UNKNOWN_ERROR)
                 freeaddrinfo(self._sockaddr)
-                throw NetworkError.socket(errorMessage: errorMessage)
+                throw NetworkError.socket(recoverable: false, errorMessage: errorMessage, errorCode: errno)
             }
         }
         
@@ -78,7 +119,6 @@ class Server: Thread {
                     freeaddrinfo(self._sockaddr)
                     close(self.socket_fd)
                 }
-                
                 var errorMessage = "Failed to bind a socket file descriptor to a port. Error: "
                 errorMessage.append(String(utf8String: strerror(errno)) ?? UNKNOWN_ERROR)
                 
@@ -86,7 +126,7 @@ class Server: Thread {
                                     /** Recoverable errors: **/
                 case EADDRINUSE,    /* The specified address is already in use. */
                      EINVAL:        /* socket is already bound or it has been shut down. */
-                    throw NetworkError.bind(recoverable: true, errorMessage: errorMessage)
+                    throw NetworkError.bind(recoverable: true, errorMessage: errorMessage, errorCode: errno)
                     
                                     /** Non-recoverable errors: **/
                 case EACCES,        /* The current user has inadequate permission to access the requested address. */
@@ -100,7 +140,7 @@ class Server: Thread {
                 default:            /* Non-documented errors are non-recoverable. */
                     break
                 }
-                throw NetworkError.bind(recoverable: false, errorMessage: errorMessage)
+                throw NetworkError.bind(recoverable: false, errorMessage: errorMessage, errorCode: errno)
             }
             freeaddrinfo(self._sockaddr)
         }
@@ -114,7 +154,6 @@ class Server: Thread {
                 defer {
                     close(socket_fd)
                 }
-                
                 var errorMessage = "Failed to listen on a socket. Error: "
                 errorMessage.append(String(utf8String: strerror(errno)) ?? UNKNOWN_ERROR)
                 
@@ -123,7 +162,7 @@ class Server: Thread {
                 case EDESTADDRREQ,  /* The socket is not bound to a local address and the protocol
                                      * does not support listening to an unbound socket. */
                      EINVAL:        /* Socket is already connected. */
-                    throw NetworkError.listen(recoverable: true, errorMessage: errorMessage)
+                    throw NetworkError.listen(recoverable: true, errorMessage: errorMessage, errorCode: errno)
                     
                                     /** Non-recoverable errors: **/
                 case EACCES,        /* The current process has insufficient privileges. */
@@ -135,7 +174,7 @@ class Server: Thread {
                 default:            /* Non-documented errors are non-recoverable. */
                     break
                 }
-                throw NetworkError.listen(recoverable: false, errorMessage: errorMessage)
+                throw NetworkError.listen(recoverable: false, errorMessage: errorMessage, errorCode: errno)
             }
         }
         
@@ -158,57 +197,186 @@ class Server: Thread {
                 let errorMessage = String(utf8String: strerror(errno)) ?? "Unknown error"
                 
                 switch errno {
-                case EBADF,     /* socket is not a valid file descriptor. */
-                     ECONNABORTED,   /* The connection to socket has been aborted. */
-                     EWOULDBLOCK,    /* socket is marked as non-blocking and no connections are present to be accepted. */
-                     EINTR,          /* The accept() system call was terminated by a signal. */
-                     EINVAL:         /* socket is unwilling to accept connections. */
-                    throw NetworkError.accept(recoverable: true, errorMessage: errorMessage)
+                                  /** Recoverable errors: **/
+                case EBADF,       /* socket is not a valid file descriptor. */
+                     ECONNABORTED,/* The connection to socket has been aborted. */
+                     EWOULDBLOCK, /* socket is marked as non-blocking and no connections are present to be accepted. */
+                     EINTR,       /* The accept() system call was terminated by a signal. */
+                     EINVAL:      /* socket is unwilling to accept connections. */
+                    throw NetworkError.accept(recoverable: true, errorMessage: errorMessage, errorCode: errno)
                 
-                case EFAULT,         /* The address parameter is not in a writable part of the user address space. */
-                     EMFILE,         /* The pre-process descriptor table is full. */
-                     ENFILE,         /* The system file table is full. */
-                     ENOMEM,         /* Insufficient memory was available to complete the operation. */
-                     ENOTSOCK,       /* socket references a file type other than a socket. */
-                     EOPNOTSUPP:     /* socket is not of type SOCK_STREAM and thus does not accept connections. */
+                                  /** Non-recoverable errors: **/
+                case EFAULT,      /* The address parameter is not in a writable part of the user address space. */
+                     EMFILE,      /* The pre-process descriptor table is full. */
+                     ENFILE,      /* The system file table is full. */
+                     ENOMEM,      /* Insufficient memory was available to complete the operation. */
+                     ENOTSOCK,    /* socket references a file type other than a socket. */
+                     EOPNOTSUPP:  /* socket is not of type SOCK_STREAM and thus does not accept connections. */
                     break
-                default:
+                default:          /* Non-documented errors are non-recoverable. */
                     break
                 }
-                throw NetworkError.accept(recoverable: false, errorMessage: errorMessage)
+                throw NetworkError.accept(recoverable: false, errorMessage: errorMessage, errorCode: errno)
             }
         }
         
-        func receiveAndProcessData() {
+        func receiveAndProcessData() throws {
+            defer {
+                close(self.request_fd)
+            }
             while (true) {
                 var line: String = ""
                 var buff_rcvd = CChar()
-                while line.last != "\n" {
-                    read(self.request_fd,
+                
+                /* Read a gui-o-matic command from the socket. */
+                while line.last != Constants.NEWLINE_CHAR {
+                    let status = read(self.request_fd,
                          &buff_rcvd,
-                         1)
-                    line.append(NSString(format:"%c",buff_rcvd) as String)
+                         1) /* The number of bytes to read. */
+                    
+                    guard status != -1 else {
+                        let errorMessage = String(utf8String: strerror(errno)) ?? "Unknown error"
+                        switch errno {
+                                            /** Recoverable errors. **/
+                            case EBADF,     /* fildes is not a valid file or socket descriptor open for reading. */
+                                 EINTR,     /* A read from a slow device was interrupted before any data arrived
+                                             * by the delivery of a signal. */
+                                 ENOBUFS,   /* An attempt to allocate a memory buffer fails. */
+                                 ECONNRESET,/* The connection is closed by the peer during a read attempt on a socket.*/
+                                 ENOTCONN,  /* A read is attempted on an unconnected socket. */
+                                 ETIMEDOUT: /* A transmission timeout occurs during a read attempt on a socket. */
+                                throw NetworkError.accept(recoverable: true,
+                                                          errorMessage: errorMessage,
+                                                          errorCode: errno)
+                            
+                                            /** Non-recoverable errors: **/
+                            case EAGAIN,    /* The file was marked for non-blocking I/O,
+                                             * and no data were ready to be read. */
+                                 EFAULT,    /* Buf points outside the allocated address space. */
+                                 EINVAL,    /* The pointer associated with fildes was negative. */
+                                 EIO,       /* The process group is orphaned. */
+                                 EISDIR,    /* An attempt is made to read a directory. */
+                                 ENOMEM,    /* Insufficient memory is available. */
+                                 ENXIO:     /* A requested action cannot be performed by the device. */
+                            break
+                        default:            /* Non-documented errors are non-recoverable. */
+                            break
+                        }
+                        throw NetworkError.accept(recoverable: false, errorMessage: errorMessage, errorCode: errno)
+                    }
+                    
+                    line.append(String(format:"%c", buff_rcvd))
                 }
-                let cmd = rawCommandToOperationAndArgs(rawCommand: line)
+                
+                /* Parse the gui-o-matic command */
+                let cmd = guiomaticCommandToOperationAndArgs(guiomaticCommand: line)
                 let command = CommandFactory.build(forOperation: cmd.op, withArgs: cmd.args)
                 
+                /* Dispatch the command for execution on the GUI thread. */
                 DispatchQueue.main.async {
                     command.execute(sender: self)
                 }
             }
         }
         
-        do {
-            try setupDataStructures()
-            try getSocketFileDescriptor()
-            try bindSocketFileDescriptorToPort()
-            try listenForACall()
-            dispatchForExecutionWhenChannelIsOpened()
-            try acceptCall()
-            receiveAndProcessData()
-            // TODO free up resources.
-        } catch  {
-            print("todo error handling.")
+        func logError(_ errorMessage: String, _ errorCode: Int32? = nil) {
+            NSLog(errorMessage + (errorCode != nil ? " ("+String(errorCode!)+")." : ""))
         }
+        
+        // TODO Refactor out.
+        func displayErrorToUser(preferredErrorMessage: String) {
+            DispatchQueue.main.async {
+                func showAlert() {
+                    let alert = NSAlert()
+                    if let error = Blackboard.shared.nextErrorMessage {
+                        Blackboard.shared.nextErrorMessage = nil
+                        alert.messageText = error
+                    } else {
+                        alert.messageText = "Error"
+                    }
+                    alert.informativeText = preferredErrorMessage
+                    alert.addButton(withTitle: "Exit")
+                    alert.alertStyle = NSAlert.Style.critical
+                    alert.runModal()
+                    NSApp.terminate(self)
+                }
+                showAlert()
+                NSApp.requestUserAttention(.criticalRequest)
+            }
+        }
+        
+        while (true) {
+            do {
+                Blackboard.shared.tcp_port = nil
+                let port = UInt16.random(min: 1024, max: UInt16.max)
+                try setupDataStructures(portToListenOn: port)
+                try getSocketFileDescriptor()
+                /* NOTE: bindSocketFileDescriptorToPort throws a recoverable exception should it fail
+                 * to bind a socket to a port, in which case the error handling spins this loop around
+                 * and an attempt will be made to bind a new socket to a different port. */
+                try bindSocketFileDescriptorToPort()
+                try listenForACall()
+                Blackboard.shared.tcp_port = port
+                dispatchForExecutionWhenChannelIsOpened()
+                try acceptCall()
+                try receiveAndProcessData()
+            }
+            /*
+             *    Handle recoverable errors.
+             */
+            catch let NetworkError.getaddrinfo(recoverable, errorMessage, errorCode) where recoverable  {
+                logError(errorMessage, errorCode)
+                continue
+            } catch let NetworkError.socket(recoverable, errorMessage, errorCode) where recoverable {
+                logError(errorMessage, errorCode)
+                continue
+            } catch let NetworkError.bind(recoverable, errorMessage, errorCode) where recoverable {
+                logError(errorMessage, errorCode)
+                continue
+            } catch let NetworkError.listen(recoverable, errorMessage, errorCode) where recoverable {
+                logError(errorMessage, errorCode)
+                continue
+            } catch let NetworkError.accept(recoverable, errorMessage, errorCode) where recoverable {
+                logError(errorMessage, errorCode)
+                continue
+            } catch let NetworkError.read(recoverable, errorMessage, errorCode) where recoverable {
+                logError(errorMessage, errorCode)
+                continue
+            }
+            /*
+             *    Handle non-recoverable errors.
+             */
+            catch let NetworkError.getaddrinfo(recoverable, errorMessage, errorCode) where !recoverable  {
+                logError(errorMessage, errorCode)
+                displayErrorToUser(preferredErrorMessage: errorMessage)
+                return
+            } catch let NetworkError.socket(recoverable, errorMessage, errorCode) where !recoverable {
+                logError(errorMessage, errorCode)
+                displayErrorToUser(preferredErrorMessage: errorMessage)
+                return
+            } catch let NetworkError.bind(recoverable, errorMessage, errorCode) where !recoverable {
+                logError(errorMessage, errorCode)
+                displayErrorToUser(preferredErrorMessage: errorMessage)
+                return
+            } catch let NetworkError.listen(recoverable, errorMessage, errorCode) where !recoverable {
+                logError(errorMessage, errorCode)
+                displayErrorToUser(preferredErrorMessage: errorMessage)
+                return
+            } catch let NetworkError.accept(recoverable, errorMessage, errorCode) where !recoverable {
+                logError(errorMessage, errorCode)
+                displayErrorToUser(preferredErrorMessage: errorMessage)
+                return
+            } catch let NetworkError.read(recoverable, errorMessage, errorCode) where !recoverable {
+                logError(errorMessage, errorCode)
+                displayErrorToUser(preferredErrorMessage: errorMessage)
+                return
+            } catch {
+                let errorMessage = "An unknown network error has occured."
+                logError(errorMessage)
+                displayErrorToUser(preferredErrorMessage: errorMessage)
+                return
+            }
+        }
+        
     }
 }

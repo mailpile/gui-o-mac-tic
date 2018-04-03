@@ -61,6 +61,8 @@
 		D8BE2C7E206EE0A70039C7B5 /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8BE2C7D206EE0A70039C7B5 /* Server.swift */; };
 		D8CA67A42066BF1C003501FD /* LogicalXOR.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CA67A32066BF1C003501FD /* LogicalXOR.swift */; };
 		D8CA67A72066CE31003501FD /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CA67A62066CE31003501FD /* Command.swift */; };
+		D8D696F42073B07200F814DE /* UInt16+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D696F32073B07200F814DE /* UInt16+Extensions.swift */; };
+		D8D91DF52072C16900520189 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D91DF42072C16900520189 /* NetworkError.swift */; };
 		D8DF32242068D5520034165A /* ShowSplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DF32232068D5520034165A /* ShowSplashScreen.swift */; };
 		D8DF322E2068ED870034165A /* SplashViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DF322D2068ED870034165A /* SplashViewDataSource.swift */; };
 		D8DF32312068EE710034165A /* SplashScreenConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DF32302068EE710034165A /* SplashScreenConfig.swift */; };
@@ -148,6 +150,8 @@
 		D8BE2C7D206EE0A70039C7B5 /* Server.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
 		D8CA67A32066BF1C003501FD /* LogicalXOR.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogicalXOR.swift; sourceTree = "<group>"; };
 		D8CA67A62066CE31003501FD /* Command.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Command.swift; sourceTree = "<group>"; };
+		D8D696F32073B07200F814DE /* UInt16+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UInt16+Extensions.swift"; sourceTree = "<group>"; };
+		D8D91DF42072C16900520189 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		D8DF32232068D5520034165A /* ShowSplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowSplashScreen.swift; sourceTree = "<group>"; };
 		D8DF322D2068ED870034165A /* SplashViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewDataSource.swift; sourceTree = "<group>"; };
 		D8DF32302068EE710034165A /* SplashScreenConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenConfig.swift; sourceTree = "<group>"; };
@@ -186,7 +190,6 @@
 			isa = PBXGroup;
 			children = (
 				D8167F13206EC17E0073552A /* StringToOperation.swift */,
-				D8BE2C7D206EE0A70039C7B5 /* Server.swift */,
 			);
 			path = Mappers;
 			sourceTree = "<group>";
@@ -215,7 +218,6 @@
 		D819888020595165004B5974 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				D8167F12206EC1620073552A /* Mappers */,
 				D819888120595165004B5974 /* AppDelegate.swift */,
 				D819888520595165004B5974 /* Assets.xcassets */,
 				D8167F10206EAD4E0073552A /* Blackboard.swift */,
@@ -232,8 +234,11 @@
 				D8CA67A32066BF1C003501FD /* LogicalXOR.swift */,
 				D819888720595165004B5974 /* Main.storyboard */,
 				D8F1FEFC20654785007E497B /* main.swift */,
+				D8167F12206EC1620073552A /* Mappers */,
 				D8515E95205C3C2100565AAE /* Model */,
+				D8D91DF42072C16900520189 /* NetworkError.swift */,
 				D8515EAB205C440900565AAE /* Parser */,
+				D8BE2C7D206EE0A70039C7B5 /* Server.swift */,
 				D85B1E3120614F42003744E0 /* Views */,
 			);
 			path = src;
@@ -259,6 +264,7 @@
 				D8DF324220692B7B0034165A /* String+Extensions.swift */,
 				D842DA8B2062A73B0043B73A /* URL+Extensions.swift */,
 				659F39C6BDCA4E86A2CC3C01 /* NSImage+Extensions.swift */,
+				D8D696F32073B07200F814DE /* UInt16+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -565,6 +571,7 @@
 				D8A38275206D741E006E79D6 /* NotifyByAlert.swift in Sources */,
 				D8BE028A2067DE8D006219D5 /* GetURL.swift in Sources */,
 				D8515EA1205C402600565AAE /* ActionItemType.swift in Sources */,
+				D8D696F42073B07200F814DE /* UInt16+Extensions.swift in Sources */,
 				D8B109C0206BD82F00084D82 /* HTTPCookie.swift in Sources */,
 				D8B109B7206BAA6900084D82 /* NotificationStrategyFactory.swift in Sources */,
 				D81A51FE2067F38600E431E9 /* PostURL.swift in Sources */,
@@ -575,6 +582,7 @@
 				D8515EA8205C421900565AAE /* StatusDisplay.swift in Sources */,
 				D8B109B3206BA72700084D82 /* NotifyByModal.swift in Sources */,
 				659F3D252E28CC11C274AEB2 /* NSImage+Extensions.swift in Sources */,
+				D8D91DF52072C16900520189 /* NetworkError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -658,7 +666,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
@@ -712,7 +720,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";

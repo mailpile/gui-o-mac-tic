@@ -10,7 +10,7 @@ class Blackboard {
     
     var unexecuted = Queue<Command>()
     
-    var tcp_port: UInt16 = 4444 // TODO ASSIGN a random free port.
+    var tcp_port: UInt16?
     
     static let shared = Blackboard()
     private init() {

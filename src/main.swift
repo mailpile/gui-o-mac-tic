@@ -4,8 +4,8 @@ let appDelegate = AppDelegate()
 app.delegate = appDelegate
 var server = Server()
 
-func rawCommandToOperationAndArgs(rawCommand: String) -> (op: Operation, args: Args) {
-    let keyValuePair = rawCommand.split(separator: " ", maxSplits: 1)
+func guiomaticCommandToOperationAndArgs(guiomaticCommand: String) -> (op: Operation, args: Args) {
+    let keyValuePair = guiomaticCommand.split(separator: " ", maxSplits: 1)
     let key = String(keyValuePair[0])
     let op = StringToOperationMapper.Map(operation: key)
     let value = String(keyValuePair[1])
@@ -47,51 +47,49 @@ do {
                 preconditionFailure("Not yet implemented.")
             
             case let command where command.hasPrefix(OK_LISTEN_TCP):
-                var shellCommand = String(command.dropFirst(OK_LISTEN_TCP.count))
-                shellCommand = shellCommand.trimmingCharacters(in: .whitespaces)
-                shellCommand = shellCommand.replacingOccurrences(of: PORT, with: String(Blackboard.shared.tcp_port))
-                let shell = Terminal(shellCommand)
                 /*
                  * NOTE Starts a server for listening to commands over TCP,
-                 * then executes a shell command which triggres commands to
+                 * which then executes a shell command which triggres commands to
                  * be send over TCP.
                  */
                 DispatchQueue.global(qos: .background).async {
                     server.serve() {
-                        shell.execute(sender: NSString(string: "Called by main.swift."))
+                        var shellCommand = String(command.dropFirst(OK_LISTEN_TCP.count))
+                        shellCommand = shellCommand.trimmingCharacters(in: .whitespaces)
+                        shellCommand = shellCommand.replacingOccurrences(of: PORT, with: String(Blackboard.shared.tcp_port!))
+                        let shell = Terminal(shellCommand)
+                        shell.execute(sender: NSObject()/* Not sent by an object. */)
                     }
                 }
                 
             case let command where command.hasPrefix(OK_LISTEN_HTTP):
-                var uri = String(command.dropFirst(OK_LISTEN_HTTP.count))
-                uri = uri.trimmingCharacters(in: .whitespaces)
-                uri = uri.replacingOccurrences(of: PORT, with: String(Blackboard.shared.tcp_port))
-                if let url = URL(string: uri) {
                 /*
                  * NOTE Starts a server for listening to commands over TCP,
                  * then requests commands to be send over TCP.
                  */
-                    DispatchQueue.global(qos: .background).async {
-                        server.serve() {
-                            do {
-                                try _ = String(contentsOf: url, encoding: String.Encoding.utf8)
-                            } catch {
-                                // TODO error handling, server could not be contacted.
-                                print("Failed to connect to url")
-                                preconditionFailure("not yet implemented.")
-                            }
+                DispatchQueue.global(qos: .background).async {
+                    server.serve() {
+                        do {
+                            var uri = String(command.dropFirst(OK_LISTEN_HTTP.count))
+                            uri = uri.trimmingCharacters(in: .whitespaces)
+                            uri = uri.replacingOccurrences(of: PORT, with: String(Blackboard.shared.tcp_port!))
+                            let url = URL(string: uri)
+                            try _ = String(contentsOf: url!, encoding: String.Encoding.utf8)
+                        } catch {
+                            // TODO error handling, server could not be contacted.
+                            print("Failed to connect to url")
+                            preconditionFailure("not yet implemented.")
                         }
                     }
-                } else {
-                     // TODO error handing
-                    preconditionFailure("Error: \(uri) is not a url.")
                 }
+                
+                
                 
             case OK_LISTEN:
                 return true
             
             default:
-                let cmd = rawCommandToOperationAndArgs(rawCommand: rawStage2Command)
+                let cmd = guiomaticCommandToOperationAndArgs(guiomaticCommand: rawStage2Command)
                 let command = CommandFactory.build(forOperation: cmd.op, withArgs: cmd.args)
                 Blackboard.shared.unexecuted.push(command)
             }
@@ -108,7 +106,7 @@ catch {
 }
 
 #if DEBUG
-    setenv("CFNETWORK_DIAGNOSTICS", "3", 1);
+    //setenv("CFNETWORK_DIAGNOSTICS", "3", 1);
 #endif
 
 _ = NSApplicationMain(CommandLine.argc, CommandLine.unsafeArgv)
