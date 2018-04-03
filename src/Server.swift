@@ -1,6 +1,17 @@
 import Foundation
 import CoreFoundation
 
+/*
+ * NOTE:
+ * This class contains low-evel code which is usually not
+ * seen by Swift programmers. For those unfamiliar with network
+ * programming, I suggest to read "Beej's Guide to Network Programming".
+ * That guide is available at http://beej.us/guide/bgnet/.
+ * (Note that Beej's Guide uses the C programming language).
+ *
+ * The code in the following class is laid out such that it's structure
+ * corresponds to the structure of the aforementioned guide.
+ */
 class Server: Thread {
     let QUEUE_SIZE: Int32 = 5
     let port = "4444"
@@ -11,8 +22,9 @@ class Server: Thread {
     
     var _addrinfo: addrinfo?
     var _sockaddr: UnsafeMutablePointer<addrinfo>?
-    var socket_fd: Int32? = -1
-    var request_fd: Int32? = -1
+    private static let INVALID_FILE_DESCRIPTOR: Int32 = -1
+    var socket_fd: Int32 = INVALID_FILE_DESCRIPTOR
+    var request_fd: Int32 = INVALID_FILE_DESCRIPTOR
 
     func serve(dispatchForExecutionWhenChannelIsOpened: () -> Void) {
         func setupDataStructures() throws {
@@ -47,7 +59,7 @@ class Server: Thread {
                 self._sockaddr!.pointee.ai_socktype,
                 self._sockaddr!.pointee.ai_protocol)
             
-            guard self.socket_fd != -1 else {
+            guard self.socket_fd != Server.INVALID_FILE_DESCRIPTOR else {
                 var errorMessage = "Failed to create a socket file descriptor. Error: "
                 errorMessage.append(String(utf8String: strerror(errno)) ?? UNKNOWN_ERROR)
                 freeaddrinfo(self._sockaddr)
@@ -57,14 +69,14 @@ class Server: Thread {
         
         func bindSocketFileDescriptorToPort() throws {
             let status = Darwin.bind(
-                self.socket_fd!,
+                self.socket_fd,
                 self._sockaddr!.pointee.ai_addr,
                 self._sockaddr!.pointee.ai_addrlen)
             
             guard status == 0 else {
                 defer {
                     freeaddrinfo(self._sockaddr)
-                    close(self.socket_fd!)
+                    close(self.socket_fd)
                 }
                 
                 var errorMessage = "Failed to bind a socket file descriptor to a port. Error: "
@@ -95,12 +107,12 @@ class Server: Thread {
         
         func listenForACall() throws {
             let status = listen(
-                self.socket_fd!,
+                self.socket_fd,
                 QUEUE_SIZE)
             
             guard status == 0 else {
                 defer {
-                    close(socket_fd!)
+                    close(socket_fd)
                 }
                 
                 var errorMessage = "Failed to listen on a socket. Error: "
@@ -127,18 +139,43 @@ class Server: Thread {
             }
         }
         
-        func acceptCall() {
+        func acceptCall() throws {
+            defer {
+                close(self.socket_fd) // NOTE: Only a single connection shall be accepted.
+            }
             var connectedAddrInfo = sockaddr(sa_len: 0, sa_family: 0, sa_data: (0,0,0,0,0,0,0,0,0,0,0,0,0,0))
             var connectedAddrInfoLength = socklen_t(MemoryLayout.size(ofValue: sockaddr.self))
-            self.request_fd = accept(self.socket_fd!,
+            self.request_fd = accept(self.socket_fd,
                                      &connectedAddrInfo,
-                                     &connectedAddrInfoLength) // TODO free?
+                                     &connectedAddrInfoLength)
             
-            guard request_fd != -1 else {
-                let error = String(utf8String: strerror(errno)) ?? "Unknown error" // TODO Handle errors.
-                print(error)
-                Thread.exit()
-                return
+            guard request_fd != Server.INVALID_FILE_DESCRIPTOR else {
+                defer {
+                    if request_fd != Server.INVALID_FILE_DESCRIPTOR {
+                        close(request_fd)
+                    }
+                }
+                let errorMessage = String(utf8String: strerror(errno)) ?? "Unknown error"
+                
+                switch errno {
+                case EBADF,     /* socket is not a valid file descriptor. */
+                     ECONNABORTED,   /* The connection to socket has been aborted. */
+                     EWOULDBLOCK,    /* socket is marked as non-blocking and no connections are present to be accepted. */
+                     EINTR,          /* The accept() system call was terminated by a signal. */
+                     EINVAL:         /* socket is unwilling to accept connections. */
+                    throw NetworkError.accept(recoverable: true, errorMessage: errorMessage)
+                
+                case EFAULT,         /* The address parameter is not in a writable part of the user address space. */
+                     EMFILE,         /* The pre-process descriptor table is full. */
+                     ENFILE,         /* The system file table is full. */
+                     ENOMEM,         /* Insufficient memory was available to complete the operation. */
+                     ENOTSOCK,       /* socket references a file type other than a socket. */
+                     EOPNOTSUPP:     /* socket is not of type SOCK_STREAM and thus does not accept connections. */
+                    break
+                default:
+                    break
+                }
+                throw NetworkError.accept(recoverable: false, errorMessage: errorMessage)
             }
         }
         
@@ -147,7 +184,7 @@ class Server: Thread {
                 var line: String = ""
                 var buff_rcvd = CChar()
                 while line.last != "\n" {
-                    read(self.request_fd!,
+                    read(self.request_fd,
                          &buff_rcvd,
                          1)
                     line.append(NSString(format:"%c",buff_rcvd) as String)
@@ -167,7 +204,7 @@ class Server: Thread {
             try bindSocketFileDescriptorToPort()
             try listenForACall()
             dispatchForExecutionWhenChannelIsOpened()
-            acceptCall()
+            try acceptCall()
             receiveAndProcessData()
             // TODO free up resources.
         } catch  {
