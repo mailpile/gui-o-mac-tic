@@ -202,7 +202,7 @@
 				D8DF32252068E66A0034165A /* share */,
 				D819888020595165004B5974 /* src */,
 				D819887F20595165004B5974 /* Products */,
-				D8B289612067B1C3000DCD03 /* GUI-o-Mac-ticTests */,
+				D8B289612067B1C3000DCD03 /* tests */,
 			);
 			sourceTree = "<group>";
 		};
@@ -335,13 +335,13 @@
 			path = DataTypes;
 			sourceTree = "<group>";
 		};
-		D8B289612067B1C3000DCD03 /* GUI-o-Mac-ticTests */ = {
+		D8B289612067B1C3000DCD03 /* tests */ = {
 			isa = PBXGroup;
 			children = (
 				D8B289622067B1C3000DCD03 /* GUI_o_Mac_ticTests.swift */,
 				D8B289642067B1C3000DCD03 /* Info.plist */,
 			);
-			path = "GUI-o-Mac-ticTests";
+			path = tests;
 			sourceTree = "<group>";
 		};
 		D8BE028B2067E485006219D5 /* Facades */ = {
@@ -385,8 +385,7 @@
 				D8167F0C206E753C0073552A /* configurator.sh */,
 				D88F29EF206CEC0B006901CB /* mailpile.conf */,
 			);
-			name = share;
-			path = "New Group";
+			path = share;
 			sourceTree = "<group>";
 		};
 		D8DF322C2068ED670034165A /* Protocols */ = {
