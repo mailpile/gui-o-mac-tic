@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14109"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -77,7 +78,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="400" height="260"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnReordering="NO" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="77" viewBased="YES" floatsGroupRows="NO" id="p3U-rk-9b6">
+                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnReordering="NO" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="77" viewBased="YES" floatsGroupRows="NO" id="p3U-rk-9b6" userLabel="Status View">
                                             <rect key="frame" x="0.0" y="0.0" width="400" height="260"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="15"/>
@@ -93,34 +94,46 @@
                                                     <customCell key="dataCell" alignment="left" id="VdF-et-xH7"/>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
-                                                        <tableCellView identifier="SubstatusCell" id="rUs-8z-jQM" userLabel="Substatus Cell" customClass="SubstatusTableCellView" customModule="GUI_o_Mac_tic" customModuleProvider="target">
+                                                        <tableCellView identifier="SubstatusCell" id="rUs-8z-jQM" userLabel="Status Cell" customClass="SubstatusTableCellView" customModule="GUI_o_Mac_tic" customModuleProvider="target">
                                                             <rect key="frame" x="1" y="7" width="397" height="80"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
-                                                                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hUq-LA-QDk">
+                                                                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hUq-LA-QDk">
                                                                     <rect key="frame" x="5" y="5" width="70" height="70"/>
-                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" secondItem="hUq-LA-QDk" secondAttribute="height" multiplier="1:1" id="5Ed-i4-uwg"/>
+                                                                    </constraints>
                                                                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" id="DwG-DC-SuK"/>
                                                                 </imageView>
-                                                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YyL-Oy-bpd">
-                                                                    <rect key="frame" x="80" y="54" width="472" height="22"/>
-                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Not logged in" id="3QE-82-1Z9">
+                                                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="YyL-Oy-bpd">
+                                                                    <rect key="frame" x="80" y="53" width="314" height="22"/>
+                                                                    <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Not logged in" id="3QE-82-1Z9">
                                                                         <font key="font" metaFont="systemBold" size="18"/>
                                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
                                                                 </textField>
-                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mMk-vT-bvm">
-                                                                    <rect key="frame" x="80" y="14" width="472" height="40"/>
-                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Your data is stored encrypted and is inaccessible until you log in." id="Ggv-zH-4Xp">
+                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="mMk-vT-bvm" userLabel="Details View">
+                                                                    <rect key="frame" x="80" y="14" width="314" height="34"/>
+                                                                    <textFieldCell key="cell" truncatesLastVisibleLine="YES" sendsActionOnEndEditing="YES" title="Your data is stored encrypted and is inaccessible until you log in." id="Ggv-zH-4Xp">
                                                                         <font key="font" metaFont="system"/>
                                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
                                                                 </textField>
                                                             </subviews>
+                                                            <constraints>
+                                                                <constraint firstItem="mMk-vT-bvm" firstAttribute="leading" secondItem="hUq-LA-QDk" secondAttribute="trailing" constant="7" id="3Tc-9Y-Pgc"/>
+                                                                <constraint firstAttribute="trailing" secondItem="YyL-Oy-bpd" secondAttribute="trailing" constant="5" id="4sG-HH-IoL"/>
+                                                                <constraint firstItem="hUq-LA-QDk" firstAttribute="leading" secondItem="rUs-8z-jQM" secondAttribute="leading" constant="5" id="I6o-kc-j1Y"/>
+                                                                <constraint firstAttribute="bottom" secondItem="hUq-LA-QDk" secondAttribute="bottom" constant="5" id="Kbo-Db-1fm"/>
+                                                                <constraint firstItem="YyL-Oy-bpd" firstAttribute="top" secondItem="hUq-LA-QDk" secondAttribute="top" id="Nmd-f2-ltG"/>
+                                                                <constraint firstItem="YyL-Oy-bpd" firstAttribute="leading" secondItem="hUq-LA-QDk" secondAttribute="trailing" constant="7" id="Vi6-rw-U4g"/>
+                                                                <constraint firstItem="mMk-vT-bvm" firstAttribute="top" secondItem="YyL-Oy-bpd" secondAttribute="bottom" constant="5" id="eui-72-FV1"/>
+                                                                <constraint firstAttribute="trailing" secondItem="mMk-vT-bvm" secondAttribute="trailing" constant="5" id="fZ3-88-Hps"/>
+                                                                <constraint firstItem="hUq-LA-QDk" firstAttribute="top" secondItem="rUs-8z-jQM" secondAttribute="top" constant="5" id="o14-G5-N6o"/>
+                                                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="mMk-vT-bvm" secondAttribute="bottom" constant="5" id="tZW-Y1-FzT"/>
+                                                            </constraints>
                                                             <connections>
                                                                 <outlet property="descriptionView" destination="mMk-vT-bvm" id="0PG-CC-NxD"/>
                                                                 <outlet property="iconView" destination="hUq-LA-QDk" id="IHz-43-vtR"/>
