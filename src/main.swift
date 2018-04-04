@@ -70,7 +70,12 @@ do {
                         var shellCommand = String(command.dropFirst(OK_LISTEN_TCP.count))
                         shellCommand = shellCommand.trimmingCharacters(in: .whitespaces)
                         shellCommand = shellCommand.replacingOccurrences(of: PORT, with: String(Blackboard.shared.tcp_port!))
+                        #if DEBUG
+                        print("DEBUG-mode: Replacing Shell command with Terminal command.")
                         let shell = Terminal(shellCommand)
+                        #else
+                        let shell = Shell(shellCommand)
+                        #endif
                         shell.execute(sender: NSObject()/* Not sent by an object. */)
                     }
                 }
