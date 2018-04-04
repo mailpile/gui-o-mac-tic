@@ -23,8 +23,20 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
         
         func buildStatusBarMenu(config: Config) -> NSStatusItem! {
             func applyStartupIconToMenu() {
+                func resizeToFitIfNeeded(image: inout NSImage) {
+                    assert(statusBarMenu.statusBar?.thickness != nil,
+                           "Should not be nil. To be safe we fallback to 22 at runtime.")
+                    let maxLength = statusBarMenu.statusBar?.thickness ?? CGFloat(22)
+                    guard image.size.height > maxLength || image.size.width > maxLength else { return }
+                    let lengthWhichLooksGoodOnToolbar = maxLength * CGFloat(0.8)
+                    let iconSize = NSMakeSize(lengthWhichLooksGoodOnToolbar, lengthWhichLooksGoodOnToolbar)
+                    image = NSImage.init(withImage: image, resizedTo: iconSize)
+                    NSLog("The status bar icon had to be resied because it was larger than"
+                        + " \(UInt(maxLength))×\(UInt(maxLength)).")
+                }
                 let iconName: String! = config.indicator.initialStatus
-                let iconImage: NSImage! = config.icons[iconName]
+                var iconImage: NSImage = config.icons[iconName]!
+                resizeToFitIfNeeded(image: &iconImage)
                 statusBarMenu.image = iconImage
             }
             func buildMenuItem(menuItem: ActionItem) -> NSMenuItem {
@@ -101,8 +113,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
             let command = CommandFactory.build(forOperation: action!.op!, withArgs: action!.args)
             // TODO error handling in case the command factory fails to build the command.
             command.execute(sender: self)
-        
         }
-        
     }
 }
