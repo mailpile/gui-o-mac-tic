@@ -74,7 +74,9 @@ do {
                         print("DEBUG-mode: Replacing Shell command with Terminal command.")
                         let shell = Terminal(shellCommand)
                         #else
-                        let shell = Shell(shellCommand)
+                        var commands = [String]()
+                        commands.append(shellCommand)
+                        let shell = Shell(commands)
                         #endif
                         shell.execute(sender: NSObject()/* Not sent by an object. */)
                     }

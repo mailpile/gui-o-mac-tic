@@ -171,7 +171,7 @@
                     <connections>
                         <outlet property="actionStack" destination="Abb-xO-YYl" id="eEn-ko-gvN"/>
                         <outlet property="background" destination="Nlk-hX-FkE" id="ho9-Hh-vk8"/>
-                        <outlet property="message" destination="WQR-TC-v3D" id="qKv-Oj-gKs"/>
+                        <outlet property="notification" destination="WQR-TC-v3D" id="qKv-Oj-gKs"/>
                         <outlet property="substatusView" destination="p3U-rk-9b6" id="uEr-4u-8fT"/>
                         <segue destination="ddy-uX-gB5" kind="show" identifier="splashSegue" id="plZ-p0-PkT"/>
                     </connections>
@@ -239,8 +239,8 @@
                     </view>
                     <connections>
                         <outlet property="imageCell" destination="qdE-7X-iao" id="rLM-7e-eRT"/>
+                        <outlet property="notification" destination="52b-Wz-GcU" id="D5K-Sa-NIT"/>
                         <outlet property="progressIndicator" destination="28v-MU-njv" id="Mmg-i0-V85"/>
-                        <outlet property="reportingLabel" destination="52b-Wz-GcU" id="D5K-Sa-NIT"/>
                     </connections>
                 </viewController>
                 <customObject id="83p-c2-dhe" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>

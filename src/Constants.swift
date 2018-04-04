@@ -28,4 +28,5 @@ final class Constants {
     
     static let DEFAULT_WIDTH = 800
     static let DEFAULT_HEIGHT = 600
+    static let DEFAULT_FONT_SIZE = CGFloat(16)
 }

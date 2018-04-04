@@ -10,7 +10,7 @@ class CommandFactory {
         
         case .shell:
             precondition(args?.list != nil && args!.list!.count > 0, "No command was provided for execution.")
-            return Shell(commands: args!.list!)
+            return Shell(args!.list!)
             
         case .show_main_window:
             return ShowMainWindow()

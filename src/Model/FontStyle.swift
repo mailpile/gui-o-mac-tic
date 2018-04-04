@@ -8,8 +8,8 @@ struct FontStyles {
         let italic: Bool?
     }
     
+    let title: FontStyle?
     let details: FontStyle?
     let notification: FontStyle?
     let splash: FontStyle?
-    let status: FontStyle?
 }

@@ -3,7 +3,7 @@ import Foundation
 class Shell: Command {
     let commands: [String]
     
-    init(commands: [String]) {
+    init(_ commands: [String]) {
         precondition(commands.count > 0, "Expected a command for execution.")
         self.commands = commands
     }

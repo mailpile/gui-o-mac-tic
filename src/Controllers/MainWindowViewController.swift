@@ -6,13 +6,26 @@ class MainWindowViewController: NSViewController, NSTableViewDelegate, NSTableVi
     var button2Action = [NSButton: ActionItem]()
     var commands = [Command]()
     
+    var statusDisplayTitleFont: NSFont?
+    var statusDisplayDetailsFont: NSFont?
+    
     @IBOutlet weak var background: NSImageView!
     @IBOutlet weak var substatusView: NSTableView!
     @IBOutlet weak var actionStack: NSStackView!
-    @IBOutlet weak var message: NSTextField!
+    @IBOutlet weak var notification: NSTextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if let titleFont = Blackboard.shared.config?.fontStyles?.title {
+            self.statusDisplayTitleFont = FontStyleToFontMapper.map(titleFont)
+        }
+        if let detailsFont = Blackboard.shared.config?.fontStyles?.details {
+            self.statusDisplayDetailsFont = FontStyleToFontMapper.map(detailsFont)
+        }
+        if let notificationFont = Blackboard.shared.config?.fontStyles?.notification {
+            self.notification.font = FontStyleToFontMapper.map(notificationFont)
+        }
+        
         func configureActionStack() {
             func mapPosition2Gravity(position: Position) -> NSStackView.Gravity {
                 switch position {
@@ -61,8 +74,8 @@ class MainWindowViewController: NSViewController, NSTableViewDelegate, NSTableVi
             guard let message: String = Blackboard.shared.mainWindowMessages.tryPop() else {
                 preconditionFailure("Expected a message.")
             }
-            self.message.stringValue = message
-            self.message.sizeToFit()
+            self.notification.stringValue = message
+            self.notification.sizeToFit()
         }
         
         configureActionStack()
@@ -76,8 +89,17 @@ class MainWindowViewController: NSViewController, NSTableViewDelegate, NSTableVi
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         let cell = tableView.makeView(withIdentifier: Constants.SUBSTATE_CELL_ID, owner: self) as! SubstatusTableCellView
         let status = Blackboard.shared.config!.main_window!.status![row]
+        
         cell.titleView.stringValue = status.title
+        if self.statusDisplayTitleFont != nil {
+            cell.titleView.font = self.statusDisplayTitleFont!
+        }
+        
         cell.descriptionView.stringValue = status.details ?? ""
+        if self.statusDisplayDetailsFont != nil {
+            cell.descriptionView.font = self.statusDisplayDetailsFont!
+        }
+        
         cell.iconView.image = status.icon
         
         if let colour = status.textColour {
@@ -95,7 +117,7 @@ class MainWindowViewController: NSViewController, NSTableViewDelegate, NSTableVi
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
         if let targetWindowController = segue.destinationController as? NSWindowController,
             let targetViewController = targetWindowController.contentViewController as? SplashViewController {
-            targetViewController.reportingLabel.stringValue = splashScreenConfig!.message
+            targetViewController.notification.stringValue = splashScreenConfig!.message
             targetViewController.imageCell.image = splashScreenConfig!.background
             targetViewController.progressIndicator.isHidden = splashScreenConfig!.showProgressIndicator == false
         } else {

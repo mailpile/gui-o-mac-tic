@@ -10,7 +10,7 @@ extension Config {
         let indicatorJSON = json["indicator"] as? [String: Any]
         let indicator: Indicator! = Indicator(json: indicatorJSON!)
         
-        let fontStylesJSON = json["font-styles"] as? [String: Any]
+        let fontStylesJSON = json["font_styles"] as? [String: Any]
         let fontStyles: FontStyles? = fontStylesJSON != nil ? FontStyles(json: fontStylesJSON!) : nil
         
         let imagesJSON = json["images"] as? [String: String]
@@ -171,10 +171,10 @@ extension FontStyles {
             self.splash = nil
         }
         
-        if let statusJSON = json["status"] as? [String: Any] {
-            self.status = FontStyle(json: statusJSON)
+        if let statusJSON = json["title"] as? [String: Any] {
+            self.title = FontStyle(json: statusJSON)
         } else {
-            self.status = nil
+            self.title = nil
         }
     }
 }

@@ -1,24 +1,15 @@
 import Cocoa
 
 class SplashViewController: NSViewController {
-    @IBOutlet weak var reportingLabel: NSTextField!
+    @IBOutlet weak var notification: NSTextField!
     @IBOutlet weak var imageCell: NSImageCell!
     @IBOutlet weak var progressIndicator: NSProgressIndicator!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         if let fontStyle = Blackboard.shared.config!.fontStyles?.splash {
-            var font = NSFont.userFont(ofSize: CGFloat(fontStyle.points!))!
-            if (fontStyle.family != nil) {
-                font = NSFontManager.shared.convert(font, toFamily: fontStyle.family!)
-            }
-            if fontStyle.bold != nil {
-                font = NSFontManager.shared.convert(font, toHaveTrait: NSFontTraitMask.boldFontMask)
-            }
-            if fontStyle.italic != nil {
-                font = NSFontManager.shared.convert(font, toNotHaveTrait: NSFontTraitMask.italicFontMask)
-            }
-            self.reportingLabel.font = font
+            self.notification.font = FontStyleToFontMapper.map(fontStyle)
         }
         
         NotificationCenter.default.addObserver(forName: Constants.UPDATE_SPLASH_SCREEN,
@@ -29,7 +20,7 @@ class SplashViewController: NSViewController {
                 self.progressIndicator.doubleValue = progress
                 
                 let message = userInfo["message"] as! String
-                self.reportingLabel.stringValue = message
+                self.notification.stringValue = message
             }
         }
         
@@ -37,12 +28,12 @@ class SplashViewController: NSViewController {
             guard let message: String = Blackboard.shared.splashMessages.tryPop() else {
                 preconditionFailure("Expected a message.")
             }
-            self.reportingLabel.stringValue = message
-            self.reportingLabel.sizeToFit()
+            self.notification.stringValue = message
+            self.notification.sizeToFit()
         }
     }
     
     override func viewWillAppear() {
-        self.reportingLabel.sizeToFit()
+        self.notification.sizeToFit()
     }
 }
