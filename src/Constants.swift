@@ -6,6 +6,8 @@ final class Constants {
     
     static let NEWLINE_CHAR: Character = "\n"
     
+    static let USERINFO_COMMAND = "USERINFO_COMMAND"
+    
     // TODO Replace the following notifications with KVO on the blackboard.
     static let SHOW_MAIN_WINDOW = NSNotification.Name(rawValue: "SHOW_MAIN_WINDOW")
     static let HIDE_MAIN_WINDOW = NSNotification.Name(rawValue: "HIDE_MAIN_WINDOW")

@@ -11,6 +11,8 @@ class Blackboard {
     var unexecuted = Queue<Command>()
     
     var tcp_port: UInt16?
+
+    var notificationIdentifier2Actions = [String:[ActionItem]]()
     
     static let shared = Blackboard()
     private init() {

@@ -80,22 +80,28 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
     }
     
     func userNotificationCenter(_ center: NSUserNotificationCenter, didActivate notification: NSUserNotification) {
-        switch notification.activationType {
-        case .actionButtonClicked: // Lower button.
-            preconditionFailure()
-            break
-        case .additionalActionClicked: // Button from menu that expands.
-            preconditionFailure()
-            break
-        case .contentsClicked: // Actual notification clicked.
-            preconditionFailure()
-            break
-        case .none:
-            preconditionFailure()
-            break
-        case .replied:
-            preconditionFailure()
-            break
+        guard notification.identifier != nil else { return }
+        if let actions: [ActionItem] = Blackboard.shared.notificationIdentifier2Actions.removeValue(forKey: notification.identifier!) {
+            func getAction(withLabel label: String?) -> ActionItem? {
+                return actions.first(where: { $0.label == label })
+            }
+            var action: ActionItem? = nil
+            switch notification.activationType {
+            case .actionButtonClicked:
+                action = getAction(withLabel: notification.actionButtonTitle)
+            case .additionalActionClicked:
+                action = getAction(withLabel: notification.additionalActivationAction?.title)
+            case .contentsClicked,
+                 .none:
+                break
+            case .replied:
+                preconditionFailure("Unreachable.")
+            }
+            guard action != nil else { return }
+            let command = CommandFactory.build(forOperation: action!.op!, withArgs: action!.args)
+            // TODO error handling in case the command factory fails to build the command.
+            command.execute(sender: self)
+        
         }
         
     }
