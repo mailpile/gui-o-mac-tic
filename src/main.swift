@@ -1,7 +1,5 @@
 import Cocoa
-let app = NSApplication.shared
-let appDelegate = AppDelegate()
-app.delegate = appDelegate
+
 var server = Server()
 
 func guiomaticCommandToOperationAndArgs(guiomaticCommand: String) -> (op: Operation, args: Args) {
@@ -107,4 +105,12 @@ catch {
     //setenv("CFNETWORK_DIAGNOSTICS", "3", 1);
 #endif
 
+if let appIconPath = Blackboard.shared.config?.app_icon,
+    let appIcon = NSImage(contentsOfFile: appIconPath) {
+    NSWorkspace.shared.setIcon(appIcon, forFile: Bundle.main.bundlePath, options: [])
+}
+
+let app = NSApplication.shared
+let appDelegate = AppDelegate()
+app.delegate = appDelegate
 _ = NSApplicationMain(CommandLine.argc, CommandLine.unsafeArgv)
