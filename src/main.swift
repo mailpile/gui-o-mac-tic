@@ -26,11 +26,26 @@ let OK_LISTEN_TCP = "OK LISTEN TCP:"
 let OK_GO = "OK GO"
 let OK_LISTEN = "OK LISTEN"
 let PORT = "%PORT%"
-
+let app: NSApplication
+let appDelegate: AppDelegate
 do {
+    /** Begin Stage 1 **/
     let boot = Boot()
     boot.boot()
     try Blackboard.shared.config = Parser.parse(json: boot.part1!)
+    /** End of Stage 1 **/
+    
+    /** Set app icon and start the main app thread. */
+    if let appIconPath = Blackboard.shared.config?.app_icon,
+        let appIcon = NSImage(contentsOfFile: appIconPath) {
+        NSWorkspace.shared.setIcon(appIcon, forFile: Bundle.main.bundlePath, options: [])
+    }
+    app = NSApplication.shared
+    appDelegate = AppDelegate()
+    app.delegate = appDelegate
+    /** Main thread is now running. */
+    
+    /** Begin Stage 2 **/
     for rawStage2Command: String in boot.part2 {
         func stage2(command: String) -> Bool /* true if for loop should is allowed to run again */ {
             guard rawStage2Command.isEmpty == false else {
@@ -95,22 +110,11 @@ do {
             break
         }
     }
+    /** End of stage 2 **/
 }
 catch {
     print(error) // TODO Error handling.
     exit(EX_USAGE)
 }
 
-#if DEBUG
-    //setenv("CFNETWORK_DIAGNOSTICS", "3", 1);
-#endif
-
-if let appIconPath = Blackboard.shared.config?.app_icon,
-    let appIcon = NSImage(contentsOfFile: appIconPath) {
-    NSWorkspace.shared.setIcon(appIcon, forFile: Bundle.main.bundlePath, options: [])
-}
-
-let app = NSApplication.shared
-let appDelegate = AppDelegate()
-app.delegate = appDelegate
 _ = NSApplicationMain(CommandLine.argc, CommandLine.unsafeArgv)
