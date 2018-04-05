@@ -6,8 +6,15 @@ class Boot {
     
     func boot() {
         let process = Process()
-        process.launchPath = "/bin/sh"
         
+        let SH = "/bin/sh"
+        if #available(OSX 10.13, *) {
+            process.currentDirectoryURL = Bundle.main.resourceURL
+            process.executableURL = URL(fileURLWithPath: SH)
+        } else {
+            process.currentDirectoryPath = Bundle.main.resourcePath!
+            process.launchPath = SH
+        }
         let url = Bundle.main.url(forResource: "configurator", withExtension: "sh")
         process.arguments = url?.relativePath.components(separatedBy: .whitespaces)
         

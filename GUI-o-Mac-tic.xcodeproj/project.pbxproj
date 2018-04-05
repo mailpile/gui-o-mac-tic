@@ -23,6 +23,7 @@
 		D81A52002067F81A00E431E9 /* URLCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81A51FF2067F81A00E431E9 /* URLCommand.swift */; };
 		D81D3CE620665A7E008325B9 /* SubstatusTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85B1E3220614FC5003744E0 /* SubstatusTableCellView.swift */; };
 		D8307B9520754E1100FCE94D /* FontStyleToFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8307B9420754E1100FCE94D /* FontStyleToFont.swift */; };
+		D8307B97207661D500FCE94D /* stage2.conf in Resources */ = {isa = PBXBuildFile; fileRef = D8307B96207661D500FCE94D /* stage2.conf */; };
 		D8333EE9205D3FA90029172B /* FontStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8333EE8205D3FA90029172B /* FontStyle.swift */; };
 		D842DA8C2062A73B0043B73A /* URL+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D842DA8B2062A73B0043B73A /* URL+Extensions.swift */; };
 		D8515E99205C3CB000565AAE /* Operation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8515E98205C3CB000565AAE /* Operation.swift */; };
@@ -74,7 +75,7 @@
 		D8DF323F206922150034165A /* SetStatusDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DF323E206922150034165A /* SetStatusDisplay.swift */; };
 		D8DF3241206927200034165A /* NSColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DF3240206927200034165A /* NSColor+Extensions.swift */; };
 		D8DF324320692B7B0034165A /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DF324220692B7B0034165A /* String+Extensions.swift */; };
-		D8E459F320753B1B00B5A3CD /* introduction.config in Resources */ = {isa = PBXBuildFile; fileRef = D8E459F220753B1B00B5A3CD /* introduction.config */; };
+		D8E459F320753B1B00B5A3CD /* stage1.conf in Resources */ = {isa = PBXBuildFile; fileRef = D8E459F220753B1B00B5A3CD /* stage1.conf */; };
 		D8ECDD6C205EA6370004790B /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8ECDD6B205EA6370004790B /* Parser.swift */; };
 		D8F1FEFD20654785007E497B /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F1FEFC20654785007E497B /* main.swift */; };
 		D8F1FEFF2065818D007E497B /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F1FEFE2065818D007E497B /* SplashViewController.swift */; };
@@ -109,6 +110,7 @@
 		D81A51FD2067F38600E431E9 /* PostURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostURL.swift; sourceTree = "<group>"; };
 		D81A51FF2067F81A00E431E9 /* URLCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLCommand.swift; sourceTree = "<group>"; };
 		D8307B9420754E1100FCE94D /* FontStyleToFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontStyleToFont.swift; sourceTree = "<group>"; };
+		D8307B96207661D500FCE94D /* stage2.conf */ = {isa = PBXFileReference; lastKnownFileType = text; path = stage2.conf; sourceTree = "<group>"; };
 		D8333EE8205D3FA90029172B /* FontStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontStyle.swift; sourceTree = "<group>"; };
 		D842DA84206276B00043B73A /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		D842DA8B2062A73B0043B73A /* URL+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Extensions.swift"; sourceTree = "<group>"; };
@@ -164,7 +166,7 @@
 		D8DF323E206922150034165A /* SetStatusDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetStatusDisplay.swift; sourceTree = "<group>"; };
 		D8DF3240206927200034165A /* NSColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSColor+Extensions.swift"; sourceTree = "<group>"; };
 		D8DF324220692B7B0034165A /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
-		D8E459F220753B1B00B5A3CD /* introduction.config */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = introduction.config; sourceTree = "<group>"; };
+		D8E459F220753B1B00B5A3CD /* stage1.conf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = stage1.conf; sourceTree = "<group>"; };
 		D8ECDD6B205EA6370004790B /* Parser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		D8F1FEFC20654785007E497B /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		D8F1FEFE2065818D007E497B /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
@@ -385,8 +387,9 @@
 		D8DF32252068E66A0034165A /* share */ = {
 			isa = PBXGroup;
 			children = (
-				D8E459F220753B1B00B5A3CD /* introduction.config */,
 				D8167F0C206E753C0073552A /* configurator.sh */,
+				D8E459F220753B1B00B5A3CD /* stage1.conf */,
+				D8307B96207661D500FCE94D /* stage2.conf */,
 			);
 			path = share;
 			sourceTree = "<group>";
@@ -452,9 +455,6 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = "";
-				KnownAssetTags = (
-					New,
-				);
 				LastSwiftUpdateCheck = 0920;
 				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = "Mailpile ehf.";
@@ -499,8 +499,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D8E459F320753B1B00B5A3CD /* introduction.config in Resources */,
+				D8E459F320753B1B00B5A3CD /* stage1.conf in Resources */,
 				D8167F0D206E753C0073552A /* configurator.sh in Resources */,
+				D8307B97207661D500FCE94D /* stage2.conf in Resources */,
 				D88213252066441400150FAE /* LICENSE.txt in Resources */,
 				D819888620595165004B5974 /* Assets.xcassets in Resources */,
 				D819888920595165004B5974 /* Main.storyboard in Resources */,
