@@ -1,13 +1,12 @@
 import AppKit
 
 struct MainWindow {
-    let show: Bool!
+    let show: Bool
     let message: String?
-    let close_quits: Bool!
-    let width: Int!
-    let height: Int!
+    let close_quits: Bool
+    let width: Int
+    let height: Int
     let image: NSImage?
-    let actions: [Action]!
-    let status: [Status]?
-    let substatus: [Status]?
+    var actions: [ActionItem]
+    let status: [StatusDisplay]?
 }

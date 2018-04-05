@@ -1,33 +1,29 @@
 import AppKit
 
 class Config {
-    static private var _shared: Config?
-    static public var shared: Config! {
-        return Config._shared!
-    }
+    var app_name: String
+    var app_icon: String
+    var require_gui: String?
+    var main_window: MainWindow?
+    var indicator: Indicator!
+    var icons: [String: NSImage]
+    var fontStyles: FontStyles?
+    var http_cookies: [MPHTTPCookie]?
     
-    private(set) public var app_name: String!
-    private(set) public var app_icon: String!
-    private(set) public var require_gui: String?
-    private(set) public var main_window: MainWindow?
-    private(set) public var indicator: Indicator!
-    private(set) public var icons: [String: Icon]!
-    private(set) public var fontStyles: FontStyles?
-    
-    init(app_name: String!,
-         app_icon: String!,
+    init(app_name: String,
+         app_icon: String,
          require_gui: String?,
          main_window: MainWindow?,
          indicators: Indicator!,
-         icons: [String: Icon]!,
-         fontStyles: FontStyles?) {
+         icons: [String: NSImage],
+         fontStyles: FontStyles?,
+         http_cookies: [MPHTTPCookie]?) {
         self.app_name = app_name
         self.app_icon = app_icon
         self.main_window = main_window
         self.indicator = indicators
         self.icons = icons
         self.fontStyles = fontStyles
-        
-        Config._shared = self
+        self.http_cookies = http_cookies
     }
 }
