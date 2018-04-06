@@ -40,6 +40,7 @@
 		D85B1E2820612A81003744E0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85B1E2720612A81003744E0 /* Constants.swift */; };
 		D85B1E2D20613614003744E0 /* Shell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85B1E2C20613614003744E0 /* Shell.swift */; };
 		D860514620601B2000E8983A /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D860514520601B2000E8983A /* MainWindowController.swift */; };
+		D86BD81620778F1100FDB288 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86BD81520778F1100FDB288 /* Tests.swift */; };
 		D88213252066441400150FAE /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = D88213242066441400150FAE /* LICENSE.txt */; };
 		D8A38275206D741E006E79D6 /* NotifyByAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A38274206D741E006E79D6 /* NotifyByAlert.swift */; };
 		D8B109AB206BA28F00084D82 /* NotifyUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B109AA206BA28F00084D82 /* NotifyUser.swift */; };
@@ -52,7 +53,6 @@
 		D8B109BC206BD64C00084D82 /* SetHTTPCookie.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B109BB206BD64C00084D82 /* SetHTTPCookie.swift */; };
 		D8B109C0206BD82F00084D82 /* HTTPCookie.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B109BF206BD82F00084D82 /* HTTPCookie.swift */; };
 		D8B289492067AD6A000DCD03 /* ShowURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B289482067AD6A000DCD03 /* ShowURL.swift */; };
-		D8B289632067B1C3000DCD03 /* GUI_o_Mac_ticTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B289622067B1C3000DCD03 /* GUI_o_Mac_ticTests.swift */; };
 		D8B2896D2067C3C5000DCD03 /* CommandFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B2896C2067C3C5000DCD03 /* CommandFactory.swift */; };
 		D8B2896F2067C5A1000DCD03 /* Quit.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B2896E2067C5A1000DCD03 /* Quit.swift */; };
 		D8B289712067CBBD000DCD03 /* ShowMainWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B289702067CBBD000DCD03 /* ShowMainWindow.swift */; };
@@ -82,7 +82,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		D8B289652067B1C3000DCD03 /* PBXContainerItemProxy */ = {
+		D86BD81820778F1100FDB288 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D819887620595165004B5974 /* Project object */;
 			proxyType = 1;
@@ -129,6 +129,9 @@
 		D85B1E2C20613614003744E0 /* Shell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shell.swift; sourceTree = "<group>"; };
 		D85B1E3220614FC5003744E0 /* SubstatusTableCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SubstatusTableCellView.swift; path = src/Views/SubstatusTableCellView.swift; sourceTree = SOURCE_ROOT; };
 		D860514520601B2000E8983A /* MainWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
+		D86BD81320778F1100FDB288 /* Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D86BD81520778F1100FDB288 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
+		D86BD81720778F1100FDB288 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D88213242066441400150FAE /* LICENSE.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
 		D8A38274206D741E006E79D6 /* NotifyByAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotifyByAlert.swift; sourceTree = "<group>"; };
 		D8B109AA206BA28F00084D82 /* NotifyUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotifyUser.swift; sourceTree = "<group>"; };
@@ -141,7 +144,6 @@
 		D8B109BB206BD64C00084D82 /* SetHTTPCookie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetHTTPCookie.swift; sourceTree = "<group>"; };
 		D8B109BF206BD82F00084D82 /* HTTPCookie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPCookie.swift; sourceTree = "<group>"; };
 		D8B289482067AD6A000DCD03 /* ShowURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowURL.swift; sourceTree = "<group>"; };
-		D8B289602067B1C3000DCD03 /* GUI-o-Mac-ticTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "GUI-o-Mac-ticTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8B289622067B1C3000DCD03 /* GUI_o_Mac_ticTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GUI_o_Mac_ticTests.swift; sourceTree = "<group>"; };
 		D8B289642067B1C3000DCD03 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D8B2896C2067C3C5000DCD03 /* CommandFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandFactory.swift; sourceTree = "<group>"; };
@@ -180,7 +182,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D8B2895D2067B1C3000DCD03 /* Frameworks */ = {
+		D86BD81020778F1100FDB288 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -206,6 +208,7 @@
 				D842DA84206276B00043B73A /* README.md */,
 				D8DF32252068E66A0034165A /* share */,
 				D819888020595165004B5974 /* src */,
+				D86BD81420778F1100FDB288 /* Tests */,
 				D819887F20595165004B5974 /* Products */,
 				D8B289612067B1C3000DCD03 /* tests */,
 			);
@@ -215,7 +218,7 @@
 			isa = PBXGroup;
 			children = (
 				D819887E20595165004B5974 /* GUI-o-Mac-tic.app */,
-				D8B289602067B1C3000DCD03 /* GUI-o-Mac-ticTests.xctest */,
+				D86BD81320778F1100FDB288 /* Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -307,6 +310,15 @@
 				D85B1E3220614FC5003744E0 /* SubstatusTableCellView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		D86BD81420778F1100FDB288 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				D86BD81520778F1100FDB288 /* Tests.swift */,
+				D86BD81720778F1100FDB288 /* Info.plist */,
+			);
+			path = Tests;
 			sourceTree = "<group>";
 		};
 		D8B109AC206BA5D100084D82 /* NotifyUser */ = {
@@ -430,22 +442,22 @@
 			productReference = D819887E20595165004B5974 /* GUI-o-Mac-tic.app */;
 			productType = "com.apple.product-type.application";
 		};
-		D8B2895F2067B1C3000DCD03 /* GUI-o-Mac-ticTests */ = {
+		D86BD81220778F1100FDB288 /* Tests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D8B289672067B1C3000DCD03 /* Build configuration list for PBXNativeTarget "GUI-o-Mac-ticTests" */;
+			buildConfigurationList = D86BD81A20778F1100FDB288 /* Build configuration list for PBXNativeTarget "Tests" */;
 			buildPhases = (
-				D8B2895C2067B1C3000DCD03 /* Sources */,
-				D8B2895D2067B1C3000DCD03 /* Frameworks */,
-				D8B2895E2067B1C3000DCD03 /* Resources */,
+				D86BD80F20778F1100FDB288 /* Sources */,
+				D86BD81020778F1100FDB288 /* Frameworks */,
+				D86BD81120778F1100FDB288 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				D8B289662067B1C3000DCD03 /* PBXTargetDependency */,
+				D86BD81920778F1100FDB288 /* PBXTargetDependency */,
 			);
-			name = "GUI-o-Mac-ticTests";
-			productName = "GUI-o-Mac-ticTests";
-			productReference = D8B289602067B1C3000DCD03 /* GUI-o-Mac-ticTests.xctest */;
+			name = Tests;
+			productName = Tests;
+			productReference = D86BD81320778F1100FDB288 /* Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -455,7 +467,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = "";
-				LastSwiftUpdateCheck = 0920;
+				LastSwiftUpdateCheck = 0930;
 				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = "Mailpile ehf.";
 				TargetAttributes = {
@@ -468,8 +480,8 @@
 							};
 						};
 					};
-					D8B2895F2067B1C3000DCD03 = {
-						CreatedOnToolsVersion = 9.2;
+					D86BD81220778F1100FDB288 = {
+						CreatedOnToolsVersion = 9.3;
 						ProvisioningStyle = Automatic;
 						TestTargetID = D819887D20595165004B5974;
 					};
@@ -489,7 +501,7 @@
 			projectRoot = "";
 			targets = (
 				D819887D20595165004B5974 /* GUI-o-Mac-tic */,
-				D8B2895F2067B1C3000DCD03 /* GUI-o-Mac-ticTests */,
+				D86BD81220778F1100FDB288 /* Tests */,
 			);
 		};
 /* End PBXProject section */
@@ -508,7 +520,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D8B2895E2067B1C3000DCD03 /* Resources */ = {
+		D86BD81120778F1100FDB288 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -590,21 +602,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D8B2895C2067B1C3000DCD03 /* Sources */ = {
+		D86BD80F20778F1100FDB288 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D8B289632067B1C3000DCD03 /* GUI_o_Mac_ticTests.swift in Sources */,
+				D86BD81620778F1100FDB288 /* Tests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		D8B289662067B1C3000DCD03 /* PBXTargetDependency */ = {
+		D86BD81920778F1100FDB288 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = D819887D20595165004B5974 /* GUI-o-Mac-tic */;
-			targetProxy = D8B289652067B1C3000DCD03 /* PBXContainerItemProxy */;
+			targetProxy = D86BD81820778F1100FDB288 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -766,32 +778,36 @@
 			};
 			name = Release;
 		};
-		D8B289682067B1C3000DCD03 /* Debug */ = {
+		D86BD81B20778F1100FDB288 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 32325SM62E;
-				INFOPLIST_FILE = "GUI-o-Mac-ticTests/Info.plist";
+				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "is.mailpile.GUI-o-Mac-ticTests";
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				PRODUCT_BUNDLE_IDENTIFIER = is.mailpile.Tests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GUI-o-Mac-tic.app/Contents/MacOS/GUI-o-Mac-tic";
 			};
 			name = Debug;
 		};
-		D8B289692067B1C3000DCD03 /* Release */ = {
+		D86BD81C20778F1100FDB288 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 32325SM62E;
-				INFOPLIST_FILE = "GUI-o-Mac-ticTests/Info.plist";
+				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "is.mailpile.GUI-o-Mac-ticTests";
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				PRODUCT_BUNDLE_IDENTIFIER = is.mailpile.Tests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GUI-o-Mac-tic.app/Contents/MacOS/GUI-o-Mac-tic";
@@ -819,11 +835,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D8B289672067B1C3000DCD03 /* Build configuration list for PBXNativeTarget "GUI-o-Mac-ticTests" */ = {
+		D86BD81A20778F1100FDB288 /* Build configuration list for PBXNativeTarget "Tests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D8B289682067B1C3000DCD03 /* Debug */,
-				D8B289692067B1C3000DCD03 /* Release */,
+				D86BD81B20778F1100FDB288 /* Debug */,
+				D86BD81C20778F1100FDB288 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

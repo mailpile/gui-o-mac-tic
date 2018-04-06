@@ -35,11 +35,27 @@ do {
     try Blackboard.shared.config = Parser.parse(json: boot.part1!)
     /** End of Stage 1 **/
     
-    /** Set app icon and start the main app thread. */
+    /** Set app's icon. */
+    
+
     if let appIconPath = Blackboard.shared.config?.app_icon,
         let appIcon = NSImage(contentsOfFile: appIconPath) {
+        #if DEBUG
+        /* HACK -- Allow the app's icon to be changed at runtime without breaking codesign every time we build.
+         * The app's icon must not be changed when running in debug mode, the following explains why.
+         * An initial run in debug mode triggers this app's bundle to be built and Apple's codesign utility to run.
+         * Changing the app's icon at runtime has the side-effect of creating a file called "Icon?" in the bundle's root.
+         * The Icon? file is a so-called "resource fork". Resource forks have funny filesystem attributes.
+         * Apple's codesign utility does not like funny attributes, as such it will exit erronously on subsequent builds.
+         * This if DEBUG prevents the app's icon from changing during development. */
+        NSLog("This is a debug build. The App's icon will not be changed to \(appIconPath).")
+        #else
         NSWorkspace.shared.setIcon(appIcon, forFile: Bundle.main.bundlePath, options: [])
+        #endif
     }
+    
+    
+    /** Start up applications main thread. **/
     app = NSApplication.shared
     appDelegate = AppDelegate()
     app.delegate = appDelegate
