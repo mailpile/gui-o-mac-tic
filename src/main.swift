@@ -31,13 +31,11 @@ let appDelegate: AppDelegate
 do {
     /** Begin Stage 1 **/
     let boot = Boot()
-    boot.boot()
-    try Blackboard.shared.config = Parser.parse(json: boot.part1!)
+    try boot.boot()
+    try Blackboard.shared.config = Parser.parse(json: boot.stage1!)
     /** End of Stage 1 **/
     
     /** Set app's icon. */
-    
-
     if let appIconPath = Blackboard.shared.config?.app_icon,
         let appIcon = NSImage(contentsOfFile: appIconPath) {
         #if DEBUG
@@ -62,7 +60,7 @@ do {
     /** Main thread is now running. */
     
     /** Begin Stage 2 **/
-    for rawStage2Command: String in boot.part2 {
+    for rawStage2Command: String in boot.stage2 {
         func stage2(command: String) -> Bool /* true if for loop should is allowed to run again */ {
             guard rawStage2Command.isEmpty == false else {
                 return true

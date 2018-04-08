@@ -1,14 +1,14 @@
 import AppKit
 
 extension Config {
-    convenience init?(json: [String: Any]) {
+    convenience init?(json: [String: Any]) throws {
         let app_name = json["app_name"] as? String
         let app_icon = json["app_icon"] as? String
         let require_gui = json["require_gui"] as? String
         let main_windowJSON = json["main_window"] as? [String: Any]
         
-        let indicatorJSON = json["indicator"] as? [String: Any]
-        let indicator: Indicator! = Indicator(json: indicatorJSON!)
+        guard let indicatorJSON = json["indicator"] as? [String: Any] else { throw ParsingError.nonCompliantInput }
+        let indicator: Indicator! = Indicator(json: indicatorJSON)
         
         let fontStylesJSON = json["font_styles"] as? [String: Any]
         let fontStyles: FontStyles? = fontStylesJSON != nil ? FontStyles(json: fontStylesJSON!) : nil
