@@ -42,6 +42,7 @@
 		D85B1E2820612A81003744E0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85B1E2720612A81003744E0 /* Constants.swift */; };
 		D85B1E2D20613614003744E0 /* Shell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85B1E2C20613614003744E0 /* Shell.swift */; };
 		D860514620601B2000E8983A /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D860514520601B2000E8983A /* MainWindowController.swift */; };
+		D86EFEC92080A5ED004D3B45 /* Keyword.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86EFEC82080A5ED004D3B45 /* Keyword.swift */; };
 		D88213252066441400150FAE /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = D88213242066441400150FAE /* LICENSE.txt */; };
 		D8A38275206D741E006E79D6 /* NotifyByAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A38274206D741E006E79D6 /* NotifyByAlert.swift */; };
 		D8B109AB206BA28F00084D82 /* NotifyUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B109AA206BA28F00084D82 /* NotifyUser.swift */; };
@@ -149,6 +150,7 @@
 		D85B1E3220614FC5003744E0 /* SubstatusTableCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SubstatusTableCellView.swift; path = src/Views/SubstatusTableCellView.swift; sourceTree = SOURCE_ROOT; };
 		D860514520601B2000E8983A /* MainWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
 		D86BD81320778F1100FDB288 /* Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D86EFEC82080A5ED004D3B45 /* Keyword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keyword.swift; sourceTree = "<group>"; };
 		D88213242066441400150FAE /* LICENSE.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
 		D8A38274206D741E006E79D6 /* NotifyByAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotifyByAlert.swift; sourceTree = "<group>"; };
 		D8B109AA206BA28F00084D82 /* NotifyUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotifyUser.swift; sourceTree = "<group>"; };
@@ -357,6 +359,7 @@
 				D8515EAC205C443400565AAE /* ConfigInitializer.swift */,
 				D8ECDD6B205EA6370004790B /* Parser.swift */,
 				D8F35ED72077AA5C006CD09E /* ParsingError.swift */,
+				D86EFEC82080A5ED004D3B45 /* Keyword.swift */,
 			);
 			path = Parser;
 			sourceTree = "<group>";
@@ -672,6 +675,7 @@
 				D8167F14206EC17E0073552A /* StringToOperation.swift in Sources */,
 				D8B289492067AD6A000DCD03 /* ShowURL.swift in Sources */,
 				D8B109AB206BA28F00084D82 /* NotifyUser.swift in Sources */,
+				D86EFEC92080A5ED004D3B45 /* Keyword.swift in Sources */,
 				D8DF323F206922150034165A /* SetStatusDisplay.swift in Sources */,
 				D8594A0E206A8A8D00D089DE /* SetNextErrorMessage.swift in Sources */,
 				D8B109AF206BA67400084D82 /* NotificationStrategy.swift in Sources */,

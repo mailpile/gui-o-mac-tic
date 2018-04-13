@@ -226,7 +226,7 @@
                             </progressIndicator>
                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="sxi-34-1Wi" userLabel="Splash Image View">
                                 <rect key="frame" x="0.0" y="0.0" width="480" height="720"/>
-                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" image="SplashBackground" id="qdE-7X-iao"/>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" id="qdE-7X-iao"/>
                             </imageView>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="52b-Wz-GcU" userLabel="Splash Label">
                                 <rect key="frame" x="-2" y="158" width="484" height="17"/>
@@ -261,7 +261,4 @@
             <point key="canvasLocation" x="-379" y="1593"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="SplashBackground" width="480" height="720"/>
-    </resources>
 </document>

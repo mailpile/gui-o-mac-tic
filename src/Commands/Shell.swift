@@ -61,7 +61,7 @@ class Shell: Command {
      - Throws: An NSInvalidArgumentException if the binary invalid or if it fails to to be executed.
      - Returns: The stdout, the stderr and the exit code obtained by executing the binary.
      */
-    static func execute(binary: String = "/bin/sh",
+    static func execute(binary: String = "/usr/bin/env",
                  arguments: [String]? = nil,
                  workingDirectory: URL = Bundle.main.resourceURL!) throws -> ExecutionOutput {
         let process = Process()

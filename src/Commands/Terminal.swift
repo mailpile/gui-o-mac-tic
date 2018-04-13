@@ -15,6 +15,7 @@ class Terminal: Command {
     func execute(sender: NSObject) {
         var errorMessage: String = ""
         let executedSuccesfully = execute(command: command, terminalWindowTitle: title, errorMessage: &errorMessage)
+        // Note: executeSuccessfully will always be true if "command" is executed within a screen session.
         if !executedSuccesfully {
             // TODO Handle errors.
             assertionFailure("Not implemented.")

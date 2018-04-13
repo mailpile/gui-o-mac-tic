@@ -22,10 +22,10 @@ class CommandFactory {
         case .terminal:
             precondition(args?.dictionary != nil, "Expected a dictionary.")
             precondition(args!.dictionary!.count > 0, "Expected a non-empty dictionary.")
-            precondition(args!.dictionary!["command"] != nil, "No command was provided for execution.")
-            let command = args!.dictionary!["command"] as! String
-            let title = args!.dictionary!["title"] as? String
-            let icon = args!.dictionary!["icon"] as? String
+            precondition(args!.dictionary![Keyword.command.rawValue] != nil, "No command was provided for execution.")
+            let command = args!.dictionary![Keyword.command.rawValue] as! String
+            let title = args!.dictionary![Keyword.title.rawValue] as? String
+            let icon = args!.dictionary![Keyword.icon.rawValue] as? String
             return Terminal(command, title, icon)
             
         case .get_url:
@@ -54,22 +54,22 @@ class CommandFactory {
         
         case .show_splash_screen:
             precondition(args != nil, "Did not receive arguments")
-            let background = NSImage(contentsOfFile: args!.dictionary!["background"] as! String)
-            let message = args!.dictionary!["message"] as? String ?? ""
-            let showProgressBar = args!.dictionary!["progress_bar"] as? Bool == true
+            let background = NSImage(contentsOfFile: args!.dictionary![Keyword.background.rawValue] as! String)
+            let message = args!.dictionary![Keyword.message.rawValue] as? String ?? ""
+            let showProgressBar = args!.dictionary![Keyword.progress_bar.rawValue] as? Bool == true
             
             precondition(background != nil, "A splash screen can not be created without a background.")
             return ShowSplashScreen(background: background, message: message, showProgressBar: showProgressBar)
             
         case .update_splash_screen:
             precondition(args == nil || args!.dictionary != nil, "Expected args to be a dictionary.")
-            var progress = args!.dictionary!["progress"] as? Double
+            var progress = args!.dictionary![Keyword.progress.rawValue] as? Double
             if (progress != nil) {
                 /* The Bar Progress Indicator requries a value on the range [0;100] but
                 such values are on the range [0.0;1.0] in the config file. */
                 progress! *= 100
             }
-            let message = args!.dictionary!["message"] as? String ?? ""
+            let message = args!.dictionary![Keyword.message.rawValue] as? String ?? ""
             return UpdateSplashScreen(progress ?? 0, message)
             
         case .hide_splash_screen:
@@ -79,52 +79,53 @@ class CommandFactory {
             return HideMainWindow()
             
         case .set_status:
-            let status = args?.dictionary?["status"] as? String
-            let badge = args?.dictionary?["badge"] as? String
+            let status = args?.dictionary?[Keyword.status_displays.rawValue] as? String
+            let badge = args?.dictionary?[Keyword.badge.rawValue] as? String
             return SetStatus(status, badge)
             
         case .set_status_display:
-            guard let id: String = args?.dictionary?["id"] as? String else {
-                preconditionFailure("'set_status_display' must provide an 'id'.")
+            guard let id: String = args?.dictionary?[Keyword.id.rawValue] as? String else {
+                preconditionFailure("'set_status_display' must provide an \(Keyword.id.rawValue).")
             }
-            let title = args!.dictionary!["title"] as? String
-            let details = args!.dictionary!["details"] as? String
+            let title = args!.dictionary![Keyword.title.rawValue] as? String
+            let details = args!.dictionary![Keyword.details.rawValue] as? String
             
             let icon: NSImage?
-            if let iconUrl = args!.dictionary!["icon"] as? String {
+            if let iconUrl = args!.dictionary![Keyword.icon.rawValue] as? String {
                 icon = NSImage(contentsOfFile: iconUrl) // TODO icon can also be image:{somename} FIXME
             } else {
                 icon = nil
             }
             
             var colour: NSColor?
-            if let hexColour = args!.dictionary!["color"] as? String {
+            if let hexColour = args!.dictionary![Keyword.color.rawValue] as? String {
                 colour = NSColor(hexColour: hexColour)
             }
             
             return SetStatusDisplay(id, title, details, icon, colour)
             
         case .set_item:
-            precondition(args?.dictionary?["id"] as? String != nil, "'set_item' must provide an id.")
-            let id = args!.dictionary!["id"] as! String
-            let label = args!.dictionary!["label"] as? String
-            let sensitive = args!.dictionary!["sensitive"] as? Bool ?? true
+            precondition(args?.dictionary?[Keyword.id.rawValue] as? String != nil,
+                         "'set_item' must provide an \(Keyword.id.rawValue).")
+            let id = args!.dictionary![Keyword.id.rawValue] as! String
+            let label = args!.dictionary![Keyword.label.rawValue] as? String
+            let sensitive = args!.dictionary![Keyword.sensitive.rawValue] as? Bool ?? true
             return SetItem(id, label, sensitive)
             
         case .set_next_error_message:
-            let message = args?.dictionary?["message"] as? String
+            let message = args?.dictionary?[Keyword.message.rawValue] as? String
             return SetNextErrorMessage(message)
             
         case .notify_user:
-            let message = args?.dictionary?["message"] as? String
-            precondition(message != nil, "'notify_user' must provide a message.")
+            let message = args?.dictionary?[Keyword.message.rawValue] as? String
+            precondition(message != nil, "'notify_user' must provide a \(Keyword.message.rawValue).")
             
-            let popup = args?.dictionary?["popup"] as? Bool ?? false
-            let alert = args?.dictionary?["alert"] as? Bool ?? false
+            let popup = args?.dictionary?[Keyword.popup.rawValue] as? Bool ?? false
+            let alert = args?.dictionary?[Keyword.alert.rawValue] as? Bool ?? false
             
             let actions: [ActionItem]?
-            if let jsonActions = args?.dictionary?["actions"] as? [[String: Any]] {
-                actions = Parser.parse(actions: jsonActions)
+            if let jsonActionItems = args?.dictionary?[Keyword.action_items.rawValue] as? [[String: Any]] {
+                actions = Parser.parse(actions: jsonActionItems)
             } else {
                 actions = nil
             }
@@ -134,16 +135,16 @@ class CommandFactory {
                               actions: actions)
             
         case .set_http_cookie:
-            guard let domain = args!.dictionary!["domain"] as? String else {
-                preconditionFailure("'set_http_cookie' must provide a 'domain'.")
+            guard let domain = args!.dictionary![Keyword.domain.rawValue] as? String else {
+                preconditionFailure("'set_http_cookie' must provide a \(Keyword.domain.rawValue).")
             }
             
-            guard let key = args!.dictionary!["key"] as? String else {
-                preconditionFailure("'set_http_cookie' must provide a 'key'.")
+            guard let key = args!.dictionary![Keyword.key.rawValue] as? String else {
+                preconditionFailure("'set_http_cookie' must provide a \(Keyword.key.rawValue).")
             }
             
-            let value = args!.dictionary!["value"] as? String
-            let remove = args!.dictionary!["remove"] as? Bool
+            let value = args!.dictionary![Keyword.value.rawValue] as? String
+            let remove = args!.dictionary![Keyword.remove.rawValue] as? Bool
             return SetHTTPCookie(domain, key, value, remove)
         }
     }

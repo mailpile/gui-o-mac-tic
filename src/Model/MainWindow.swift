@@ -7,6 +7,6 @@ struct MainWindow {
     let width: Int
     let height: Int
     let image: NSImage?
-    var actions: [ActionItem]
-    let status: [StatusDisplay]?
+    var action_items: [ActionItem]
+    let status_displays: [StatusDisplay]?
 }

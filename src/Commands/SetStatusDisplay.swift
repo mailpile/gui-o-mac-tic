@@ -20,7 +20,7 @@ class SetStatusDisplay: Command {
             preconditionFailure("Unable to set a status because main_window has not been specified")
         }
         
-        guard let status = main_window.status?.first(where: { $0.id == self.id }) else {
+        guard let status = main_window.status_displays?.first(where: { $0.id == self.id }) else {
             preconditionFailure("Unable to set_status_display on \(self.id) because no status exists with that id.")
         }
         
