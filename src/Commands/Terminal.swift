@@ -24,12 +24,13 @@ class Terminal: Command {
     
     private func execute(command: String!, terminalWindowTitle: String?, errorMessage: inout String) -> Bool {
         precondition(!command.isEmpty)
+        let path = "PATH=\(Bundle.main.bundlePath)/Contents/Resources/app/bin:$PATH"
         
         /* The empty lines and the indentation is part of the AppleScript syntax. */
         let headerPart: String =
         """
         tell application "Terminal"
-            do script " "
+            do script "\(path)"
 
         """
         /* The empty line and the indentation is part of the AppleScript syntax. */

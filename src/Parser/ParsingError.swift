@@ -11,4 +11,7 @@ enum ParsingError: Error {
     
     /** The provided Stage 1 config does not conform to GUI-o-Matic's protocol. */
     case nonCompliantInput
+    
+    /** The argument contains an unclosed quote. */
+    case unclosedQuota
 }

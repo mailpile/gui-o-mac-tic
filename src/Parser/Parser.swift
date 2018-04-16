@@ -6,7 +6,6 @@ class Parser {
      - Parameter json: A valid UTF-8 encoded JSON document containing a Stage 1 configuration. The document must conforms to GUI-o-Matic's protocol. document
      - Throws: An error of type `ParsingError.empty` if `json` is empty.
      - Returns: An corresponding domain model instance of the parsed configuration.
-     
      */
     static func parse(json: String) throws -> Config {
         func parse() throws -> [String: Any] {
@@ -51,6 +50,45 @@ class Parser {
         let action: ActionItem = parse(action: action)
         let command = CommandFactory.build(forOperation: action.op!, withArgs: action.args)
         return command
+    }
+    
+    /**
+     Splits a string containing command line arguments to a list of C-style `argv[]` strings.
+     
+     - Parameter arguments: A string containing zero or more arguments.
+     - Throws: An error of type `ParsingError.unclosedQuote` if `arguments` contains an unclosed quote.
+     - Returns: A list of C-style arguments.
+     */
+    static func parse(arguments: String) throws -> [String] {
+        var result = [String]()
+        var argument: String = ""
+        var inQuote = false
+        for c: Character in arguments {
+            if c == "\"" {
+                inQuote = !inQuote
+                argument.append(c)
+                if !inQuote {
+                    result.append(argument)
+                    argument = ""
+                }
+            } else {
+                let cIsWhitespace = CharacterSet(charactersIn: String(c)).isSubset(of: .whitespaces)
+                if cIsWhitespace && !inQuote && !argument.isEmpty {
+                    result.append(argument)
+                    argument = ""
+                } else {
+                    if !cIsWhitespace {
+                        argument.append(c)
+                    }
+                }
+            }
+        }
+        guard !inQuote else { throw ParsingError.unclosedQuota }
+        if !argument.isEmpty {
+            result.append(argument)
+            argument = ""
+        }
+        return result
     }
 
 }
