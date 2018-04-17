@@ -13,5 +13,5 @@ enum ParsingError: Error {
     case nonCompliantInput
     
     /** The argument contains an unclosed quote. */
-    case unclosedQuota
+    case unclosedQuote
 }

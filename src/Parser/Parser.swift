@@ -77,13 +77,13 @@ class Parser {
                     result.append(argument)
                     argument = ""
                 } else {
-                    if !cIsWhitespace {
+                    if !(cIsWhitespace && argument.isEmpty) {
                         argument.append(c)
                     }
                 }
             }
         }
-        guard !inQuote else { throw ParsingError.unclosedQuota }
+        guard !inQuote else { throw ParsingError.unclosedQuote }
         if !argument.isEmpty {
             result.append(argument)
             argument = ""
