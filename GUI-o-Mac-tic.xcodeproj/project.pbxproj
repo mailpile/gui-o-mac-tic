@@ -16,9 +16,7 @@
 		D819888420595165004B5974 /* MainWindowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D819888320595165004B5974 /* MainWindowViewController.swift */; };
 		D819888620595165004B5974 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D819888520595165004B5974 /* Assets.xcassets */; };
 		D819888920595165004B5974 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D819888720595165004B5974 /* Main.storyboard */; };
-		D81988A0205951D5004B5974 /* Control.swift in Sources */ = {isa = PBXBuildFile; fileRef = D819889F205951D5004B5974 /* Control.swift */; };
 		D81988A2205957EE004B5974 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81988A1205957EE004B5974 /* Config.swift */; };
-		D81988A420595F08004B5974 /* GUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81988A320595F08004B5974 /* GUI.swift */; };
 		D81A51FE2067F38600E431E9 /* PostURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81A51FD2067F38600E431E9 /* PostURL.swift */; };
 		D81A52002067F81A00E431E9 /* URLCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81A51FF2067F81A00E431E9 /* URLCommand.swift */; };
 		D81D3CE620665A7E008325B9 /* SubstatusTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85B1E3220614FC5003744E0 /* SubstatusTableCellView.swift */; };
@@ -122,9 +120,7 @@
 		D819888820595165004B5974 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D819888A20595165004B5974 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D819888B20595165004B5974 /* GUI-o-Mac-tic.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "GUI-o-Mac-tic.entitlements"; sourceTree = "<group>"; };
-		D819889F205951D5004B5974 /* Control.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Control.swift; sourceTree = "<group>"; };
 		D81988A1205957EE004B5974 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
-		D81988A320595F08004B5974 /* GUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GUI.swift; sourceTree = "<group>"; };
 		D81A51FD2067F38600E431E9 /* PostURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostURL.swift; sourceTree = "<group>"; };
 		D81A51FF2067F81A00E431E9 /* URLCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLCommand.swift; sourceTree = "<group>"; };
 		D8307B9420754E1100FCE94D /* FontStyleToFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontStyleToFont.swift; sourceTree = "<group>"; };
@@ -269,12 +265,10 @@
 				D8167F10206EAD4E0073552A /* Blackboard.swift */,
 				D8CA67A52066CE23003501FD /* Commands */,
 				D85B1E2720612A81003744E0 /* Constants.swift */,
-				D819889F205951D5004B5974 /* Control.swift */,
 				D8333EF8205E40D90029172B /* Controllers */,
 				D8B109B8206BB80F00084D82 /* DataTypes */,
 				D842DA8A2062A7290043B73A /* Extensions */,
 				D819888B20595165004B5974 /* GUI-o-Mac-tic.entitlements */,
-				D81988A320595F08004B5974 /* GUI.swift */,
 				D819888A20595165004B5974 /* Info.plist */,
 				D8CA67A32066BF1C003501FD /* LogicalXOR.swift */,
 				D819888720595165004B5974 /* Main.storyboard */,
@@ -685,7 +679,6 @@
 				D8CA67A42066BF1C003501FD /* LogicalXOR.swift in Sources */,
 				D8B289742067CC3C000DCD03 /* Terminal.swift in Sources */,
 				D8515E9B205C3D0D00565AAE /* ActionItem.swift in Sources */,
-				D81988A0205951D5004B5974 /* Control.swift in Sources */,
 				D8B109B1206BA6BD00084D82 /* NotifyByNotification.swift in Sources */,
 				D8515E9D205C3F0300565AAE /* Position.swift in Sources */,
 				D8A38275206D741E006E79D6 /* NotifyByAlert.swift in Sources */,
@@ -699,7 +692,6 @@
 				D8DF324320692B7B0034165A /* String+Extensions.swift in Sources */,
 				D8CD296D2078D3DF009264AC /* BootError.swift in Sources */,
 				D8ECDD6C205EA6370004790B /* Parser.swift in Sources */,
-				D81988A420595F08004B5974 /* GUI.swift in Sources */,
 				D8515EA8205C421900565AAE /* StatusDisplay.swift in Sources */,
 				D8B109B3206BA72700084D82 /* NotifyByModal.swift in Sources */,
 				659F3D252E28CC11C274AEB2 /* NSImage+Extensions.swift in Sources */,
@@ -803,7 +795,7 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
+					DEBUG,
 					"$(inherited)",
 				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -889,6 +881,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_BUNDLE_IDENTIFIER = "is.mailpile.gui-o-mac-tic";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -909,6 +902,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_BUNDLE_IDENTIFIER = "is.mailpile.gui-o-mac-tic";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
