@@ -79,7 +79,7 @@ class Shell: Command {
             process.currentDirectoryURL = workingDirectory
             process.executableURL = URL(fileURLWithPath: binary)
         } else {
-            process.currentDirectoryPath = workingDirectory.absoluteString
+            process.currentDirectoryPath = workingDirectory.path
             process.launchPath = binary
         }
         
