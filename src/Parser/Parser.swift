@@ -90,5 +90,44 @@ class Parser {
         }
         return result
     }
+    
+    /**
+     Parses a GUI-o-matic Stage 3 protocol command to an operation and args.
+     Stage 3 protocol commands are strings on the form
+     ````
+     lowercase_command_with_underscores {"arguments": "as JSON"}
+     ````
+     where `as JSON` is a json string.
+     
+     - Parameter guiomaticCommand: A stage 3 protocol command.
+     - Throws:
+     An error of type `ParsingError.empty` if `guiomaticCommand` is empty;
+     an error of type `ParsingError.notStage3Command` if `guiomaticCommand` is definitely not a stage 3 commaand;
+     an error of type `ParsingError.notJSON` if `guiomaticCommand` contains an invalid json string in `as JSON`.
+     
+     - Returns: An operation and args for that operation.
+     */
+    static func guiomaticCommandToOperationAndArgs(guiomaticCommand: String) throws -> (op: Operation, args: Args) {
+        guard !guiomaticCommand.isEmpty else { throw ParsingError.empty }
+        
+        let keyValuePair = guiomaticCommand.split(separator: " ", maxSplits: 1)
+        guard keyValuePair.count == 2 else { throw ParsingError.notStage3Command }
+        
+        let key = String(keyValuePair[0])
+        let op = StringToOperationMapper.Map(operation: key)
+        guard op != nil else { throw ParsingError.notStage3Command }
+        
+        let value = String(keyValuePair[1])
+        
+        do {
+            let data = value.data(using: .utf8)
+            let argsJSON: [String: Any]
+            try argsJSON = JSONSerialization.jsonObject(with: data!, options: []) as! [String: Any]
+            let args = Args(string: nil, list: nil, dictionary: argsJSON)
+            return (op: op!, args: args)
+        } catch {
+            throw ParsingError.notJSON
+        }
+    }
 
 }

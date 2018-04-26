@@ -2,24 +2,6 @@ import Cocoa
 
 var server = Server()
 
-func guiomaticCommandToOperationAndArgs(guiomaticCommand: String) -> (op: Operation, args: Args) {
-    let keyValuePair = guiomaticCommand.split(separator: " ", maxSplits: 1)
-    let key = String(keyValuePair[0])
-    let op = StringToOperationMapper.Map(operation: key)
-    let value = String(keyValuePair[1])
-    
-    do {
-        let data = value.data(using: .utf8)
-        let argsJSON: [String: Any]
-        try argsJSON = JSONSerialization.jsonObject(with: data!, options: []) as! [String: Any]
-        let args = Args(string: nil, list: nil, dictionary: argsJSON)
-        return (op: op!, args: args)
-    } catch {
-        print(error) // TODO error handling.
-        preconditionFailure("Not implemented.")
-    }
-}
-
 let OK_LISTEN_TO = "OK LISTEN TO:"
 let OK_LISTEN_HTTP = "OK LISTEN HTTP:"
 let OK_LISTEN_TCP = "OK LISTEN TCP:"
@@ -33,6 +15,7 @@ do {
     let boot = Boot()
     try boot.boot()
     try Blackboard.shared.config = Parser.parse(json: boot.stage1!)
+    Blackboard.shared.canMainWindowBeVisible = Blackboard.shared.config?.main_window?.show ?? false
     /** End of Stage 1 **/
     
     /** Set app's icon. */
@@ -129,7 +112,12 @@ do {
                 return true
             
             default:
-                let cmd = guiomaticCommandToOperationAndArgs(guiomaticCommand: rawStage2Command)
+                let cmd = try! Parser.guiomaticCommandToOperationAndArgs(guiomaticCommand: rawStage2Command)
+                if (cmd.op == Operation.show_main_window) {
+                    Blackboard.shared.canMainWindowBeVisible = true
+                } else if (cmd.op == Operation.hide_main_window) {
+                    Blackboard.shared.canMainWindowBeVisible = false
+                }
                 let command = CommandFactory.build(forOperation: cmd.op, withArgs: cmd.args)
                 Blackboard.shared.unexecuted.push(command)
             }

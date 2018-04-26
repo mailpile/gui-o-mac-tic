@@ -275,9 +275,8 @@
 				D8F1FEFC20654785007E497B /* main.swift */,
 				D8167F12206EC1620073552A /* Mappers */,
 				D8515E95205C3C2100565AAE /* Model */,
-				D8D91DF42072C16900520189 /* NetworkError.swift */,
+				D8CC30D9208DD280001BF0FF /* Server */,
 				D8515EAB205C440900565AAE /* Parser */,
-				D8BE2C7D206EE0A70039C7B5 /* Server.swift */,
 				D85B1E3120614F42003744E0 /* Views */,
 			);
 			path = src;
@@ -428,6 +427,15 @@
 				D81A51FF2067F81A00E431E9 /* URLCommand.swift */,
 			);
 			path = Commands;
+			sourceTree = "<group>";
+		};
+		D8CC30D9208DD280001BF0FF /* Server */ = {
+			isa = PBXGroup;
+			children = (
+				D8D91DF42072C16900520189 /* NetworkError.swift */,
+				D8BE2C7D206EE0A70039C7B5 /* Server.swift */,
+			);
+			path = Server;
 			sourceTree = "<group>";
 		};
 		D8DF32252068E66A0034165A /* share */ = {

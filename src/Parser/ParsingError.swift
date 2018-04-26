@@ -14,4 +14,7 @@ enum ParsingError: Error {
     
     /** The argument contains an unclosed quote. */
     case unclosedQuote
+    
+    /** The argument is not a stage 3 command. */
+    case notStage3Command
 }

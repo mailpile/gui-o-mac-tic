@@ -1,6 +1,7 @@
 import Foundation
 import CoreFoundation
 import AppKit.NSAlert
+import os.log
 
 /*
  * NOTE:
@@ -16,6 +17,8 @@ import AppKit.NSAlert
 class Server: Thread {
     let QUEUE_SIZE: Int32 = 5
     let UNKNOWN_ERROR = "Unknown error."
+    
+    let UNDEFINED_ERROR: Int32 = -1
     
     /* NOTE: The archaic types, functions and their error-codes
      * are documented in the BSD System Calls Manual and in the
@@ -220,6 +223,13 @@ class Server: Thread {
             }
         }
         
+        /**
+          Receives and processes GUI-o-Matic Stage 3 protocol commands.
+         
+          - Throws:
+          An error of type `NetworkError.read` if the received data is not a stage 3 protocol command and
+          this method can recover from that error.
+        */
         func receiveAndProcessData() throws {
             defer {
                 close(self.request_fd)
@@ -269,17 +279,40 @@ class Server: Thread {
                 }
                 
                 /* Parse the gui-o-matic command */
-                let cmd = guiomaticCommandToOperationAndArgs(guiomaticCommand: line)
-                let command = CommandFactory.build(forOperation: cmd.op, withArgs: cmd.args)
-                
-                /* Dispatch the command for execution on the GUI thread. */
-                DispatchQueue.main.async {
-                    command.execute(sender: self)
+                do {
+                    let cmd = try Parser.guiomaticCommandToOperationAndArgs(guiomaticCommand: line)
+                    if (cmd.op == Operation.show_main_window) {
+                        Blackboard.shared.canMainWindowBeVisible = true
+                    } else if (cmd.op == Operation.hide_main_window) {
+                        Blackboard.shared.canMainWindowBeVisible = false
+                    }
+                    let command = CommandFactory.build(forOperation: cmd.op, withArgs: cmd.args)
+                    
+                    
+                    /* Dispatch the command for execution on the GUI thread. */
+                    DispatchQueue.main.async {
+                        command.execute(sender: self)
+                    }
+                } catch ParsingError.empty {
+                    throw NetworkError.read(recoverable: true,
+                                            errorMessage: "Expected a command but received an empty string.",
+                                            errorCode: UNDEFINED_ERROR)
+                } catch ParsingError.notStage3Command {
+                    throw NetworkError.read(recoverable: true,
+                                            errorMessage: "Expected a command with arguments but received a single "
+                                                        + "word.",
+                                            errorCode: UNDEFINED_ERROR)
+                } catch ParsingError.notJSON {
+                    throw NetworkError.read(recoverable: false,
+                                            errorMessage: "The arguments provided with the stage 3 command are not "
+                                                        + "JSON formatted.",
+                                            errorCode: UNDEFINED_ERROR)
                 }
             }
         }
         
         func logError(_ errorMessage: String, _ errorCode: Int32? = nil) {
+            // TODO change to os_log.
             NSLog(errorMessage + (errorCode != nil ? " ("+String(errorCode!)+")." : ""))
         }
         

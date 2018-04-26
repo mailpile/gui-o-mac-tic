@@ -115,4 +115,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
             command.execute(sender: self)
         }
     }
+    
+    func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
+        ShowMainWindow().execute(sender: self)
+        return false
+    }
 }
