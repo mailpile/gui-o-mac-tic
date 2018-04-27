@@ -26,30 +26,17 @@ class Terminal: Command {
         precondition(!command.isEmpty)
         let path = "PATH=\(Bundle.main.bundlePath)/Contents/Resources/app/bin:$PATH"
         
-        /* The empty lines and the indentation is part of the AppleScript syntax. */
-        let headerPart: String =
+        let script: String =
         """
         tell application "Terminal"
-            do script "\(path)"
-
-        """
-        /* The empty line and the indentation is part of the AppleScript syntax. */
-        let titlePart: String =
-        """
-            set custom title of tab 1 of front window to "\(terminalWindowTitle ?? "My App")"
-        
-        """
-        /* The indentation is part of the AppleScript syntax. */
-        let executionPart: String =
-        """
+            activate
+            do script ""
+            set window_id to id of first window whose frontmost is true
+            set custom title of front window to "\(terminalWindowTitle ?? "My App")"
+            do script "\(path)" in window id window_id of application "Terminal"
             do script "\(command!.replacingOccurrences(of: "\"", with: "\\\""))" in front window
         end tell
         """
-        
-        let script = headerPart
-            + (terminalWindowTitle != nil ? titlePart : "")
-            + executionPart
-        
         let appleScript = NSAppleScript.init(source: script)
         var errorInfo: NSDictionary?
         appleScript?.executeAndReturnError(&errorInfo)
