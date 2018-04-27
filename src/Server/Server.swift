@@ -294,19 +294,11 @@ class Server: Thread {
                         command.execute(sender: self)
                     }
                 } catch ParsingError.empty {
-                    throw NetworkError.read(recoverable: true,
-                                            errorMessage: "Expected a command but received an empty string.",
-                                            errorCode: UNDEFINED_ERROR)
+                    continue
                 } catch ParsingError.notStage3Command {
-                    throw NetworkError.read(recoverable: true,
-                                            errorMessage: "Expected a command with arguments but received a single "
-                                                        + "word.",
-                                            errorCode: UNDEFINED_ERROR)
+                    continue
                 } catch ParsingError.notJSON {
-                    throw NetworkError.read(recoverable: false,
-                                            errorMessage: "The arguments provided with the stage 3 command are not "
-                                                        + "JSON formatted.",
-                                            errorCode: UNDEFINED_ERROR)
+                    continue
                 }
             }
         }
@@ -352,6 +344,8 @@ class Server: Thread {
                 Blackboard.shared.tcp_port = port
                 dispatchForExecutionWhenChannelIsOpened()
                 try acceptCall()
+                
+                
                 try receiveAndProcessData()
             }
             /*
