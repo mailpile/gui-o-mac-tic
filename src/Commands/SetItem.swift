@@ -26,7 +26,7 @@ class SetItem: Command {
         }
         func tryUpdateMenuItemFor(id: String) -> Bool {
             let appDelegate = NSApplication.shared.delegate as! AppDelegate
-            guard let menuItem = appDelegate.item2Action[id]  else {
+            guard let menuItem = appDelegate.item2Action[id] else {
                 return false
             }
             if self.label != nil {

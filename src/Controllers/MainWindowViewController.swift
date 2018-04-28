@@ -78,6 +78,19 @@ class MainWindowViewController: NSViewController, NSTableViewDelegate, NSTableVi
             self.notification.sizeToFit()
         }
         
+        NotificationCenter.default.addObserver(forName: Constants.DOMAIN_UPDATE, object: nil, queue: nil) { notification in
+            if let actionItem = notification.object as? ActionItem {
+                for (button, action) in self.button2Action {
+                    if actionItem.id == action.id && actionItem.id != nil {
+                        button.title = action.label ?? ""
+                        self.button2Action[button] = actionItem
+                        button.setNeedsDisplay()
+                        return
+                    }
+                }
+            }
+        }
+        
         configureActionStack()
         self.background.image = Blackboard.shared.config!.main_window?.image
     }
