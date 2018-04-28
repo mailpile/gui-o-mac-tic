@@ -17,22 +17,21 @@ class Terminal: Command {
         let executedSuccesfully = execute(command: command, terminalWindowTitle: title, errorMessage: &errorMessage)
         // Note: executeSuccessfully will always be true if "command" is executed within a screen session.
         if !executedSuccesfully {
-            // TODO Handle errors.
-            assertionFailure("Not implemented.")
+            assertionFailure("Intentionally not implemented. Executions errors are silent in production.")
         }
     }
     
     private func execute(command: String!, terminalWindowTitle: String?, errorMessage: inout String) -> Bool {
         precondition(!command.isEmpty)
         let path = "PATH=\(Bundle.main.bundlePath)/Contents/Resources/app/bin:$PATH"
-        
+        let appName = Bundle.main.infoDictionary![kCFBundleNameKey as String] as! String
         let script: String =
         """
         tell application "Terminal"
-            activate
             do script ""
+            activate
             set window_id to id of first window whose frontmost is true
-            set custom title of front window to "\(terminalWindowTitle ?? "My App")"
+            set custom title of front window to "\(terminalWindowTitle ?? appName)"
             do script "\(path)" in window id window_id of application "Terminal"
             do script "\(command!.replacingOccurrences(of: "\"", with: "\\\""))" in front window
         end tell
