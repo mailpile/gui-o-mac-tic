@@ -91,20 +91,6 @@
 			remoteGlobalIDString = D819887D20595165004B5974;
 			remoteInfo = "GUI-o-Mac-tic";
 		};
-		D86BD81820778F1100FDB288 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D819887620595165004B5974 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = D819887D20595165004B5974;
-			remoteInfo = "GUI-o-Mac-tic";
-		};
-		D8F3AB6B207A005100B8151E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D819887620595165004B5974 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = D819887D20595165004B5974;
-			remoteInfo = "GUI-o-Mac-tic";
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -145,7 +131,6 @@
 		D85B1E2C20613614003744E0 /* Shell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shell.swift; sourceTree = "<group>"; };
 		D85B1E3220614FC5003744E0 /* SubstatusTableCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SubstatusTableCellView.swift; path = src/Views/SubstatusTableCellView.swift; sourceTree = SOURCE_ROOT; };
 		D860514520601B2000E8983A /* MainWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
-		D86BD81320778F1100FDB288 /* Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D86EFEC82080A5ED004D3B45 /* Keyword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keyword.swift; sourceTree = "<group>"; };
 		D88213242066441400150FAE /* LICENSE.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
 		D8A38274206D741E006E79D6 /* NotifyByAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotifyByAlert.swift; sourceTree = "<group>"; };
@@ -189,7 +174,6 @@
 		D8F1FEFE2065818D007E497B /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		D8F35ED52077A4BA006CD09E /* ParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ParserTests.swift; path = "GUI-o-Mac-tic-Tests/ParserTests.swift"; sourceTree = SOURCE_ROOT; };
 		D8F35ED72077AA5C006CD09E /* ParsingError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParsingError.swift; sourceTree = "<group>"; };
-		D8F3AB66207A005100B8151E /* GUI-o-Mac-ticTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "GUI-o-Mac-ticTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -201,20 +185,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		D84AB8D3207A0ECE00AB4E21 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D86BD81020778F1100FDB288 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D8F3AB63207A005100B8151E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -249,8 +219,6 @@
 			isa = PBXGroup;
 			children = (
 				D819887E20595165004B5974 /* GUI-o-Mac-tic.app */,
-				D86BD81320778F1100FDB288 /* Tests.xctest */,
-				D8F3AB66207A005100B8151E /* GUI-o-Mac-ticTests.xctest */,
 				D84AB8D6207A0ECE00AB4E21 /* GUI-o-Mac-tic-Tests.xctest */,
 			);
 			name = Products;
@@ -502,42 +470,6 @@
 			productReference = D84AB8D6207A0ECE00AB4E21 /* GUI-o-Mac-tic-Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		D86BD81220778F1100FDB288 /* Tests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = D86BD81A20778F1100FDB288 /* Build configuration list for PBXNativeTarget "Tests" */;
-			buildPhases = (
-				D86BD80F20778F1100FDB288 /* Sources */,
-				D86BD81020778F1100FDB288 /* Frameworks */,
-				D86BD81120778F1100FDB288 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				D86BD81920778F1100FDB288 /* PBXTargetDependency */,
-			);
-			name = Tests;
-			productName = Tests;
-			productReference = D86BD81320778F1100FDB288 /* Tests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		D8F3AB65207A005100B8151E /* GUI-o-Mac-ticTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = D8F3AB6D207A005100B8151E /* Build configuration list for PBXNativeTarget "GUI-o-Mac-ticTests" */;
-			buildPhases = (
-				D8F3AB62207A005100B8151E /* Sources */,
-				D8F3AB63207A005100B8151E /* Frameworks */,
-				D8F3AB64207A005100B8151E /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				D8F3AB6C207A005100B8151E /* PBXTargetDependency */,
-			);
-			name = "GUI-o-Mac-ticTests";
-			productName = "GUI-o-Mac-ticTests";
-			productReference = D8F3AB66207A005100B8151E /* GUI-o-Mac-ticTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -563,16 +495,6 @@
 						ProvisioningStyle = Automatic;
 						TestTargetID = D819887D20595165004B5974;
 					};
-					D86BD81220778F1100FDB288 = {
-						CreatedOnToolsVersion = 9.3;
-						ProvisioningStyle = Automatic;
-						TestTargetID = D819887D20595165004B5974;
-					};
-					D8F3AB65207A005100B8151E = {
-						CreatedOnToolsVersion = 9.3;
-						ProvisioningStyle = Automatic;
-						TestTargetID = D819887D20595165004B5974;
-					};
 				};
 			};
 			buildConfigurationList = D819887920595165004B5974 /* Build configuration list for PBXProject "GUI-o-Mac-tic" */;
@@ -589,8 +511,6 @@
 			projectRoot = "";
 			targets = (
 				D819887D20595165004B5974 /* GUI-o-Mac-tic */,
-				D86BD81220778F1100FDB288 /* Tests */,
-				D8F3AB65207A005100B8151E /* GUI-o-Mac-ticTests */,
 				D84AB8D5207A0ECE00AB4E21 /* GUI-o-Mac-tic-Tests */,
 			);
 		};
@@ -611,20 +531,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		D84AB8D4207A0ECE00AB4E21 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D86BD81120778F1100FDB288 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D8F3AB64207A005100B8151E /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -716,20 +622,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D86BD80F20778F1100FDB288 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D8F3AB62207A005100B8151E /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -737,16 +629,6 @@
 			isa = PBXTargetDependency;
 			target = D819887D20595165004B5974 /* GUI-o-Mac-tic */;
 			targetProxy = D84AB8DB207A0ECE00AB4E21 /* PBXContainerItemProxy */;
-		};
-		D86BD81920778F1100FDB288 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = D819887D20595165004B5974 /* GUI-o-Mac-tic */;
-			targetProxy = D86BD81820778F1100FDB288 /* PBXContainerItemProxy */;
-		};
-		D8F3AB6C207A005100B8151E /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = D819887D20595165004B5974 /* GUI-o-Mac-tic */;
-			targetProxy = D8F3AB6B207A005100B8151E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -962,94 +844,6 @@
 			};
 			name = Release;
 		};
-		D86BD81B20778F1100FDB288 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 32325SM62E;
-				INFOPLIST_FILE = Tests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@loader_path/../Frameworks",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
-				PRODUCT_BUNDLE_IDENTIFIER = is.mailpile.Tests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GUI-o-Mac-tic.app/Contents/MacOS/GUI-o-Mac-tic";
-			};
-			name = Debug;
-		};
-		D86BD81C20778F1100FDB288 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 32325SM62E;
-				INFOPLIST_FILE = Tests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@loader_path/../Frameworks",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
-				PRODUCT_BUNDLE_IDENTIFIER = is.mailpile.Tests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GUI-o-Mac-tic.app/Contents/MacOS/GUI-o-Mac-tic";
-			};
-			name = Release;
-		};
-		D8F3AB6E207A005100B8151E /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 32325SM62E;
-				INFOPLIST_FILE = "GUI-o-Mac-ticTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@loader_path/../Frameworks",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
-				PRODUCT_BUNDLE_IDENTIFIER = "is.mailpile.GUI-o-Mac-ticTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GUI-o-Mac-tic.app/Contents/MacOS/GUI-o-Mac-tic";
-			};
-			name = Debug;
-		};
-		D8F3AB6F207A005100B8151E /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 32325SM62E;
-				INFOPLIST_FILE = "GUI-o-Mac-ticTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@loader_path/../Frameworks",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
-				PRODUCT_BUNDLE_IDENTIFIER = "is.mailpile.GUI-o-Mac-ticTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GUI-o-Mac-tic.app/Contents/MacOS/GUI-o-Mac-tic";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1076,24 +870,6 @@
 			buildConfigurations = (
 				D84AB8DD207A0ECE00AB4E21 /* Debug */,
 				D84AB8DE207A0ECE00AB4E21 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		D86BD81A20778F1100FDB288 /* Build configuration list for PBXNativeTarget "Tests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				D86BD81B20778F1100FDB288 /* Debug */,
-				D86BD81C20778F1100FDB288 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		D8F3AB6D207A005100B8151E /* Build configuration list for PBXNativeTarget "GUI-o-Mac-ticTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				D8F3AB6E207A005100B8151E /* Debug */,
-				D8F3AB6F207A005100B8151E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
