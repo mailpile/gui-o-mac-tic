@@ -2,24 +2,6 @@ import Cocoa
 
 var server = Server()
 
-func guiomaticCommandToOperationAndArgs(guiomaticCommand: String) -> (op: Operation, args: Args) {
-    let keyValuePair = guiomaticCommand.split(separator: " ", maxSplits: 1)
-    let key = String(keyValuePair[0])
-    let op = StringToOperationMapper.Map(operation: key)
-    let value = String(keyValuePair[1])
-    
-    do {
-        let data = value.data(using: .utf8)
-        let argsJSON: [String: Any]
-        try argsJSON = JSONSerialization.jsonObject(with: data!, options: []) as! [String: Any]
-        let args = Args(string: nil, list: nil, dictionary: argsJSON)
-        return (op: op!, args: args)
-    } catch {
-        print(error) // TODO error handling.
-        preconditionFailure("Not implemented.")
-    }
-}
-
 let OK_LISTEN_TO = "OK LISTEN TO:"
 let OK_LISTEN_HTTP = "OK LISTEN HTTP:"
 let OK_LISTEN_TCP = "OK LISTEN TCP:"
@@ -31,22 +13,45 @@ let appDelegate: AppDelegate
 do {
     /** Begin Stage 1 **/
     let boot = Boot()
-    boot.boot()
-    try Blackboard.shared.config = Parser.parse(json: boot.part1!)
+    try boot.boot()
+    try Blackboard.shared.config = Parser.parse(json: boot.stage1!)
+    Blackboard.shared.canMainWindowBeVisible = Blackboard.shared.config?.main_window?.show ?? false
     /** End of Stage 1 **/
     
-    /** Set app icon and start the main app thread. */
-    if let appIconPath = Blackboard.shared.config?.app_icon,
-        let appIcon = NSImage(contentsOfFile: appIconPath) {
-        NSWorkspace.shared.setIcon(appIcon, forFile: Bundle.main.bundlePath, options: [])
+    /** Set app's icon. */
+    if let appIconPath = Blackboard.shared.config?.app_icon {
+        var appIcon:NSImage? = nil
+        if appIconPath.contains(":") {
+            let icon = appIconPath.components(separatedBy: ":")
+            precondition(icon.count == 2, "':' is not a valid symbol in an icon's title.")
+            appIcon = Blackboard.shared.config!.icons[icon.last!]
+        } else {
+            appIcon = NSImage(contentsOfFile: appIconPath)
+        }
+        
+        /* HACK -- Allow the app's icon to be changed at runtime without breaking codesign every time we build.
+         * The app's icon must not be changed when running in debug mode, the following explains why.
+         * An initial run in debug mode triggers this app's bundle to be built and Apple's codesign utility to run.
+         * Changing the app's icon at runtime has the side-effect of creating a file called "Icon?" in the bundle's root.
+         * The Icon? file is a so-called "resource fork". Resource forks have funny filesystem attributes.
+         * Apple's codesign utility does not like funny attributes, as such it will exit erronously on subsequent builds.
+         * This if DEBUG prevents the app's icon from changing during development. */
+    #if DEBUG
+                print("This is a debug build. The App's icon will not be changed to \(appIconPath).")
+    #else
+                NSWorkspace.shared.setIcon(appIcon, forFile: Bundle.main.bundlePath, options: [])
+    #endif
     }
+    
+    
+    /** Start up applications main thread. **/
     app = NSApplication.shared
     appDelegate = AppDelegate()
     app.delegate = appDelegate
     /** Main thread is now running. */
     
     /** Begin Stage 2 **/
-    for rawStage2Command: String in boot.part2 {
+    for rawStage2Command: String in boot.stage2 {
         func stage2(command: String) -> Bool /* true if for loop should is allowed to run again */ {
             guard rawStage2Command.isEmpty == false else {
                 return true
@@ -107,7 +112,12 @@ do {
                 return true
             
             default:
-                let cmd = guiomaticCommandToOperationAndArgs(guiomaticCommand: rawStage2Command)
+                let cmd = try! Parser.guiomaticCommandToOperationAndArgs(guiomaticCommand: rawStage2Command)
+                if (cmd.op == Operation.show_main_window) {
+                    Blackboard.shared.canMainWindowBeVisible = true
+                } else if (cmd.op == Operation.hide_main_window) {
+                    Blackboard.shared.canMainWindowBeVisible = false
+                }
                 let command = CommandFactory.build(forOperation: cmd.op, withArgs: cmd.args)
                 Blackboard.shared.unexecuted.push(command)
             }

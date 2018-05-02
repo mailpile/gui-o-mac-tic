@@ -35,7 +35,7 @@ class MainWindowViewController: NSViewController, NSTableViewDelegate, NSTableVi
                     return .trailing
                 }
             }
-            Blackboard.shared.config!.main_window?.actions.forEach { action in
+            Blackboard.shared.config!.main_window?.action_items.forEach { action in
                 let buttonInit: ((String, Any?, Selector?) -> NSButton)
                     switch action.type {
                     case .checkbox?:
@@ -56,8 +56,8 @@ class MainWindowViewController: NSViewController, NSTableViewDelegate, NSTableVi
         NotificationCenter.default.addObserver(forName: Constants.SHOW_SPLASH_SCREEN, object: nil, queue: nil) { notification in
             guard
                 let userInfo = notification.userInfo,
-                let background = userInfo["background"] as? NSImage,
-                let message = userInfo["message"] as? String,
+                let background = userInfo[Keyword.background.rawValue] as? NSImage,
+                let message = userInfo[Keyword.message.rawValue] as? String,
                 let showProgressBar = userInfo["showProgressBar"] as? Bool?
                 else {
                     preconditionFailure("Observed a \(Constants.SHOW_SPLASH_SCREEN) notification without a valid userInfo.")
@@ -78,17 +78,30 @@ class MainWindowViewController: NSViewController, NSTableViewDelegate, NSTableVi
             self.notification.sizeToFit()
         }
         
+        NotificationCenter.default.addObserver(forName: Constants.DOMAIN_UPDATE, object: nil, queue: nil) { notification in
+            if let actionItem = notification.object as? ActionItem {
+                for (button, action) in self.button2Action {
+                    if actionItem.id == action.id && actionItem.id != nil {
+                        button.title = action.label ?? ""
+                        self.button2Action[button] = actionItem
+                        button.setNeedsDisplay()
+                        return
+                    }
+                }
+            }
+        }
+        
         configureActionStack()
         self.background.image = Blackboard.shared.config!.main_window?.image
     }
         
     func numberOfRows(in tableView: NSTableView) -> Int {
-        return Blackboard.shared.config!.main_window?.status?.count ?? 0
+        return Blackboard.shared.config!.main_window?.status_displays?.count ?? 0
     }
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         let cell = tableView.makeView(withIdentifier: Constants.SUBSTATE_CELL_ID, owner: self) as! SubstatusTableCellView
-        let status = Blackboard.shared.config!.main_window!.status![row]
+        let status = Blackboard.shared.config!.main_window!.status_displays![row]
         
         cell.titleView.stringValue = status.title
         if self.statusDisplayTitleFont != nil {

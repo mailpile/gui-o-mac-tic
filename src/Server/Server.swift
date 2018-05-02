@@ -1,6 +1,7 @@
 import Foundation
 import CoreFoundation
 import AppKit.NSAlert
+import os.log
 
 /*
  * NOTE:
@@ -16,6 +17,8 @@ import AppKit.NSAlert
 class Server: Thread {
     let QUEUE_SIZE: Int32 = 5
     let UNKNOWN_ERROR = "Unknown error."
+    
+    let UNDEFINED_ERROR: Int32 = -1
     
     /* NOTE: The archaic types, functions and their error-codes
      * are documented in the BSD System Calls Manual and in the
@@ -220,6 +223,13 @@ class Server: Thread {
             }
         }
         
+        /**
+          Receives and processes GUI-o-Matic Stage 3 protocol commands.
+         
+          - Throws:
+          An error of type `NetworkError.read` if the received data is not a stage 3 protocol command and
+          this method can recover from that error.
+        */
         func receiveAndProcessData() throws {
             defer {
                 close(self.request_fd)
@@ -269,17 +279,32 @@ class Server: Thread {
                 }
                 
                 /* Parse the gui-o-matic command */
-                let cmd = guiomaticCommandToOperationAndArgs(guiomaticCommand: line)
-                let command = CommandFactory.build(forOperation: cmd.op, withArgs: cmd.args)
-                
-                /* Dispatch the command for execution on the GUI thread. */
-                DispatchQueue.main.async {
-                    command.execute(sender: self)
+                do {
+                    let cmd = try Parser.guiomaticCommandToOperationAndArgs(guiomaticCommand: line)
+                    if (cmd.op == Operation.show_main_window) {
+                        Blackboard.shared.canMainWindowBeVisible = true
+                    } else if (cmd.op == Operation.hide_main_window) {
+                        Blackboard.shared.canMainWindowBeVisible = false
+                    }
+                    let command = CommandFactory.build(forOperation: cmd.op, withArgs: cmd.args)
+                    
+                    
+                    /* Dispatch the command for execution on the GUI thread. */
+                    DispatchQueue.main.async {
+                        command.execute(sender: self)
+                    }
+                } catch ParsingError.empty {
+                    continue
+                } catch ParsingError.notStage3Command {
+                    continue
+                } catch ParsingError.notJSON {
+                    continue
                 }
             }
         }
         
         func logError(_ errorMessage: String, _ errorCode: Int32? = nil) {
+            // TODO change to os_log.
             NSLog(errorMessage + (errorCode != nil ? " ("+String(errorCode!)+")." : ""))
         }
         
@@ -319,6 +344,8 @@ class Server: Thread {
                 Blackboard.shared.tcp_port = port
                 dispatchForExecutionWhenChannelIsOpened()
                 try acceptCall()
+                
+                
                 try receiveAndProcessData()
             }
             /*

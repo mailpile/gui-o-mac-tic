@@ -12,4 +12,9 @@ extension URL {
         url = url.appendingPathExtension(pathExtension)
         return url
     }
+    
+    static func isAFullyQualifiedFilePath(_ string: String) -> Bool {
+        return URL.init(fileURLWithPath: string).pathComponents.count > 1
+            && string.first! == "/"
+    }
 }
