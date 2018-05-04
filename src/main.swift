@@ -67,7 +67,7 @@ do {
             case let command where command.hasPrefix(OK_LISTEN_TCP):
                 /*
                  * NOTE Starts a server for listening to commands over TCP,
-                 * which then executes a shell command which triggres commands to
+                 * which then executes a shell command which triggers commands to
                  * be send over TCP.
                  */
                 DispatchQueue.global(qos: .background).async {
