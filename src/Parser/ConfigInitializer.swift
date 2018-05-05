@@ -144,8 +144,12 @@ extension StatusDisplay {
     convenience init?(json: [String: String], statusDisplayIconFinder: (String?) -> NSImage?) {
         let icon: String? = json[Keyword.icon.rawValue]
         assert(icon?.hasPrefix(Keyword.imagePrefix.rawValue) ?? true)
-        let iconName = String(icon!.dropFirst(Keyword.imagePrefix.rawValue.count))
-        let iconImage: NSImage? = statusDisplayIconFinder(iconName)
+        var iconImage: NSImage?
+        if icon != nil {
+            let iconName = String(icon!.dropFirst(Keyword.imagePrefix.rawValue.count))
+            iconImage = statusDisplayIconFinder(iconName)
+        }
+        
         self.init(item: json[Keyword.id.rawValue]!,
                   title: json[Keyword.title.rawValue]!,
                   details: json[Keyword.details.rawValue],

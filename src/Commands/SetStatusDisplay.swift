@@ -21,7 +21,8 @@ class SetStatusDisplay: Command {
         }
         
         guard let status = main_window.status_displays?.first(where: { $0.id == self.id }) else {
-            preconditionFailure("Unable to set_status_display on \(self.id) because no status exists with that id.")
+            // NOTE: Unable to set_status_display on "self.id" because no status exists with that id.
+            return
         }
         
         if self.title != nil {
