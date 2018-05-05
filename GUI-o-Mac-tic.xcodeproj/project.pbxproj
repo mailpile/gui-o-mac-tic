@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		659F3D252E28CC11C274AEB2 /* NSImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659F39C6BDCA4E86A2CC3C01 /* NSImage+Extensions.swift */; };
+		D80FE851209C4581009B5F13 /* ErrorNotifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80FE850209C4581009B5F13 /* ErrorNotifier.swift */; };
 		D8167F0D206E753C0073552A /* configurator.sh in Resources */ = {isa = PBXBuildFile; fileRef = D8167F0C206E753C0073552A /* configurator.sh */; };
 		D8167F0F206E76A10073552A /* Boot.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8167F0E206E76A10073552A /* Boot.swift */; };
 		D8167F11206EAD4E0073552A /* Blackboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8167F10206EAD4E0073552A /* Blackboard.swift */; };
@@ -95,6 +96,7 @@
 
 /* Begin PBXFileReference section */
 		659F39C6BDCA4E86A2CC3C01 /* NSImage+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSImage+Extensions.swift"; sourceTree = "<group>"; };
+		D80FE850209C4581009B5F13 /* ErrorNotifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorNotifier.swift; sourceTree = "<group>"; };
 		D8167F0C206E753C0073552A /* configurator.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = configurator.sh; sourceTree = "<group>"; };
 		D8167F0E206E76A10073552A /* Boot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Boot.swift; sourceTree = "<group>"; };
 		D8167F10206EAD4E0073552A /* Blackboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Blackboard.swift; sourceTree = "<group>"; };
@@ -246,6 +248,7 @@
 				D8CC30D9208DD280001BF0FF /* Server */,
 				D8515EAB205C440900565AAE /* Parser */,
 				D85B1E3120614F42003744E0 /* Views */,
+				D80FE850209C4581009B5F13 /* ErrorNotifier.swift */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -559,6 +562,7 @@
 				D8B289712067CBBD000DCD03 /* ShowMainWindow.swift in Sources */,
 				D8B2896F2067C5A1000DCD03 /* Quit.swift in Sources */,
 				D8515EA3205C416700565AAE /* Indicator.swift in Sources */,
+				D80FE851209C4581009B5F13 /* ErrorNotifier.swift in Sources */,
 				D8167F0F206E76A10073552A /* Boot.swift in Sources */,
 				D8515EAD205C443400565AAE /* ConfigInitializer.swift in Sources */,
 				D8B109B5206BA7AD00084D82 /* NotifyBySplashScreenMessage.swift in Sources */,
@@ -689,6 +693,7 @@
 					"$(inherited)",
 				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
@@ -744,6 +749,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;

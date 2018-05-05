@@ -1,6 +1,7 @@
 import Cocoa
 
 class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDelegate {
+    public var stageWorker: DispatchQueue? = nil
     private var commands = [Command]()
     private var statusBarMenu: NSStatusItem?
     var item2Action = [String: NSMenuItem]()
@@ -79,7 +80,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
-        // Insert code here to tear down your application
+        stageWorker = nil
     }
     
     func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
@@ -111,7 +112,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
             }
             guard action != nil else { return }
             let command = CommandFactory.build(forOperation: action!.op!, withArgs: action!.args)
-            // TODO error handling in case the command factory fails to build the command.
             command.execute(sender: self)
         }
     }
