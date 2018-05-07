@@ -80,6 +80,28 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
+        
+        if Blackboard.shared.openedTerminalWindows.count > 0 {
+            func closeTerminalWindowsWith(windowIds: [Int32]) {
+                // Convert windowIds to a string list.
+                var windowIdsString = ""
+                for id in windowIds {
+                    windowIdsString.append("\(id),")
+                }
+                windowIdsString.removeLast()
+                
+                // Load applescript and insert the ids if the windows to be closed.
+                let template = Bundle.main.url(forResource: "CloseTerminalWindows", withExtension: "applescript")!
+                var script = try! String(contentsOf: template)
+                script = script.replacingOccurrences(of: "WINDOW_IDS_TOKEN", with:windowIdsString)
+                
+                let appleScript = NSAppleScript.init(source: script)
+                var errorInfo: NSDictionary?
+                appleScript?.executeAndReturnError(&errorInfo)
+                assert (errorInfo == nil)
+            }
+            closeTerminalWindowsWith(windowIds: Blackboard.shared.openedTerminalWindows)
+        }
         stageWorker = nil
     }
     

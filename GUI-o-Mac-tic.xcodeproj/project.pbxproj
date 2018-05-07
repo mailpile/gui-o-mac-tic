@@ -65,6 +65,8 @@
 		D8CA67A42066BF1C003501FD /* LogicalXOR.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CA67A32066BF1C003501FD /* LogicalXOR.swift */; };
 		D8CA67A72066CE31003501FD /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CA67A62066CE31003501FD /* Command.swift */; };
 		D8CD296D2078D3DF009264AC /* BootError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CD296C2078D3DF009264AC /* BootError.swift */; };
+		D8D3737C20A048CB00FE8843 /* CloseTerminalWindows.applescript in Sources */ = {isa = PBXBuildFile; fileRef = D8D3737B20A048CB00FE8843 /* CloseTerminalWindows.applescript */; };
+		D8D3737D20A062B500FE8843 /* CloseTerminalWindows.applescript in Resources */ = {isa = PBXBuildFile; fileRef = D8D3737B20A048CB00FE8843 /* CloseTerminalWindows.applescript */; };
 		D8D696F42073B07200F814DE /* UInt16+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D696F32073B07200F814DE /* UInt16+Extensions.swift */; };
 		D8D91DF52072C16900520189 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D91DF42072C16900520189 /* NetworkError.swift */; };
 		D8DF32242068D5520034165A /* ShowSplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DF32232068D5520034165A /* ShowSplashScreen.swift */; };
@@ -159,6 +161,7 @@
 		D8CA67A62066CE31003501FD /* Command.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Command.swift; sourceTree = "<group>"; };
 		D8CD296C2078D3DF009264AC /* BootError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BootError.swift; sourceTree = "<group>"; };
 		D8CD296E2078EDC5009264AC /* BootTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BootTests.swift; path = "GUI-o-Mac-tic-Tests/BootTests.swift"; sourceTree = SOURCE_ROOT; };
+		D8D3737B20A048CB00FE8843 /* CloseTerminalWindows.applescript */ = {isa = PBXFileReference; explicitFileType = sourcecode.applescript; path = CloseTerminalWindows.applescript; sourceTree = "<group>"; };
 		D8D696F32073B07200F814DE /* UInt16+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UInt16+Extensions.swift"; sourceTree = "<group>"; };
 		D8D91DF42072C16900520189 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		D8DF32232068D5520034165A /* ShowSplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowSplashScreen.swift; sourceTree = "<group>"; };
@@ -235,10 +238,12 @@
 				D819888120595165004B5974 /* AppDelegate.swift */,
 				D819888520595165004B5974 /* Assets.xcassets */,
 				D8167F10206EAD4E0073552A /* Blackboard.swift */,
+				D8D3737B20A048CB00FE8843 /* CloseTerminalWindows.applescript */,
 				D8CA67A52066CE23003501FD /* Commands */,
 				D85B1E2720612A81003744E0 /* Constants.swift */,
 				D8333EF8205E40D90029172B /* Controllers */,
 				D8B109B8206BB80F00084D82 /* DataTypes */,
+				D80FE850209C4581009B5F13 /* ErrorNotifier.swift */,
 				D842DA8A2062A7290043B73A /* Extensions */,
 				D819888B20595165004B5974 /* GUI-o-Mac-tic.entitlements */,
 				D819888A20595165004B5974 /* Info.plist */,
@@ -250,7 +255,6 @@
 				D8CC30D9208DD280001BF0FF /* Server */,
 				D8515EAB205C440900565AAE /* Parser */,
 				D85B1E3120614F42003744E0 /* Views */,
-				D80FE850209C4581009B5F13 /* ErrorNotifier.swift */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -535,6 +539,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D8D3737D20A062B500FE8843 /* CloseTerminalWindows.applescript in Resources */,
 				D8E459F320753B1B00B5A3CD /* stage1.conf in Resources */,
 				D8167F0D206E753C0073552A /* configurator.sh in Resources */,
 				D8307B97207661D500FCE94D /* stage2.conf in Resources */,
@@ -599,6 +604,7 @@
 				D8B109AB206BA28F00084D82 /* NotifyUser.swift in Sources */,
 				D86EFEC92080A5ED004D3B45 /* Keyword.swift in Sources */,
 				D8DF323F206922150034165A /* SetStatusDisplay.swift in Sources */,
+				D8D3737C20A048CB00FE8843 /* CloseTerminalWindows.applescript in Sources */,
 				D8594A0E206A8A8D00D089DE /* SetNextErrorMessage.swift in Sources */,
 				D8B109AF206BA67400084D82 /* NotificationStrategy.swift in Sources */,
 				D842DA8C2062A73B0043B73A /* URL+Extensions.swift in Sources */,

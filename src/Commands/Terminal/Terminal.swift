@@ -33,7 +33,9 @@ class Terminal: Command {
         
         let appleScript = NSAppleScript.init(source: script)
         var errorInfo: NSDictionary?
-        appleScript?.executeAndReturnError(&errorInfo)
+        if let appleEventDescriptor = appleScript?.executeAndReturnError(&errorInfo) {
+            Blackboard.shared.openedTerminalWindows.append(Int32.init(exactly: appleEventDescriptor.doubleValue)!)
+        }
         
         if errorInfo != nil {
             errorMessage = (String(describing: errorInfo))

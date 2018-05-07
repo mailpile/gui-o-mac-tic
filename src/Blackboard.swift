@@ -42,6 +42,9 @@ class Blackboard {
     /** Indicates whether the main window may be visible to the user. */
     var canMainWindowBeVisible = false
     
+    /** ID's of terminal windows which were opened by executing the Terminal command. */
+    var openedTerminalWindows = [Int32]()
+    
     /** Returns an shared instance of the Blackboard. */
     static let shared = Blackboard()
     private init() {
