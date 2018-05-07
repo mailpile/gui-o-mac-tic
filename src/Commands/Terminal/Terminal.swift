@@ -23,19 +23,14 @@ class Terminal: Command {
     
     private func execute(command: String!, terminalWindowTitle: String?, errorMessage: inout String) -> Bool {
         precondition(!command.isEmpty)
-        let path = "PATH=\(Bundle.main.bundlePath)/Contents/Resources/app/bin:$PATH"
-        let appName = Bundle.main.infoDictionary![kCFBundleNameKey as String] as! String
-        let script: String =
-        """
-        tell application "Terminal"
-            do script ""
-            activate
-            set window_id to id of first window whose frontmost is true
-            set custom title of front window to "\(terminalWindowTitle ?? appName)"
-            do script "\(path)" in window id window_id of application "Terminal"
-            do script "\(command!.replacingOccurrences(of: "\"", with: "\\\""))" in front window
-        end tell
-        """
+        let path = "export PATH=\(Bundle.main.bundlePath)/Contents/Resources/app/bin:$PATH"
+        let title = Bundle.main.infoDictionary![kCFBundleNameKey as String] as! String
+        let template = Bundle.main.url(forResource: "Terminal", withExtension: "applescript")!
+        var script = try! String(contentsOf: template)
+        script = script.replacingOccurrences(of: "COMMAND_TOKEN",
+                                             with:"\(path); \(command!)")
+        script = script.replacingOccurrences(of: "TITLE_TOKEN", with: title)
+        
         let appleScript = NSAppleScript.init(source: script)
         var errorInfo: NSDictionary?
         appleScript?.executeAndReturnError(&errorInfo)
