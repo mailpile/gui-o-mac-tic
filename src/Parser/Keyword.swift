@@ -51,4 +51,5 @@ enum Keyword: String {
     case key =              "key"
     case value =            "value"
     case remove =           "remove"
+    case never_run_from_dmg = "_never_run_from_dmg"
 }

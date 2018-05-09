@@ -11,6 +11,9 @@ class Config {
     var fontStyles: FontStyles?
     var http_cookies: [MPHTTPCookie]?
     
+    /** If true, then the .app will refuse to run when located on a DMG file. */
+    var never_run_from_dmg: Bool?
+    
     init(app_name: String,
          app_icon: String,
          require_gui: String?,
@@ -18,7 +21,8 @@ class Config {
          indicators: Indicator!,
          icons: [String: NSImage],
          fontStyles: FontStyles?,
-         http_cookies: [MPHTTPCookie]?) {
+         http_cookies: [MPHTTPCookie]?,
+         never_run_from_dmg: Bool?) {
         self.app_name = app_name
         self.app_icon = app_icon
         self.main_window = main_window
@@ -34,5 +38,6 @@ class Config {
         
         self.fontStyles = fontStyles
         self.http_cookies = http_cookies
+        self.never_run_from_dmg = never_run_from_dmg
     }
 }
