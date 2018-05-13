@@ -1,13 +1,16 @@
 import Cocoa
 
-class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDelegate {
+class AppDelegate: NSObject,
+                   NSApplicationDelegate,
+                   NSUserNotificationCenterDelegate,
+                   NSMenuDelegate {
     public var stageWorker: DispatchQueue? = nil
     private var commands = [Command]()
-    private var statusBarMenu: NSStatusItem?
+    var statusBarMenu: NSStatusItem?
     var item2Action = [String: NSMenuItem]()
     private var action2Item = [NSMenuItem: String]()
     private var item2ConfigAction = [String: ActionItem]()
-    
+    private var popoverController: StatusBarPopoverController?
     private var _status = "normal"
     var status: String {
         get {
@@ -21,7 +24,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         let statusBarMenu = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
-        
         func buildStatusBarMenu(config: Config) -> NSStatusItem! {
             func applyStartupIconToMenu() {
                 func resizeToFitIfNeeded(image: inout NSImage) {
@@ -59,6 +61,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
             NSUserNotificationCenter.default.delegate = self
             applyStartupIconToMenu()
             let menu = NSMenu()
+            menu.delegate = self
             menu.autoenablesItems = false
             config.indicator.menu.forEach { configItem in
                 let newItem = buildMenuItem(menuItem: configItem)
@@ -77,10 +80,33 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
         while let command = Blackboard.shared.unexecuted.tryPop() {
             command.execute(sender: self)
         }
+        
+        /* If a status bar popover message was specified in the config, display it. */
+        if let messageToShowInStatusBarPopup = Blackboard.shared.config?.status_bar_popover_message {
+            func getStatusBarView() -> NSView? {
+                if let appDelegate = (NSApp.delegate as? AppDelegate)
+                    , let statusBarItem = appDelegate.statusBarMenu
+                    , let statusBarWindow = statusBarItem.value(forKey: "window") as? NSWindow
+                    , let targetView = statusBarWindow.contentView {
+                    return targetView
+                }
+                return nil
+            }
+            if let statusBarView = getStatusBarView() {
+                self.popoverController = StatusBarPopoverController(text: messageToShowInStatusBarPopup)
+                self.popoverController!.showPopover(relativeTo: statusBarView.frame,
+                                                    of: statusBarView,
+                                                    preferredEdge: .maxY,
+                                                    closeAfter: DispatchTimeInterval.seconds(5))
+            }
+        }
+    }
+    
+    func menuWillOpen(_ menu: NSMenu) {
+        self.popoverController?.closePopover()
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
-        
         if Blackboard.shared.openedTerminalWindows.count > 0 {
             func closeTerminalWindowsWith(windowIds: [Int32]) {
                 // Convert windowIds to a string list.
@@ -141,5 +167,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
     func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
         ShowMainWindow().execute(sender: self)
         return false
+    }
+    
+    func applicationWillResignActive(_ notification: Notification) {
+        self.popoverController?.closePopover()
     }
 }

@@ -38,6 +38,8 @@ extension Config {
         
         let never_run_from_dmg = json[Keyword.never_run_from_dmg.rawValue] as? Bool
         
+        let status_bar_popover_message = json[Keyword.status_bar_popover_message.rawValue] as? String
+        
         self.init(app_name: app_name!,
                   app_icon: app_icon!,
                   require_gui: require_gui,
@@ -46,7 +48,8 @@ extension Config {
                   icons: images,
                   fontStyles: fontStyles,
                   http_cookies: http_cookies,
-                  never_run_from_dmg: never_run_from_dmg)
+                  never_run_from_dmg: never_run_from_dmg,
+                  status_bar_popover_message: status_bar_popover_message)
     }
 }
 

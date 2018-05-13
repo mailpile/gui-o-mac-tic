@@ -14,6 +14,10 @@ class Config {
     /** If true, then the .app will refuse to run when located on a DMG file. */
     var never_run_from_dmg: Bool?
     
+    /** A message to be shown in a popover, from the status bar when the application is launched, or `null` if the
+        popover is not to be shown. */
+    var status_bar_popover_message: String?
+    
     init(app_name: String,
          app_icon: String,
          require_gui: String?,
@@ -22,7 +26,8 @@ class Config {
          icons: [String: NSImage],
          fontStyles: FontStyles?,
          http_cookies: [MPHTTPCookie]?,
-         never_run_from_dmg: Bool?) {
+         never_run_from_dmg: Bool?,
+         status_bar_popover_message: String?) {
         self.app_name = app_name
         self.app_icon = app_icon
         self.main_window = main_window
@@ -39,5 +44,6 @@ class Config {
         self.fontStyles = fontStyles
         self.http_cookies = http_cookies
         self.never_run_from_dmg = never_run_from_dmg
+        self.status_bar_popover_message = status_bar_popover_message
     }
 }

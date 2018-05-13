@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		659F3D252E28CC11C274AEB2 /* NSImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659F39C6BDCA4E86A2CC3C01 /* NSImage+Extensions.swift */; };
+		D80681A420A5859500D8D174 /* StatusBarPopoverController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80681A220A5859500D8D174 /* StatusBarPopoverController.swift */; };
+		D80681A520A5859500D8D174 /* StatusBarPopoverController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D80681A320A5859500D8D174 /* StatusBarPopoverController.xib */; };
 		D80FE851209C4581009B5F13 /* ErrorNotifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80FE850209C4581009B5F13 /* ErrorNotifier.swift */; };
 		D8167F0D206E753C0073552A /* configurator.sh in Resources */ = {isa = PBXBuildFile; fileRef = D8167F0C206E753C0073552A /* configurator.sh */; };
 		D8167F0F206E76A10073552A /* Boot.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8167F0E206E76A10073552A /* Boot.swift */; };
@@ -65,7 +67,6 @@
 		D8CA67A42066BF1C003501FD /* LogicalXOR.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CA67A32066BF1C003501FD /* LogicalXOR.swift */; };
 		D8CA67A72066CE31003501FD /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CA67A62066CE31003501FD /* Command.swift */; };
 		D8CD296D2078D3DF009264AC /* BootError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CD296C2078D3DF009264AC /* BootError.swift */; };
-		D8D3737C20A048CB00FE8843 /* CloseTerminalWindows.applescript in Sources */ = {isa = PBXBuildFile; fileRef = D8D3737B20A048CB00FE8843 /* CloseTerminalWindows.applescript */; };
 		D8D3737D20A062B500FE8843 /* CloseTerminalWindows.applescript in Resources */ = {isa = PBXBuildFile; fileRef = D8D3737B20A048CB00FE8843 /* CloseTerminalWindows.applescript */; };
 		D8D696F42073B07200F814DE /* UInt16+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D696F32073B07200F814DE /* UInt16+Extensions.swift */; };
 		D8D91DF52072C16900520189 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D91DF42072C16900520189 /* NetworkError.swift */; };
@@ -99,6 +100,8 @@
 
 /* Begin PBXFileReference section */
 		659F39C6BDCA4E86A2CC3C01 /* NSImage+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSImage+Extensions.swift"; sourceTree = "<group>"; };
+		D80681A220A5859500D8D174 /* StatusBarPopoverController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarPopoverController.swift; sourceTree = "<group>"; };
+		D80681A320A5859500D8D174 /* StatusBarPopoverController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StatusBarPopoverController.xib; sourceTree = "<group>"; };
 		D80FE850209C4581009B5F13 /* ErrorNotifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorNotifier.swift; sourceTree = "<group>"; };
 		D8167F0C206E753C0073552A /* configurator.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = configurator.sh; sourceTree = "<group>"; };
 		D8167F0E206E76A10073552A /* Boot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Boot.swift; sourceTree = "<group>"; };
@@ -201,6 +204,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D806819F20A584E300D8D174 /* StatusBarPopover */ = {
+			isa = PBXGroup;
+			children = (
+				D80681A220A5859500D8D174 /* StatusBarPopoverController.swift */,
+				D80681A320A5859500D8D174 /* StatusBarPopoverController.xib */,
+			);
+			path = StatusBarPopover;
+			sourceTree = "<group>";
+		};
 		D8167F12206EC1620073552A /* Mappers */ = {
 			isa = PBXGroup;
 			children = (
@@ -234,6 +246,7 @@
 		D819888020595165004B5974 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				D806819F20A584E300D8D174 /* StatusBarPopover */,
 				D84AB8E5207A2F7600AB4E21 /* Boot */,
 				D819888120595165004B5974 /* AppDelegate.swift */,
 				D819888520595165004B5974 /* Assets.xcassets */,
@@ -545,6 +558,7 @@
 				D8307B97207661D500FCE94D /* stage2.conf in Resources */,
 				D88213252066441400150FAE /* LICENSE.txt in Resources */,
 				D819888620595165004B5974 /* Assets.xcassets in Resources */,
+				D80681A520A5859500D8D174 /* StatusBarPopoverController.xib in Resources */,
 				D896443320A0310800D4F5B4 /* Terminal.applescript in Resources */,
 				D819888920595165004B5974 /* Main.storyboard in Resources */,
 			);
@@ -569,6 +583,7 @@
 				D8BE2C7E206EE0A70039C7B5 /* Server.swift in Sources */,
 				D8DF3241206927200034165A /* NSColor+Extensions.swift in Sources */,
 				D819888420595165004B5974 /* MainWindowViewController.swift in Sources */,
+				D80681A420A5859500D8D174 /* StatusBarPopoverController.swift in Sources */,
 				D8B109BC206BD64C00084D82 /* SetHTTPCookie.swift in Sources */,
 				D8F1FEFF2065818D007E497B /* SplashViewController.swift in Sources */,
 				D8515E99205C3CB000565AAE /* Operation.swift in Sources */,
@@ -604,7 +619,6 @@
 				D8B109AB206BA28F00084D82 /* NotifyUser.swift in Sources */,
 				D86EFEC92080A5ED004D3B45 /* Keyword.swift in Sources */,
 				D8DF323F206922150034165A /* SetStatusDisplay.swift in Sources */,
-				D8D3737C20A048CB00FE8843 /* CloseTerminalWindows.applescript in Sources */,
 				D8594A0E206A8A8D00D089DE /* SetNextErrorMessage.swift in Sources */,
 				D8B109AF206BA67400084D82 /* NotificationStrategy.swift in Sources */,
 				D842DA8C2062A73B0043B73A /* URL+Extensions.swift in Sources */,
