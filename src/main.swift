@@ -49,7 +49,7 @@ func runStage2(_ boot: Boot) {
                     commands.append(shellCommand)
                     let shell = Shell(commands)
                     #endif
-                    shell.execute(sender: NSObject()/* Not sent by an object. */)
+                    shell.execute(sender: NSObject()/* Using NSObject because execute is not called by an object. */)
                 }
                 
             case let command where command.hasPrefix(OK_LISTEN_HTTP):
@@ -80,6 +80,7 @@ func runStage2(_ boot: Boot) {
                 } else if (cmd.op == Operation.hide_main_window) {
                     Blackboard.shared.canMainWindowBeVisible = false
                 }
+                /* NOTE: Queues the command - it will be executed once the application has finished launching. */
                 let command = CommandFactory.build(forOperation: cmd.op, withArgs: cmd.args)
                 Blackboard.shared.unexecuted.push(command)
             }

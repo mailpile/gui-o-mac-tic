@@ -1,14 +1,9 @@
 import Foundation
 
-class UserNotificationFacade {
-    static func DeliverNotification(withTitle title: String? = nil, withText text: String) {
-        let notification = buildNotification(withTitle: title, withText: text)
-        NSUserNotificationCenter.default.deliver(notification)
-    }
-    
+class UserNotificationFacade {    
     static func DeliverNotification(withTitle title: String? = nil,
                                     withText text: String,
-                                    withActions actions: [ActionItem]?) {
+                                    withActions actions: [ActionItem]? = nil) {
         let notification: NSUserNotification = buildNotification(withTitle: title,
                                                                  withText: text,
                                                                  withActions: actions)
