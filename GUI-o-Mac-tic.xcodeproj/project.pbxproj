@@ -23,6 +23,7 @@
 		D81A51FE2067F38600E431E9 /* PostURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81A51FD2067F38600E431E9 /* PostURL.swift */; };
 		D81A52002067F81A00E431E9 /* URLCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81A51FF2067F81A00E431E9 /* URLCommand.swift */; };
 		D81D3CE620665A7E008325B9 /* SubstatusTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85B1E3220614FC5003744E0 /* SubstatusTableCellView.swift */; };
+		D82F163E20AAE59D00563AD0 /* CookieControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82F163D20AAE59D00563AD0 /* CookieControl.swift */; };
 		D8307B9520754E1100FCE94D /* FontStyleToFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8307B9420754E1100FCE94D /* FontStyleToFont.swift */; };
 		D8307B97207661D500FCE94D /* stage2.conf in Resources */ = {isa = PBXBuildFile; fileRef = D8307B96207661D500FCE94D /* stage2.conf */; };
 		D8333EE9205D3FA90029172B /* FontStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8333EE8205D3FA90029172B /* FontStyle.swift */; };
@@ -117,6 +118,7 @@
 		D81988A1205957EE004B5974 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		D81A51FD2067F38600E431E9 /* PostURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostURL.swift; sourceTree = "<group>"; };
 		D81A51FF2067F81A00E431E9 /* URLCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLCommand.swift; sourceTree = "<group>"; };
+		D82F163D20AAE59D00563AD0 /* CookieControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookieControl.swift; sourceTree = "<group>"; };
 		D8307B9420754E1100FCE94D /* FontStyleToFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontStyleToFont.swift; sourceTree = "<group>"; };
 		D8307B96207661D500FCE94D /* stage2.conf */ = {isa = PBXFileReference; lastKnownFileType = text; path = stage2.conf; sourceTree = "<group>"; };
 		D8333EE8205D3FA90029172B /* FontStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontStyle.swift; sourceTree = "<group>"; };
@@ -250,7 +252,7 @@
 				D84AB8E5207A2F7600AB4E21 /* Boot */,
 				D819888120595165004B5974 /* AppDelegate.swift */,
 				D819888520595165004B5974 /* Assets.xcassets */,
-				D8167F10206EAD4E0073552A /* Blackboard.swift */,
+				D82F163C20AAE57700563AD0 /* Blackboard */,
 				D8D3737B20A048CB00FE8843 /* CloseTerminalWindows.applescript */,
 				D8CA67A52066CE23003501FD /* Commands */,
 				D85B1E2720612A81003744E0 /* Constants.swift */,
@@ -270,6 +272,15 @@
 				D85B1E3120614F42003744E0 /* Views */,
 			);
 			path = src;
+			sourceTree = "<group>";
+		};
+		D82F163C20AAE57700563AD0 /* Blackboard */ = {
+			isa = PBXGroup;
+			children = (
+				D8167F10206EAD4E0073552A /* Blackboard.swift */,
+				D82F163D20AAE59D00563AD0 /* CookieControl.swift */,
+			);
+			path = Blackboard;
 			sourceTree = "<group>";
 		};
 		D8333EF8205E40D90029172B /* Controllers */ = {
@@ -588,6 +599,7 @@
 				D8F1FEFF2065818D007E497B /* SplashViewController.swift in Sources */,
 				D8515E99205C3CB000565AAE /* Operation.swift in Sources */,
 				D8DF32242068D5520034165A /* ShowSplashScreen.swift in Sources */,
+				D82F163E20AAE59D00563AD0 /* CookieControl.swift in Sources */,
 				D8594A0B206A737000D089DE /* SetItem.swift in Sources */,
 				D81988A2205957EE004B5974 /* Config.swift in Sources */,
 				D8DF323A206908F70034165A /* HideMainWindow.swift in Sources */,

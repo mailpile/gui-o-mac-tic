@@ -30,9 +30,13 @@ extension Config {
         var http_cookies = [MPHTTPCookie]()
         if let http_cookiesJSON = json[Keyword.http_cookies.rawValue] as? [String: Any] {
             for cookieJSON in http_cookiesJSON {
-                let value = cookieJSON.value as! [String: Any]
-                let cookie = MPHTTPCookie(hostname: cookieJSON.key, json: value)
-                http_cookies.append(cookie)
+                if let host = cookieJSON.key.split(separator: ":").first
+                 , let portString = cookieJSON.key.split(separator: ":").last
+                 , let port = UInt16(portString)
+                 , let value = cookieJSON.value as? [String: Any] {
+                    let cookie = MPHTTPCookie(hostname: String(host), port: port, json: value)
+                    http_cookies.append(cookie)
+                }
             }
         }
         

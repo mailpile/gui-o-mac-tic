@@ -33,19 +33,21 @@ class CommandFactory {
             guard let url = args!.asURL() else {
                 preconditionFailure("Did not receive a URL to get.")
             }
-            return GetURL(url: url)
+            let cookies = CookieControl.cookiesForHost(url: url)
+            return GetURL(url: url, cookies: cookies)
             
         case .post_url:
             precondition(args != nil, "Did not receive a URL to POST to.")
             guard let url = args!.asURL() else {
-                preconditionFailure("Did not receive a URL to get.")
+                preconditionFailure("Did not receive a payload to post.")
             }
             var swiftPayload = args!.dictionary
             swiftPayload?.removeValue(forKey: URL_KEY)
             
             do {
-                let jsonPayload = try JSONSerialization.data(withJSONObject: swiftPayload!, options: [])
-                return PostURL(url: url, payload: jsonPayload)
+                let jsonPayload: Data? = try JSONSerialization.data(withJSONObject: swiftPayload!, options: [])
+                let cookies = CookieControl.cookiesForHost(url: url)
+                return PostURL(url: url, payload: jsonPayload, cookies: cookies)
             } catch {
                 // TODO Error handling.
                 print(error.localizedDescription)

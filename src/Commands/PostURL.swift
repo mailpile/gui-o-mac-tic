@@ -2,11 +2,13 @@ import Foundation
 
 class PostURL: URLCommand {
     let url: URL
-    let payload: Data
+    let payload: Data?
+    let cookies: [String: String]?
     
-    init(url: URL, payload: Data) {
+    init(url: URL, payload: Data?, cookies: [String: String]?) {
         self.url = url
         self.payload = payload
+        self.cookies = cookies
     }
     
     func execute(sender: NSObject) {
@@ -14,6 +16,12 @@ class PostURL: URLCommand {
         request.httpMethod = "POST"
         request.httpBody = payload
         request.cachePolicy = .reloadIgnoringLocalAndRemoteCacheData
+        
+        if let cookies = self.cookies {
+            for cookie in cookies {
+                request.addValue(cookie.key + "=" + cookie.value, forHTTPHeaderField: "Cookie")
+            }
+        }
         
         let task = URLSession.shared.dataTask(with: request,
                                               completionHandler:completionHandler(data:urlResponse:error:))
