@@ -248,7 +248,6 @@
 		D819888020595165004B5974 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				D806819F20A584E300D8D174 /* StatusBarPopover */,
 				D84AB8E5207A2F7600AB4E21 /* Boot */,
 				D819888120595165004B5974 /* AppDelegate.swift */,
 				D819888520595165004B5974 /* Assets.xcassets */,
@@ -268,6 +267,7 @@
 				D8167F12206EC1620073552A /* Mappers */,
 				D8515E95205C3C2100565AAE /* Model */,
 				D8CC30D9208DD280001BF0FF /* Server */,
+				D806819F20A584E300D8D174 /* StatusBarPopover */,
 				D8515EAB205C440900565AAE /* Parser */,
 				D85B1E3120614F42003744E0 /* Views */,
 			);
