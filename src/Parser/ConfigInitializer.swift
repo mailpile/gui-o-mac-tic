@@ -86,9 +86,9 @@ extension ActionItem {
         }
 
         if let type = json[Keyword.type.rawValue] as? String {
-            self.type = ActionItemType(rawValue: type)
+            self.type = ActionItemType(rawValue: type)!
         } else {
-            self.type = nil
+            self.type = ActionItemType.button
         }
         
         if let opString = json[Keyword.op.rawValue] as? String {

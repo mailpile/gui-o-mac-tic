@@ -38,11 +38,9 @@ class MainWindowViewController: NSViewController, NSTableViewDelegate, NSTableVi
             Blackboard.shared.config!.main_window?.action_items.forEach { action in
                 let buttonInit: ((String, Any?, Selector?) -> NSButton)
                     switch action.type {
-                    case .checkbox?:
+                    case .checkbox:
                         buttonInit = NSButton.init(checkboxWithTitle:target:action:)
-                    case .button?:
-                        buttonInit = NSButton.init(title:target:action:)
-                    case nil:
+                    case .button:
                         buttonInit = NSButton.init(title:target:action:)
                     }
                 let command = CommandFactory.build(forOperation: action.op!, withArgs: action.args)
