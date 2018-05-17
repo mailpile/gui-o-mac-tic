@@ -17,7 +17,7 @@ class CommandFactory {
             
         case .show_url:
             precondition(args != nil, "Did not receive a URL to open.")
-            return ShowURL(url: args!.asURL()!)
+            return ShowURL(url: args!.asURL() ?? URL(string: args!.dictionary!["url"] as! String)!)
             
         case .terminal:
             precondition(args?.dictionary != nil, "Expected a dictionary.")
