@@ -118,6 +118,9 @@ class MainWindowViewController: NSViewController, NSTableViewDelegate, NSTableVi
             cell.descriptionView.textColor = colour
         }
         
+        /* Refreshes the cell in case the SetStatusDisplay command has just executed. */
+        cell.setNeedsDisplay(cell.frame)
+        
         return cell
     }
     

@@ -41,6 +41,7 @@ enum Keyword: String {
     case imagePrefix =                  "image:"
     case badge =                        "badge"
     case status_displays =              "status_displays"
+    case status =                       "status"
     case command =                      "command"
     case progress_bar =                 "progress_bar"
     case progress =                     "progress"

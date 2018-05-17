@@ -81,7 +81,7 @@ class CommandFactory {
             return HideMainWindow()
             
         case .set_status:
-            let status = args?.dictionary?[Keyword.status_displays.rawValue] as? String
+            let status = args?.dictionary?[Keyword.status.rawValue] as? String
             let badge = args?.dictionary?[Keyword.badge.rawValue] as? String
             return SetStatus(status, badge)
             
@@ -94,7 +94,13 @@ class CommandFactory {
             
             let icon: NSImage?
             if let iconUrl = args!.dictionary![Keyword.icon.rawValue] as? String {
-                icon = NSImage(contentsOfFile: iconUrl) // TODO icon can also be image:{somename} FIXME
+                if let iconFromFile = NSImage(contentsOfFile: iconUrl) {
+                    icon = iconFromFile
+                } else if let iconName = iconUrl.split(separator: ":").last {
+                    icon = Blackboard.shared.config?.icons[String(iconName)]
+                } else {
+                    icon = nil
+                }
             } else {
                 icon = nil
             }
