@@ -29,7 +29,7 @@ class Terminal: Command {
         var script = try! String(contentsOf: template)
         script = script.replacingOccurrences(of: "COMMAND_TOKEN",
                                              with:"\(path); \(command!)")
-        script = script.replacingOccurrences(of: "TITLE_TOKEN", with: title)
+        script = script.replacingOccurrences(of: "TITLE_TOKEN", with: terminalWindowTitle ?? title)
         
         let appleScript = NSAppleScript.init(source: script)
         var errorInfo: NSDictionary?
