@@ -11,37 +11,25 @@ class AppDelegate: NSObject,
     private var action2Item = [NSMenuItem: String]()
     private var item2ConfigAction = [String: ActionItem]()
     private var popoverController: StatusBarPopoverController?
-    private var _status = "normal"
-    var status: String {
-        get {
-            return self._status
-        }
-        set {
-            var icon = Blackboard.shared.config!.icons[newValue]
-            resizeToFitIfNeeded(image: &icon!, statusbar: self.statusBarMenu! )
-            self.statusBarMenu?.image = Blackboard.shared.config!.icons[newValue]
-            self._status = newValue
-        }
+    
+    private func resizeToFitIfNeeded(image: inout NSImage, statusbar: NSStatusItem) {
+        let maxLength = statusbar.statusBar?.thickness ?? CGFloat(22)
+        guard image.size.height > maxLength || image.size.width > maxLength else { return }
+        let lengthWhichLooksGoodOnToolbar = maxLength * CGFloat(0.8)
+        let iconSize = NSMakeSize(lengthWhichLooksGoodOnToolbar, lengthWhichLooksGoodOnToolbar)
+        image = NSImage.init(withImage: image, resizedTo: iconSize)
+        NSLog("The status bar icon had to be resied because it was larger than"
+            + " \(UInt(maxLength))×\(UInt(maxLength)).")
     }
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         let statusBarMenu = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
         func buildStatusBarMenu(config: Config) -> NSStatusItem! {
             func applyStartupIconToMenu() {
-                func resizeToFitIfNeeded(image: inout NSImage) {
-                    assert(statusBarMenu.statusBar?.thickness != nil,
-                           "Should not be nil. To be safe we fallback to 22 at runtime.")
-                    let maxLength = statusBarMenu.statusBar?.thickness ?? CGFloat(22)
-                    guard image.size.height > maxLength || image.size.width > maxLength else { return }
-                    let lengthWhichLooksGoodOnToolbar = maxLength * CGFloat(0.8)
-                    let iconSize = NSMakeSize(lengthWhichLooksGoodOnToolbar, lengthWhichLooksGoodOnToolbar)
-                    image = NSImage.init(withImage: image, resizedTo: iconSize)
-                    NSLog("The status bar icon had to be resied because it was larger than"
-                        + " \(UInt(maxLength))×\(UInt(maxLength)).")
-                }
+                
                 let iconName: String! = config.indicator.initialStatus
                 var iconImage: NSImage = config.icons[iconName]!
-                resizeToFitIfNeeded(image: &iconImage)
+                resizeToFitIfNeeded(image: &iconImage, statusbar: statusBarMenu)
                 statusBarMenu.image = iconImage
             }
             func buildMenuItem(menuItem: ActionItem) -> NSMenuItem {
@@ -101,6 +89,12 @@ class AppDelegate: NSObject,
                                                     preferredEdge: .maxY,
                                                     closeAfter: DispatchTimeInterval.seconds(5))
             }
+        }
+        
+        Blackboard.shared.addStatusDidChange {
+            var icon = Blackboard.shared.config!.icons[Blackboard.shared.status]
+            self.resizeToFitIfNeeded(image: &icon!, statusbar: self.statusBarMenu!)
+            self.statusBarMenu?.image = icon
         }
     }
     

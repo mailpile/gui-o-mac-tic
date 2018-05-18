@@ -34,6 +34,23 @@ class Blackboard {
         }
     }
     
+    /** Closures to be executed when `status`'s rval is changed. */
+    private var statusDidChange = [(()->())]()
+    
+    /** Add a closure which will be executed when `status`'s rval is changed. */
+    public func addStatusDidChange(closure: @escaping (()->())) {
+        statusDidChange.append(closure)
+    }
+    
+    /** The application's status. */
+    var status: String = "" {
+        didSet {
+            for closure in statusDidChange {
+                closure()
+            }
+        }
+    }
+    
     /** A queue of commands which are yet to be executed.
       A command shall be removed, by the executer, from this queue upon execution. */
     var unexecuted = Queue<Command>()

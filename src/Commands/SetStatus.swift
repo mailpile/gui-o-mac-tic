@@ -10,13 +10,12 @@ class SetStatus: Command {
     }
     
     func execute(sender: NSObject) {
-        if self.status != nil {
-            let delegate = NSApplication.shared.delegate as! AppDelegate
-            delegate.status = self.status!
+        if let status = self.status {
+            Blackboard.shared.status = status
         }
         
-        if self.badge != nil {
-            NSApp.dockTile.badgeLabel = self.badge
+        if let badge = self.badge {
+            NSApp.dockTile.badgeLabel = badge
         }
     }
 }
