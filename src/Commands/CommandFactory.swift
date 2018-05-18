@@ -138,7 +138,7 @@ class CommandFactory {
                 actions = nil
             }
             return NotifyUser(messageToSend: message!,
-                              preferUserNotificationCenter: popup,
+                              popup: popup,
                               alert: alert,
                               actions: actions)
             

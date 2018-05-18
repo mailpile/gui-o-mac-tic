@@ -17,6 +17,8 @@ class AppDelegate: NSObject,
             return self._status
         }
         set {
+            var icon = Blackboard.shared.config!.icons[newValue]
+            resizeToFitIfNeeded(image: &icon!, statusbar: self.statusBarMenu! )
             self.statusBarMenu?.image = Blackboard.shared.config!.icons[newValue]
             self._status = newValue
         }

@@ -68,11 +68,8 @@ class MainWindowViewController: NSViewController, NSTableViewDelegate, NSTableVi
             self.substatusView.reloadData()
         }
         
-        NotificationCenter.default.addObserver(forName: Constants.MAIN_WINDOW_NOTIFY_USER, object: nil, queue: nil) { _ in
-            guard let message: String = Blackboard.shared.mainWindowMessages.tryPop() else {
-                preconditionFailure("Expected a message.")
-            }
-            self.notification.stringValue = message
+        Blackboard.shared.addNotificationDidChange {
+            self.notification.stringValue = Blackboard.shared.notification
             self.notification.sizeToFit()
         }
         

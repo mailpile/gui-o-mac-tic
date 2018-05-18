@@ -31,6 +31,11 @@ class SplashViewController: NSViewController {
             self.notification.stringValue = message
             self.notification.sizeToFit()
         }
+        
+        Blackboard.shared.addNotificationDidChange {
+            self.notification.stringValue = Blackboard.shared.notification
+            self.notification.sizeToFit()
+        }
     }
     
     override func viewWillAppear() {

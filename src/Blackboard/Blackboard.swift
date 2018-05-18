@@ -18,9 +18,21 @@ class Blackboard {
       in the splash screen. */
     var splashMessages = Queue<String>()
     
-    /** A queue of notifications which shall be displayed as the content of the message label
-      in the main window. */
-    var mainWindowMessages = Queue<String>()
+    /** Closures to be executed when `notification`'s rval is changed. */
+    private var notificationDidChange = [(()->())]()
+    
+    /** Add a closure which will be executed when `notification`'s rval is changed. */
+    public func addNotificationDidChange(closure: @escaping (()->())) {
+        notificationDidChange.append(closure)
+    }
+    /** A notifications which shall be displayed to the user. */
+    var notification: String = "" {
+        didSet {
+            for closure in notificationDidChange {
+                closure()
+            }
+        }
+    }
     
     /** A queue of commands which are yet to be executed.
       A command shall be removed, by the executer, from this queue upon execution. */

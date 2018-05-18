@@ -1,4 +1,5 @@
 import Foundation
+import Cocoa
 
 class NotifyUser: Command {
     let message: String
@@ -7,17 +8,25 @@ class NotifyUser: Command {
     let actions: [ActionItem]?
     
     init(messageToSend message: String,
-         preferUserNotificationCenter: Bool,
+         popup: Bool,
          alert: Bool,
          actions: [ActionItem]?) {
         self.message = message
-        self.popup = preferUserNotificationCenter
+        self.popup = popup
         self.alert = alert
         self.actions = actions
     }
     
     func execute(sender: NSObject) {
-        let strategy = NotificationStrategyFactory.build(preferUserNotificationCenter: self.popup, alert: self.alert)
-        strategy.Notify(message: self.message, actions: self.actions)
+        Blackboard.shared.notification = self.message
+        if self.popup {
+            UserNotificationFacade.DeliverNotification(withText: message, withActions:actions)
+        }
+        if self.alert {
+            NSApp.requestUserAttention(.criticalRequest)
+            for window in NSApp.windows {
+                window.shakeHorizontally()
+            }
+        }
     }
 }
