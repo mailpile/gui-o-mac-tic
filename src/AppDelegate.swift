@@ -18,7 +18,7 @@ class AppDelegate: NSObject,
         let lengthWhichLooksGoodOnToolbar = maxLength * CGFloat(0.8)
         let iconSize = NSMakeSize(lengthWhichLooksGoodOnToolbar, lengthWhichLooksGoodOnToolbar)
         image = NSImage.init(withImage: image, resizedTo: iconSize)
-        NSLog("The status bar icon had to be resied because it was larger than"
+        NSLog("The status bar icon had to be resized because it was larger than"
             + " \(UInt(maxLength))×\(UInt(maxLength)).")
     }
     
