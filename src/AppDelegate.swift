@@ -26,7 +26,6 @@ class AppDelegate: NSObject,
         let statusBarMenu = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
         func buildStatusBarMenu(config: Config) -> NSStatusItem! {
             func applyStartupIconToMenu() {
-                
                 let iconName: String! = config.indicator.initialStatus
                 var iconImage: NSImage = config.icons[iconName]!
                 resizeToFitIfNeeded(image: &iconImage, statusbar: statusBarMenu)
@@ -95,6 +94,14 @@ class AppDelegate: NSObject,
             var icon = Blackboard.shared.config!.icons[Blackboard.shared.status]
             self.resizeToFitIfNeeded(image: &icon!, statusbar: self.statusBarMenu!)
             self.statusBarMenu?.image = icon
+        }
+        
+        Blackboard.shared.addNotificationDidChange {
+            self.item2Action["notification"]?.title = Blackboard.shared.notification
+        }
+        
+        if !Blackboard.shared.notification.isEmpty {
+            self.item2Action["notification"]?.title = Blackboard.shared.notification
         }
     }
     
