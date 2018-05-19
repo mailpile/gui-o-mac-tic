@@ -56,11 +56,17 @@ class MainWindowViewController: NSViewController, NSTableViewDelegate, NSTableVi
                 let userInfo = notification.userInfo,
                 let background = userInfo[Keyword.background.rawValue] as? NSImage,
                 let message = userInfo[Keyword.message.rawValue] as? String,
-                let showProgressBar = userInfo["showProgressBar"] as? Bool?
+                let showProgressBar = userInfo["showProgressBar"] as? Bool?,
+                let messageX = userInfo["message_x"] as? Float,
+                let messageY = userInfo["message_y"] as? Float
                 else {
                     preconditionFailure("Observed a \(Constants.SHOW_SPLASH_SCREEN) notification without a valid userInfo.")
             }
-            self.splashScreenConfig = SplashScreenConfig(message, background, showProgressBar ?? false)
+            self.splashScreenConfig = SplashScreenConfig(message,
+                                                         background,
+                                                         showProgressBar ?? false,
+                                                         messageX,
+                                                         messageY)
             self.showSplashScreen()
         }
         
@@ -131,6 +137,8 @@ class MainWindowViewController: NSViewController, NSTableViewDelegate, NSTableVi
             targetViewController.notification.stringValue = splashScreenConfig!.message
             targetViewController.imageCell.image = splashScreenConfig!.background
             targetViewController.progressIndicator.isHidden = splashScreenConfig!.showProgressIndicator == false
+            targetViewController.messageX = splashScreenConfig!.messageX
+            targetViewController.messageY = splashScreenConfig!.messageY
         } else {
             assertionFailure("Expected a single segue from this controller, leading to a NSWindowController.")
         }

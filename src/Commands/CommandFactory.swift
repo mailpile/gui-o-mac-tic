@@ -59,9 +59,15 @@ class CommandFactory {
             let background = NSImage(contentsOfFile: args!.dictionary![Keyword.background.rawValue] as! String)
             let message = args!.dictionary![Keyword.message.rawValue] as? String ?? ""
             let showProgressBar = args!.dictionary![Keyword.progress_bar.rawValue] as? Bool == true
+            let messageX = Float(args!.dictionary!["message_x"] as? String ?? "0.0")!
+            let messageY = Float(args!.dictionary!["message_y"] as? String ?? "0.0")!
             
             precondition(background != nil, "A splash screen can not be created without a background.")
-            return ShowSplashScreen(background: background, message: message, showProgressBar: showProgressBar)
+            return ShowSplashScreen(background: background,
+                                    message: message,
+                                    showProgressBar: showProgressBar,
+                                    messageX: messageX,
+                                    messageY: messageY)
             
         case .update_splash_screen:
             precondition(args == nil || args!.dictionary != nil, "Expected args to be a dictionary.")
