@@ -16,6 +16,8 @@ class MainWindowViewController: NSViewController, NSTableViewDelegate, NSTableVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.notification.stringValue = Blackboard.shared.config?.main_window?.initial_notification ?? ""
+        
         if let titleFont = Blackboard.shared.config?.fontStyles?.title {
             self.statusDisplayTitleFont = FontStyleToFontMapper.map(titleFont)
         }

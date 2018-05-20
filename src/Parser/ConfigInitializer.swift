@@ -136,6 +136,8 @@ extension MainWindow {
             self.image = nil
         }
         
+        self.initial_notification = json[Keyword.initial_notification.rawValue] as? String ?? ""
+        
         
         let statusJSON = json[Keyword.status_displays.rawValue] as? [[String: String]]
         self.status_displays = statusParser(statusJSON: statusJSON)

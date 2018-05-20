@@ -54,4 +54,5 @@ enum Keyword: String {
     case remove =                       "remove"
     case never_run_from_dmg         =   "_never_run_from_dmg"
     case status_bar_popover_message =   "_status_bar_popover_message"
+    case initial_notification =         "initial_notification"
 }

@@ -9,4 +9,5 @@ struct MainWindow {
     let image: NSImage?
     var action_items: [ActionItem]
     let status_displays: [StatusDisplay]?
+    let initial_notification: String
 }
