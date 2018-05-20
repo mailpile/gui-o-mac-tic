@@ -96,7 +96,7 @@ class MainWindowViewController: NSViewController, NSTableViewDelegate, NSTableVi
         }
         
         configureActionStack()
-        self.background.image = Blackboard.shared.config!.main_window?.image
+        self.background.image = NSImage.init(withGUIOMaticImage: Blackboard.shared.config!.main_window?.image)
     }
         
     func numberOfRows(in tableView: NSTableView) -> Int {

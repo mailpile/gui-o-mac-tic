@@ -130,11 +130,7 @@ extension MainWindow {
         self.width = json[Keyword.width.rawValue] as! Int
         self.height = json[Keyword.height.rawValue] as! Int
         
-        if let imageFileName = json[Keyword.background.rawValue] as? String {
-            self.image = NSImage(withTemplatedIconPath: imageFileName)
-        } else {
-            self.image = nil
-        }
+        self.image = json[Keyword.background.rawValue] as? String
         
         self.initial_notification = json[Keyword.initial_notification.rawValue] as? String ?? ""
         

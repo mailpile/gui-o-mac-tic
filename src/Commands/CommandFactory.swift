@@ -98,18 +98,7 @@ class CommandFactory {
             let title = args!.dictionary![Keyword.title.rawValue] as? String
             let details = args!.dictionary![Keyword.details.rawValue] as? String
             
-            let icon: NSImage?
-            if let iconUrl = args!.dictionary![Keyword.icon.rawValue] as? String {
-                if let iconFromFile = NSImage(contentsOfFile: iconUrl) {
-                    icon = iconFromFile
-                } else if let iconName = iconUrl.split(separator: ":").last {
-                    icon = Blackboard.shared.config?.icons[String(iconName)]
-                } else {
-                    icon = nil
-                }
-            } else {
-                icon = nil
-            }
+            let icon: NSImage? = NSImage.init(withGUIOMaticImage: args!.dictionary![Keyword.icon.rawValue] as? String)
             
             var colour: NSColor?
             if let hexColour = args!.dictionary![Keyword.color.rawValue] as? String {

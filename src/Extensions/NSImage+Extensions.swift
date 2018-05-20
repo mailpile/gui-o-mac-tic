@@ -17,4 +17,23 @@ extension NSImage {
                     fraction: CGFloat(1))
         self.unlockFocus()
     }
+    
+    convenience init?(withGUIOMaticImage source: String?) {
+        guard source != nil else {
+            return nil
+        }
+        
+        if let source = source {
+            if let data = NSImage(contentsOfFile: source)?.tiffRepresentation {
+                self.init(data: data)
+            } else if let iconName = source.split(separator: ":").last
+                    , let data = Blackboard.shared.config?.icons[String(iconName)]?.tiffRepresentation {
+                self.init(data: data)
+            } else {
+                return nil
+            }
+        } else {
+            return nil
+        }
+    }
 }
