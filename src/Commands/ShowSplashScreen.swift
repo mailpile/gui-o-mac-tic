@@ -1,6 +1,9 @@
 import AppKit
 
 class ShowSplashScreen: Command {
+    var messageOnError: String = Blackboard.shared.nextErrorMessage
+        ?? "Failed to execute 'show_splash_screen'."
+    
     let background: NSImage?
     let message: String
     let showProgressBar: Bool

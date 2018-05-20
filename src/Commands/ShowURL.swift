@@ -1,6 +1,9 @@
 import AppKit
 
-class ShowURL: Command {    
+class ShowURL: Command {
+    var messageOnError: String = Blackboard.shared.nextErrorMessage
+        ?? "Failed to execute 'show_url'."
+    
     let url: URL
     
     init(url: URL) {

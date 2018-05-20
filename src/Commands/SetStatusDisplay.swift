@@ -1,6 +1,9 @@
 import AppKit
 
 class SetStatusDisplay: Command {
+    var messageOnError: String = Blackboard.shared.nextErrorMessage
+        ?? "Failed to execute 'set_status_display'."
+    
     let id: String
     let title: String?
     let details: String?

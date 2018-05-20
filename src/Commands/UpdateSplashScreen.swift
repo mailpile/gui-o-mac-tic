@@ -1,6 +1,9 @@
 import Foundation
 
 class UpdateSplashScreen: Command {
+    var messageOnError: String = Blackboard.shared.nextErrorMessage
+        ?? "Failed to execute 'update_splash_screen'."
+    
     let progress: Double?
     let message: String?
     

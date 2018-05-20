@@ -1,6 +1,9 @@
 import Foundation
 
 class SetHTTPCookie: Command {
+    var messageOnError: String = Blackboard.shared.nextErrorMessage
+        ?? "Failed to execute 'set_http_cookie'."
+    
     let domain: String
     let key: String
     let value: String?

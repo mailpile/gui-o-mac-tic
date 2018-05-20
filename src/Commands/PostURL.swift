@@ -1,6 +1,9 @@
 import Foundation
 
 class PostURL: URLCommand {
+    var messageOnError: String = Blackboard.shared.nextErrorMessage
+        ?? "Failed to execute 'post_url'."
+    
     let url: URL
     let payload: Data?
     let cookies: [String: String]?

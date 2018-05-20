@@ -2,6 +2,9 @@ import Foundation
 import Cocoa
 
 class NotifyUser: Command {
+    var messageOnError: String = Blackboard.shared.nextErrorMessage
+        ?? "Failed to execute 'notify_user'."
+    
     let message: String
     let popup: Bool
     let alert: Bool

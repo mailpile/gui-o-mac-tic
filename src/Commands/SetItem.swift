@@ -1,6 +1,9 @@
 import AppKit
 
 class SetItem: Command {
+    var messageOnError: String = Blackboard.shared.nextErrorMessage
+        ?? "Failed to execute 'set_item'."
+    
     let id: String
     let label: String?
     let sensitive: Bool

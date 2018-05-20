@@ -1,6 +1,9 @@
 import Foundation
 
 class GetURL: URLCommand {
+    var messageOnError: String = Blackboard.shared.nextErrorMessage
+        ?? "Failed to execute 'get_url'."
+    
     let url: URL
     let cookies: [String: String]?
     

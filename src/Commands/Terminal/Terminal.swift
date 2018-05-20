@@ -1,6 +1,9 @@
 import AppKit
 
 class Terminal: Command {
+    var messageOnError: String = Blackboard.shared.nextErrorMessage
+        ?? "Failed to execute 'terminal'."
+    
     let command: String
     let title: String?
     let icon: String? // TODO What should be done with this icon?

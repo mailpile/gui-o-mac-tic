@@ -1,6 +1,9 @@
 import AppKit
 
 class SetStatus: Command {
+    var messageOnError: String = Blackboard.shared.nextErrorMessage
+        ?? "Failed to execute 'set_status'."
+    
     let status: String?
     let badge: String?
     
