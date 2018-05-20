@@ -11,6 +11,7 @@ class MainWindowViewController: NSViewController, NSTableViewDelegate, NSTableVi
     
     @IBOutlet weak var background: NSImageView!
     @IBOutlet weak var substatusView: NSTableView!
+    @IBOutlet weak var substatusScrollView: NSScrollView!
     @IBOutlet weak var actionStack: NSStackView!
     @IBOutlet weak var notification: NSTextField!
     
@@ -148,5 +149,21 @@ class MainWindowViewController: NSViewController, NSTableViewDelegate, NSTableVi
     
     func showSplashScreen() {
         performSegue(withIdentifier: Constants.SPLASH_SEGUE, sender: self)
+    }
+    
+    /**
+     Resizes this controller's view such that it shows at most `statusDisplayCount` status items in it's window.
+    */
+    func sizeToFit(statusDisplayCount: UInt) {
+        /* Compute a height value which can show `statusDisplayCount` rows. */
+        let heightWithoutScrollview = self.view.frame.height - self.substatusScrollView.frame.height
+        let cellHeight = self.substatusView.rowHeight + self.substatusView.intercellSpacing.height
+        let height = heightWithoutScrollview + cellHeight * CGFloat(statusDisplayCount)
+        
+        /* Set this controller's view's height. */
+        self.view.setFrameSize(NSMakeSize(self.view.frame.width, height))
+        
+        /* Update the this view's window's height so the entire view will be displayed. */
+        self.view.window?.setContentSize(self.view.frame.size)
     }
 }

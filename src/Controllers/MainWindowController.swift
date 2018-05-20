@@ -22,6 +22,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         NotificationCenter.default.addObserver(forName: Constants.HIDE_MAIN_WINDOW, object: nil, queue: nil) { _ in
             self.window?.orderOut(self)
         }
+        
+        (self.contentViewController as! MainWindowViewController).sizeToFit(statusDisplayCount: 3)
     }
 
     override func showWindow(_ sender: Any?) {

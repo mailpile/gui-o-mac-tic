@@ -185,6 +185,7 @@
                         <outlet property="actionStack" destination="Abb-xO-YYl" id="eEn-ko-gvN"/>
                         <outlet property="background" destination="Nlk-hX-FkE" id="ho9-Hh-vk8"/>
                         <outlet property="notification" destination="WQR-TC-v3D" id="qKv-Oj-gKs"/>
+                        <outlet property="substatusScrollView" destination="vZC-z3-k86" id="AYj-NB-rui"/>
                         <outlet property="substatusView" destination="p3U-rk-9b6" id="uEr-4u-8fT"/>
                         <segue destination="ddy-uX-gB5" kind="show" identifier="splashSegue" id="plZ-p0-PkT"/>
                     </connections>
