@@ -54,7 +54,7 @@ let URL_KEY = "_url"
             assert(self.list!.count == 1)
             return URL.init(string: self.list!.first!)
         case .dictionary:
-            assert(self.dictionary!.count == 1)
+            assert(self.dictionary!.keys.contains(URL_KEY) || self.dictionary!.keys.contains("url"))
             if let urlString = self.dictionary![URL_KEY] {
                 return URL.init(string: urlString as! String)
             }

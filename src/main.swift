@@ -2,24 +2,6 @@ import Cocoa
 
 var server = Server()
 
-func guiomaticCommandToOperationAndArgs(guiomaticCommand: String) -> (op: Operation, args: Args) {
-    let keyValuePair = guiomaticCommand.split(separator: " ", maxSplits: 1)
-    let key = String(keyValuePair[0])
-    let op = StringToOperationMapper.Map(operation: key)
-    let value = String(keyValuePair[1])
-    
-    do {
-        let data = value.data(using: .utf8)
-        let argsJSON: [String: Any]
-        try argsJSON = JSONSerialization.jsonObject(with: data!, options: []) as! [String: Any]
-        let args = Args(string: nil, list: nil, dictionary: argsJSON)
-        return (op: op!, args: args)
-    } catch {
-        print(error) // TODO error handling.
-        preconditionFailure("Not implemented.")
-    }
-}
-
 let OK_LISTEN_TO = "OK LISTEN TO:"
 let OK_LISTEN_HTTP = "OK LISTEN HTTP:"
 let OK_LISTEN_TCP = "OK LISTEN TCP:"
@@ -28,25 +10,15 @@ let OK_LISTEN = "OK LISTEN"
 let PORT = "%PORT%"
 let app: NSApplication
 let appDelegate: AppDelegate
-do {
-    /** Begin Stage 1 **/
-    let boot = Boot()
-    boot.boot()
-    try Blackboard.shared.config = Parser.parse(json: boot.part1!)
-    /** End of Stage 1 **/
-    
-    /** Set app icon and start the main app thread. */
-    if let appIconPath = Blackboard.shared.config?.app_icon,
-        let appIcon = NSImage(contentsOfFile: appIconPath) {
-        NSWorkspace.shared.setIcon(appIcon, forFile: Bundle.main.bundlePath, options: [])
-    }
-    app = NSApplication.shared
-    appDelegate = AppDelegate()
-    app.delegate = appDelegate
-    /** Main thread is now running. */
-    
-    /** Begin Stage 2 **/
-    for rawStage2Command: String in boot.part2 {
+
+func runStage1(_ boot: Boot) throws {
+    try boot.boot()
+    try Blackboard.shared.config = Parser.parse(json: boot.stage1!)
+    Blackboard.shared.canMainWindowBeVisible = Blackboard.shared.config?.main_window?.show ?? false
+}
+
+func runStage2(_ boot: Boot) {
+    for rawStage2Command: String in boot.stage2 {
         func stage2(command: String) -> Bool /* true if for loop should is allowed to run again */ {
             guard rawStage2Command.isEmpty == false else {
                 return true
@@ -55,31 +27,29 @@ do {
             switch rawStage2Command {
             case OK_GO:
                 return false
-            
+                
             case let command where command.hasPrefix(OK_LISTEN_TO):
                 preconditionFailure("Not yet implemented.")
-            
+                
             case let command where command.hasPrefix(OK_LISTEN_TCP):
                 /*
                  * NOTE Starts a server for listening to commands over TCP,
-                 * which then executes a shell command which triggres commands to
+                 * which then executes a shell command which triggers commands to
                  * be send over TCP.
                  */
-                DispatchQueue.global(qos: .background).async {
-                    server.serve() {
-                        var shellCommand = String(command.dropFirst(OK_LISTEN_TCP.count))
-                        shellCommand = shellCommand.trimmingCharacters(in: .whitespaces)
-                        shellCommand = shellCommand.replacingOccurrences(of: PORT, with: String(Blackboard.shared.tcp_port!))
-                        #if DEBUG
-                        print("DEBUG-mode: Replacing Shell command with Terminal command.")
-                        let shell = Terminal(shellCommand)
-                        #else
-                        var commands = [String]()
-                        commands.append(shellCommand)
-                        let shell = Shell(commands)
-                        #endif
-                        shell.execute(sender: NSObject()/* Not sent by an object. */)
-                    }
+                server.serve() {
+                    var shellCommand = String(command.dropFirst(OK_LISTEN_TCP.count))
+                    shellCommand = shellCommand.trimmingCharacters(in: .whitespaces)
+                    shellCommand = shellCommand.replacingOccurrences(of: PORT, with: String(Blackboard.shared.tcp_port!))
+                    #if DEBUG
+                    print("DEBUG-mode: Replacing Shell command with Terminal command.")
+                    let shell = Terminal(shellCommand)
+                    #else
+                    var commands = [String]()
+                    commands.append(shellCommand)
+                    let shell = Shell(commands)
+                    #endif
+                    shell.execute(sender: NSObject()/* Using NSObject because execute is not called by an object. */)
                 }
                 
             case let command where command.hasPrefix(OK_LISTEN_HTTP):
@@ -87,40 +57,97 @@ do {
                  * NOTE Starts a server for listening to commands over TCP,
                  * then requests commands to be send over TCP.
                  */
-                DispatchQueue.global(qos: .background).async {
-                    server.serve() {
-                        do {
-                            var uri = String(command.dropFirst(OK_LISTEN_HTTP.count))
-                            uri = uri.trimmingCharacters(in: .whitespaces)
-                            uri = uri.replacingOccurrences(of: PORT, with: String(Blackboard.shared.tcp_port!))
-                            let url = URL(string: uri)
-                            try _ = String(contentsOf: url!, encoding: String.Encoding.utf8)
-                        } catch {
-                            // TODO error handling, server could not be contacted.
-                            print("Failed to connect to url")
-                            preconditionFailure("not yet implemented.")
-                        }
+                server.serve() {
+                    do {
+                        var uri = String(command.dropFirst(OK_LISTEN_HTTP.count))
+                        uri = uri.trimmingCharacters(in: .whitespaces)
+                        uri = uri.replacingOccurrences(of: PORT, with: String(Blackboard.shared.tcp_port!))
+                        let url = URL(string: uri)
+                        try _ = String(contentsOf: url!, encoding: String.Encoding.utf8)
+                    } catch {
+                        print("Failed to connect to url")
+                        exit(EX_USAGE)
                     }
                 }
                 
             case OK_LISTEN:
                 return true
-            
+                
             default:
-                let cmd = guiomaticCommandToOperationAndArgs(guiomaticCommand: rawStage2Command)
+                let cmd = try! Parser.guiomaticCommandToOperationAndArgs(guiomaticCommand: rawStage2Command)
+                if (cmd.op == Operation.show_main_window) {
+                    Blackboard.shared.canMainWindowBeVisible = true
+                } else if (cmd.op == Operation.hide_main_window) {
+                    Blackboard.shared.canMainWindowBeVisible = false
+                }
+                /* NOTE: Queues the command - it will be executed once the application has finished launching. */
                 let command = CommandFactory.build(forOperation: cmd.op, withArgs: cmd.args)
                 Blackboard.shared.unexecuted.push(command)
             }
             return true
         }
-        if stage2(command: rawStage2Command) == false { // NOTE Possible recursion.
+        if stage2(command: rawStage2Command) == false { // NOTE: This is a recursive call.
             break
         }
     }
-    /** End of stage 2 **/
+}
+
+do {
+    let boot = Boot()
+    try runStage1(boot)
+    
+    /**
+     Checks if the app is being run from a mounted DMG.
+     - Returns: `true` if the App's executable is located on a mounted DMG; `false` otherwise.
+     */
+    func isRunningFromDMG() -> Bool {
+        /* 1. First we use hdiutil to get a plist description of mounted volumes. */
+        if let plistXML = try? Shell.execute(binary: "/usr/bin/hdiutil", arguments: ["info", "-plist"]).stdout {
+            let data = plistXML?.data(using: .utf8)
+            let plist = try? PropertyListSerialization.propertyList(from: data!,
+                                                                    options: [],
+                                                                    format: nil) as! [String:Any]
+            /* 2. Then, for every mounted image: */
+            if let images = plist?["images"] as? [[String: Any]] {
+                for image in images {
+                    /* 3. if the image is a DMG file */
+                    if let imagePath = image["image-path"] as? String, imagePath.hasSuffix(".dmg"),
+                    let entities = image["system-entities"] as? [[String: Any]]
+                    {
+                        for entity in entities {
+                            /* 4. and if that DMG's file's mount point is
+                             * a prefix to this application's fully qualified name */
+                            if let mountPoint = entity["mount-point"] as? String,
+                                Bundle.main.bundleURL.deletingLastPathComponent().path.hasPrefix(mountPoint) {
+                                /* 5. then this application is being run from a mounted DMG. */
+                                return true
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return false
+    }
+    if Blackboard.shared.config?.never_run_from_dmg ?? false, isRunningFromDMG()
+    {
+            let error = "You must install \(ProcessInfo.processInfo.processName) before launching it."
+            ErrorNotifier.displayErrorToUser(preferredErrorMessage: error)
+    }
+    else {
+        /* Start up applications main thread. **/
+        app = NSApplication.shared
+        appDelegate = AppDelegate()
+        app.delegate = appDelegate
+        /* The main thread is now running. */
+        appDelegate.stageWorker = DispatchQueue(label: "is.mailpile.GUI-o-Mac-tic.stageWorker")
+        appDelegate.stageWorker?.async {
+            runStage2(boot)
+        }
+    }
+    
 }
 catch {
-    print(error) // TODO Error handling.
     exit(EX_USAGE)
 }
 

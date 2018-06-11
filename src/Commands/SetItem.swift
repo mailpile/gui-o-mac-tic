@@ -1,6 +1,9 @@
 import AppKit
 
 class SetItem: Command {
+    var messageOnError: String = Blackboard.shared.nextErrorMessage
+        ?? "Failed to execute 'set_item'."
+    
     let id: String
     let label: String?
     let sensitive: Bool
@@ -14,9 +17,8 @@ class SetItem: Command {
     func execute(sender: NSObject) {
         /* Updates the domain model and returns id of the updated item. */
         func updateDomainModel() -> String {
-            
             let allItems = Blackboard.shared.config!.indicator.menu
-                + (Blackboard.shared.config?.main_window?.actions ?? [ActionItem]())
+                + (Blackboard.shared.config?.main_window?.action_items ?? [ActionItem]())
             var item = allItems.first(where: {$0.id == self.id})
             precondition(item != nil, "Unable to 'set_item' for id='\(self.id)' because no item has that id.")
             if self.label != nil {
@@ -27,7 +29,7 @@ class SetItem: Command {
         }
         func tryUpdateMenuItemFor(id: String) -> Bool {
             let appDelegate = NSApplication.shared.delegate as! AppDelegate
-            guard let menuItem = appDelegate.item2Action[id]  else {
+            guard let menuItem = appDelegate.item2Action[id] else {
                 return false
             }
             if self.label != nil {
@@ -38,7 +40,7 @@ class SetItem: Command {
         }
         func tryUpdateAction(id: String) -> Bool {
             let allItems = Blackboard.shared.config!.indicator.menu
-                + (Blackboard.shared.config?.main_window?.actions ?? [ActionItem]())
+                + (Blackboard.shared.config?.main_window?.action_items ?? [ActionItem]())
             var item = allItems.first(where: {$0.id == self.id})
             guard item != nil else {
                 return false

@@ -6,7 +6,8 @@ struct MainWindow {
     let close_quits: Bool
     let width: Int
     let height: Int
-    let image: NSImage?
-    var actions: [ActionItem]
-    let status: [StatusDisplay]?
+    let image: String?
+    var action_items: [ActionItem]
+    let status_displays: [StatusDisplay]?
+    let initial_notification: String
 }

@@ -19,6 +19,8 @@ final class Constants {
     static let MAIN_WINDOW_NOTIFY_USER = NSNotification.Name(rawValue: "MAIN_WINDOW_NOTIFY_USER")
     static let SPLASH_SCREEN_NOTIFY_USER = NSNotification.Name(rawValue: "SPLASH_SCREEN_NOTIFY_USER")
     
+    static let DOMAIN_UPDATE = NSNotification.Name(rawValue: "DOMAIN_UPDATE")
+    
     static let SPLASH_SEGUE = NSStoryboardSegue.Identifier.init("splashSegue")
     
     static let SUBSTATE_CELL_ID = NSUserInterfaceItemIdentifier.init(rawValue: "SubstatusCell")

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14109"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="StatusBarPopoverController" customModule="GUI_o_Mac_tic" customModuleProvider="target">
+            <connections>
+                <outlet property="textUnderArrow" destination="gpM-Lf-Y92" id="3Jt-zl-eVM"/>
+                <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView id="Hz6-mo-xeY">
+            <rect key="frame" x="0.0" y="0.0" width="128" height="150"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="a86-xy-lSC">
+                    <rect key="frame" x="0.0" y="22" width="128" height="128"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="128" id="0Ax-YI-zQ8"/>
+                        <constraint firstAttribute="height" constant="128" id="lXP-GS-DPk"/>
+                    </constraints>
+                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="NSInfo" id="je1-eB-ww2"/>
+                </imageView>
+                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="toY-Hn-dN2">
+                    <rect key="frame" x="3" y="5" width="122" height="17"/>
+                    <textFieldCell key="cell" refusesFirstResponder="YES" sendsActionOnEndEditing="YES" title="Multiline Label" id="gpM-Lf-Y92">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+            </subviews>
+            <constraints>
+                <constraint firstItem="a86-xy-lSC" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="AOP-P2-Www"/>
+                <constraint firstAttribute="width" secondItem="a86-xy-lSC" secondAttribute="width" id="C3J-4p-Rlq"/>
+                <constraint firstItem="toY-Hn-dN2" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="5" id="UL2-VI-jOD"/>
+                <constraint firstAttribute="trailing" secondItem="toY-Hn-dN2" secondAttribute="trailing" constant="5" id="c5F-Hh-SNf"/>
+                <constraint firstAttribute="bottom" secondItem="toY-Hn-dN2" secondAttribute="bottom" constant="5" id="gFx-mx-3KM"/>
+                <constraint firstItem="a86-xy-lSC" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" id="rJK-11-ADs"/>
+                <constraint firstItem="toY-Hn-dN2" firstAttribute="top" secondItem="a86-xy-lSC" secondAttribute="bottom" id="vA1-nd-QKY"/>
+            </constraints>
+            <point key="canvasLocation" x="55" y="114"/>
+        </customView>
+    </objects>
+    <resources>
+        <image name="NSInfo" width="32" height="32"/>
+    </resources>
+</document>

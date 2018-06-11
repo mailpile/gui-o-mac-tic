@@ -1,14 +1,26 @@
 import Foundation
 
 class GetURL: URLCommand {
-    let url: URL
+    var messageOnError: String = Blackboard.shared.nextErrorMessage
+        ?? "Failed to execute 'get_url'."
     
-    init(url: URL) {
+    let url: URL
+    let cookies: [String: String]?
+    
+    init(url: URL, cookies: [String: String]?) {
         self.url = url
+        self.cookies = cookies
     }
     
     func execute(sender: NSObject) {
-        let request = URLRequest(url: self.url)
+        var request = URLRequest(url: self.url)
+        
+        if let cookies = self.cookies {
+            for cookie in cookies {
+                request.addValue(cookie.key + "=" + cookie.value, forHTTPHeaderField: "Cookie")
+            }
+        }
+        
         let task = URLSession.shared.dataTask(with: request,
                                               completionHandler:completionHandler(data:urlResponse:error:))
         task.resume()

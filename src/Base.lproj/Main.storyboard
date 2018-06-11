@@ -17,7 +17,7 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="GUI-o-Mac-tic" systemMenu="apple" autoenablesItems="NO" id="uQy-DD-JDr">
                                     <items>
-                                        <menuItem title="Quit GUI-o-Mac-tic" keyEquivalent="q" id="4sb-4s-VLi">
+                                        <menuItem title="Quit" keyEquivalent="q" id="4sb-4s-VLi">
                                             <connections>
                                                 <action selector="terminate:" target="Ady-hI-5gd" id="Te7-pn-YzF"/>
                                             </connections>
@@ -185,6 +185,7 @@
                         <outlet property="actionStack" destination="Abb-xO-YYl" id="eEn-ko-gvN"/>
                         <outlet property="background" destination="Nlk-hX-FkE" id="ho9-Hh-vk8"/>
                         <outlet property="notification" destination="WQR-TC-v3D" id="qKv-Oj-gKs"/>
+                        <outlet property="substatusScrollView" destination="vZC-z3-k86" id="AYj-NB-rui"/>
                         <outlet property="substatusView" destination="p3U-rk-9b6" id="uEr-4u-8fT"/>
                         <segue destination="ddy-uX-gB5" kind="show" identifier="splashSegue" id="plZ-p0-PkT"/>
                     </connections>
@@ -226,10 +227,10 @@
                             </progressIndicator>
                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="sxi-34-1Wi" userLabel="Splash Image View">
                                 <rect key="frame" x="0.0" y="0.0" width="480" height="720"/>
-                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" image="SplashBackground" id="qdE-7X-iao"/>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" id="qdE-7X-iao"/>
                             </imageView>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="52b-Wz-GcU" userLabel="Splash Label">
-                                <rect key="frame" x="-2" y="158" width="484" height="17"/>
+                                <rect key="frame" x="-2" y="703" width="41" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Label" id="hbp-fs-c5x">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -242,16 +243,18 @@
                             <constraint firstItem="sxi-34-1Wi" firstAttribute="height" secondItem="SSV-er-UMe" secondAttribute="height" id="6hQ-TM-i3o"/>
                             <constraint firstAttribute="bottom" secondItem="28v-MU-njv" secondAttribute="bottom" constant="-6" id="7uT-0h-TaA"/>
                             <constraint firstItem="28v-MU-njv" firstAttribute="leading" secondItem="SSV-er-UMe" secondAttribute="leading" id="DpB-4v-eOf"/>
-                            <constraint firstItem="52b-Wz-GcU" firstAttribute="width" secondItem="SSV-er-UMe" secondAttribute="width" id="Ooy-fP-3oT"/>
                             <constraint firstItem="sxi-34-1Wi" firstAttribute="width" secondItem="SSV-er-UMe" secondAttribute="width" id="YHp-1d-374"/>
                             <constraint firstItem="sxi-34-1Wi" firstAttribute="leading" secondItem="SSV-er-UMe" secondAttribute="leading" id="aTf-eQ-hML"/>
-                            <constraint firstItem="52b-Wz-GcU" firstAttribute="centerX" secondItem="SSV-er-UMe" secondAttribute="centerX" id="iEU-NT-XSj"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="52b-Wz-GcU" secondAttribute="trailing" id="hmE-Fg-7Nc"/>
+                            <constraint firstItem="52b-Wz-GcU" firstAttribute="leading" secondItem="SSV-er-UMe" secondAttribute="leading" id="iWa-Wk-hh4"/>
                             <constraint firstItem="28v-MU-njv" firstAttribute="width" secondItem="SSV-er-UMe" secondAttribute="width" id="jih-YB-pTU"/>
-                            <constraint firstAttribute="bottom" secondItem="52b-Wz-GcU" secondAttribute="bottom" constant="158" id="x2v-SR-doy"/>
+                            <constraint firstAttribute="top" secondItem="52b-Wz-GcU" secondAttribute="top" id="x2v-SR-doy"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="imageCell" destination="qdE-7X-iao" id="rLM-7e-eRT"/>
+                        <outlet property="messageLeadingX" destination="iWa-Wk-hh4" id="Vdx-DC-SEF"/>
+                        <outlet property="messageTop" destination="x2v-SR-doy" id="Esg-9F-Ztp"/>
                         <outlet property="notification" destination="52b-Wz-GcU" id="D5K-Sa-NIT"/>
                         <outlet property="progressIndicator" destination="28v-MU-njv" id="Mmg-i0-V85"/>
                     </connections>
@@ -261,7 +264,4 @@
             <point key="canvasLocation" x="-379" y="1593"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="SplashBackground" width="480" height="720"/>
-    </resources>
 </document>

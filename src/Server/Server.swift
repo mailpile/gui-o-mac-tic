@@ -16,6 +16,7 @@ import AppKit.NSAlert
 class Server: Thread {
     let QUEUE_SIZE: Int32 = 5
     let UNKNOWN_ERROR = "Unknown error."
+    let UNDEFINED_ERROR: Int32 = -1
     
     /* NOTE: The archaic types, functions and their error-codes
      * are documented in the BSD System Calls Manual and in the
@@ -26,6 +27,9 @@ class Server: Thread {
     private static let INVALID_FILE_DESCRIPTOR: Int32 = -1
     var socket_fd: Int32 = INVALID_FILE_DESCRIPTOR
     var request_fd: Int32 = INVALID_FILE_DESCRIPTOR
+    
+    /** Should this thread be running? */
+    var running = true
 
     func serve(dispatchForExecutionWhenChannelIsOpened: () -> Void) {
         func setupDataStructures(portToListenOn port: UInt16) throws {
@@ -220,6 +224,13 @@ class Server: Thread {
             }
         }
         
+        /**
+          Receives and processes GUI-o-Matic Stage 3 protocol commands.
+         
+          - Throws:
+          An error of type `NetworkError.read` if the received data is not a stage 3 protocol command and
+          this method can recover from that error.
+        */
         func receiveAndProcessData() throws {
             defer {
                 close(self.request_fd)
@@ -233,6 +244,20 @@ class Server: Thread {
                     let status = read(self.request_fd,
                          &buff_rcvd,
                          1) /* The number of bytes to read. */
+                    
+                    let EOF = 0
+                    guard status != EOF else {
+                        /**
+                          - Note:
+                          The stack's defer{}s will not be called; the OS will clean up any opened sockets but that
+                          might not happen immediately after the application has terminated. This should not result
+                          in an error, next time the app is launched, because this module is set to listen on a random
+                          free port.
+                         */
+                        NSApplication.shared.terminate(self)
+                        self.running = false
+                        return
+                    }
                     
                     guard status != -1 else {
                         let errorMessage = String(utf8String: strerror(errno)) ?? "Unknown error"
@@ -269,43 +294,31 @@ class Server: Thread {
                 }
                 
                 /* Parse the gui-o-matic command */
-                let cmd = guiomaticCommandToOperationAndArgs(guiomaticCommand: line)
-                let command = CommandFactory.build(forOperation: cmd.op, withArgs: cmd.args)
-                
-                /* Dispatch the command for execution on the GUI thread. */
-                DispatchQueue.main.async {
-                    command.execute(sender: self)
-                }
-            }
-        }
-        
-        func logError(_ errorMessage: String, _ errorCode: Int32? = nil) {
-            NSLog(errorMessage + (errorCode != nil ? " ("+String(errorCode!)+")." : ""))
-        }
-        
-        // TODO Refactor out.
-        func displayErrorToUser(preferredErrorMessage: String) {
-            DispatchQueue.main.async {
-                func showAlert() {
-                    let alert = NSAlert()
-                    if let error = Blackboard.shared.nextErrorMessage {
-                        Blackboard.shared.nextErrorMessage = nil
-                        alert.messageText = error
-                    } else {
-                        alert.messageText = "Error"
+                do {
+                    let cmd = try Parser.guiomaticCommandToOperationAndArgs(guiomaticCommand: line)
+                    if (cmd.op == Operation.show_main_window) {
+                        Blackboard.shared.canMainWindowBeVisible = true
+                    } else if (cmd.op == Operation.hide_main_window) {
+                        Blackboard.shared.canMainWindowBeVisible = false
                     }
-                    alert.informativeText = preferredErrorMessage
-                    alert.addButton(withTitle: "Exit")
-                    alert.alertStyle = NSAlert.Style.critical
-                    alert.runModal()
-                    NSApp.terminate(self)
+                    let command = CommandFactory.build(forOperation: cmd.op, withArgs: cmd.args)
+                    
+                    
+                    /* Dispatch the command for execution on the GUI thread. */
+                    DispatchQueue.main.async {
+                        command.execute(sender: self)
+                    }
+                } catch ParsingError.empty {
+                    continue
+                } catch ParsingError.notStage3Command {
+                    continue
+                } catch ParsingError.notJSON {
+                    continue
                 }
-                showAlert()
-                NSApp.requestUserAttention(.criticalRequest)
             }
         }
-        
-        while (true) {
+                
+        while (self.running) {
             do {
                 Blackboard.shared.tcp_port = nil
                 let port = UInt16.random(min: 1024, max: UInt16.max)
@@ -324,56 +337,42 @@ class Server: Thread {
             /*
              *    Handle recoverable errors.
              */
-            catch let NetworkError.getaddrinfo(recoverable, errorMessage, errorCode) where recoverable  {
-                logError(errorMessage, errorCode)
+            catch let NetworkError.getaddrinfo(recoverable, _, _) where recoverable  {
                 continue
-            } catch let NetworkError.socket(recoverable, errorMessage, errorCode) where recoverable {
-                logError(errorMessage, errorCode)
+            } catch let NetworkError.socket(recoverable, _, _) where recoverable {
                 continue
-            } catch let NetworkError.bind(recoverable, errorMessage, errorCode) where recoverable {
-                logError(errorMessage, errorCode)
+            } catch let NetworkError.bind(recoverable, _, _) where recoverable {
                 continue
-            } catch let NetworkError.listen(recoverable, errorMessage, errorCode) where recoverable {
-                logError(errorMessage, errorCode)
+            } catch let NetworkError.listen(recoverable, _, _) where recoverable {
                 continue
-            } catch let NetworkError.accept(recoverable, errorMessage, errorCode) where recoverable {
-                logError(errorMessage, errorCode)
+            } catch let NetworkError.accept(recoverable, _, _) where recoverable {
                 continue
-            } catch let NetworkError.read(recoverable, errorMessage, errorCode) where recoverable {
-                logError(errorMessage, errorCode)
+            } catch let NetworkError.read(recoverable, _, _) where recoverable {
                 continue
             }
             /*
              *    Handle non-recoverable errors.
              */
-            catch let NetworkError.getaddrinfo(recoverable, errorMessage, errorCode) where !recoverable  {
-                logError(errorMessage, errorCode)
-                displayErrorToUser(preferredErrorMessage: errorMessage)
+            catch let NetworkError.getaddrinfo(recoverable, errorMessage, _) where !recoverable  {
+                ErrorNotifier.displayErrorToUser(preferredErrorMessage: errorMessage)
                 return
-            } catch let NetworkError.socket(recoverable, errorMessage, errorCode) where !recoverable {
-                logError(errorMessage, errorCode)
-                displayErrorToUser(preferredErrorMessage: errorMessage)
+            } catch let NetworkError.socket(recoverable, errorMessage, _) where !recoverable {
+                ErrorNotifier.displayErrorToUser(preferredErrorMessage: errorMessage)
                 return
-            } catch let NetworkError.bind(recoverable, errorMessage, errorCode) where !recoverable {
-                logError(errorMessage, errorCode)
-                displayErrorToUser(preferredErrorMessage: errorMessage)
+            } catch let NetworkError.bind(recoverable, errorMessage, _) where !recoverable {
+                ErrorNotifier.displayErrorToUser(preferredErrorMessage: errorMessage)
                 return
-            } catch let NetworkError.listen(recoverable, errorMessage, errorCode) where !recoverable {
-                logError(errorMessage, errorCode)
-                displayErrorToUser(preferredErrorMessage: errorMessage)
+            } catch let NetworkError.listen(recoverable, errorMessage, _) where !recoverable {
+                ErrorNotifier.displayErrorToUser(preferredErrorMessage: errorMessage)
                 return
-            } catch let NetworkError.accept(recoverable, errorMessage, errorCode) where !recoverable {
-                logError(errorMessage, errorCode)
-                displayErrorToUser(preferredErrorMessage: errorMessage)
+            } catch let NetworkError.accept(recoverable, errorMessage, _) where !recoverable {
+                ErrorNotifier.displayErrorToUser(preferredErrorMessage: errorMessage)
                 return
-            } catch let NetworkError.read(recoverable, errorMessage, errorCode) where !recoverable {
-                logError(errorMessage, errorCode)
-                displayErrorToUser(preferredErrorMessage: errorMessage)
+            } catch let NetworkError.read(recoverable, errorMessage, _) where !recoverable {
+                ErrorNotifier.displayErrorToUser(preferredErrorMessage: errorMessage)
                 return
             } catch {
-                let errorMessage = "An unknown network error has occured."
-                logError(errorMessage)
-                displayErrorToUser(preferredErrorMessage: errorMessage)
+                ErrorNotifier.displayErrorToUser(preferredErrorMessage: "An unknown network error has occured.")
                 return
             }
         }
