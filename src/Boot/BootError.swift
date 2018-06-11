@@ -1,7 +1,7 @@
 import Foundation
 
 /** Errors related to the boot process. */
-enum BootError: Error, Equatable {
+enum BootError: Error {
     
     /** An error occured while obtaining the config for Stage 1 and 2. */
     case failedToObtainConfig(reason: String)
