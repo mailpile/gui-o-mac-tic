@@ -190,6 +190,12 @@ extension FontStyles {
         } else {
             self.title = nil
         }
+        
+        if let buttonsJSON = json[Keyword.buttons.rawValue] as? [String: Any] {
+            self.buttons = FontStyle(json: buttonsJSON)
+        } else {
+            self.buttons = nil
+        }
     }
 }
 

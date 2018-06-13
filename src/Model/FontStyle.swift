@@ -12,4 +12,5 @@ struct FontStyles {
     let details: FontStyle?
     let notification: FontStyle?
     let splash: FontStyle?
+    let buttons: FontStyle?
 }

@@ -28,6 +28,7 @@ class MainWindowViewController: NSViewController, NSTableViewDelegate, NSTableVi
         if let notificationFont = Blackboard.shared.config?.fontStyles?.notification {
             self.notification.font = FontStyleToFontMapper.map(notificationFont)
         }
+
         
         func configureActionStack() {
             func mapPosition2Gravity(position: Position) -> NSStackView.Gravity {
@@ -52,6 +53,12 @@ class MainWindowViewController: NSViewController, NSTableViewDelegate, NSTableVi
                 let gravity = mapPosition2Gravity(position: action.position!)
                 self.actionStack.addView(control, in: gravity)
                 self.button2Action[control] = action
+            }
+            
+            if let buttonsFont = Blackboard.shared.config?.fontStyles?.buttons {
+                self.button2Action.keys.forEach { button in
+                    button.font = FontStyleToFontMapper.map(buttonsFont)
+                }
             }
         }
         NotificationCenter.default.addObserver(forName: Constants.SHOW_SPLASH_SCREEN, object: nil, queue: nil) { notification in
