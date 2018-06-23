@@ -19,7 +19,10 @@ func runStage1(_ boot: Boot) throws {
 
 func runStage2(_ boot: Boot) {
     for rawStage2Command: String in boot.stage2 {
-        func stage2(command: String) -> Bool /* true if for loop should is allowed to run again */ {
+        /**
+         - Returns: true if the for loop may run again.
+         */
+        func stage2(command: String) -> Bool {
             guard rawStage2Command.isEmpty == false else {
                 return true
             }
@@ -29,7 +32,9 @@ func runStage2(_ boot: Boot) {
                 return false
                 
             case let command where command.hasPrefix(OK_LISTEN_TO):
-                preconditionFailure("Not yet implemented.")
+                let listener = Listener()
+                listener.command = String(command.dropFirst(OK_LISTEN_TO.count).trimmingCharacters(in: CharacterSet.whitespacesAndNewlines))
+                listener.listen()
                 
             case let command where command.hasPrefix(OK_LISTEN_TCP):
                 /*
