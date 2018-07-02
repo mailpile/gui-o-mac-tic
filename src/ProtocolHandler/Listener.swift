@@ -1,5 +1,8 @@
-import Foundation
+import AppKit
 
+/**
+ Executes a command, then listens to it's stdout.
+ */
 class Listener: Thread {
     /** The command this listener is to listen to. */
     var command: String?
@@ -43,14 +46,21 @@ class Listener: Thread {
             
             process.launch()
             process.waitUntilExit()
+            
+            if process.terminationStatus != 0 {
+                DispatchQueue.main.async {
+                    let errorMsg = "The app can not be configured because of an error from OK LISTEN TO."
+                    ErrorNotifier.displayErrorToUser(preferredErrorMessage: errorMsg)
+                }
+            }
         }
         
         assert(self.command?.first != " " && self.command?.last != " " && self.command?.last != "\n",
                "Expected the command to be trimmed.");
         var args = self.command!
-        self.command = self.command?.components(separatedBy: CharacterSet.whitespaces).first!
+        self.command = self.command!.components(separatedBy: CharacterSet.whitespaces).first!
         args.removeFirst(self.command!.count + 1 /*+1 for the space*/)
-        self.arguments.append(args)
+        self.arguments = args.components(separatedBy: CharacterSet.whitespaces)
         
         execute()
     }
@@ -66,7 +76,6 @@ class Listener: Thread {
                 Blackboard.shared.canMainWindowBeVisible = false
             }
             let command = CommandFactory.build(forOperation: cmd!.op, withArgs: cmd!.args)
-            
             
             /* Dispatch the command for execution on the GUI thread. */
             DispatchQueue.main.async {
