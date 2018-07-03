@@ -15,11 +15,12 @@ class Listener: Thread {
          */
         func execute() {
             let process = Process()
-            let binary = self.command
+            let binary = "/usr/bin/env"
+            
             if #available(OSX 10.13, *) {
-                process.executableURL = URL(fileURLWithPath: binary!)
+                process.executableURL = URL(fileURLWithPath: binary)
             } else {
-                process.launchPath = binary!
+                process.launchPath = binary
             }
             process.arguments = self.arguments
             
@@ -55,12 +56,8 @@ class Listener: Thread {
             }
         }
         
-        assert(self.command?.first != " " && self.command?.last != " " && self.command?.last != "\n",
-               "Expected the command to be trimmed.");
-        var args = self.command!
-        self.command = self.command!.components(separatedBy: CharacterSet.whitespaces).first!
-        args.removeFirst(self.command!.count + 1 /*+1 for the space*/)
-        self.arguments = args.components(separatedBy: CharacterSet.whitespaces)
+        self.arguments.append("-S") // Passes -S to env.
+        self.arguments.append(self.command!)
         
         execute()
     }
