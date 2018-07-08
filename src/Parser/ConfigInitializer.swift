@@ -196,6 +196,21 @@ extension FontStyles {
         } else {
             self.buttons = nil
         }
+        
+        for localScope in json.keys where localScope.hasSuffix(Keyword._title.rawValue) {
+            let id = String(localScope.dropLast(Keyword._title.rawValue.count))
+            guard id != localScope else { continue }
+            if let style = FontStyle(json: json[localScope] as! [String: Any]) {
+                self.statusId2statusTitle[id] = style
+            }
+        }
+        for localScope in json.keys where localScope.hasSuffix(Keyword._details.rawValue) {
+            let id = String(localScope.dropLast(Keyword._details.rawValue.count))
+            guard id != localScope else { continue }
+            if let style = FontStyle(json: json[localScope] as! [String: Any]) {
+                self.statusId2statusDetails[id] = style
+            }
+        }
     }
 }
 
