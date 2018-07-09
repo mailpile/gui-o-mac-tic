@@ -14,7 +14,7 @@ class SetItem: Command {
         self.sensitive = sensitive
     }
     
-    func execute(sender: NSObject) {
+    func execute(sender: NSObject) -> Bool {
         /* Updates the domain model and returns id of the updated item. */
         func updateDomainModel() -> String {
             let allItems = Blackboard.shared.config!.indicator.menu
@@ -55,6 +55,8 @@ class SetItem: Command {
         if (!didUpdateMenuItem) {
             let didUpdateAction = tryUpdateAction(id: idOfUpdatedObject)
             assert(didUpdateAction, "Item not found.")
+            if !didUpdateAction { return false }
         }
+        return true
     }
 }

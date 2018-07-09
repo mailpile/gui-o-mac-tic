@@ -54,7 +54,8 @@ func runStage2(_ boot: Boot) {
                     commands.append(shellCommand)
                     let shell = Shell(commands)
                     #endif
-                    shell.execute(sender: NSObject()/* Using NSObject because execute is not called by an object. */)
+                    let wasExecuted = shell.execute(sender: NSObject()/* Using NSObject because execute is not called by an object. */)
+                    return wasExecuted
                 }
                 
             case let command where command.hasPrefix(OK_LISTEN_HTTP):
@@ -70,9 +71,9 @@ func runStage2(_ boot: Boot) {
                         let url = URL(string: uri)
                         try _ = String(contentsOf: url!, encoding: String.Encoding.utf8)
                     } catch {
-                        print("Failed to connect to url")
-                        exit(EX_USAGE)
+                        return false
                     }
+                    return true
                 }
                 
             case OK_LISTEN:

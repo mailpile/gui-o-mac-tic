@@ -14,7 +14,7 @@ class PostURL: URLCommand {
         self.cookies = cookies
     }
     
-    func execute(sender: NSObject) {
+    func execute(sender: NSObject) -> Bool {
         var request = URLRequest(url: self.url)
         request.httpMethod = "POST"
         request.httpBody = payload
@@ -29,5 +29,6 @@ class PostURL: URLCommand {
         let task = URLSession.shared.dataTask(with: request,
                                               completionHandler:completionHandler(data:urlResponse:error:))
         task.resume()
+        return true
     }
 }

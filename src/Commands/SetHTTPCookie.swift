@@ -16,9 +16,10 @@ class SetHTTPCookie: Command {
         self.remove = remove
     }
     
-    func execute(sender: NSObject) {
+    func execute(sender: NSObject) -> Bool {
         guard var cookies = Blackboard.shared.config!.http_cookies else {
-            preconditionFailure("Attempted to modify a cookie, but no cookies exist.")
+            assertionFailure("Attempted to modify a cookie, but no cookies exist.")
+            return false
         }
         
         let domainParts = self.domain.split(separator: ":")
@@ -32,7 +33,8 @@ class SetHTTPCookie: Command {
                 && $0.data.keys.contains(self.key)
         })
         if indexOfCookieToModify == nil && (self.value != nil || self.remove == true) {
-            preconditionFailure("Failed to modify a non-existing cookie.")
+            assertionFailure("Failed to modify a non-existing cookie.")
+            return false
         } else {
             if self.value != nil {
                 cookies[indexOfCookieToModify!].data[self.key] = value
@@ -42,5 +44,6 @@ class SetHTTPCookie: Command {
                 cookies[indexOfCookieToModify!].data.removeValue(forKey: self.key)
             }
         }
+        return true
     }
 }

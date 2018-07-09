@@ -10,7 +10,8 @@ class SetNextErrorMessage: Command {
         self.message = message
     }
     
-    func execute(sender: NSObject) {
+    func execute(sender: NSObject) -> Bool {
         Blackboard.shared.nextErrorMessage = message
+        return true
     }
 }

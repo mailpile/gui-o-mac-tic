@@ -10,11 +10,8 @@ class ShowURL: Command {
         self.url = url
     }
     
-    @objc func execute(sender: NSObject) {
+    @objc func execute(sender: NSObject) -> Bool {
         let didOpenUrl = NSWorkspace.shared.open(self.url)
-        if !didOpenUrl {
-            /* TODO Error handling, url could not be opened. */
-            assertionFailure("Not implemented.")
-        }
+        return didOpenUrl
     }
 }

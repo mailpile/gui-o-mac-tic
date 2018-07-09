@@ -18,14 +18,15 @@ class SetStatusDisplay: Command {
         self.textColour = colour
     }
     
-    func execute(sender: NSObject) {
+    func execute(sender: NSObject) -> Bool {
         guard let main_window = Blackboard.shared.config!.main_window else {
-            preconditionFailure("Unable to set a status because main_window has not been specified")
+            assertionFailure("Unable to set a status because main_window has not been specified")
+            return false
         }
         
         guard let status = main_window.status_displays?.first(where: { $0.id == self.id }) else {
             // NOTE: Unable to set_status_display on "self.id" because no status exists with that id.
-            return
+            return false
         }
         
         if self.title != nil {
@@ -42,5 +43,7 @@ class SetStatusDisplay: Command {
         }
         
         NotificationCenter.default.post(name: Constants.SET_STATUS_DISPLAY, object: nil)
+        
+        return true
     }
 }

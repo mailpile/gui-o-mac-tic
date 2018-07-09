@@ -12,7 +12,7 @@ class SetStatus: Command {
         self.badge = badge
     }
     
-    func execute(sender: NSObject) {
+    func execute(sender: NSObject) -> Bool {
         if let status = self.status {
             Blackboard.shared.status = status
         }
@@ -20,5 +20,7 @@ class SetStatus: Command {
         if let badge = self.badge {
             NSApp.dockTile.badgeLabel = badge
         }
+        
+        return true
     }
 }

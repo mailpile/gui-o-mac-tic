@@ -2,7 +2,7 @@ import Foundation
 
 protocol URLCommand: Command {
     func completionHandler(data: Data?, urlResponse: URLResponse?, error: Error?)
-    func execute(sender: NSObject)
+    func execute(sender: NSObject) -> Bool
 }
 
 extension URLCommand {

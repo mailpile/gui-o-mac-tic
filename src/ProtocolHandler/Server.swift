@@ -31,7 +31,7 @@ class Server: Thread {
     /** Should this thread be running? */
     var running = true
 
-    func serve(dispatchForExecutionWhenChannelIsOpened: () -> Void) {
+    func serve(dispatchForExecutionWhenChannelIsOpened: () -> Bool) {
         func setupDataStructures(portToListenOn port: UInt16) throws {
             self._addrinfo = addrinfo(
                 ai_flags: AI_PASSIVE,
@@ -317,22 +317,25 @@ class Server: Thread {
                 }
             }
         }
-                
-        while (self.running) {
+        
+        /** // The port to which a socket is to be bound. */
+        var port: UInt16 = 0
+        
+        /**
+         * Try to bind a socket to a port.
+         */
+        func isSocketBoundToAPort() -> Bool { return Blackboard.shared.tcp_port != nil }
+        while (!isSocketBoundToAPort()) {
             do {
                 Blackboard.shared.tcp_port = nil
-                let port = UInt16.random(min: 1024, max: UInt16.max)
+                port = UInt16.random(min: 1024, max: UInt16.max)
                 try setupDataStructures(portToListenOn: port)
                 try getSocketFileDescriptor()
                 /* NOTE: bindSocketFileDescriptorToPort throws a recoverable exception should it fail
                  * to bind a socket to a port, in which case the error handling spins this loop around
                  * and an attempt will be made to bind a new socket to a different port. */
                 try bindSocketFileDescriptorToPort()
-                try listenForACall()
                 Blackboard.shared.tcp_port = port
-                dispatchForExecutionWhenChannelIsOpened()
-                try acceptCall()
-                try receiveAndProcessData()
             }
             /*
              *    Handle recoverable errors.
@@ -372,10 +375,26 @@ class Server: Thread {
                 ErrorNotifier.displayErrorToUser(preferredErrorMessage: errorMessage)
                 return
             } catch {
-                ErrorNotifier.displayErrorToUser(preferredErrorMessage: "An unknown network error has occured.")
+                let errorMessage = "An unknown network error occured during an attempt to bind a socket to a port."
+                ErrorNotifier.displayErrorToUser(preferredErrorMessage: errorMessage)
                 return
             }
         }
         
+        /**
+         * A socket has been bound to a port.
+         * Begin listening for a connection on that port,
+         * then inform the backend that it should begin sending data over the port,
+         * then receive and process incoming data.
+         */
+        do {
+            try listenForACall()
+            dispatchForExecutionWhenChannelIsOpened()
+            try acceptCall()
+            try receiveAndProcessData()
+        } catch {
+            let errorMessage = "An unknown network error occured during an attempt to accept, receive or process data."
+            ErrorNotifier.displayErrorToUser(preferredErrorMessage: errorMessage)
+        }
     }
 }

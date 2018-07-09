@@ -35,20 +35,19 @@ class Shell: Command {
      - Parameter sender: This function's caller.
      - Throws: An NSInvalidArgumentException if the binary invalid or if it fails to to be executed.
      */
-    func execute(sender: NSObject) {
+    func execute(sender: NSObject) -> Bool {
         for command in commands {
             do {
                 let arguments = try Parser.parse(arguments: command)
                 let output = try Shell.execute(binary: "/usr/bin/env", arguments: arguments)
                 guard output.exitStatus == EXIT_SUCCESS else {
-                    // TODO error handling.
-                    preconditionFailure("Not implemented.")
+                    return false
                 }
             } catch {
-                // TODO error handling.
-                preconditionFailure("Not implemented.")
+                return false
             }
         }
+        return true
     }
     
     /**
