@@ -31,7 +31,7 @@ class Server: Thread {
     /** Should this thread be running? */
     var running = true
 
-    func serve(dispatchForExecutionWhenChannelIsOpened: () -> Bool) {
+    func serve(dispatchForExecutionWhenChannelIsOpened: (_: inout Bool) -> ()) {
         func setupDataStructures(portToListenOn port: UInt16) throws {
             self._addrinfo = addrinfo(
                 ai_flags: AI_PASSIVE,
@@ -306,7 +306,7 @@ class Server: Thread {
                     
                     /* Dispatch the command for execution on the GUI thread. */
                     DispatchQueue.main.async {
-                        command.execute(sender: self)
+                        _ = command.execute(sender: self)
                     }
                 } catch ParsingError.empty {
                     continue
@@ -389,7 +389,13 @@ class Server: Thread {
          */
         do {
             try listenForACall()
-            dispatchForExecutionWhenChannelIsOpened()
+            var executedSuccessfully = false
+            dispatchForExecutionWhenChannelIsOpened(&executedSuccessfully)
+            guard executedSuccessfully else {
+                let errorMessage = "Failed to execute OK LISTEN TCP's command."
+                ErrorNotifier.displayErrorToUser(preferredErrorMessage: errorMessage)
+                return
+            }
             try acceptCall()
             try receiveAndProcessData()
         } catch {

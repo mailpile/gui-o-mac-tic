@@ -77,6 +77,7 @@
 		D8DF323F206922150034165A /* SetStatusDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DF323E206922150034165A /* SetStatusDisplay.swift */; };
 		D8DF3241206927200034165A /* NSColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DF3240206927200034165A /* NSColor+Extensions.swift */; };
 		D8DF324320692B7B0034165A /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DF324220692B7B0034165A /* String+Extensions.swift */; };
+		D8E0F26C20F47992005D84C2 /* CommandWithReturn.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E0F26B20F47992005D84C2 /* CommandWithReturn.swift */; };
 		D8E459F320753B1B00B5A3CD /* stage1.conf in Resources */ = {isa = PBXBuildFile; fileRef = D8E459F220753B1B00B5A3CD /* stage1.conf */; };
 		D8E9A6C620D13E7000C950AF /* Listener.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E9A6C520D13E7000C950AF /* Listener.swift */; };
 		D8ECDD6C205EA6370004790B /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8ECDD6B205EA6370004790B /* Parser.swift */; };
@@ -171,6 +172,7 @@
 		D8DF323E206922150034165A /* SetStatusDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetStatusDisplay.swift; sourceTree = "<group>"; };
 		D8DF3240206927200034165A /* NSColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSColor+Extensions.swift"; sourceTree = "<group>"; };
 		D8DF324220692B7B0034165A /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
+		D8E0F26B20F47992005D84C2 /* CommandWithReturn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandWithReturn.swift; sourceTree = "<group>"; };
 		D8E459F220753B1B00B5A3CD /* stage1.conf */ = {isa = PBXFileReference; explicitFileType = sourcecode.javascript; fileEncoding = 4; path = stage1.conf; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.javascript; };
 		D8E9A6C520D13E7000C950AF /* Listener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Listener.swift; sourceTree = "<group>"; };
 		D8ECDD6B205EA6370004790B /* Parser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
@@ -406,6 +408,7 @@
 				D896443120A0309F00D4F5B4 /* Terminal */,
 				D8DF32322068FC2E0034165A /* UpdateSplashScreen.swift */,
 				D81A51FF2067F81A00E431E9 /* URLCommand.swift */,
+				D8E0F26B20F47992005D84C2 /* CommandWithReturn.swift */,
 			);
 			path = Commands;
 			sourceTree = "<group>";
@@ -602,6 +605,7 @@
 				D8B109AB206BA28F00084D82 /* NotifyUser.swift in Sources */,
 				D86EFEC92080A5ED004D3B45 /* Keyword.swift in Sources */,
 				D8467E6C20AEBDFA00F8F08A /* NSWindow+Extensions.swift in Sources */,
+				D8E0F26C20F47992005D84C2 /* CommandWithReturn.swift in Sources */,
 				D8DF323F206922150034165A /* SetStatusDisplay.swift in Sources */,
 				D8594A0E206A8A8D00D089DE /* SetNextErrorMessage.swift in Sources */,
 				D842DA8C2062A73B0043B73A /* URL+Extensions.swift in Sources */,

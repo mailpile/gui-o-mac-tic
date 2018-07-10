@@ -67,7 +67,7 @@ class AppDelegate: NSObject,
         NSApplication.shared.windows.forEach { window in window.title = Blackboard.shared.config!.app_name }
         
         while let command = Blackboard.shared.unexecuted.tryPop() {
-            command.execute(sender: self)
+            _ = command.execute(sender: self)
         }
         
         /* If a status bar popover message was specified in the config, display it. */
@@ -163,12 +163,12 @@ class AppDelegate: NSObject,
             }
             guard action != nil else { return }
             let command = CommandFactory.build(forOperation: action!.op!, withArgs: action!.args)
-            command.execute(sender: self)
+            _ = command.execute(sender: self)
         }
     }
     
     func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
-        ShowMainWindow().execute(sender: self)
+        _ = ShowMainWindow().execute(sender: self)
         return false
     }
     

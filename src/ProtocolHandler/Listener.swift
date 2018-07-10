@@ -76,7 +76,7 @@ class Listener: Thread {
             
             /* Dispatch the command for execution on the GUI thread. */
             DispatchQueue.main.async {
-                command.execute(sender: self)
+                _ = command.execute(sender: self)
             }
         }
     }

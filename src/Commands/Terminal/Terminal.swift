@@ -1,6 +1,6 @@
 import AppKit
 
-class Terminal: Command {
+class Terminal: Command, CommandWithReturn {
     var messageOnError: String = Blackboard.shared.nextErrorMessage
         ?? "Failed to execute 'terminal'."
     
@@ -13,6 +13,11 @@ class Terminal: Command {
         self.command = command
         self.title = title
         self.icon = icon
+    }
+    
+    func execute(executedSuccessfully: inout Bool) {
+        var errorMessage: String = ""
+        executedSuccessfully = execute(command: command, terminalWindowTitle: title, errorMessage: &errorMessage)
     }
     
     func execute(sender: NSObject) -> Bool {

@@ -1,7 +1,7 @@
 import Foundation
 import AppKit
 
-class Shell: Command {
+class Shell: Command, CommandWithReturn {
     var messageOnError: String = Blackboard.shared.nextErrorMessage
         ?? "Failed to execute 'shell'."
     
@@ -27,6 +27,22 @@ class Shell: Command {
     init(_ commands: [String]) {
         assert(commands.count > 0, "Expected a command for execution.")
         self.commands = commands
+    }
+    
+    func execute(executedSuccessfully: inout Bool) {
+        for command in commands {
+            do {
+                let arguments = try Parser.parse(arguments: command)
+                let output = try Shell.execute(binary: "/usr/bin/env", arguments: arguments)
+                guard output.exitStatus == EXIT_SUCCESS else {
+                    executedSuccessfully = false
+                    return
+                }
+                executedSuccessfully = true
+            } catch {
+                executedSuccessfully = false
+            }
+        }
     }
     
     /**
