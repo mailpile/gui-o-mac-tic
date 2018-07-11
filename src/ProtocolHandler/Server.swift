@@ -14,9 +14,13 @@ import AppKit.NSAlert
  * corresponds to the structure of the aforementioned guide.
  */
 class Server: Thread {
+    let ACCEPT_TIMEOUT_SECONDS = 30.0
     let QUEUE_SIZE: Int32 = 5
     let UNKNOWN_ERROR = "Unknown error."
     let UNDEFINED_ERROR: Int32 = -1
+    
+    /** This semaphore is used by a timeout barrier on the accept method. */
+    let acceptTimeoutSemaphore = DispatchSemaphore(value: 1)
     
     /* NOTE: The archaic types, functions and their error-codes
      * are documented in the BSD System Calls Manual and in the
@@ -381,12 +385,6 @@ class Server: Thread {
             }
         }
         
-        /**
-         * A socket has been bound to a port.
-         * Begin listening for a connection on that port,
-         * then inform the backend that it should begin sending data over the port,
-         * then receive and process incoming data.
-         */
         do {
             try listenForACall()
             var executedSuccessfully = false
@@ -396,11 +394,41 @@ class Server: Thread {
                 ErrorNotifier.displayErrorToUser(preferredErrorMessage: errorMessage)
                 return
             }
-            try acceptCall()
-            try receiveAndProcessData()
         } catch {
             let errorMessage = "An unknown network error occured during an attempt to accept, receive or process data."
             ErrorNotifier.displayErrorToUser(preferredErrorMessage: errorMessage)
+            return
+        }
+        
+        do {
+            
+            let concurrentQueue = DispatchQueue(label: "accept socket connection")
+            self.acceptTimeoutSemaphore.wait()
+            concurrentQueue.async {
+                do {
+                    try acceptCall()
+                }
+                catch{
+                    let errorMessage = "An unknown network error occured during an attempt to accept, receive or process data."
+                    ErrorNotifier.displayErrorToUser(preferredErrorMessage: errorMessage)
+                }
+                self.acceptTimeoutSemaphore.signal()
+            }
+            let result = self.acceptTimeoutSemaphore.wait(wallTimeout: .now() + ACCEPT_TIMEOUT_SECONDS)
+            if (result != .success) {
+                let errorMessage = "A timeout occured while waiting for a connection from OK LISTEN TCP's command."
+                ErrorNotifier.displayErrorToUser(preferredErrorMessage: errorMessage)
+                return
+            }
+        }
+        
+        do {
+            try receiveAndProcessData()
+        }
+        catch {
+            let errorMessage = "An unknown network error occured during an attempt to accept, receive or process data."
+            ErrorNotifier.displayErrorToUser(preferredErrorMessage: errorMessage)
+            return
         }
     }
 }
