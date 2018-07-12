@@ -12,22 +12,21 @@ class AppDelegate: NSObject,
     private var item2ConfigAction = [String: ActionItem]()
     private var popoverController: StatusBarPopoverController?
     
-    private func resizeToFitIfNeeded(image: inout NSImage, statusbar: NSStatusItem) {
-        let maxLength = statusbar.statusBar?.thickness ?? CGFloat(22)
-        guard image.size.height > maxLength || image.size.width > maxLength else { return }
-        let lengthWhichLooksGoodOnToolbar = maxLength * CGFloat(0.8)
-        let iconSize = NSMakeSize(lengthWhichLooksGoodOnToolbar, lengthWhichLooksGoodOnToolbar)
-        image = NSImage.init(withImage: image, resizedTo: iconSize)
-        NSLog("The status bar icon had to be resized because it was larger than"
-            + " \(UInt(maxLength))×\(UInt(maxLength)).")
-    }
-    
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         let statusBarMenu = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
+        func resizeToFitIfNeeded(image: inout NSImage, statusbar: NSStatusItem) {
+            let maxLength = statusbar.statusBar?.thickness ?? CGFloat(22)
+            guard image.size.height > maxLength || image.size.width > maxLength else { return }
+            let lengthWhichLooksGoodOnToolbar = maxLength * CGFloat(0.8)
+            let iconSize = NSMakeSize(lengthWhichLooksGoodOnToolbar, lengthWhichLooksGoodOnToolbar)
+            image = NSImage.init(withImage: image, resizedTo: iconSize)
+            NSLog("The status bar icon had to be resized because it was larger than"
+                + " \(UInt(maxLength))×\(UInt(maxLength)).")
+        }
         func buildStatusBarMenu(config: Config) -> NSStatusItem! {
             func applyStartupIconToMenu() {
                 let iconName: String! = config.indicator.initialStatus
-                var iconImage: NSImage = config.icons[iconName]!
+                var iconImage: NSImage = config.icons.get(title: iconName)!
                 resizeToFitIfNeeded(image: &iconImage, statusbar: statusBarMenu)
                 statusBarMenu.image = iconImage
             }
@@ -91,8 +90,8 @@ class AppDelegate: NSObject,
         }
         
         Blackboard.shared.addStatusDidChange {
-            var icon = Blackboard.shared.config!.icons[Blackboard.shared.status]
-            self.resizeToFitIfNeeded(image: &icon!, statusbar: self.statusBarMenu!)
+            var icon = Blackboard.shared.config!.icons.get(title: Blackboard.shared.status)
+            resizeToFitIfNeeded(image: &icon!, statusbar: self.statusBarMenu!)
             self.statusBarMenu?.image = icon
         }
         

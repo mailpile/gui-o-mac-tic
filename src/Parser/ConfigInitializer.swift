@@ -16,14 +16,16 @@ extension Config {
         let fontStyles: FontStyles? = fontStylesJSON != nil ? FontStyles(json: fontStylesJSON!) : nil
         
         let imagesJSON = json[Keyword.images.rawValue] as? [String: String]
-        var images = [String: NSImage]()
+        
+        var images = Images()
+        
         imagesJSON!.forEach({ title, path in
             let image = NSImage(withTemplatedIconPath: path)
-            images[title] = image
+            images.add(title: title, path: path)
         })
         
         func imageForIcon(name: String!) -> NSImage? {
-            return images[name]
+            return images.get(title: name)
         }
         let main_window:MainWindow? = MainWindow(json: main_windowJSON!, statusDisplayIconFinder: imageForIcon)
         
