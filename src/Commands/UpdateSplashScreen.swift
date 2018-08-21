@@ -12,12 +12,13 @@ class UpdateSplashScreen: Command {
         self.message = message
     }
     
-    func execute(sender: NSObject) {
+    func execute(sender: NSObject) -> Bool {
         var userInfo = [AnyHashable: Any]()
         userInfo["progress"] = progress
         userInfo["message"] = message
         NotificationCenter.default.post(name: Constants.UPDATE_SPLASH_SCREEN,
                                         object: nil,
                                         userInfo: userInfo)
+        return true
     }
 }

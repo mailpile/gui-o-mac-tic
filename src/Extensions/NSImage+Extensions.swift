@@ -27,7 +27,7 @@ extension NSImage {
             if let data = NSImage(contentsOfFile: source)?.tiffRepresentation {
                 self.init(data: data)
             } else if let iconName = source.split(separator: ":").last
-                    , let data = Blackboard.shared.config?.icons[String(iconName)]?.tiffRepresentation {
+                , let data = Blackboard.shared.config?.icons.get(title: String(iconName))?.tiffRepresentation {
                 self.init(data: data)
             } else {
                 return nil

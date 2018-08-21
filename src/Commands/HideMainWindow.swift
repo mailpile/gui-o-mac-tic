@@ -4,7 +4,8 @@ class HideMainWindow: Command {
     var messageOnError: String = Blackboard.shared.nextErrorMessage
         ?? "Failed to execute 'hide_main_window'."
     
-    func execute(sender: NSObject) {
+    func execute(sender: NSObject) -> Bool {
         NotificationCenter.default.post(name: Constants.HIDE_MAIN_WINDOW, object: nil)
+        return true
     }
 }

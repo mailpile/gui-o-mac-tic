@@ -18,7 +18,7 @@ class ShowSplashScreen: Command {
         self.messageY = messageY
     }
     
-    func execute(sender: NSObject) {
+    func execute(sender: NSObject) -> Bool {
         var userInfo = [AnyHashable: Any]()
         userInfo["background"] = self.background
         userInfo["message"] = self.message
@@ -28,5 +28,6 @@ class ShowSplashScreen: Command {
         NotificationCenter.default.post(name: Constants.SHOW_SPLASH_SCREEN,
                                         object: nil,
                                         userInfo: userInfo)
+        return true
     }
 }

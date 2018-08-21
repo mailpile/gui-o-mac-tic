@@ -16,14 +16,16 @@ extension Config {
         let fontStyles: FontStyles? = fontStylesJSON != nil ? FontStyles(json: fontStylesJSON!) : nil
         
         let imagesJSON = json[Keyword.images.rawValue] as? [String: String]
-        var images = [String: NSImage]()
+        
+        var images = Images()
+        
         imagesJSON!.forEach({ title, path in
             let image = NSImage(withTemplatedIconPath: path)
-            images[title] = image
+            images.add(title: title, path: path)
         })
         
         func imageForIcon(name: String!) -> NSImage? {
-            return images[name]
+            return images.get(title: name)
         }
         let main_window:MainWindow? = MainWindow(json: main_windowJSON!, statusDisplayIconFinder: imageForIcon)
         
@@ -189,6 +191,27 @@ extension FontStyles {
             self.title = FontStyle(json: statusJSON)
         } else {
             self.title = nil
+        }
+        
+        if let buttonsJSON = json[Keyword.buttons.rawValue] as? [String: Any] {
+            self.buttons = FontStyle(json: buttonsJSON)
+        } else {
+            self.buttons = nil
+        }
+        
+        for localScope in json.keys where localScope.hasSuffix(Keyword._title.rawValue) {
+            let id = String(localScope.dropLast(Keyword._title.rawValue.count))
+            guard id != localScope else { continue }
+            if let style = FontStyle(json: json[localScope] as! [String: Any]) {
+                self.statusId2statusTitle[id] = style
+            }
+        }
+        for localScope in json.keys where localScope.hasSuffix(Keyword._details.rawValue) {
+            let id = String(localScope.dropLast(Keyword._details.rawValue.count))
+            guard id != localScope else { continue }
+            if let style = FontStyle(json: json[localScope] as! [String: Any]) {
+                self.statusId2statusDetails[id] = style
+            }
         }
     }
 }

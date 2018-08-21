@@ -28,6 +28,7 @@ class MainWindowViewController: NSViewController, NSTableViewDelegate, NSTableVi
         if let notificationFont = Blackboard.shared.config?.fontStyles?.notification {
             self.notification.font = FontStyleToFontMapper.map(notificationFont)
         }
+
         
         func configureActionStack() {
             func mapPosition2Gravity(position: Position) -> NSStackView.Gravity {
@@ -52,6 +53,12 @@ class MainWindowViewController: NSViewController, NSTableViewDelegate, NSTableVi
                 let gravity = mapPosition2Gravity(position: action.position!)
                 self.actionStack.addView(control, in: gravity)
                 self.button2Action[control] = action
+            }
+            
+            if let buttonsFont = Blackboard.shared.config?.fontStyles?.buttons {
+                self.button2Action.keys.forEach { button in
+                    button.font = FontStyleToFontMapper.map(buttonsFont)
+                }
             }
         }
         NotificationCenter.default.addObserver(forName: Constants.SHOW_SPLASH_SCREEN, object: nil, queue: nil) { notification in
@@ -104,18 +111,33 @@ class MainWindowViewController: NSViewController, NSTableViewDelegate, NSTableVi
     }
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
+        func getTitleFont(forStatus status: StatusDisplay) -> NSFont? {
+            return getFont(forStatus: status,
+                           source: Blackboard.shared.config?.fontStyles?.statusId2statusTitle,
+                           fallback: self.statusDisplayTitleFont!)
+        }
+        func getDetailsFont(forStatus status: StatusDisplay) -> NSFont? {
+            return getFont(forStatus: status,
+                           source: Blackboard.shared.config?.fontStyles?.statusId2statusDetails,
+                           fallback: self.statusDisplayDetailsFont!)
+        }
+        func getFont(forStatus status: StatusDisplay, source: [String: FontStyles.FontStyle]?, fallback: NSFont) -> NSFont? {
+            if let source = source, let fontStyle = source[status.id] {
+                return FontStyleToFontMapper.map(fontStyle)
+            }
+            else {
+                return fallback
+            }
+        }
+        
         let cell = tableView.makeView(withIdentifier: Constants.SUBSTATE_CELL_ID, owner: self) as! SubstatusTableCellView
         let status = Blackboard.shared.config!.main_window!.status_displays![row]
         
         cell.titleView.stringValue = status.title
-        if self.statusDisplayTitleFont != nil {
-            cell.titleView.font = self.statusDisplayTitleFont!
-        }
+        cell.titleView.font = getTitleFont(forStatus: status)
         
         cell.descriptionView.stringValue = status.details ?? ""
-        if self.statusDisplayDetailsFont != nil {
-            cell.descriptionView.font = self.statusDisplayDetailsFont!
-        }
+        cell.descriptionView.font = getDetailsFont(forStatus: status)
         
         cell.iconView.image = status.icon
         

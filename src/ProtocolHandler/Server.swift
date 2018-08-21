@@ -14,9 +14,13 @@ import AppKit.NSAlert
  * corresponds to the structure of the aforementioned guide.
  */
 class Server: Thread {
+    let ACCEPT_TIMEOUT_SECONDS = 30.0
     let QUEUE_SIZE: Int32 = 5
     let UNKNOWN_ERROR = "Unknown error."
     let UNDEFINED_ERROR: Int32 = -1
+    
+    /** This semaphore is used by a timeout barrier on the accept method. */
+    let acceptTimeoutSemaphore = DispatchSemaphore(value: 1)
     
     /* NOTE: The archaic types, functions and their error-codes
      * are documented in the BSD System Calls Manual and in the
@@ -31,7 +35,7 @@ class Server: Thread {
     /** Should this thread be running? */
     var running = true
 
-    func serve(dispatchForExecutionWhenChannelIsOpened: () -> Void) {
+    func serve(dispatchForExecutionWhenChannelIsOpened: (_: inout Bool) -> ()) {
         func setupDataStructures(portToListenOn port: UInt16) throws {
             self._addrinfo = addrinfo(
                 ai_flags: AI_PASSIVE,
@@ -306,7 +310,7 @@ class Server: Thread {
                     
                     /* Dispatch the command for execution on the GUI thread. */
                     DispatchQueue.main.async {
-                        command.execute(sender: self)
+                        _ = command.execute(sender: self)
                     }
                 } catch ParsingError.empty {
                     continue
@@ -317,22 +321,25 @@ class Server: Thread {
                 }
             }
         }
-                
-        while (self.running) {
+        
+        /** // The port to which a socket is to be bound. */
+        var port: UInt16 = 0
+        
+        /**
+         * Try to bind a socket to a port.
+         */
+        func isSocketBoundToAPort() -> Bool { return Blackboard.shared.tcp_port != nil }
+        while (!isSocketBoundToAPort()) {
             do {
                 Blackboard.shared.tcp_port = nil
-                let port = UInt16.random(min: 1024, max: UInt16.max)
+                port = UInt16.random(min: 1024, max: UInt16.max)
                 try setupDataStructures(portToListenOn: port)
                 try getSocketFileDescriptor()
                 /* NOTE: bindSocketFileDescriptorToPort throws a recoverable exception should it fail
                  * to bind a socket to a port, in which case the error handling spins this loop around
                  * and an attempt will be made to bind a new socket to a different port. */
                 try bindSocketFileDescriptorToPort()
-                try listenForACall()
                 Blackboard.shared.tcp_port = port
-                dispatchForExecutionWhenChannelIsOpened()
-                try acceptCall()
-                try receiveAndProcessData()
             }
             /*
              *    Handle recoverable errors.
@@ -372,10 +379,56 @@ class Server: Thread {
                 ErrorNotifier.displayErrorToUser(preferredErrorMessage: errorMessage)
                 return
             } catch {
-                ErrorNotifier.displayErrorToUser(preferredErrorMessage: "An unknown network error has occured.")
+                let errorMessage = "An unknown network error occured during an attempt to bind a socket to a port."
+                ErrorNotifier.displayErrorToUser(preferredErrorMessage: errorMessage)
                 return
             }
         }
         
+        do {
+            try listenForACall()
+            var executedSuccessfully = false
+            dispatchForExecutionWhenChannelIsOpened(&executedSuccessfully)
+            guard executedSuccessfully else {
+                let errorMessage = "Failed to execute OK LISTEN TCP's command."
+                ErrorNotifier.displayErrorToUser(preferredErrorMessage: errorMessage)
+                return
+            }
+        } catch {
+            let errorMessage = "An unknown network error occured during an attempt to accept, receive or process data."
+            ErrorNotifier.displayErrorToUser(preferredErrorMessage: errorMessage)
+            return
+        }
+        
+        do {
+            
+            let concurrentQueue = DispatchQueue(label: "accept socket connection")
+            self.acceptTimeoutSemaphore.wait()
+            concurrentQueue.async {
+                do {
+                    try acceptCall()
+                }
+                catch{
+                    let errorMessage = "An unknown network error occured during an attempt to accept, receive or process data."
+                    ErrorNotifier.displayErrorToUser(preferredErrorMessage: errorMessage)
+                }
+                self.acceptTimeoutSemaphore.signal()
+            }
+            let result = self.acceptTimeoutSemaphore.wait(wallTimeout: .now() + ACCEPT_TIMEOUT_SECONDS)
+            if (result != .success) {
+                let errorMessage = "A timeout occured while waiting for a connection from OK LISTEN TCP's command."
+                ErrorNotifier.displayErrorToUser(preferredErrorMessage: errorMessage)
+                return
+            }
+        }
+        
+        do {
+            try receiveAndProcessData()
+        }
+        catch {
+            let errorMessage = "An unknown network error occured during an attempt to accept, receive or process data."
+            ErrorNotifier.displayErrorToUser(preferredErrorMessage: errorMessage)
+            return
+        }
     }
 }

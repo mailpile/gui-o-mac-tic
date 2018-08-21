@@ -20,7 +20,7 @@ class NotifyUser: Command {
         self.actions = actions
     }
     
-    func execute(sender: NSObject) {
+    func execute(sender: NSObject) -> Bool {
         Blackboard.shared.notification = self.message
         if self.popup {
             UserNotificationFacade.DeliverNotification(withText: message, withActions:actions)
@@ -31,5 +31,6 @@ class NotifyUser: Command {
                 window.shakeHorizontally()
             }
         }
+        return true
     }
 }

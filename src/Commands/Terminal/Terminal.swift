@@ -1,6 +1,6 @@
 import AppKit
 
-class Terminal: Command {
+class Terminal: Command, CommandWithReturn {
     var messageOnError: String = Blackboard.shared.nextErrorMessage
         ?? "Failed to execute 'terminal'."
     
@@ -15,13 +15,15 @@ class Terminal: Command {
         self.icon = icon
     }
     
-    func execute(sender: NSObject) {
+    func execute(executedSuccessfully: inout Bool) {
+        var errorMessage: String = ""
+        executedSuccessfully = execute(command: command, terminalWindowTitle: title, errorMessage: &errorMessage)
+    }
+    
+    func execute(sender: NSObject) -> Bool {
         var errorMessage: String = ""
         let executedSuccesfully = execute(command: command, terminalWindowTitle: title, errorMessage: &errorMessage)
-        // Note: executeSuccessfully will always be true if "command" is executed within a screen session.
-        if !executedSuccesfully {
-            assertionFailure("Intentionally not implemented. Executions errors are silent in production.")
-        }
+        return executedSuccesfully
     }
     
     private func execute(command: String!, terminalWindowTitle: String?, errorMessage: inout String) -> Bool {

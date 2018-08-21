@@ -22,15 +22,18 @@ class AppDelegate: NSObject,
             + " \(UInt(maxLength))×\(UInt(maxLength)).")
     }
     
+    @objc func applyStartupIconToMenu() {
+        let iconName: String! = Blackboard.shared.config!.indicator.initialStatus
+        var iconImage: NSImage = Blackboard.shared.config!.icons.get(title: iconName)!
+        resizeToFitIfNeeded(image: &iconImage, statusbar: statusBarMenu!)
+        statusBarMenu!.image = iconImage
+    }
+    
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        let statusBarMenu = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
-        func buildStatusBarMenu(config: Config) -> NSStatusItem! {
-            func applyStartupIconToMenu() {
-                let iconName: String! = config.indicator.initialStatus
-                var iconImage: NSImage = config.icons[iconName]!
-                resizeToFitIfNeeded(image: &iconImage, statusbar: statusBarMenu)
-                statusBarMenu.image = iconImage
-            }
+        self.statusBarMenu = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
+        
+        func buildStatusBarMenu(config: Config) {
+            
             func buildMenuItem(menuItem: ActionItem) -> NSMenuItem {
                 if menuItem.separator == true {
                     return NSMenuItem.separator()
@@ -49,6 +52,8 @@ class AppDelegate: NSObject,
             }
             NSUserNotificationCenter.default.delegate = self
             applyStartupIconToMenu()
+            
+           
             let menu = NSMenu()
             menu.delegate = self
             menu.autoenablesItems = false
@@ -59,15 +64,14 @@ class AppDelegate: NSObject,
                 self.item2Action[item] = newItem
                 self.item2ConfigAction[item] = configItem
             }
-            statusBarMenu.menu = menu
-            return statusBarMenu
+            self.statusBarMenu!.menu = menu
         }
 
-        self.statusBarMenu = buildStatusBarMenu(config: Blackboard.shared.config!)
+        buildStatusBarMenu(config: Blackboard.shared.config!)
         NSApplication.shared.windows.forEach { window in window.title = Blackboard.shared.config!.app_name }
         
         while let command = Blackboard.shared.unexecuted.tryPop() {
-            command.execute(sender: self)
+            _ = command.execute(sender: self)
         }
         
         /* If a status bar popover message was specified in the config, display it. */
@@ -91,7 +95,7 @@ class AppDelegate: NSObject,
         }
         
         Blackboard.shared.addStatusDidChange {
-            var icon = Blackboard.shared.config!.icons[Blackboard.shared.status]
+            var icon = Blackboard.shared.config!.icons.get(title: Blackboard.shared.status)
             self.resizeToFitIfNeeded(image: &icon!, statusbar: self.statusBarMenu!)
             self.statusBarMenu?.image = icon
         }
@@ -103,6 +107,11 @@ class AppDelegate: NSObject,
         if !Blackboard.shared.notification.isEmpty {
             self.item2Action["notification"]?.title = Blackboard.shared.notification
         }
+        
+        DistributedNotificationCenter.default().addObserver(self,
+                                                            selector: #selector(AppDelegate.applyStartupIconToMenu),
+                                                            name: NSNotification.Name(rawValue: "AppleInterfaceThemeChangedNotification"),
+                                                            object: nil)
     }
     
     func menuWillOpen(_ menu: NSMenu) {
@@ -163,12 +172,12 @@ class AppDelegate: NSObject,
             }
             guard action != nil else { return }
             let command = CommandFactory.build(forOperation: action!.op!, withArgs: action!.args)
-            command.execute(sender: self)
+            _ = command.execute(sender: self)
         }
     }
     
     func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
-        ShowMainWindow().execute(sender: self)
+        _ = ShowMainWindow().execute(sender: self)
         return false
     }
     

@@ -7,7 +7,7 @@ class Config {
     var require_gui: String?
     var main_window: MainWindow?
     var indicator: Indicator!
-    var icons: [String: NSImage]
+    var icons = Images()
     var fontStyles: FontStyles?
     var http_cookies: [MPHTTPCookie]?
     
@@ -23,7 +23,7 @@ class Config {
          require_gui: String?,
          main_window: MainWindow?,
          indicators: Indicator!,
-         icons: [String: NSImage],
+         icons: Images,
          fontStyles: FontStyles?,
          http_cookies: [MPHTTPCookie]?,
          never_run_from_dmg: Bool?,

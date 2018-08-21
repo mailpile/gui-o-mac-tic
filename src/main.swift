@@ -19,7 +19,10 @@ func runStage1(_ boot: Boot) throws {
 
 func runStage2(_ boot: Boot) {
     for rawStage2Command: String in boot.stage2 {
-        func stage2(command: String) -> Bool /* true if for loop should is allowed to run again */ {
+        /**
+         - Returns: true if the for loop may run again.
+         */
+        func stage2(command: String) -> Bool {
             guard rawStage2Command.isEmpty == false else {
                 return true
             }
@@ -29,7 +32,9 @@ func runStage2(_ boot: Boot) {
                 return false
                 
             case let command where command.hasPrefix(OK_LISTEN_TO):
-                preconditionFailure("Not yet implemented.")
+                let listener = Listener()
+                listener.command = String(command.dropFirst(OK_LISTEN_TO.count).trimmingCharacters(in: CharacterSet.whitespacesAndNewlines))
+                listener.listen()
                 
             case let command where command.hasPrefix(OK_LISTEN_TCP):
                 /*
@@ -37,38 +42,40 @@ func runStage2(_ boot: Boot) {
                  * which then executes a shell command which triggers commands to
                  * be send over TCP.
                  */
-                server.serve() {
+                let closure = { (wasExecutedSuccessfully: inout Bool) -> () in
                     var shellCommand = String(command.dropFirst(OK_LISTEN_TCP.count))
                     shellCommand = shellCommand.trimmingCharacters(in: .whitespaces)
                     shellCommand = shellCommand.replacingOccurrences(of: PORT, with: String(Blackboard.shared.tcp_port!))
                     #if DEBUG
-                    print("DEBUG-mode: Replacing Shell command with Terminal command.")
-                    let shell = Terminal(shellCommand)
+                        print("DEBUG-mode: Replacing Shell command with Terminal command.")
+                        let shell = Terminal(shellCommand)
                     #else
-                    var commands = [String]()
-                    commands.append(shellCommand)
-                    let shell = Shell(commands)
+                        var commands = [String]()
+                        commands.append(shellCommand)
+                        let shell = Shell(commands)
                     #endif
-                    shell.execute(sender: NSObject()/* Using NSObject because execute is not called by an object. */)
+                    wasExecutedSuccessfully = shell.execute(sender: NSObject())
                 }
+                server.serve(dispatchForExecutionWhenChannelIsOpened: closure)
                 
             case let command where command.hasPrefix(OK_LISTEN_HTTP):
                 /*
                  * NOTE Starts a server for listening to commands over TCP,
                  * then requests commands to be send over TCP.
                  */
-                server.serve() {
+                let closure = { (wasExecutedSuccessfully: inout Bool) -> () in
                     do {
                         var uri = String(command.dropFirst(OK_LISTEN_HTTP.count))
                         uri = uri.trimmingCharacters(in: .whitespaces)
                         uri = uri.replacingOccurrences(of: PORT, with: String(Blackboard.shared.tcp_port!))
                         let url = URL(string: uri)
                         try _ = String(contentsOf: url!, encoding: String.Encoding.utf8)
+                        wasExecutedSuccessfully = true
                     } catch {
-                        print("Failed to connect to url")
-                        exit(EX_USAGE)
+                        wasExecutedSuccessfully = false
                     }
                 }
+                server.serve(dispatchForExecutionWhenChannelIsOpened: closure)
                 
             case OK_LISTEN:
                 return true

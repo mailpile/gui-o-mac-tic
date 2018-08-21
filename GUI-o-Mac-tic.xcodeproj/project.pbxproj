@@ -26,6 +26,8 @@
 		D82F163E20AAE59D00563AD0 /* CookieControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82F163D20AAE59D00563AD0 /* CookieControl.swift */; };
 		D8307B9520754E1100FCE94D /* FontStyleToFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8307B9420754E1100FCE94D /* FontStyleToFont.swift */; };
 		D8307B97207661D500FCE94D /* stage2.conf in Resources */ = {isa = PBXBuildFile; fileRef = D8307B96207661D500FCE94D /* stage2.conf */; };
+		D832052E20F73D8B00ED006A /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = D832052D20F73D8B00ED006A /* Images.swift */; };
+		D832053020F7432B00ED006A /* DarkModeChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D832052F20F7432B00ED006A /* DarkModeChecker.swift */; };
 		D8333EE9205D3FA90029172B /* FontStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8333EE8205D3FA90029172B /* FontStyle.swift */; };
 		D842DA8C2062A73B0043B73A /* URL+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D842DA8B2062A73B0043B73A /* URL+Extensions.swift */; };
 		D8467E6C20AEBDFA00F8F08A /* NSWindow+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8467E6B20AEBDFA00F8F08A /* NSWindow+Extensions.swift */; };
@@ -77,7 +79,9 @@
 		D8DF323F206922150034165A /* SetStatusDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DF323E206922150034165A /* SetStatusDisplay.swift */; };
 		D8DF3241206927200034165A /* NSColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DF3240206927200034165A /* NSColor+Extensions.swift */; };
 		D8DF324320692B7B0034165A /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DF324220692B7B0034165A /* String+Extensions.swift */; };
+		D8E0F26C20F47992005D84C2 /* CommandWithReturn.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E0F26B20F47992005D84C2 /* CommandWithReturn.swift */; };
 		D8E459F320753B1B00B5A3CD /* stage1.conf in Resources */ = {isa = PBXBuildFile; fileRef = D8E459F220753B1B00B5A3CD /* stage1.conf */; };
+		D8E9A6C620D13E7000C950AF /* Listener.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E9A6C520D13E7000C950AF /* Listener.swift */; };
 		D8ECDD6C205EA6370004790B /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8ECDD6B205EA6370004790B /* Parser.swift */; };
 		D8F1FEFD20654785007E497B /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F1FEFC20654785007E497B /* main.swift */; };
 		D8F1FEFF2065818D007E497B /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F1FEFE2065818D007E497B /* SplashViewController.swift */; };
@@ -116,6 +120,8 @@
 		D82F163D20AAE59D00563AD0 /* CookieControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookieControl.swift; sourceTree = "<group>"; };
 		D8307B9420754E1100FCE94D /* FontStyleToFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontStyleToFont.swift; sourceTree = "<group>"; };
 		D8307B96207661D500FCE94D /* stage2.conf */ = {isa = PBXFileReference; lastKnownFileType = text; path = stage2.conf; sourceTree = "<group>"; };
+		D832052D20F73D8B00ED006A /* Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
+		D832052F20F7432B00ED006A /* DarkModeChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkModeChecker.swift; sourceTree = "<group>"; };
 		D8333EE8205D3FA90029172B /* FontStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontStyle.swift; sourceTree = "<group>"; };
 		D842DA84206276B00043B73A /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		D842DA8B2062A73B0043B73A /* URL+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Extensions.swift"; sourceTree = "<group>"; };
@@ -170,7 +176,9 @@
 		D8DF323E206922150034165A /* SetStatusDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetStatusDisplay.swift; sourceTree = "<group>"; };
 		D8DF3240206927200034165A /* NSColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSColor+Extensions.swift"; sourceTree = "<group>"; };
 		D8DF324220692B7B0034165A /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
+		D8E0F26B20F47992005D84C2 /* CommandWithReturn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandWithReturn.swift; sourceTree = "<group>"; };
 		D8E459F220753B1B00B5A3CD /* stage1.conf */ = {isa = PBXFileReference; explicitFileType = sourcecode.javascript; fileEncoding = 4; path = stage1.conf; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.javascript; };
+		D8E9A6C520D13E7000C950AF /* Listener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Listener.swift; sourceTree = "<group>"; };
 		D8ECDD6B205EA6370004790B /* Parser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		D8F1FEFC20654785007E497B /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		D8F1FEFE2065818D007E497B /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
@@ -256,10 +264,11 @@
 				D8F1FEFC20654785007E497B /* main.swift */,
 				D8167F12206EC1620073552A /* Mappers */,
 				D8515E95205C3C2100565AAE /* Model */,
-				D8CC30D9208DD280001BF0FF /* Server */,
+				D8CC30D9208DD280001BF0FF /* ProtocolHandler */,
 				D806819F20A584E300D8D174 /* StatusBarPopover */,
 				D8515EAB205C440900565AAE /* Parser */,
 				D85B1E3120614F42003744E0 /* Views */,
+				D832052F20F7432B00ED006A /* DarkModeChecker.swift */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -332,6 +341,7 @@
 				D8515E98205C3CB000565AAE /* Operation.swift */,
 				D8515E9C205C3F0300565AAE /* Position.swift */,
 				D8515EA7205C421900565AAE /* StatusDisplay.swift */,
+				D832052D20F73D8B00ED006A /* Images.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -404,17 +414,19 @@
 				D896443120A0309F00D4F5B4 /* Terminal */,
 				D8DF32322068FC2E0034165A /* UpdateSplashScreen.swift */,
 				D81A51FF2067F81A00E431E9 /* URLCommand.swift */,
+				D8E0F26B20F47992005D84C2 /* CommandWithReturn.swift */,
 			);
 			path = Commands;
 			sourceTree = "<group>";
 		};
-		D8CC30D9208DD280001BF0FF /* Server */ = {
+		D8CC30D9208DD280001BF0FF /* ProtocolHandler */ = {
 			isa = PBXGroup;
 			children = (
 				D8D91DF42072C16900520189 /* NetworkError.swift */,
 				D8BE2C7D206EE0A70039C7B5 /* Server.swift */,
+				D8E9A6C520D13E7000C950AF /* Listener.swift */,
 			);
-			path = Server;
+			path = ProtocolHandler;
 			sourceTree = "<group>";
 		};
 		D8DF32252068E66A0034165A /* share */ = {
@@ -570,7 +582,9 @@
 				D8DF32242068D5520034165A /* ShowSplashScreen.swift in Sources */,
 				D82F163E20AAE59D00563AD0 /* CookieControl.swift in Sources */,
 				D8594A0B206A737000D089DE /* SetItem.swift in Sources */,
+				D832053020F7432B00ED006A /* DarkModeChecker.swift in Sources */,
 				D81988A2205957EE004B5974 /* Config.swift in Sources */,
+				D832052E20F73D8B00ED006A /* Images.swift in Sources */,
 				D8DF323A206908F70034165A /* HideMainWindow.swift in Sources */,
 				D8B289712067CBBD000DCD03 /* ShowMainWindow.swift in Sources */,
 				D8B2896F2067C5A1000DCD03 /* Quit.swift in Sources */,
@@ -599,6 +613,7 @@
 				D8B109AB206BA28F00084D82 /* NotifyUser.swift in Sources */,
 				D86EFEC92080A5ED004D3B45 /* Keyword.swift in Sources */,
 				D8467E6C20AEBDFA00F8F08A /* NSWindow+Extensions.swift in Sources */,
+				D8E0F26C20F47992005D84C2 /* CommandWithReturn.swift in Sources */,
 				D8DF323F206922150034165A /* SetStatusDisplay.swift in Sources */,
 				D8594A0E206A8A8D00D089DE /* SetNextErrorMessage.swift in Sources */,
 				D842DA8C2062A73B0043B73A /* URL+Extensions.swift in Sources */,
@@ -612,6 +627,7 @@
 				D8515E9D205C3F0300565AAE /* Position.swift in Sources */,
 				D8BE028A2067DE8D006219D5 /* GetURL.swift in Sources */,
 				D8515EA1205C402600565AAE /* ActionItemType.swift in Sources */,
+				D8E9A6C620D13E7000C950AF /* Listener.swift in Sources */,
 				D8D696F42073B07200F814DE /* UInt16+Extensions.swift in Sources */,
 				D8B109C0206BD82F00084D82 /* HTTPCookie.swift in Sources */,
 				D81A51FE2067F38600E431E9 /* PostURL.swift in Sources */,

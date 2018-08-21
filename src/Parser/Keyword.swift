@@ -55,4 +55,7 @@ enum Keyword: String {
     case never_run_from_dmg         =   "_never_run_from_dmg"
     case status_bar_popover_message =   "_status_bar_popover_message"
     case initial_notification =         "initial_notification"
+    case buttons =                      "buttons"
+    case _title =                       "_title"
+    case _details =                     "_details"
 }
