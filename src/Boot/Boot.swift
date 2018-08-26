@@ -69,7 +69,7 @@ class Boot {
                 }
             }
             if inStage2 {
-                stage2.append(line)
+                stage2.append(line.hasPrefix("OK LISTEN T") ? line.replacingOccurrences(of: "\"", with: "") : line)
             } else {
                 stage1.append(line)
             }
