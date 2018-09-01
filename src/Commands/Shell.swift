@@ -32,8 +32,7 @@ class Shell: Command, CommandWithReturn {
     func execute(executedSuccessfully: inout Bool) {
         for command in commands {
             do {
-                let arguments = try Parser.parse(arguments: command)
-                let shCommandArg: [String] = ["-c"] + arguments
+                let shCommandArg: [String] = ["-c", command]
                 let output = try Shell.execute(binary: "/bin/sh", arguments: shCommandArg)
                 guard output.exitStatus == EXIT_SUCCESS else {
                     executedSuccessfully = false
@@ -55,9 +54,8 @@ class Shell: Command, CommandWithReturn {
     func execute(sender: NSObject) -> Bool {
         for command in commands {
             do {
-                let arguments = try Parser.parse(arguments: command)
-                let shCommandArg: [String] = ["-c"] + arguments
-                let output = try Shell.execute(binary: "/bin/sh", arguments: shCommandArg)
+                let arguments: [String] = ["-c", command]
+                let output = try Shell.execute(binary: "/bin/sh", arguments: arguments)
                 guard output.exitStatus == EXIT_SUCCESS else {
                     return false
                 }
