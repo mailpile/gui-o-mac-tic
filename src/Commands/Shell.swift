@@ -32,8 +32,7 @@ class Shell: Command, CommandWithReturn {
     func execute(executedSuccessfully: inout Bool) {
         for command in commands {
             do {
-                let shCommandArg: [String] = ["-c", command]
-                let output = try Shell.execute(binary: "/bin/sh", arguments: shCommandArg)
+                let output = try Shell.execute(binary: "/bin/sh", arguments: [command])
                 guard output.exitStatus == EXIT_SUCCESS else {
                     executedSuccessfully = false
                     return
@@ -54,8 +53,7 @@ class Shell: Command, CommandWithReturn {
     func execute(sender: NSObject) -> Bool {
         for command in commands {
             do {
-                let arguments: [String] = ["-c", command]
-                let output = try Shell.execute(binary: "/bin/sh", arguments: arguments)
+                let output = try Shell.execute(binary: "/bin/sh", arguments: [command])
                 guard output.exitStatus == EXIT_SUCCESS else {
                     return false
                 }
@@ -81,11 +79,11 @@ class Shell: Command, CommandWithReturn {
                  arguments: [String]? = nil,
                  workingDirectory: URL = Bundle.main.resourceURL!) throws -> ExecutionOutput {
         let process = Process()
-        var shCommandArg: [String] = ["-c"]
-        if (arguments != nil) {
-            shCommandArg += arguments!
-        }
-        process.arguments = shCommandArg
+        process.arguments =
+            binary == "/bin/sh"
+            ? (arguments != nil ? ["-c"] + arguments! : [])
+            : (arguments != nil ?          arguments! : [])
+    
         
         let bin = "\(Bundle.main.bundlePath)/Contents/Resources/app/bin"
         var environment = ProcessInfo.processInfo.environment
