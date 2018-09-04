@@ -15,14 +15,16 @@ class Listener: Thread {
          */
         func execute() {
             let process = Process()
-            let binary = "/usr/bin/env"
+            let binary = "/bin/sh"
             
             if #available(OSX 10.13, *) {
                 process.executableURL = URL(fileURLWithPath: binary)
             } else {
                 process.launchPath = binary
             }
-            process.arguments = self.arguments
+            let shProcessArgs = ["-c"] + self.arguments
+            process.arguments = shProcessArgs
+            
             
             let stdout = Pipe()
             let stdoutHandle = stdout.fileHandleForReading
@@ -56,7 +58,6 @@ class Listener: Thread {
             }
         }
         
-        self.arguments.append("-S") // Passes -S to env.
         self.arguments.append(self.command!)
         
         execute()

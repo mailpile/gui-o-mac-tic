@@ -53,45 +53,6 @@ class Parser {
     }
     
     /**
-     Splits a string containing command line arguments to a list of C-style `argv[]` strings.
-     
-     - Parameter arguments: A string containing zero or more arguments.
-     - Throws: An error of type `ParsingError.unclosedQuote` if `arguments` contains an unclosed quote.
-     - Returns: A list of C-style arguments.
-     */
-    static func parse(arguments: String) throws -> [String] {
-        var result = [String]()
-        var argument: String = ""
-        var inQuote = false
-        for c: Character in arguments {
-            if c == "\"" {
-                inQuote = !inQuote
-                argument.append(c)
-                if !inQuote {
-                    result.append(argument)
-                    argument = ""
-                }
-            } else {
-                let cIsWhitespace = CharacterSet(charactersIn: String(c)).isSubset(of: .whitespaces)
-                if cIsWhitespace && !inQuote && !argument.isEmpty {
-                    result.append(argument)
-                    argument = ""
-                } else {
-                    if !(cIsWhitespace && argument.isEmpty) {
-                        argument.append(c)
-                    }
-                }
-            }
-        }
-        guard !inQuote else { throw ParsingError.unclosedQuote }
-        if !argument.isEmpty {
-            result.append(argument)
-            argument = ""
-        }
-        return result
-    }
-    
-    /**
      Parses a GUI-o-matic Stage 3 protocol command to an operation and args.
      Stage 3 protocol commands are strings on the form
      ````

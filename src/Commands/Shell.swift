@@ -32,8 +32,7 @@ class Shell: Command, CommandWithReturn {
     func execute(executedSuccessfully: inout Bool) {
         for command in commands {
             do {
-                let arguments = try Parser.parse(arguments: command)
-                let output = try Shell.execute(binary: "/usr/bin/env", arguments: arguments)
+                let output = try Shell.execute(binary: "/bin/sh", arguments: [command])
                 guard output.exitStatus == EXIT_SUCCESS else {
                     executedSuccessfully = false
                     return
@@ -54,8 +53,7 @@ class Shell: Command, CommandWithReturn {
     func execute(sender: NSObject) -> Bool {
         for command in commands {
             do {
-                let arguments = try Parser.parse(arguments: command)
-                let output = try Shell.execute(binary: "/usr/bin/env", arguments: arguments)
+                let output = try Shell.execute(binary: "/bin/sh", arguments: [command])
                 guard output.exitStatus == EXIT_SUCCESS else {
                     return false
                 }
@@ -77,11 +75,15 @@ class Shell: Command, CommandWithReturn {
      - Throws: An NSInvalidArgumentException if the binary invalid or if it fails to to be executed.
      - Returns: The stdout, the stderr and the exit code obtained by executing the binary.
      */
-    static func execute(binary: String = "/usr/bin/env",
+    static func execute(binary: String = "/bin/sh",
                  arguments: [String]? = nil,
                  workingDirectory: URL = Bundle.main.resourceURL!) throws -> ExecutionOutput {
         let process = Process()
-        process.arguments = arguments
+        process.arguments =
+            binary == "/bin/sh"
+            ? (arguments != nil ? ["-c"] + arguments! : [])
+            : (arguments != nil ?          arguments! : [])
+    
         
         let bin = "\(Bundle.main.bundlePath)/Contents/Resources/app/bin"
         var environment = ProcessInfo.processInfo.environment
