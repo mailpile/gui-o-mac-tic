@@ -8,8 +8,8 @@ class SplashViewController: NSViewController {
     @IBOutlet weak var messageLeadingX: NSLayoutConstraint!
     @IBOutlet weak var messageTop: NSLayoutConstraint!
     
-    public var messageX: Float = 0.0
-    public var messageY: Float = 0.0
+    public var messageX: Float = 0.5
+    public var messageY: Float = 0.5
     override func viewDidLoad() {
         super.viewDidLoad()
         

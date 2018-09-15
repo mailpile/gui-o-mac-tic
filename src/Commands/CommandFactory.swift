@@ -59,8 +59,8 @@ class CommandFactory {
             let background = NSImage(contentsOfFile: args!.dictionary![Keyword.background.rawValue] as! String)
             let message = args!.dictionary![Keyword.message.rawValue] as? String ?? ""
             let showProgressBar = args!.dictionary![Keyword.progress_bar.rawValue] as? Bool == true
-            let messageX = Float(args!.dictionary!["message_x"] as? String ?? "0.0")!
-            let messageY = Float(args!.dictionary!["message_y"] as? String ?? "0.0")!
+            let messageX = Float(args!.dictionary!["message_x"] as? String ?? "0.5")!
+            let messageY = Float(args!.dictionary!["message_y"] as? String ?? "0.5")!
             
             precondition(background != nil, "A splash screen can not be created without a background.")
             return ShowSplashScreen(background: background,
@@ -71,11 +71,14 @@ class CommandFactory {
             
         case .update_splash_screen:
             precondition(args == nil || args!.dictionary != nil, "Expected args to be a dictionary.")
-            var progress = args!.dictionary![Keyword.progress.rawValue] as? Double
-            if (progress != nil) {
+            let progressString = args!.dictionary![Keyword.progress.rawValue] as? String
+            let progress: Double?
+            if (progressString != nil) {
                 /* The Bar Progress Indicator requries a value on the range [0;100] but
-                such values are on the range [0.0;1.0] in the config file. */
-                progress! *= 100
+                 such values are on the range [0.0;1.0] in the config file. */
+                progress = Double(progressString!)! * 100
+            } else {
+                progress = nil
             }
             let message = args!.dictionary![Keyword.message.rawValue] as? String ?? ""
             return UpdateSplashScreen(progress ?? 0, message)
