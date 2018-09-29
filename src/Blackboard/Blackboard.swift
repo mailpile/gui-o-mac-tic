@@ -34,6 +34,9 @@ class Blackboard {
         }
     }
     
+    /** The config of the splash screen. */
+    var splashScreenConfig: SplashScreenConfig?
+    
     /** Closures to be executed when `status`'s rval is changed. */
     private var statusDidChange = [(()->())]()
     

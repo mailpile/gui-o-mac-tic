@@ -13,12 +13,18 @@ class UpdateSplashScreen: Command {
     }
     
     func execute(sender: NSObject) -> Bool {
-        var userInfo = [AnyHashable: Any]()
-        userInfo["progress"] = progress
-        userInfo["message"] = message
-        NotificationCenter.default.post(name: Constants.UPDATE_SPLASH_SCREEN,
-                                        object: nil,
-                                        userInfo: userInfo)
+        if let config = Blackboard.shared.splashScreenConfig {
+            if let message = self.message {
+                config.message = message
+            }
+            if let progress = self.progress {
+                config.progress = progress
+            }
+            NotificationCenter.default.post(name: Constants.UPDATE_SPLASH_SCREEN,
+                                            object: nil,
+                                            userInfo: nil)
+        }
+        
         return true
     }
 }

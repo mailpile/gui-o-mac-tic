@@ -1,8 +1,6 @@
 import Cocoa
 
-class MainWindowViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource, SplashScreenDataSource {
-    
-    var splashScreenConfig: SplashScreenConfig?
+class MainWindowViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource {
     var button2Action = [NSButton: ActionItem]()
     var commands = [Command]()
     
@@ -72,11 +70,8 @@ class MainWindowViewController: NSViewController, NSTableViewDelegate, NSTableVi
                 else {
                     preconditionFailure("Observed a \(Constants.SHOW_SPLASH_SCREEN) notification without a valid userInfo.")
             }
-            self.splashScreenConfig = SplashScreenConfig(message,
-                                                         background,
-                                                         showProgressBar ?? false,
-                                                         messageX,
-                                                         messageY)
+            Blackboard.shared.splashScreenConfig = SplashScreenConfig(message, background, showProgressBar ?? false,
+                                                                      messageX, messageY)
             self.showSplashScreen()
         }
         
@@ -157,16 +152,7 @@ class MainWindowViewController: NSViewController, NSTableViewDelegate, NSTableVi
     }
     
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
-        if let targetWindowController = segue.destinationController as? NSWindowController,
-            let targetViewController = targetWindowController.contentViewController as? SplashViewController {
-            targetViewController.notification.stringValue = splashScreenConfig!.message
-            targetViewController.imageCell.image = splashScreenConfig!.background
-            targetViewController.progressIndicator.isHidden = splashScreenConfig!.showProgressIndicator == false
-            targetViewController.messageX = splashScreenConfig!.messageX
-            targetViewController.messageY = splashScreenConfig!.messageY
-        } else {
-            assertionFailure("Expected a single segue from this controller, leading to a NSWindowController.")
-        }
+        
     }
     
     func showSplashScreen() {
