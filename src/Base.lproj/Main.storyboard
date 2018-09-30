@@ -104,34 +104,43 @@
                                                                     </constraints>
                                                                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" id="DwG-DC-SuK"/>
                                                                 </imageView>
-                                                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="YyL-Oy-bpd">
-                                                                    <rect key="frame" x="80" y="53" width="314" height="22"/>
-                                                                    <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Not logged in" id="3QE-82-1Z9">
-                                                                        <font key="font" metaFont="systemBold" size="18"/>
-                                                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                                                    </textFieldCell>
-                                                                </textField>
-                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="mMk-vT-bvm" userLabel="Details View">
-                                                                    <rect key="frame" x="80" y="14" width="314" height="34"/>
-                                                                    <textFieldCell key="cell" truncatesLastVisibleLine="YES" sendsActionOnEndEditing="YES" title="Your data is stored encrypted and is inaccessible until you log in." id="Ggv-zH-4Xp">
-                                                                        <font key="font" metaFont="system"/>
-                                                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                                                    </textFieldCell>
-                                                                </textField>
+                                                                <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1Oj-SQ-CCe">
+                                                                    <rect key="frame" x="80" y="12" width="317" height="56"/>
+                                                                    <subviews>
+                                                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="YyL-Oy-bpd">
+                                                                            <rect key="frame" x="-2" y="34" width="119" height="22"/>
+                                                                            <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Not logged in" id="3QE-82-1Z9">
+                                                                                <font key="font" metaFont="systemBold" size="18"/>
+                                                                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                                            </textFieldCell>
+                                                                        </textField>
+                                                                        <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="mMk-vT-bvm" userLabel="Details View">
+                                                                            <rect key="frame" x="-2" y="0.0" width="321" height="34"/>
+                                                                            <textFieldCell key="cell" truncatesLastVisibleLine="YES" sendsActionOnEndEditing="YES" title="Your data is stored encrypted and is inaccessible until you log in." id="Ggv-zH-4Xp">
+                                                                                <font key="font" metaFont="system"/>
+                                                                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                                            </textFieldCell>
+                                                                        </textField>
+                                                                    </subviews>
+                                                                    <visibilityPriorities>
+                                                                        <integer value="1000"/>
+                                                                        <integer value="1000"/>
+                                                                    </visibilityPriorities>
+                                                                    <customSpacing>
+                                                                        <real value="3.4028234663852886e+38"/>
+                                                                        <real value="3.4028234663852886e+38"/>
+                                                                    </customSpacing>
+                                                                </stackView>
                                                             </subviews>
                                                             <constraints>
-                                                                <constraint firstItem="mMk-vT-bvm" firstAttribute="leading" secondItem="hUq-LA-QDk" secondAttribute="trailing" constant="7" id="3Tc-9Y-Pgc"/>
-                                                                <constraint firstAttribute="trailing" secondItem="YyL-Oy-bpd" secondAttribute="trailing" constant="5" id="4sG-HH-IoL"/>
                                                                 <constraint firstItem="hUq-LA-QDk" firstAttribute="leading" secondItem="rUs-8z-jQM" secondAttribute="leading" constant="5" id="I6o-kc-j1Y"/>
                                                                 <constraint firstAttribute="bottom" secondItem="hUq-LA-QDk" secondAttribute="bottom" constant="5" id="Kbo-Db-1fm"/>
-                                                                <constraint firstItem="YyL-Oy-bpd" firstAttribute="top" secondItem="hUq-LA-QDk" secondAttribute="top" id="Nmd-f2-ltG"/>
-                                                                <constraint firstItem="YyL-Oy-bpd" firstAttribute="leading" secondItem="hUq-LA-QDk" secondAttribute="trailing" constant="7" id="Vi6-rw-U4g"/>
-                                                                <constraint firstItem="mMk-vT-bvm" firstAttribute="top" secondItem="YyL-Oy-bpd" secondAttribute="bottom" constant="5" id="eui-72-FV1"/>
-                                                                <constraint firstAttribute="trailing" secondItem="mMk-vT-bvm" secondAttribute="trailing" constant="5" id="fZ3-88-Hps"/>
+                                                                <constraint firstItem="1Oj-SQ-CCe" firstAttribute="leading" secondItem="hUq-LA-QDk" secondAttribute="trailing" constant="5" id="LDh-J5-Wcr"/>
+                                                                <constraint firstItem="1Oj-SQ-CCe" firstAttribute="centerY" secondItem="rUs-8z-jQM" secondAttribute="centerY" id="gNS-Jh-KLU"/>
+                                                                <constraint firstAttribute="trailing" secondItem="1Oj-SQ-CCe" secondAttribute="trailing" id="lga-wM-qah"/>
                                                                 <constraint firstItem="hUq-LA-QDk" firstAttribute="top" secondItem="rUs-8z-jQM" secondAttribute="top" constant="5" id="o14-G5-N6o"/>
-                                                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="mMk-vT-bvm" secondAttribute="bottom" constant="5" id="tZW-Y1-FzT"/>
                                                             </constraints>
                                                             <connections>
                                                                 <outlet property="descriptionView" destination="mMk-vT-bvm" id="0PG-CC-NxD"/>
