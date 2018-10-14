@@ -24,6 +24,7 @@ final class Constants {
     static let SPLASH_SEGUE = NSStoryboardSegue.Identifier.init("splashSegue")
     
     static let SUBSTATE_CELL_ID = NSUserInterfaceItemIdentifier.init(rawValue: "SubstatusCell")
+    static let NOTIFICATION_CELL_ID = NSUserInterfaceItemIdentifier.init(rawValue: "NotificationCell")
     
     static let STATUSBAR = "@statusbar"
     static let SUBSTATUS = "@substatus"
@@ -31,4 +32,6 @@ final class Constants {
     static let DEFAULT_WIDTH = 800
     static let DEFAULT_HEIGHT = 600
     static let DEFAULT_FONT_SIZE = CGFloat(16)
+    
+    static let NOTIFICATION = "notification"
 }

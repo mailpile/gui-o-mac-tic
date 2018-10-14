@@ -148,6 +148,28 @@
                                                                 <outlet property="titleView" destination="YyL-Oy-bpd" id="o6f-p8-fhh"/>
                                                             </connections>
                                                         </tableCellView>
+                                                        <tableCellView identifier="NotificationCell" id="k1B-mx-aEW" userLabel="Status Cell" customClass="NotificationTableCellView" customModule="GUI_o_Mac_tic" customModuleProvider="target">
+                                                            <rect key="frame" x="1" y="102" width="397" height="80"/>
+                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                            <subviews>
+                                                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vFC-pY-qjl">
+                                                                    <rect key="frame" x="-2" y="0.0" width="401" height="17"/>
+                                                                    <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Label" id="0G2-VK-kej">
+                                                                        <font key="font" usesAppearanceFont="YES"/>
+                                                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                                    </textFieldCell>
+                                                                </textField>
+                                                            </subviews>
+                                                            <constraints>
+                                                                <constraint firstItem="vFC-pY-qjl" firstAttribute="width" secondItem="k1B-mx-aEW" secondAttribute="width" id="E8Y-wa-Fuh"/>
+                                                                <constraint firstItem="vFC-pY-qjl" firstAttribute="centerX" secondItem="k1B-mx-aEW" secondAttribute="centerX" id="FSj-Ut-Avu"/>
+                                                                <constraint firstAttribute="bottom" secondItem="vFC-pY-qjl" secondAttribute="bottom" id="IHk-Pf-sMG"/>
+                                                            </constraints>
+                                                            <connections>
+                                                                <outlet property="notification" destination="vFC-pY-qjl" id="1MF-jp-33s"/>
+                                                            </connections>
+                                                        </tableCellView>
                                                     </prototypeCellViews>
                                                 </tableColumn>
                                             </tableColumns>

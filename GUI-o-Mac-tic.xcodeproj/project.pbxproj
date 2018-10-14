@@ -42,6 +42,7 @@
 		D8515EA8205C421900565AAE /* StatusDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8515EA7205C421900565AAE /* StatusDisplay.swift */; };
 		D8515EAD205C443400565AAE /* ConfigInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8515EAC205C443400565AAE /* ConfigInitializer.swift */; };
 		D8515EB1205D206300565AAE /* Args.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8515EB0205D206300565AAE /* Args.swift */; };
+		D8557FAF2173876F00401801 /* NotificationTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8557FAE2173876F00401801 /* NotificationTableCellView.swift */; };
 		D8594A0B206A737000D089DE /* SetItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8594A0A206A737000D089DE /* SetItem.swift */; };
 		D8594A0E206A8A8D00D089DE /* SetNextErrorMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8594A0D206A8A8D00D089DE /* SetNextErrorMessage.swift */; };
 		D85B1E2820612A81003744E0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85B1E2720612A81003744E0 /* Constants.swift */; };
@@ -137,6 +138,7 @@
 		D8515EA7205C421900565AAE /* StatusDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusDisplay.swift; sourceTree = "<group>"; };
 		D8515EAC205C443400565AAE /* ConfigInitializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigInitializer.swift; sourceTree = "<group>"; };
 		D8515EB0205D206300565AAE /* Args.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Args.swift; sourceTree = "<group>"; };
+		D8557FAE2173876F00401801 /* NotificationTableCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTableCellView.swift; sourceTree = "<group>"; };
 		D8594A0A206A737000D089DE /* SetItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetItem.swift; sourceTree = "<group>"; };
 		D8594A0D206A8A8D00D089DE /* SetNextErrorMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetNextErrorMessage.swift; sourceTree = "<group>"; };
 		D85B1E2720612A81003744E0 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -361,6 +363,7 @@
 			isa = PBXGroup;
 			children = (
 				D85B1E3220614FC5003744E0 /* SubstatusTableCellView.swift */,
+				D8557FAE2173876F00401801 /* NotificationTableCellView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -607,6 +610,7 @@
 				D8515EB1205D206300565AAE /* Args.swift in Sources */,
 				D8F1FEFD20654785007E497B /* main.swift in Sources */,
 				D819888220595165004B5974 /* AppDelegate.swift in Sources */,
+				D8557FAF2173876F00401801 /* NotificationTableCellView.swift in Sources */,
 				D8DF323C206917510034165A /* SetStatus.swift in Sources */,
 				D8167F14206EC17E0073552A /* StringToOperation.swift in Sources */,
 				D8B289492067AD6A000DCD03 /* ShowURL.swift in Sources */,
