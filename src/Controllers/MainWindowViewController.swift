@@ -13,9 +13,10 @@ class MainWindowViewController: NSViewController, NSTableViewDelegate, NSTableVi
     @IBOutlet weak var actionStack: NSStackView!
     @IBOutlet weak var notification: NSTextField!
     
+    var displayNotificationsInLastStatusDisplay: Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.notification.stringValue = Blackboard.shared.config?.main_window?.initial_notification ?? ""
         
         if let titleFont = Blackboard.shared.config?.fontStyles?.title {
             self.statusDisplayTitleFont = FontStyleToFontMapper.map(titleFont)
@@ -80,7 +81,7 @@ class MainWindowViewController: NSViewController, NSTableViewDelegate, NSTableVi
         }
         
         Blackboard.shared.addNotificationDidChange {
-            self.notification.stringValue = Blackboard.shared.notification
+            self.setNotification(text: Blackboard.shared.notification)
             self.notification.sizeToFit()
         }
         
@@ -97,15 +98,44 @@ class MainWindowViewController: NSViewController, NSTableViewDelegate, NSTableVi
             }
         }
         
+        if let statusDisplays = Blackboard.shared.config?.main_window?.status_displays {
+            for statusDisplay in statusDisplays {
+                if statusDisplay.id == Constants.NOTIFICATION {
+                    self.displayNotificationsInLastStatusDisplay = true
+                    break
+                }
+            }
+        }
+        if !self.displayNotificationsInLastStatusDisplay {
+            self.notification.stringValue = Blackboard.shared.config?.main_window?.initial_notification ?? ""
+        }
+        
         configureActionStack()
         self.background.image = NSImage.init(withGUIOMaticImage: Blackboard.shared.config!.main_window?.image)
+    }
+    
+    func setNotification(text: String) {
+        if !self.displayNotificationsInLastStatusDisplay {
+            self.notification.stringValue = text
+        }
     }
         
     func numberOfRows(in tableView: NSTableView) -> Int {
         return Blackboard.shared.config!.main_window?.status_displays?.count ?? 0
+        + (self.displayNotificationsInLastStatusDisplay ? 1 : 0)
     }
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
+        
+        // If notifications are shown in a status display, treat the last status display as for showing notifications.
+        if (displayNotificationsInLastStatusDisplay && row == numberOfRows(in: tableView) - 1) {
+            let cell = tableView.makeView(withIdentifier: Constants.NOTIFICATION_CELL_ID, owner: self) as! NotificationTableCellView
+            cell.notification.stringValue = Blackboard.shared.config?.main_window?.initial_notification ?? ""
+            cell.notification.font = self.notification.font
+            cell.setNeedsDisplay(cell.frame)
+            return cell;
+        }
+        
         func getTitleFont(forStatus status: StatusDisplay) -> NSFont? {
             return getFont(forStatus: status,
                            source: Blackboard.shared.config?.fontStyles?.statusId2statusTitle,
