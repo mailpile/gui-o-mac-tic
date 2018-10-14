@@ -8,8 +8,6 @@ class SplashViewController: NSViewController {
     @IBOutlet weak var messageLeadingX: NSLayoutConstraint!
     @IBOutlet weak var messageTop: NSLayoutConstraint!
     
-    public var messageX: Float = 0.0
-    public var messageY: Float = 0.0
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -19,14 +17,8 @@ class SplashViewController: NSViewController {
         
         NotificationCenter.default.addObserver(forName: Constants.UPDATE_SPLASH_SCREEN,
                                                object: nil,
-                                               queue: nil) { notification in
-            if let userInfo = notification.userInfo {
-                let progress = userInfo["progress"] as! Double
-                self.progressIndicator.doubleValue = progress
-                
-                let message = userInfo["message"] as! String
-                self.notification.stringValue = message
-            }
+                                               queue: nil) { _ in
+                                                self.updateSplashScreen();
         }
         
         NotificationCenter.default.addObserver(forName: Constants.SPLASH_SCREEN_NOTIFY_USER, object: nil, queue: nil) { _ in
@@ -34,34 +26,54 @@ class SplashViewController: NSViewController {
                 preconditionFailure("Expected a message.")
             }
             self.notification.stringValue = message
-            self.notification.sizeToFit()
+            self.viewWillAppear()
+        }
+        
+        NotificationCenter.default.addObserver(forName: Constants.SHOW_SPLASH_SCREEN, object: nil, queue: nil) { _ in
+            self.viewWillAppear()
         }
         
         Blackboard.shared.addNotificationDidChange {
             self.notification.stringValue = Blackboard.shared.notification
-            self.notification.sizeToFit()
+            self.viewWillAppear()
         }
+    }
+
+    func updateSplashScreen() {
+        viewWillAppear();
     }
     
     override func viewWillAppear() {
+        if let config = Blackboard.shared.splashScreenConfig {
+            self.notification.stringValue = config.message
+            self.imageCell.image = config.background
+            self.view.window?.setContentSize(self.imageCell.image!.size)
+            self.progressIndicator.isHidden = !config.showProgressIndicator
+            self.progressIndicator.doubleValue = config.progress
+        }
+        adjustLabel()
+                self.view.window?.center()
+    }
+    
+    
+    func adjustLabel() {
         self.notification.sizeToFit()
-        
-        func adjustOffsetX() {
-            let labelWidth = self.notification.frame.width
-            let viewWidth = self.view.frame.width
-            let width = viewWidth - labelWidth
-            let x = messageX * Float(width)
-            self.messageLeadingX.constant = CGFloat(x)
-        }
         adjustOffsetX()
-        
-        func adjustOffsetY() {
-            let labelHeight = self.notification.frame.height
-            let viewHeight = self.view.frame.height
-            let height = viewHeight - labelHeight
-            let y = -(messageY * Float(height))
-            self.messageTop.constant = CGFloat(y)
-        }
         adjustOffsetY()
+        self.view.layout()
+    }
+    
+    func adjustOffsetX() {
+        let labelWidth = self.notification.frame.width
+        let viewWidth  = self.view.frame.width
+        self.messageLeadingX.constant =
+            viewWidth*CGFloat(Blackboard.shared.splashScreenConfig!.messageX) - labelWidth/2.0
+    }
+    
+    func adjustOffsetY() {
+        let labelHeight = CGFloat(self.notification.frame.height)
+        let viewHeight = CGFloat(self.imageCell.image!.size.height)
+        self.messageTop.constant =
+            -1*(viewHeight*CGFloat(Blackboard.shared.splashScreenConfig!.messageY) - labelHeight/2)
     }
 }

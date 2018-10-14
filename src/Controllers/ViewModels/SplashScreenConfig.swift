@@ -1,11 +1,12 @@
 import AppKit
 
 @objc class SplashScreenConfig: NSObject {
-    let message: String
-    let background: NSImage
-    let showProgressIndicator: Bool
-    let messageX: Float
-    let messageY: Float
+    var message: String
+    var background: NSImage
+    var showProgressIndicator: Bool
+    var messageX: Float
+    var messageY: Float
+    var progress: Double = 0.0
     
     init(_ message: String, _ background: NSImage, _ showProgressIndicator: Bool, _ messageX: Float, _ messageY: Float) {
         self.message = message
