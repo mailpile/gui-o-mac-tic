@@ -81,8 +81,13 @@ class MainWindowViewController: NSViewController, NSTableViewDelegate, NSTableVi
         }
         
         Blackboard.shared.addNotificationDidChange {
-            self.setNotification(text: Blackboard.shared.notification)
-            self.notification.sizeToFit()
+            if !self.displayNotificationsInLastStatusDisplay {
+                self.notification.stringValue = Blackboard.shared.notification
+                self.notification.sizeToFit()
+                self.notification.setNeedsDisplay()
+            }
+            
+            self.substatusView.reloadData()
         }
         
         NotificationCenter.default.addObserver(forName: Constants.DOMAIN_UPDATE, object: nil, queue: nil) { notification in
@@ -106,19 +111,12 @@ class MainWindowViewController: NSViewController, NSTableViewDelegate, NSTableVi
                 }
             }
         }
-        if !self.displayNotificationsInLastStatusDisplay {
-            self.notification.stringValue = Blackboard.shared.config?.main_window?.initial_notification ?? ""
-        }
         
         configureActionStack()
         self.background.image = NSImage.init(withGUIOMaticImage: Blackboard.shared.config!.main_window?.image)
+        Blackboard.shared.notification = Blackboard.shared.config?.main_window?.initial_notification ?? ""
     }
     
-    func setNotification(text: String) {
-        if !self.displayNotificationsInLastStatusDisplay {
-            self.notification.stringValue = text
-        }
-    }
         
     func numberOfRows(in tableView: NSTableView) -> Int {
         return Blackboard.shared.config!.main_window?.status_displays?.count ?? 0
@@ -130,7 +128,7 @@ class MainWindowViewController: NSViewController, NSTableViewDelegate, NSTableVi
         // If notifications are shown in a status display, treat the last status display as for showing notifications.
         if (displayNotificationsInLastStatusDisplay && row == numberOfRows(in: tableView) - 1) {
             let cell = tableView.makeView(withIdentifier: Constants.NOTIFICATION_CELL_ID, owner: self) as! NotificationTableCellView
-            cell.notification.stringValue = Blackboard.shared.config?.main_window?.initial_notification ?? ""
+            cell.notification.stringValue = Blackboard.shared.notification
             cell.notification.font = self.notification.font
             cell.setNeedsDisplay(cell.frame)
             return cell;
